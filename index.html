@@ -1,0 +1,1840 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Archetype">
+<meta name="theme-color" content="#17181c">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-192.png">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}*{-webkit-tap-highlight-color:transparent}body{margin:0;font:14px system-ui,-apple-system,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Archetype Training</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yuji+Syuku&display=swap&text=一修刃剣力努器天守岩影律悟愛戦打拍拳斬日星暴武歩炎無燃爆牙狼猪獣王白盾継翼血賭透速進鎖音鬼魔">
+<style>
+/* Layout: phone-first single column; graphite monochrome, ink hero band, physique detail tucked into collapsibles */
+:root{
+  --bg:#f3f3f5; --surface:#ffffff; --surface-2:#ebebee; --ink:#17181c; --muted:#696c75; --line:#dedfe3;
+  --pc-l:#17181c; --pc-on-l:#ffffff; --pc-d:#ececee; --pc-on-d:#111214;
+  --accent:var(--pc-l); --on-accent:var(--pc-on-l); --accent-soft:color-mix(in srgb,var(--accent) 18%,transparent); --good:#17181c; --good-soft:rgba(23,24,28,.07);
+  --hero-bg:#17181c; --hero-ink:#f3f3f5; --hero-muted:#979aa3; --hero-accent:var(--accent); --hero-on-accent:var(--on-accent); --hero-track:rgba(255,255,255,.14);
+  --bm-sil:#e7e8eb; --bm-base:#d2d4d9; --bm-line:rgba(23,24,28,.16); --bm-hit:var(--accent);
+  --fig-hi:#dcdde2; --fig-lo:#878a94; --fig-sil:#5f626b; --fig-line:rgba(23,24,28,.35);
+  --font-display:'Outfit',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --font-body:'Outfit',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --font-kanji:'Yuji Syuku','Hiragino Mincho ProN','Yu Mincho','Noto Serif JP',serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --nav-h:64px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1012; --surface:#17181b; --surface-2:#202126; --ink:#ececee; --muted:#989aa2; --line:#2a2b31;
+  --accent:var(--pc-d); --on-accent:var(--pc-on-d); --accent-soft:color-mix(in srgb,var(--accent) 20%,transparent); --good:#ececee; --good-soft:rgba(236,236,238,.08);
+  --hero-bg:#1c1d21; --hero-ink:#f0f0f2; --hero-muted:#979aa3; --hero-accent:var(--accent); --hero-on-accent:var(--on-accent); --hero-track:rgba(255,255,255,.12);
+  --bm-sil:#1e1f23; --bm-base:#34363c; --bm-line:rgba(0,0,0,.45); --bm-hit:var(--accent);
+  --fig-hi:#d8dae2; --fig-lo:#696c78; --fig-sil:#2a2c33; --fig-line:rgba(0,0,0,.5); color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0f1012; --surface:#17181b; --surface-2:#202126; --ink:#ececee; --muted:#989aa2; --line:#2a2b31;
+  --accent:var(--pc-d); --on-accent:var(--pc-on-d); --accent-soft:color-mix(in srgb,var(--accent) 20%,transparent); --good:#ececee; --good-soft:rgba(236,236,238,.08);
+  --hero-bg:#1c1d21; --hero-ink:#f0f0f2; --hero-muted:#979aa3; --hero-accent:var(--accent); --hero-on-accent:var(--on-accent); --hero-track:rgba(255,255,255,.12);
+  --bm-sil:#1e1f23; --bm-base:#34363c; --bm-line:rgba(0,0,0,.45); --bm-hit:var(--accent);
+  --fig-hi:#d8dae2; --fig-lo:#696c78; --fig-sil:#2a2c33; --fig-line:rgba(0,0,0,.5); color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{background:var(--bg)}
+body{color:var(--ink);font-family:var(--font-body);font-size:15.5px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.app{max-width:580px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:16px calc(var(--nav-h) + 96px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:16px}
+h1,h2,h3{margin:0;text-wrap:balance}
+h2{font-family:var(--font-display);font-weight:600;font-size:21px;letter-spacing:-.01em}
+h3{font-size:16px;font-weight:700}
+p{margin:0}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.mono,.num{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.btn{border:0;border-radius:10px;padding:12px 16px;font-weight:700;font-size:15px;background:var(--surface-2);color:var(--ink)}
+.btn.primary{background:var(--accent);color:var(--on-accent)}
+.btn.block{width:100%}
+.btn.small{padding:8px 12px;font-size:13px}
+.btn.ghost{background:transparent;color:var(--muted);text-decoration:underline;text-underline-offset:3px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.row{display:flex;align-items:center;gap:12px}
+.between{justify-content:space-between}
+.muted{color:var(--muted)}
+.section{display:flex;flex-direction:column;gap:12px}
+
+/* hero */
+.hero{position:relative;overflow:hidden;background:var(--hero-bg);color:var(--hero-ink);border-radius:18px;padding:22px 20px 20px;display:flex;flex-direction:column;gap:14px}
+.hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+.hero-top>div{display:flex;flex-direction:column;gap:8px;min-width:0}
+.emblem{flex:0 0 auto;width:96px;height:96px;color:var(--ink);display:block}
+.hero .emblem{color:var(--hero-ink)}
+.wo-banner .hero-top{align-items:center}
+.wo-banner .emblem{width:52px;height:52px}
+.wo-banner .prog{font-family:var(--font-display);font-weight:700;font-size:19px;line-height:1.1}
+.hero .eyebrow{color:var(--hero-muted)}
+.hero h1{font-family:var(--font-display);font-weight:700;font-size:clamp(30px,9vw,44px);overflow-wrap:anywhere;line-height:1;letter-spacing:-.015em;position:relative}
+.hero .sub{color:var(--hero-muted);max-width:30ch;position:relative}
+.hero .meter{position:relative;display:flex;flex-direction:column;gap:6px}
+.bar{height:6px;border-radius:3px;background:var(--hero-track);overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--hero-accent);border-radius:3px}
+.hero .btn.primary{background:var(--hero-accent);color:var(--hero-on-accent)}
+.hero .meter .row{font-size:13px;color:var(--hero-muted)}
+.hero .meter b{color:var(--hero-ink);font-family:var(--font-mono);font-weight:500}
+
+/* body map */
+.art{margin:0;display:flex;flex-direction:column;gap:14px}
+.art svg{width:100%;max-width:440px;margin:0 auto;display:block;height:auto}
+.callouts{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;font-size:13px}
+.callouts li{display:flex;gap:8px;align-items:flex-start;min-width:0}
+.callouts .n{flex:0 0 20px;height:20px;border-radius:50%;background:var(--accent);color:var(--on-accent);font-family:var(--font-mono);font-size:11px;display:grid;place-items:center}
+@media (max-width:440px){.callouts{grid-template-columns:1fr}}
+.bodymap{position:relative;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:14px;align-items:center}
+.bodymap svg{width:100%;height:auto;display:block;max-height:280px}
+.bm-key{display:flex;flex-direction:column;gap:6px;min-width:0}
+.bm-row{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.sw{width:12px;height:12px;border-radius:3px;background:var(--bm-hit);flex:0 0 auto}
+.sw.s{opacity:.45}
+.bm-list{font-size:14px;font-weight:500;line-height:1.4;margin-bottom:4px}
+.bm-list.muted-h{color:var(--muted)}
+.wo-banner{gap:10px}
+@media (max-width:380px){.bodymap{grid-template-columns:1fr}.bm-key{flex-direction:row;flex-wrap:wrap;column-gap:12px}.bm-key .eyebrow{width:100%}}
+
+
+/* collapsibles */
+details.minor>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px}
+details.minor>summary::-webkit-details-marker{display:none}
+details.minor>summary>span:first-child{display:flex;flex-direction:column;gap:2px;font-size:14px;min-width:0}
+details.minor>summary b{font-size:16px}
+.chev{width:20px;height:20px;flex:0 0 auto;fill:none;stroke:var(--muted);stroke-width:2}
+details.minor[open] .chev{transform:rotate(180deg)}
+.minor-body{display:flex;flex-direction:column;gap:18px;padding-top:14px}
+details.card.minor{display:block}
+.wo-banner details.minor>summary{font-size:13px;border-top:1px solid var(--line);padding-top:10px}
+
+/* browse */
+.search{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:0 12px}
+.search svg{width:18px;height:18px;fill:none;stroke:var(--muted);stroke-width:2;flex:0 0 auto}
+.search input{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);font:inherit;font-size:16px;padding:11px 0;outline:none}
+.search:focus-within{border-color:var(--ink)}
+.prog-list{display:flex;flex-direction:column;gap:10px}
+.prog-card{flex-direction:row;align-items:flex-start;text-align:left;gap:14px}
+.prog-card .emblem{width:64px;height:64px}
+.pc-text{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1}
+.pc-text b{font-family:var(--font-display);font-weight:600;font-size:21px;line-height:1.15}
+.pc-meta{font-size:13px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.pc-status{display:flex;align-items:center;gap:10px;margin-top:4px;font-size:12px;color:var(--muted)}
+.pc-status .bar{flex:1;background:var(--surface-2)}
+.pc-status .bar>i{background:var(--ink)}
+.soon{border-style:dashed;background:transparent;gap:4px}
+
+/* physique */
+.physique{display:grid;grid-template-columns:1fr;gap:8px}
+.physique svg{width:100%;max-width:360px;height:auto;margin:0 auto;display:block}
+.traits{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:14px;margin:0}
+.traits dt{color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding-top:2px}
+.traits dd{margin:0}
+.feat{font-size:13px;color:var(--muted);border-top:1px dashed var(--line);padding-top:10px}
+
+/* schedule */
+.week-strip{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.week-strip div{background:var(--surface-2);border-radius:8px;padding:8px 4px;text-align:center;font-size:11px;font-weight:700;color:var(--muted);display:flex;flex-direction:column;gap:2px}
+.week-strip div span{font-family:var(--font-mono);font-size:12px;color:var(--ink)}
+.week-strip div.on{background:var(--accent-soft)}
+.week-strip div.on span{color:var(--ink)}
+.week-strip div.opt span{color:var(--muted)}
+
+/* week chips */
+.chips{position:relative;display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip-sep{flex:0 0 1px;align-self:stretch;background:var(--line);margin-inline:4px}
+.chip{flex:0 0 auto;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-family:var(--font-mono);font-size:13px;position:relative}
+.chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip.done::after{content:"";position:absolute;top:3px;right:3px;width:6px;height:6px;border-radius:50%;background:var(--good)}
+.phase{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.pill{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:999px;background:var(--accent-soft);color:var(--accent)}
+.pill.good{background:var(--good-soft);color:var(--good)}
+.pill.plain{background:var(--surface-2);color:var(--muted)}
+
+/* day cards */
+.day-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.day-num{font-family:var(--font-display);font-weight:600;font-size:12px;color:var(--accent);letter-spacing:.08em}
+.ex-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.ex-list li{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-top:1px solid var(--line);font-size:14px}
+.ex-list li:first-child{border-top:0}
+.ex-list li .num{color:var(--muted);font-size:13px;white-space:nowrap}
+.ex-list li.main span:first-child{font-weight:700}
+
+.upcoming{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.upcoming .card{gap:4px;opacity:.75}
+.upcoming .card b{font-family:var(--font-display);font-weight:400;font-size:17px}
+
+/* workout */
+.wo-head{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:8px;display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wo-head h2{font-size:18px}
+.clock{font-family:var(--font-mono);font-size:18px}
+.ex-card .cue{font-size:13px;color:var(--muted)}
+.ex-card .last{font-size:12px;font-family:var(--font-mono);color:var(--muted)}
+.sets{display:flex;flex-direction:column;gap:6px}
+.set{display:grid;grid-template-columns:28px 1fr 1fr 44px;gap:8px;align-items:center}
+.set.cond{grid-template-columns:28px 1fr 44px}
+.set .idx{font-family:var(--font-mono);font-size:13px;color:var(--muted);text-align:center}
+.set label{position:relative;display:block;min-width:0}
+.set input[type=number]{width:100%;min-width:0;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);border-radius:8px;padding:10px 34px 10px 10px;font-family:var(--font-mono);font-size:16px}
+.set label small{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--muted);pointer-events:none}
+.set .target{font-size:14px;background:var(--surface-2);border-radius:8px;padding:10px;color:var(--muted)}
+.tick{width:44px;height:44px;border-radius:10px;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center}
+.tick svg{width:20px;height:20px;stroke:var(--muted)}
+.set.done .tick{background:var(--good);border-color:var(--good)}
+.set.done .tick svg{stroke:var(--on-accent)}
+.set.done input{border-color:var(--good)}
+.set-actions{display:flex;gap:8px}
+.confirm{display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--accent-soft);border-radius:10px;padding:10px 12px;font-size:14px}
+
+/* history & progress */
+details.sess{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+details.sess summary{list-style:none;padding:14px 16px;display:grid;grid-template-columns:1fr auto;gap:2px 12px;cursor:pointer}
+details.sess summary::-webkit-details-marker{display:none}
+details.sess summary .meta{font-size:13px;color:var(--muted)}
+details.sess .body{padding:0 16px 14px;display:flex;flex-direction:column;gap:10px}
+.sess-ex{font-size:14px;display:flex;flex-direction:column;gap:2px}
+.sess-ex .num{font-size:13px;color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.stat b{font-family:var(--font-mono);font-weight:500;font-size:20px}
+.stat span{font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.lift{display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:center;padding:12px 0;border-top:1px solid var(--line)}
+.lift:first-of-type{border-top:0}
+.lift .e1rm{font-family:var(--font-mono);font-size:20px;text-align:right}
+.lift .delta{font-family:var(--font-mono);font-size:12px;text-align:right}
+.lift svg{grid-column:1/-1;width:100%;height:40px}
+.up{color:var(--good)} .flat{color:var(--muted)}
+.empty{text-align:center;padding:28px 16px;color:var(--muted);display:flex;flex-direction:column;gap:10px;align-items:center}
+.empty b{color:var(--ink);font-size:16px}
+
+/* nav + timer + toast */
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+nav.tabs .in{max-width:580px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);height:var(--nav-h)}
+nav.tabs button{border:0;background:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--muted);position:relative}
+nav.tabs button svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8}
+nav.tabs button.on{color:var(--accent)}
+nav.tabs button .dot{position:absolute;top:10px;right:calc(50% - 18px);width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.rest{position:fixed;left:0;right:0;bottom:calc(var(--nav-h) + env(safe-area-inset-bottom,0px));z-index:19;padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px));padding-block:8px}
+.rest .in{max-width:556px;margin:0 auto;background:var(--hero-bg);color:var(--hero-ink);border-radius:14px;padding:10px 12px 10px 16px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.rest .t{font-family:var(--font-mono);font-size:22px;flex:0 0 auto}
+.rest .lbl{font-size:12px;color:var(--hero-muted);flex:1;min-width:0}
+.rest button{border:0;border-radius:8px;padding:8px 10px;background:rgba(255,255,255,.12);color:var(--hero-ink);font-weight:700;font-size:13px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--nav-h) + 80px + env(safe-area-inset-bottom,0px));z-index:30;background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:999px;font-size:14px;font-weight:700;max-width:calc(100% - 32px)}
+@media (prefers-reduced-motion: no-preference){
+  .bar>i{transition:width .4s ease}
+  .set .tick{transition:background .15s}
+}
+
+.themed{--accent:var(--pc-l);--on-accent:var(--pc-on-l);--accent-soft:color-mix(in srgb,var(--accent) 18%,transparent)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .themed{--accent:var(--pc-d);--on-accent:var(--pc-on-d);--accent-soft:color-mix(in srgb,var(--accent) 20%,transparent)}}
+:root[data-theme="dark"] .themed{--accent:var(--pc-d);--on-accent:var(--pc-on-d);--accent-soft:color-mix(in srgb,var(--accent) 20%,transparent)}
+.prog-card .emblem{color:var(--accent)}
+.prog-card.active{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.hero .emblem{color:var(--accent)}
+.chip.on{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.set.done .tick{background:var(--accent);border-color:var(--accent)}
+.set.done input{border-color:var(--accent)}
+nav.tabs button.on{color:var(--ink)}
+nav.tabs button.on::before{content:"";position:absolute;top:0;left:30%;right:30%;height:3px;border-radius:0 0 3px 3px;background:var(--accent)}
+.pc-status .bar>i{background:var(--accent)}
+.pill{color:var(--ink)}
+.day-num{color:var(--muted)}
+
+
+/* banner art */
+.hero-main{display:grid;grid-template-columns:minmax(0,1fr) minmax(96px,38%);gap:6px;align-items:center;position:relative}
+.hero-copy{display:flex;flex-direction:column;gap:8px;min-width:0;position:relative;z-index:1}
+.hero-copy .emblem{width:52px;height:52px}
+.banner-art{position:relative;width:100%;aspect-ratio:340/410;max-width:220px;justify-self:center;display:grid;place-items:center}
+.banner-art .splat-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.banner-art .splat{color:var(--accent);opacity:.95}
+.wo-banner .banner-art{width:76px;flex:0 0 auto}
+
+.up-next h1{font-size:clamp(26px,7.5vw,36px)}
+
+.back{align-self:flex-start;padding:4px 0;text-decoration:none;font-weight:700}
+.pill.on-hero{align-self:flex-start;background:var(--accent);color:var(--on-accent)}
+.switch{display:flex;flex-direction:column;gap:10px;background:rgba(255,255,255,.08);border-radius:10px;padding:12px;font-size:14px}
+.hero .btn.small:not(.primary){background:rgba(255,255,255,.14);color:var(--hero-ink)}
+
+/* stamp sits on top of the paint */
+.banner-art .emblem{position:absolute;width:50%;height:auto;aspect-ratio:1;right:2%;bottom:6%;transform:rotate(-7deg);color:#f4f2ec;--seal-ink:#17181c;filter:drop-shadow(0 6px 10px rgba(0,0,0,.45))}
+.banner-art.has-photo .emblem{width:40%;right:-2%;bottom:0}
+.wo-banner .banner-art .emblem{color:var(--ink);--seal-ink:var(--surface);filter:drop-shadow(0 3px 5px rgba(0,0,0,.25))}
+.prog-card .emblem{--seal-ink:var(--on-accent)}
+.emblem{--seal-ink:var(--surface)}
+.photo-ctl{display:flex;gap:8px;flex-wrap:wrap}
+.principles{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:8px;font-size:14px}
+.sets-chart{display:flex;flex-direction:column;gap:6px}
+.sc-row{display:grid;grid-template-columns:88px 1fr 36px;gap:10px;align-items:center;font-size:13px;color:var(--muted)}
+.sc-row.pr{color:var(--ink);font-weight:600}
+.sc-bar{position:relative;height:8px;background:var(--surface-2);border-radius:4px}
+.sc-bar i{position:absolute;inset:0 auto 0 0;background:var(--muted);border-radius:4px;opacity:.5}
+.sc-row.pr .sc-bar i{background:var(--accent);opacity:1}
+.sc-band{position:absolute;top:-3px;bottom:-3px;border-left:1px dashed var(--muted);border-right:1px dashed var(--muted);opacity:.6}
+.sc-row .num{text-align:right;color:var(--ink)}
+.src{font-size:12px;color:var(--muted)}
+.src a{color:var(--ink)}
+
+.series-tag{align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 9px;border-radius:999px;background:var(--accent);color:var(--on-accent)}
+.series-line{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.series-head{font-size:15px;font-weight:700;margin-top:10px;display:flex;gap:8px;align-items:baseline}
+.series-head .muted{font-weight:500;font-size:13px}
+.backup{margin-top:18px;gap:10px}
+.backup h3{font-size:17px}
+
+/* floating tab bar, clear of the screen edges and home indicator */
+:root{--nav-gap:max(14px, env(safe-area-inset-bottom,0px))}
+nav.tabs{left:max(14px,env(safe-area-inset-left,0px));right:max(14px,env(safe-area-inset-right,0px));bottom:var(--nav-gap);max-width:460px;margin:0 auto;padding:0;
+  background:color-mix(in srgb,var(--surface) 90%,transparent);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
+  border:1px solid var(--line);border-radius:24px;box-shadow:0 10px 30px rgba(0,0,0,.16)}
+nav.tabs .in{height:64px;padding:6px;gap:4px}
+nav.tabs button{border-radius:18px;font-size:10.5px;font-weight:600;letter-spacing:.02em;gap:4px}
+nav.tabs button svg{width:21px;height:21px}
+nav.tabs button.on{background:var(--accent-soft);color:var(--ink)}
+nav.tabs button.on::before{display:none}
+nav.tabs button .dot{top:8px;right:calc(50% - 17px)}
+.rest{bottom:calc(var(--nav-gap) + 64px + 10px)}
+.toast{bottom:calc(var(--nav-gap) + 64px + 84px)}
+.app{padding-bottom:calc(var(--nav-gap) + 64px + 120px)}
+
+/* exercise info sheet */
+.ex-name{display:inline-flex;align-items:center;gap:6px;border:0;background:none;padding:0;text-align:left;color:var(--ink)}
+.ex-name h3{text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:4px;text-decoration-thickness:2px}
+.ex-name svg{width:18px;height:18px;flex:0 0 auto;fill:none;stroke:var(--accent);stroke-width:2;color:var(--accent)}
+body.sheet-open{overflow:hidden}
+.sheet{position:fixed;inset:0;z-index:40}
+.sheet-back{position:absolute;inset:0;background:rgba(0,0,0,.45)}
+.sheet-panel{position:absolute;left:0;right:0;bottom:0;margin:0 auto;max-width:580px;max-height:88%;overflow-y:auto;-webkit-overflow-scrolling:touch;background:var(--bg);border-radius:22px 22px 0 0;
+  padding-top:10px;padding-bottom:calc(20px + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:16px;box-shadow:0 -10px 40px rgba(0,0,0,.25)}
+.sheet-grab{width:40px;height:5px;border-radius:3px;background:var(--line);margin:0 auto}
+.video{position:relative;width:100%;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#000}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-link{display:flex;align-items:center;gap:12px;padding:14px;border-radius:14px;background:var(--surface);border:1px solid var(--line);color:var(--ink);text-decoration:none}
+.video-link>span:last-child{display:flex;flex-direction:column;font-size:14px}
+.video-link .muted{font-size:12px}
+.play{width:44px;height:44px;border-radius:50%;background:var(--accent);display:grid;place-items:center;flex:0 0 auto}
+.play svg{width:20px;height:20px;fill:var(--on-accent)}
+.hist{display:flex;flex-direction:column;gap:12px}
+.pr-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.hist-spark svg{width:100%;height:44px;display:block}
+.hist-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.hist-list li{display:flex;flex-direction:column;gap:2px;padding:10px 0;border-top:1px solid var(--line);font-size:14px}
+.hist-list li:first-child{border-top:0}
+.hist-list .num{color:var(--ink);font-size:13px;word-spacing:4px}
+</style>
+
+<div class="app" id="view"></div>
+
+<div class="rest" id="rest" hidden>
+  <div class="in">
+    <span class="t" id="restT">1:30</span>
+    <span class="lbl" id="restL">Rest</span>
+    <button type="button" id="restAdd">+15s</button>
+    <button type="button" id="restSkip">Skip</button>
+  </div>
+</div>
+<div class="toast" id="toast" hidden></div>
+<div class="sheet" id="sheet" hidden></div>
+<input type="file" id="refFile" accept="image/*" hidden>
+<input type="file" id="restoreFile" accept=".json,application/json" hidden>
+
+<nav class="tabs" aria-label="Sections">
+  <div class="in">
+    <button type="button" data-tab="browse"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>Browse</button>
+    <button type="button" data-tab="program"><svg viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h10"/></svg>Program</button>
+    <button type="button" data-tab="workout"><svg viewBox="0 0 24 24"><path d="M3 10v4M6 7v10M18 7v10M21 10v4M6 12h12"/></svg>Workout</button>
+    <button type="button" data-tab="history"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>History</button>
+    <button type="button" data-tab="progress"><svg viewBox="0 0 24 24"><path d="M4 18l5-6 4 3 7-9"/></svg>Progress</button>
+  </div>
+</nav>
+
+<script>
+/* ---------- Exercise library: name, logging type, cue, muscles (1 = primary, ≥.4 counts as half a set) ---------- */
+const EX={
+  boxjump:['Box Jump','bw','Max height, step down. Stop before you slow.',{quads:1,glutes:.6,calves:.6}],
+  broadjump:['Broad Jump','bw','Swing, jump, stick the landing.',{glutes:1,quads:.8,hamstrings:.5,calves:.4}],
+  pogo:['Pogo Jumps','cond','Stiff ankles, quick ground contacts.',{calves:1}],
+  squat:['Back Squat','load','Brace hard, drive up fast.',{quads:1,glutes:1,adductors:.6,lowerback:.4,abs:.3,hamstrings:.3}],
+  fsquat:['Front Squat','load','Elbows high, upright torso.',{quads:1,glutes:.6,abs:.6,upperback:.3}],
+  deadlift:['Deadlift','load','Wedge in, push the floor away.',{hamstrings:1,glutes:1,lowerback:1,traps:.6,forearms:.6,lats:.4}],
+  rdl:['Romanian Deadlift','load','Hips back, bar close, 2 s lower.',{hamstrings:1,glutes:1,lowerback:.7,traps:.3,forearms:.3}],
+  goodmorning:['Good Morning','load','Soft knees, hinge until hamstrings bite.',{hamstrings:1,glutes:.8,lowerback:.8}],
+  bss:['Bulgarian Split Squat','load','Dumbbells. Front shin near vertical.',{quads:1,glutes:.8,adductors:.4}],
+  lunge:['Walking Lunge','load','Long steps, knee kisses the floor.',{quads:1,glutes:.8,adductors:.4}],
+  stepup:['Weighted Step-up','load','Drive through the front heel only.',{quads:1,glutes:.8}],
+  legpress:['Leg Press','load','Full depth, no bouncing.',{quads:1,glutes:.6,adductors:.4}],
+  legext:['Leg Extension','load','Squeeze 1 s at the top.',{quads:1}],
+  legcurl:['Seated Leg Curl','load','Lean forward, slow on the way back.',{hamstrings:1,calves:.3}],
+  nordic:['Nordic Curl','bw','Fight the fall all the way down.',{hamstrings:1}],
+  hipthrust:['Hip Thrust','load','Chin tucked, ribs down, lock out with glutes.',{glutes:1,hamstrings:.4}],
+  calf:['Standing Calf Raise','load','2 s pause in the stretch.',{calves:1}],
+  pistol:['Pistol Squat','bw','Use a counterweight until it is clean.',{quads:1,glutes:.7,abs:.3}],
+  cossack:['Cossack Squat','bw','Sit deep into the hip, heel down.',{adductors:1,quads:.6,glutes:.5}],
+  bench:['Bench Press','load','Shoulder blades pinned, leg drive.',{chest:1,shoulders:.6,triceps:.7}],
+  incline:['Incline Dumbbell Press','load','30° bench, elbows at 45°.',{chest:1,shoulders:.6,triceps:.5}],
+  cablefly:['Cable Fly','load','Soft elbows, deep stretch.',{chest:1,shoulders:.3}],
+  ohp:['Overhead Press','load','Squeeze glutes, head through.',{shoulders:1,triceps:.6,traps:.4,abs:.3}],
+  pushpress:['Push Press','load','Short dip, violent drive.',{shoulders:1,triceps:.6,quads:.4}],
+  arnold:['Arnold Press','load','Rotate as you press.',{shoulders:1,triceps:.4}],
+  latraise:['Lateral Raise','load','Lead with the elbows, no swing.',{shoulders:1}],
+  rdelt:['Rear Delt Fly','load','Arms wide, think "pull apart".',{shoulders:.8,upperback:.6}],
+  facepull:['Face Pull','load','Pull to the eyes, rotate out.',{shoulders:.8,upperback:.8,traps:.4}],
+  dips:['Dips','bw','Stop 1–2 reps shy of failure.',{chest:.8,triceps:1,shoulders:.5}],
+  wdips:['Weighted Dips','bw','Slight lean, full depth.',{chest:.8,triceps:1,shoulders:.5}],
+  pushup:['Push-up','bw','Body in one line, chest to floor.',{chest:1,triceps:.6,shoulders:.4,abs:.3}],
+  ppp:['Pseudo Planche Push-up','bw','Lean forward past the hands, protract hard.',{chest:.8,shoulders:1,triceps:.6,serratus:.5}],
+  hspu:['Handstand or Pike Push-up','bw','Head forms a triangle with the hands.',{shoulders:1,triceps:.7}],
+  skull:['Skull Crusher','load','Elbows still, lower behind the head.',{triceps:1}],
+  ohtri:['Overhead Triceps Extension','load','Long-head stretch at the bottom.',{triceps:1}],
+  pushdown:['Triceps Pushdown','load','Elbows pinned to your sides.',{triceps:1}],
+  wpullup:['Weighted Pull-up','bw','Dead hang to chin over bar.',{lats:1,biceps:.6,upperback:.6,forearms:.4}],
+  pullup:['Pull-up','bw','Full hang, chest to bar if you can.',{lats:1,biceps:.6,upperback:.5}],
+  chinup:['Chin-up','bw','Controlled lower.',{lats:1,biceps:.8}],
+  archer:['Archer Pull-up','bw','Shift over one arm, other stays straight.',{lats:1,biceps:.6,upperback:.4}],
+  muscleup:['Muscle-up','bw','Pull high, fast transition.',{lats:1,chest:.5,triceps:.6,biceps:.5}],
+  ropeclimb:['Rope Climb or Towel Pull-up','bw','Grip is the limiter.',{lats:1,biceps:.8,forearms:1}],
+  ringrow:['Ring Row','bw','Body straight, rings to ribs.',{upperback:1,lats:.6,biceps:.5}],
+  row:['Chest-Supported Row','load','Pull elbows to hips, pause.',{upperback:1,lats:.8,traps:.6,shoulders:.4,biceps:.4}],
+  dbrow:['One-Arm Dumbbell Row','load','Row to the hip, no twisting.',{lats:1,upperback:.6,biceps:.4}],
+  latpull:['Lat Pulldown','load','Chest up, bar to collarbone.',{lats:1,biceps:.5}],
+  pullover:['Cable Pullover','load','Long arms, stretch the lats overhead.',{lats:1,serratus:.4}],
+  shrug:['Shrug','load','Straight up, hold the top.',{traps:1,forearms:.4}],
+  curl:['Barbell Curl','load','Elbows pinned, no swing.',{biceps:1,forearms:.4}],
+  inclinecurl:['Incline Dumbbell Curl','load','Arms hang behind you for the stretch.',{biceps:1}],
+  hammer:['Hammer Curl','load','No swing.',{biceps:1,forearms:.8}],
+  revcurl:['Reverse Curl','load','Overhand grip, wrists straight.',{forearms:1,biceps:.5}],
+  clean:['Power Clean','load','Bar speed is the point. Drop weight if it slows.',{glutes:1,hamstrings:.7,quads:.7,traps:1,lowerback:.5}],
+  kbswing:['Kettlebell Swing','load','Snap the hips. Stop before speed drops.',{glutes:1,hamstrings:.8,lowerback:.4}],
+  halo:['Kettlebell Halo','load','Slow circles, ribs down.',{shoulders:.6,abs:.5,upperback:.4}],
+  atlas:['Sandbag to Shoulder','load','Lap it, then explode it up.',{glutes:1,hamstrings:.7,lowerback:.7,biceps:.5,traps:.5}],
+  zercher:['Zercher Carry','load','Bar in the elbows, stay upright.',{abs:1,biceps:.5,upperback:.6,quads:.4}],
+  farmer:['Farmer Carry','load','Kg per hand. Walk tall.',{traps:1,forearms:1,obliques:.5}],
+  suitcase:['Suitcase Carry','load','One side only. Don’t lean.',{obliques:1,forearms:.8,traps:.5}],
+  plategrip:['Plate Pinch','load','Pinch two plates smooth-side out.',{forearms:1}],
+  deadhang:['Dead Hang','cond','Relax the shoulders, crush the bar.',{forearms:1,lats:.4}],
+  sled:['Sled Push','load','Low angle, short steps.',{quads:1,glutes:.7,calves:.6}],
+  sledgehammer:['Sledgehammer Strikes','cond','Tyre or pad. Switch hands each round.',{obliques:1,shoulders:.6,forearms:.6,lats:.4}],
+  mbthrow:['Med Ball Rotational Throw','load','Throw through the wall, not at it.',{obliques:1,abs:.6,shoulders:.4}],
+  slam:['Med Ball Slam','load','Full extension overhead.',{abs:.8,lats:.5,shoulders:.6}],
+  landmine:['Landmine Rotation','load','Pivot the back foot, arms long.',{obliques:1,shoulders:.4}],
+  woodchop:['Cable Woodchop','load','Rotate from the hips.',{obliques:1,abs:.5}],
+  pallof:['Pallof Press','load','Resist the twist.',{obliques:1,abs:.5}],
+  hlr:['Hanging Leg Raise','bw','Curl the pelvis, no swinging.',{abs:1,obliques:.5,forearms:.3}],
+  cablecrunch:['Cable Crunch','load','Round the spine, ribs to hips.',{abs:1}],
+  abwheel:['Ab Wheel Rollout','bw','Ribs down the whole way.',{abs:1,serratus:.5,lats:.3}],
+  dragonflag:['Dragon Flag','bw','Straight body, slow lower.',{abs:1,lats:.3,obliques:.4}],
+  lsit:['L-sit Hold','cond','Push the floor away, legs locked.',{abs:1,obliques:.4,triceps:.3}],
+  handstand:['Handstand Hold','cond','Against a wall to start. Stack the joints.',{shoulders:1,triceps:.5,abs:.4}],
+  sprint:['Sprints','cond','Full recovery between reps. Every one fast.',{hamstrings:1,glutes:.8,quads:.6,calves:.7}],
+  tempo:['Tempo Runs','cond','Around 75% effort, relaxed form.',{calves:.6,hamstrings:.5,quads:.5}],
+  bike:['Air Bike Sprints','cond','All out, then easy spin.',{quads:1,hamstrings:.4}],
+  rower:['Rower Intervals','cond','Legs, hips, then arms.',{lats:.6,quads:.6,hamstrings:.4}],
+  jumprope:['Jump Rope','cond','Light on the toes.',{calves:1,shoulders:.3}],
+  bag:['Heavy Bag or Shadowbox','cond','Combos, stay on your toes.',{shoulders:.8,obliques:.7,serratus:.5}],
+  kicks:['Kick Drills','cond','Pad or bag. Turn the hip over.',{glutes:.8,hamstrings:.6,obliques:.6,adductors:.6}],
+  sprawl:['Sprawls','cond','Hips to the floor, pop back up.',{abs:.6,quads:.5,chest:.4}],
+  bbj:['Burpee Broad Jump','cond','Stick each landing.',{quads:.8,glutes:.7,chest:.4}],
+  mobility:['Mobility Flow','cond','Hips, T-spine, ankles, shoulders.',{}],
+  neck:['Neck Flexion / Extension','load','Light plate. Durability work.',{neck:1,traps:.4}]
+};
+const EXPLOSIVE=new Set(['boxjump','broadjump','pogo','mbthrow','slam','kbswing','bbj','sprint','bike']);
+const E=(id,sets,reps,rest,f='')=>({id,sets,reps:String(reps),rest,main:f==='m',power:f==='p',grow:f==='g'});
+const D=(name,focus,mins,exercises,optional)=>({name,focus,mins,exercises,optional:!!optional});
+const DEFAULT_CALLOUTS=['Shoulders','Abs and obliques','Quads','Traps and upper back','Lats','Glutes and hamstrings'];
+const SRC={
+  volume:['Pelland et al. 2024, weekly volume and frequency meta-regression','https://sportrxiv.org/index.php/server/preprint/download/460/967/908'],
+  failure:['Robinson et al. 2024, proximity to failure meta-analysis','https://www.fau.edu/newsdesk/articles/muscle-growth-strength-study'],
+  toji:['Boostcamp: Toji Fushiguro workout routine','https://www.boostcamp.app/blogs/toji-fushiguro-workout-routine'],
+  guts:['The Bioneer: Train like Guts','https://www.thebioneer.com/guts-workout-berserk/'],
+  gojo:['Action Hero Flex: Train like Satoru Gojo','https://actionheroflex.substack.com/p/train-like-satoru-gojo'],
+  baki:['Sportskeeda: Training like Baki','https://sportskeeda.com/health-and-fitness/training-like-baki-five-exercises-look-feel-like-baki-hanma'],
+  vegeta:['Looper: Vegeta fitness plan','https://www.looper.com/1514758/get-vegeta-ripped-workout-nutrition-plan'],
+  garou:['Boostcamp: Garou Physique Speedrun','https://www.boostcamp.app/users/XUIKUW-garou-physique-speedrun']
+};
+
+/* ---------- Programs ---------- */
+const PROGRAMS=[
+ {id:'itadori',name:'Sukuna/Itadori',series:'Jujutsu Kaisen',archetype:'Lean athlete',tags:['Power','Speed','Fight conditioning'],kanji:'器',crack:true,
+  colors:['#ee8fb4','#2b0f1b','#f6b4cd','#2b0f1b'],
+  blurb:'Compact, explosive and hard to put down. Sprinter legs, a thick upper back and a core built to take hits.',
+  physique:[85,95,85,80,65,60,75],
+  traits:[['Build','Athletic middleweight, V-taper, dense traps'],['Priority','Leg power, posterior chain, back, delts'],['Body fat','Lean, roughly 10–13%'],['Style','Upper/lower hybrid: strength + power + hypertrophy']],
+  feats:'Canon feats this is built around: 50 m in 3 seconds and a 30 m shot put throw.',
+  focus:'An upper/lower split that hits every muscle twice a week. Legs, glutes and back get the most sets; jumps, sprints and cleans come first while you are fresh.',
+  priority:['quads','glutes','hamstrings','lats','shoulders','abs'],sources:[],
+  callouts:['Broad, capped delts that set up the V-taper','Visible six-pack with thick obliques','Sprinter quads with a deep teardrop','Dense traps and upper back','Wide lats from heavy pulling','Powerful glutes and hamstrings'],
+  days:[
+   D('Lower Power','Jumps, heavy squats, hamstrings',65,[E('boxjump',4,3,90),E('squat',0,'',180,'m'),E('rdl',3,'6–8',150,'g'),E('legcurl',3,'8–12',90),E('calf',4,'10–15',60),E('hlr',4,'10–15',60)]),
+   D('Upper Strength','Heavy press and pull',60,[E('bench',0,'',180,'m'),E('wpullup',4,'5–8',150,'g'),E('ohp',3,'6–8',120),E('row',3,'8–12',90),E('latraise',3,'12–20',60),E('hammer',2,'10–12',60)]),
+   D('Speed & Legs','Sprints, cleans, single-leg volume',60,[E('sprint',6,'40 m',120),E('clean',0,'',150,'p'),E('bss',3,'8–12/leg',90,'g'),E('hipthrust',3,'8–12',90),E('mbthrow',3,'6/side',60),E('abwheel',3,'8–12',60)]),
+   D('Upper Volume','Width, traps and arms',60,[E('incline',3,'8–12',120),E('chinup',3,'6–10',120,'g'),E('dbrow',3,'10–12',90),E('latraise',4,'12–20',60,'g'),E('shrug',3,'10–15',60),E('dips',2,'AMRAP',90)]),
+   D('Black Flash','Fight conditioning and durability',40,[E('bag',6,'2 min',60),E('slam',4,8,60),E('bbj',4,6,60),E('farmer',4,'30 m',90),E('neck',2,'15–25',45)],1)]},
+ {id:'toji',name:'Toji Fushiguro',series:'Jujutsu Kaisen',archetype:'Peak athlete',tags:['Athletic bodybuilding','Power','Shredded'],kanji:'天',
+  colors:['#2f8a8f','#ffffff','#6cc3c8','#0b2224'],
+  blurb:'No cursed energy, all body. Brutally lean, freakishly strong, and fast enough that you never see the first hit.',
+  physique:[95,90,90,90,75,70,80],
+  traits:[['Build','Tall, wiry-muscular, very low body fat'],['Priority','Total-body muscle, power, work capacity'],['Body fat','Very lean, roughly 8–10%'],['Style','2 athletic bodybuilding + 2 athletic performance days']],
+  focus:'Two full-body hypertrophy days and two performance days, mirroring the best-known Toji programs. Muscle work runs close to failure; power work stays crisp at about 3 reps in reserve.',
+  priority:['lats','quads','glutes','hamstrings','shoulders','abs'],sources:['toji'],
+  callouts:['Rounded delts without bulk','Deep-cut abs and obliques','Lean, striated quads','Dense traps from pulls and carries','Wide, thick lats','Explosive glutes and hamstrings'],
+  days:[
+   D('Athletic Bodybuilding A','Full-body muscle',65,[E('squat',0,'',180,'m'),E('wpullup',4,'6–8',150,'g'),E('incline',3,'8–12',120),E('rdl',3,'8–10',120),E('latraise',3,'12–20',60),E('curl',2,'10–12',60)]),
+   D('Athletic Performance A','Explosive lower body',55,[E('clean',0,'',150,'p'),E('boxjump',4,3,90),E('pogo',3,'20',60),E('sprint',6,'30 m',90),E('kbswing',3,12,60),E('landmine',3,'6/side',60)]),
+   D('Athletic Bodybuilding B','Full-body muscle',65,[E('deadlift',0,'',180,'m'),E('ohp',3,'6–8',120,'g'),E('row',3,'8–12',90),E('bss',3,'8–10/leg',90),E('wdips',3,'8–12',90),E('hlr',3,'10–15',60)]),
+   D('Athletic Performance B','Upper power, grip, trunk',55,[E('broadjump',5,3,90),E('pushpress',4,4,120),E('mbthrow',4,'5/side',60),E('ropeclimb',3,1,120),E('dragonflag',3,'5–8',75),E('farmer',4,'30 m',90)]),
+   D('The Hunt','High-output conditioning',40,[E('bike',8,'20 s',100),E('sprawl',5,10,60),E('sled',6,'20 m',90),E('deadhang',3,'45 s',60)],1)]},
+ {id:'todo',name:'Aoi Todo',series:'Jujutsu Kaisen',archetype:'Heavyweight brawler',tags:['Mass','Strength','Powerbuilding'],kanji:'拍',
+  colors:['#a8853a','#1f1606','#d6b56c','#231a07'],
+  blurb:'Huge, thick and loud about it. A heavyweight frame with a barrel chest, a slab of a back and legs like tree trunks.',
+  physique:[60,95,95,75,90,95,90],
+  traits:[['Build','Heavyweight, thick through everything'],['Priority','Overall mass and raw strength'],['Body fat','Strong, roughly 14–18%'],['Style','Powerbuilding upper/lower + strongman']],
+  focus:'Heavy upper/lower powerbuilding: one strength day and one volume day per region. High weekly set counts for chest, back, traps and quads; eat in a surplus.',
+  priority:['chest','lats','traps','shoulders','quads','glutes'],sources:[],
+  callouts:['Boulder shoulders','Thick, armoured core','Massive quads','Mountainous traps','Barn-door lats','Huge glutes and hamstrings'],
+  days:[
+   D('Upper Heavy','Bench, rows, presses',70,[E('bench',0,'',180,'m'),E('row',4,'6–8',120,'g'),E('ohp',3,'6–8',120),E('wpullup',3,'6–8',150),E('shrug',4,'8–12',60),E('skull',3,'10–12',60)]),
+   D('Lower Heavy','Squat strength and size',70,[E('squat',0,'',180,'m'),E('rdl',3,'6–8',150),E('legpress',3,'10–15',120,'g'),E('legcurl',3,'10–12',75),E('calf',4,'10–15',60)]),
+   D('Upper Volume','Chest and back size',65,[E('incline',4,'8–12',90,'g'),E('latpull',4,'10–12',90),E('cablefly',3,'12–15',60),E('latraise',4,'12–20',60),E('curl',3,'8–12',60),E('pushdown',3,'10–15',60)]),
+   D('Lower & Strongman','Deadlift and odd objects',70,[E('deadlift',0,'',180,'m'),E('atlas',4,3,120),E('zercher',3,'30 m',120),E('lunge',3,'10/leg',90),E('abwheel',3,'8–12',60)]),
+   D('Brawler','Fight conditioning',40,[E('bag',6,'2 min',60),E('slam',4,8,60),E('sled',6,'20 m',90),E('neck',3,'15–25',45)],1)]},
+ {id:'megumi',name:'Megumi Fushiguro',series:'Jujutsu Kaisen',archetype:'Wiry calisthenics',tags:['Calisthenics','Relative strength','Mobility'],kanji:'影',
+  colors:['#4a5bc4','#ffffff','#93a0f5','#10153a'],
+  blurb:'Slim, wiry and quick. Strength-to-bodyweight first, built on bars, rings and the floor.',
+  physique:[80,70,85,90,70,65,75],
+  traits:[['Build','Slim, long and wiry'],['Priority','Relative strength, control, mobility'],['Body fat','Lean, roughly 10–12%'],['Style','Weighted calisthenics, pull/legs + push/core']],
+  focus:'Weighted calisthenics: pulling and pushing twice a week each, single-leg work twice, and skill practice early in the session. Add weight to dips and pull-ups once you can do 8 clean reps.',
+  priority:['lats','upperback','shoulders','abs','quads'],sources:[],
+  callouts:['Defined, compact delts','Flat, visible abs','Lean, springy legs','Tight upper back','Wiry lats from bar work','Athletic glutes and hamstrings'],
+  days:[
+   D('Pull & Legs A','Weighted pull-ups, pistols',55,[E('wpullup',0,'',150,'m'),E('ringrow',3,'10–15',75,'g'),E('pistol',4,'5–8/leg',90),E('nordic',3,'4–8',120),E('hlr',3,'10–15',60)]),
+   D('Push & Core A','Dips, handstands',55,[E('wdips',0,'',150,'m'),E('hspu',4,'5–8',120),E('pushup',3,'15–25',60),E('lsit',4,'15–30 s',60),E('handstand',4,'30 s',60)]),
+   D('Pull & Legs B','Unilateral pulling and legs',55,[E('archer',4,'4–6/side',120,'g'),E('chinup',3,'8–12',90),E('bss',3,'8–12/leg',90),E('cossack',3,'8/side',60),E('broadjump',4,3,90),E('hlr',3,'10–15',60)]),
+   D('Skill & Push B','Muscle-ups and planche work',50,[E('muscleup',5,3,120),E('ppp',3,'8–12',90,'g'),E('dragonflag',3,'5–8',75),E('facepull',3,'15–20',45),E('jumprope',4,'2 min',45)]),
+   D('Shadow Flow','Mobility and easy running',40,[E('mobility',1,'20 min',0),E('cossack',2,'10/side',45),E('deadhang',3,'45 s',60),E('tempo',4,'400 m',90)],1)]},
+ {id:'maki',name:'Maki Zenin',series:'Jujutsu Kaisen',archetype:'Agile weapon fighter',tags:['Speed','Grip','Glutes'],kanji:'武',
+  colors:['#2c8a5c','#ffffff','#6fd3a1','#082517'],
+  blurb:'Lean, quick and dangerous with anything in her hands. Explosive hips, an iron grip and a core that turns every swing into power.',
+  physique:[90,90,80,90,70,55,75],
+  traits:[['Build','Lean, athletic, long-limbed'],['Priority','Glutes and hips, grip, rotation'],['Body fat','Lean, athletic range'],['Style','Lower/upper strength + speed and rotation']],
+  focus:'Glutes and hamstrings are trained 3 times a week with hinges, thrusts and sprints. Grip and rotational power get dedicated sets; upper body is kept athletic rather than bulky.',
+  priority:['glutes','hamstrings','quads','obliques','lats','forearms'],sources:[],
+  callouts:['Sculpted shoulders','Strong, visible core','Powerful sprinter quads','Defined upper back','Lean lats','Strong glutes and hamstrings'],
+  days:[
+   D('Lower Strength','Squat and glute volume',60,[E('squat',0,'',180,'m'),E('hipthrust',4,'8–12',90,'g'),E('rdl',3,'8–10',120),E('stepup',3,'8/leg',90),E('calf',3,'12–15',45)]),
+   D('Upper & Grip','Pulling strength and grip',55,[E('wpullup',0,'',150,'m'),E('ohp',3,'6–8',120,'g'),E('dbrow',3,'10–12',90),E('latraise',3,'12–20',60),E('plategrip',3,'30 s',60),E('hammer',3,'10–12',60)]),
+   D('Speed & Rotation','Sprints and rotational power',50,[E('sprint',6,'40 m',120),E('broadjump',4,3,90),E('mbthrow',4,'6/side',60),E('landmine',3,'8/side',60),E('woodchop',3,'12/side',45),E('pallof',3,'10/side',45)]),
+   D('Full-Body Power','Cleans, front squats, carries',60,[E('clean',0,'',150,'p'),E('fsquat',3,'6–8',150,'g'),E('pushpress',3,5,120),E('ropeclimb',3,1,120),E('kbswing',3,12,60),E('farmer',3,'30 m',90)]),
+   D('Weapon Work','Striking conditioning',40,[E('sledgehammer',6,'30 s',60),E('kicks',6,'1 min',45),E('sprawl',4,8,60),E('sled',4,'20 m',90)],1)]},
+ {id:'gojo',name:'Gojo Satoru',series:'Jujutsu Kaisen',archetype:'Tall lean aesthetic',tags:['Aesthetics','Hypertrophy','V-taper'],kanji:'無',
+  colors:['#1b7fb8','#ffffff','#7fd0ff','#05243a'],
+  blurb:'Tall, lean and effortlessly built. Balanced, aesthetic muscle with shoulders that carry the whole frame.',
+  physique:[70,80,85,80,80,85,90],
+  traits:[['Build','Tall, lean, balanced proportions'],['Priority','Side delts, lats, upper chest'],['Body fat','Lean, roughly 10–12%'],['Style','Upper/lower hypertrophy + agility']],
+  focus:'Upper/lower hypertrophy with side delts and lats trained twice a week at high volume for the V-taper. Deadlifts, split squats and an optional sprint day keep the agility side from the Gojo-inspired sessions.',
+  priority:['shoulders','lats','chest','quads'],sources:['gojo'],
+  callouts:['Wide, capped shoulders','Clean six-pack','Shapely, balanced quads','Neat traps, not bulky','Wide lats for the V-taper','Strong glutes and hamstrings'],
+  days:[
+   D('Upper A','Chest, lats, side delts',60,[E('bench',0,'',180,'m'),E('wpullup',4,'6–8',150),E('latraise',4,'12–20',60,'g'),E('dbrow',3,'8–12',90),E('ohtri',3,'10–15',60),E('inclinecurl',3,'10–12',60)]),
+   D('Lower A','Squat and quads',60,[E('squat',0,'',180,'m'),E('rdl',3,'8–10',120),E('legext',3,'12–15',60),E('legcurl',3,'10–12',75),E('calf',4,'10–15',45),E('hlr',4,'10–15',60)]),
+   D('Upper B','Shoulders and width',60,[E('ohp',0,'',150,'m'),E('latpull',4,'8–12',90,'g'),E('incline',3,'8–12',90,'g'),E('latraise',4,'15–20',60),E('rdelt',3,'15–20',45),E('cablefly',3,'12–15',60)]),
+   D('Lower B','Hinge and single leg',60,[E('deadlift',0,'',180,'m'),E('bss',3,'10/leg',90,'g'),E('hipthrust',3,'8–12',90),E('legcurl',3,'10–12',75),E('abwheel',3,'8–12',60),E('calf',3,'12–20',45)]),
+   D('Limitless','Intervals and mobility',35,[E('sprint',8,'30 s',90),E('rower',1,'5 min',0),E('boxjump',3,5,60),E('mobility',1,'10 min',0)],1)]},
+ {id:'baki',name:'Baki Hanma',series:'Baki',archetype:'Hyper-defined fighter',tags:['Definition','Back','Fight'],kanji:'刃',
+  colors:['#d23a2e','#ffffff','#ff7266','#2a0805'],
+  blurb:'Every muscle visible. A compact fighter who looks carved out of rope, with a back that does the talking.',
+  physique:[95,85,100,95,85,75,85],
+  traits:[['Build','Compact middleweight, extreme detail'],['Priority','Back, abs, delts'],['Body fat','Very lean, roughly 7–9%'],['Style','Pull/push/legs + fight power']],
+  focus:'Back is the headline, so it gets two pull days and the most weekly sets. Abs are trained three times a week with loaded movements. Pull-ups, deadlifts, incline pressing, shoulder press and leg raises anchor it, matching popular Baki routines.',
+  priority:['lats','upperback','traps','abs','shoulders'],sources:['baki'],
+  callouts:['Striated delts','Blocky, deep abs','Sliced quads','Bulging traps','A back like a relief carving','Hard glutes and hamstrings'],
+  days:[
+   D('Pull Heavy','Back thickness',65,[E('deadlift',0,'',180,'m'),E('wpullup',4,'5–8',150),E('row',3,'8–12',90,'g'),E('shrug',3,'10–15',60),E('rdelt',3,'15–20',45),E('curl',3,'8–12',60)]),
+   D('Push & Abs','Incline pressing and abs',60,[E('bench',0,'',180,'m'),E('incline',3,'8–12',90),E('ohp',3,'6–8',120),E('latraise',3,'12–20',60),E('hlr',4,'10–15',60,'g'),E('dragonflag',3,'5–8',75)]),
+   D('Legs & Kicks','Leg strength and striking',60,[E('squat',0,'',180,'m'),E('rdl',3,'8–10',120),E('bss',3,'8–12/leg',90),E('calf',4,'10–15',45),E('cablecrunch',3,'10–15',60),E('kicks',5,'1 min',45)]),
+   D('Pull Volume & Power','Back width and fight power',60,[E('pullup',4,'8–12',90,'g'),E('dbrow',3,'10–12',90),E('facepull',3,'15–20',45),E('mbthrow',4,'6/side',60),E('slam',3,8,60),E('ropeclimb',3,1,120)]),
+   D('Fight Night','Rounds and durability',45,[E('bag',8,'3 min',60),E('sprawl',5,10,60),E('jumprope',5,'2 min',45),E('neck',3,'15–25',45)],1)]},
+ {id:'vegeta',name:'Vegeta',series:'Dragon Ball',archetype:'Compact powerhouse',tags:['Powerbuilding','Shoulders','Size'],kanji:'王',
+  colors:['#3550c8','#ffffff','#8ea4ff','#0b1440'],
+  blurb:'Short, dense and proud of it. Bulky but lean, with shoulders that dominate the frame.',
+  physique:[65,85,90,80,90,90,95],
+  traits:[['Build','Short, dense, full-bodied'],['Priority','Shoulders, chest, arms'],['Body fat','Lean, roughly 10–12%'],['Style','Powerbuilding upper/lower']],
+  focus:'Powerbuilding, as Vegeta-style plans recommend: heavy compounds plus bodybuilding volume. Shoulders get the most work (presses, lateral raises and rear delts twice a week), followed by chest and arms.',
+  priority:['shoulders','chest','triceps','biceps','lats'],sources:['vegeta'],
+  callouts:['Round, full delts','Thick, blocky abs','Full-sweep quads','Raised traps','Thick, wide lats','Dense glutes and hamstrings'],
+  days:[
+   D('Upper Power','Heavy press and row',65,[E('bench',0,'',180,'m'),E('row',4,'6–8',120),E('ohp',3,'6–8',120),E('latraise',4,'12–20',60,'g'),E('skull',3,'8–12',60),E('curl',3,'8–12',60)]),
+   D('Lower Power','Squat strength',60,[E('squat',0,'',180,'m'),E('rdl',3,'6–8',150),E('legpress',3,'10–15',120),E('legcurl',3,'10–12',75),E('calf',4,'10–15',45),E('cablecrunch',3,'10–15',60)]),
+   D('Upper Hypertrophy','Delts and chest',65,[E('incline',4,'8–12',90,'g'),E('wpullup',4,'6–10',150),E('arnold',3,'8–12',90),E('latraise',3,'15–20',60),E('rdelt',3,'15–20',45),E('cablefly',3,'12–15',60)]),
+   D('Lower & Arms','Deadlift and arm volume',60,[E('deadlift',0,'',180,'m'),E('lunge',3,'10/leg',90),E('legext',3,'12–15',60),E('hammer',3,'10–12',60,'g'),E('pushdown',3,'10–15',60),E('abwheel',3,'8–12',60)]),
+   D('Gravity Room','Hard conditioning',35,[E('sled',6,'20 m',90),E('bike',6,'20 s',100),E('hlr',3,'10–15',60)],1)]},
+ {id:'levi',name:'Levi Ackerman',series:'Attack on Titan',archetype:'Small and shredded',tags:['Core','Grip','Relative strength'],kanji:'翼',
+  colors:['#6c7a32','#ffffff','#b5c574','#1b2008'],
+  blurb:'Light, small and absurdly strong for his size. Everything built around core control, grip and spinning through the air.',
+  physique:[90,75,90,100,75,65,75],
+  traits:[['Build','Short, light, shredded'],['Priority','Abs and obliques, grip, back'],['Body fat','Very lean, roughly 7–9%'],['Style','Weighted calisthenics + rotational power']],
+  focus:'Core and obliques are trained 4 times a week from every angle (flexion, anti-rotation, rotation, hanging). Grip work stacks on top of heavy pulling, and legs are trained for spring rather than size.',
+  priority:['abs','obliques','lats','forearms','upperback'],sources:[],
+  callouts:['Tight, capped shoulders','Etched abs and obliques','Lean, quick legs','Defined upper back','Wiry lats','Compact, powerful glutes'],
+  days:[
+   D('Pull & Grip','Bar strength and grip',55,[E('wpullup',0,'',150,'m'),E('ropeclimb',3,1,120),E('dbrow',3,'8–12',90,'g'),E('plategrip',3,'30 s',60),E('hammer',3,'10–12',60),E('hlr',3,'10–15',60)]),
+   D('Legs & Agility','Single-leg strength and spring',55,[E('fsquat',0,'',150,'m'),E('stepup',3,'8/leg',90),E('cossack',3,'8/side',60),E('nordic',3,'4–8',120),E('broadjump',4,3,90),E('calf',3,'12–20',45)]),
+   D('Push & Core','Dips, handstands, abs',55,[E('wdips',0,'',150,'m'),E('hspu',4,'5–8',120),E('pushup',3,'15–25',60),E('dragonflag',3,'5–8',75,'g'),E('lsit',4,'20 s',60),E('pallof',3,'10/side',45)]),
+   D('Rotation & Power','Spin, throw, carry',55,[E('clean',0,'',150,'p'),E('archer',3,'4–6/side',120),E('landmine',3,'8/side',60),E('woodchop',3,'12/side',45),E('mbthrow',4,'6/side',60),E('suitcase',3,'30 m/side',60)]),
+   D('Gear Drills','Speed and conditioning',40,[E('sprint',8,'30 m',90),E('jumprope',5,'2 min',45),E('sprawl',4,10,60),E('mobility',1,'15 min',0)],1)]},
+ {id:'guts',name:'Guts',series:'Berserk',archetype:'Old-time strongman',tags:['Strongman','Mass','Endurance'],kanji:'剣',
+  colors:['#7a5b47','#ffffff','#c19c82','#24170e'],
+  blurb:'Built like the sword he swings. A thick, old-time strongman torso, tree-trunk legs and the endurance to keep swinging.',
+  physique:[85,95,100,90,95,90,95],
+  traits:[['Build','Huge, thick waist and torso'],['Priority','Back, traps, obliques, grip, legs'],['Body fat','Strong, roughly 12–15%'],['Style','Big lifts + carries + rotational swings']],
+  focus:'Follows the strongman approach used in Guts programs: heavy basic lifts, loaded and one-sided carries, rotational swings for thick obliques, wrist and neck work, and long conditioning. Progressive overload is the core rule, so keep adding load.',
+  priority:['upperback','traps','obliques','quads','forearms','shoulders'],sources:['guts'],
+  callouts:['Massive shoulders','Thick, armoured core','Huge quads','Towering traps','An enormous back','A powerful posterior chain'],
+  days:[
+   D('Heavy Lower','Squat, hinge, loaded carry',65,[E('squat',0,'',180,'m'),E('goodmorning',3,'8–10',120),E('zercher',4,'30 m',120),E('suitcase',3,'30 m/side',60,'g'),E('calf',3,'12–15',45)]),
+   D('Heavy Press','Overhead strength and traps',60,[E('ohp',0,'',180,'m'),E('bench',4,'6–8',150,'g'),E('wdips',3,'8–12',90),E('shrug',3,'10–15',60),E('ohtri',3,'10–15',60),E('neck',2,'15–30',45)]),
+   D('Heavy Pull & Carry','Back thickness and grip',65,[E('deadlift',0,'',180,'m'),E('row',4,'8–10',120),E('wpullup',3,'6–10',150,'g'),E('farmer',4,'40 m',90),E('revcurl',3,'10–15',60)]),
+   D('Swings & Odd Objects','Rotational power and atlas work',60,[E('clean',0,'',150,'p'),E('atlas',5,3,120),E('halo',3,'8/side',60),E('kbswing',4,15,60),E('landmine',3,'8/side',60),E('sledgehammer',5,'30 s',60)]),
+   D('Endless Battle','Long conditioning',45,[E('rower',5,'3 min',90),E('sledgehammer',5,'1 min',60),E('bag',5,'3 min',60),E('neck',2,'15–30',45)],1)]},
+ {id:'rengoku',name:'Kyojuro Rengoku',series:'Demon Slayer',archetype:'Athletic swordsman',tags:['Shoulders','Core','Endurance'],kanji:'炎',
+  colors:['#e06a12','#2a1302','#ffa04a','#2a1302'],
+  blurb:"Broad-shouldered and relentless. A swordsman's build with strong shoulders, a rock-solid core and lungs that never quit.",
+  physique:[95,85,85,90,75,75,90],
+  traits:[['Build','Broad, athletic, durable'],['Priority','Shoulders, back, obliques, aerobic base'],['Body fat','Lean, roughly 10–13%'],['Style','Upper/lower strength + rotation + endurance']],
+  focus:'Shoulders and upper back are trained twice a week with plenty of lateral and rear delt work for broadness. Rotation and anti-rotation core work builds the swing, and a weekly tempo-run session builds the aerobic base.',
+  priority:['shoulders','lats','obliques','quads'],sources:[],
+  callouts:['Broad, strong shoulders','A hard, functional core','Strong, enduring legs','Solid traps','A wide upper back','Powerful hips'],
+  days:[
+   D('Lower','Leg strength and stability',60,[E('squat',0,'',180,'m'),E('rdl',3,'8–10',120,'g'),E('stepup',3,'8/leg',90),E('cossack',3,'8/side',60),E('calf',3,'12–15',45)]),
+   D('Upper','Press and pull',60,[E('ohp',0,'',150,'m'),E('wpullup',4,'6–8',150,'g'),E('incline',3,'8–12',90),E('latraise',3,'12–20',60),E('facepull',3,'15–20',45)]),
+   D('Breathing & Core','Aerobic base and rotation',50,[E('tempo',5,'400 m',90),E('woodchop',3,'12/side',45),E('landmine',3,'8/side',60),E('pallof',3,'10/side',45),E('hlr',3,'10–15',60)]),
+   D('Total Strike','Explosive full-body power',55,[E('clean',0,'',150,'p'),E('pushpress',3,5,120),E('dbrow',3,'10–12',90,'g'),E('latraise',3,'15–20',60),E('sledgehammer',5,'30 s',60),E('farmer',3,'40 m',90)]),
+   D('Flame Endurance','Long conditioning',40,[E('rower',6,'2 min',60),E('jumprope',5,'2 min',45),E('sprawl',4,10,60),E('mobility',1,'15 min',0)],1)]},
+ {id:'garou',name:'Garou',series:'One Punch Man',archetype:'Martial artist',tags:['Lean muscle','Plyometrics','Mobility'],kanji:'狼',
+  colors:['#7b4ec4','#ffffff','#b493ff','#1c0f36'],
+  blurb:"Lean, flexible and vicious. A martial artist's body: springy legs, loose hips and a whippy, wiry upper body.",
+  physique:[90,90,80,90,70,65,80],
+  traits:[['Build','Lean, light, springy'],['Priority','Delts, lats, legs, abs'],['Body fat','Very lean, roughly 8–10%'],['Style','Hypertrophy + plyometrics + martial arts']],
+  focus:'Combines the shoulder- and arm-heavy hypertrophy work of popular Garou programs (lateral raises in nearly every session) with plyometrics, kicks and mobility for the martial-arts side.',
+  priority:['shoulders','lats','quads','abs','triceps'],sources:['garou'],
+  callouts:['Lean, wiry shoulders','Sharp, visible abs','Springy, defined quads','Lean traps','Wiry lats','Flexible, powerful hips'],
+  days:[
+   D('Lower & Kicks','Leg strength and kicking power',60,[E('fsquat',0,'',150,'m'),E('bss',3,'8–12/leg',90,'g'),E('cossack',3,'8/side',60),E('legcurl',3,'10–12',75),E('nordic',3,'4–8',120),E('kicks',5,'1 min',45)]),
+   D('Upper A','Pull strength and delts',60,[E('wpullup',0,'',150,'m'),E('incline',3,'8–12',90),E('latraise',4,'12–20',60,'g'),E('pullover',3,'10–12',60),E('ohtri',3,'10–15',60)]),
+   D('Plyo & Core','Spring and trunk control',45,[E('boxjump',5,3,90),E('pogo',3,'20',60),E('dragonflag',3,'5–8',75),E('lsit',4,'20 s',60),E('mbthrow',4,'6/side',60),E('jumprope',4,'2 min',45)]),
+   D('Upper B','Dips, pulls, delts',60,[E('wdips',0,'',150,'m'),E('archer',3,'4–6/side',120,'g'),E('hspu',3,'5–8',120),E('latraise',3,'15–20',60),E('rdelt',3,'15–20',45),E('hlr',3,'10–15',60)]),
+   D('Flow','Mobility and fight rounds',40,[E('mobility',1,'20 min',0),E('bag',6,'2 min',60),E('sprawl',4,10,60),E('tempo',4,'400 m',90)],1)]},
+ {id:'allmight',name:'All Might',series:'My Hero Academia',archetype:'Superhero bulk',tags:['Powerbuilding','Chest','Shoulders'],kanji:'力',
+  colors:['#c99a0c','#1f1700','#f3c843','#1f1700'],
+  blurb:'The comic-book hero build. An enormous chest and shoulders over a tight waist, with the strength to match the size.',
+  physique:[70,90,95,80,90,100,100],
+  traits:[['Build','Huge, top-heavy V'],['Priority','Chest, shoulders, lats, traps'],['Body fat','Strong, roughly 12–15%'],['Style','Upper-biased powerbuilding']],
+  focus:'Upper-biased powerbuilding: chest and shoulders sit at the top of the evidence-based volume range (about 16–20 weekly sets), split over two heavy and two volume exposures. Legs are trained hard but at maintenance-plus volume.',
+  priority:['chest','shoulders','lats','traps','triceps'],sources:[],
+  callouts:['Colossal shoulders','Thick abs, tight waist','Big, strong quads','Huge traps','Massive lats','A strong posterior chain'],
+  days:[
+   D('Upper Heavy','The hero torso, heavy',65,[E('bench',0,'',180,'m'),E('row',4,'6–8',120),E('ohp',3,'6–8',120),E('latraise',4,'12–20',60),E('skull',3,'8–12',60),E('curl',3,'8–12',60)]),
+   D('Legs','Strength and size',65,[E('squat',0,'',180,'m'),E('rdl',3,'6–8',150),E('legpress',3,'10–15',120),E('legcurl',3,'10–12',75),E('calf',4,'10–15',45),E('hlr',3,'10–15',60)]),
+   D('Upper Volume','Chest and delt volume',65,[E('incline',4,'8–12',90,'g'),E('wpullup',4,'6–10',150),E('cablefly',3,'12–15',60,'g'),E('arnold',3,'8–12',90),E('latraise',3,'15–20',60),E('shrug',3,'10–15',60)]),
+   D('Plus Ultra','Explosive strength and dips',60,[E('clean',0,'',150,'p'),E('pushpress',4,5,120),E('atlas',4,3,120),E('wdips',3,'8–12',90),E('lunge',3,'10/leg',90),E('abwheel',3,'8–12',60)]),
+   D('Hero Conditioning','Short, hard intervals',35,[E('bike',8,'20 s',100),E('slam',4,8,60),E('farmer',4,'40 m',90),E('hlr',3,'10–15',60)],1)]}
+];
+/* ---------- More exercises ---------- */
+Object.assign(EX,{
+  goblet:['Goblet Squat','load','Elbows inside knees, sit tall.',{quads:1,glutes:.6,abs:.4}],
+  hack:['Hack Squat','load','Feet low, knees travel forward.',{quads:1,glutes:.5}],
+  jumpsquat:['Jump Squat','bw','Light load, jump as high as you can.',{quads:1,glutes:.8,calves:.5}],
+  skater:['Skater Jumps','bw','Bound sideways, stick each landing.',{glutes:1,quads:.6,adductors:.5}],
+  pendlay:['Pendlay Row','load','Dead stop on the floor every rep.',{upperback:1,lats:.8,lowerback:.5}],
+  tbar:['T-Bar Row','load','Chest up, drive elbows back.',{upperback:1,lats:.8,traps:.5,biceps:.4}],
+  preacher:['Preacher Curl','load','Full stretch at the bottom.',{biceps:1}],
+  wristcurl:['Wrist Curl','load','Let the bar roll to the fingers.',{forearms:1}],
+  mbchest:['Med Ball Chest Throw','load','Explode off the chest.',{chest:.8,triceps:.6,shoulders:.5}],
+  clappush:['Clap Push-up','bw','Push hard enough to clap. Land soft.',{chest:1,triceps:.6,shoulders:.4}],
+  russian:['Weighted Russian Twist','bw','Feet up, rotate the ribs not the arms.',{obliques:1,abs:.5}],
+  situp:['Weighted Sit-up','bw','Plate on chest, control the lower.',{abs:1}],
+  plank:['Plank','cond','Squeeze glutes, ribs down.',{abs:1,obliques:.4}],
+  longrun:['Steady Run','cond','Conversational pace.',{calves:.6,quads:.5,hamstrings:.5}],
+  hillsprint:['Hill Sprints','cond','Drive the knees, walk back down.',{glutes:1,hamstrings:.8,quads:.6,calves:.6}]
+});
+['jumpsquat','skater','mbchest','clappush','hillsprint'].forEach(x=>EXPLOSIVE.add(x));
+Object.assign(SRC,{
+  zoro:['RP Strength: Bringing Zoro to life','https://rpstrength.com/blogs/articles/bringing-zoro-to-life'],
+  goku:['Boostcamp: Goku workout program','https://boostcamp.app/blogs/goku-workout-program-routine'],
+  mikasa:['Exercise With Style: Mikasa Ackerman workout','https://exercisewithstyle.com/mikasa-ackerman-workout-routine/'],
+  lee:["Action Hero Flex: Rock Lee's hybrid training",'https://actionheroflex.substack.com/p/rock-lees-hybrid-training-method'],
+  saitama:["Sportskeeda: The science of Saitama's training",'https://sportskeeda.com/health-and-fitness/the-science-saitama-s-training-unveiling-one-punch-man-workout'],
+  yujiro:['Sportskeeda: Is a demon back possible?','https://sportskeeda.com/health-and-fitness/is-demon-back-actually-possible-a-look-into-anatomy-yujiro-hanma']
+});
+const P=(o)=>o; /* readability */
+PROGRAMS.push(
+ /* ===== Jujutsu Kaisen ===== */
+ P({id:'nanami',name:'Kento Nanami',series:'Jujutsu Kaisen',archetype:'Office powerhouse',tags:['Powerbuilding','Forearms','Strength'],kanji:'律',
+  colors:['#9c7b55','#ffffff','#d1b08a','#241a0e'],
+  blurb:'A suit hiding a slab of muscle. Thick chest, heavy back and forearms built for blunt force, trained efficiently and on schedule.',
+  physique:[70,85,90,80,90,90,85],
+  traits:[['Build','Tall, broad, thick-set'],['Priority','Chest, back, forearms, traps'],['Body fat','Moderate, roughly 12–15%'],['Style','Efficient powerbuilding, 4 days, no wasted sets']],
+  focus:'Efficient upper/lower powerbuilding: four sessions, each muscle twice, nothing wasted. Forearms and grip get direct work twice a week for that blunt-weapon look.',
+  priority:['chest','lats','upperback','forearms','traps'],sources:[],
+  callouts:['Heavy, rounded delts','A solid, thick core','Strong quads','Thick traps','A wide, dense back','Strong hinge muscles'],
+  days:[
+   D('Upper Heavy','Bench, rows, grip',65,[E('bench',0,'',180,'m'),E('row',4,'6–8',120,'g'),E('ohp',3,'6–8',120),E('wpullup',3,'6–8',150),E('revcurl',3,'10–15',60),E('hammer',3,'10–12',60)]),
+   D('Lower Heavy','Squat strength',60,[E('squat',0,'',180,'m'),E('rdl',3,'6–8',150),E('legpress',3,'10–15',120),E('legcurl',3,'10–12',75),E('calf',3,'10–15',45),E('cablecrunch',3,'10–15',60)]),
+   D('Upper Volume','Chest and back size',60,[E('incline',4,'8–12',90,'g'),E('latpull',4,'8–12',90),E('latraise',3,'12–20',60),E('cablefly',3,'12–15',60),E('shrug',3,'10–15',60),E('wristcurl',3,'12–20',45)]),
+   D('Lower & Carries','Deadlift and loaded carries',60,[E('deadlift',0,'',180,'m'),E('bss',3,'8–12/leg',90,'g'),E('hipthrust',3,'8–12',90),E('farmer',4,'30 m',90),E('abwheel',3,'8–12',60)]),
+   D('Overtime','Conditioning, no more than needed',35,[E('rower',5,'3 min',90),E('sled',4,'20 m',90),E('plank',3,'45 s',45)],1)]}),
+ P({id:'yuta',name:'Yuta Okkotsu',series:'Jujutsu Kaisen',archetype:'Lean swordsman',tags:['Lean','Grip','Rotation'],kanji:'愛',
+  colors:['#6f6aa8','#ffffff','#b8b3ec','#16133a'],
+  blurb:'Slim, quick and quietly terrifying. A lean swordsman build with sharp shoulders, a strong grip and a core that powers every cut.',
+  physique:[85,80,80,90,70,65,80],
+  traits:[['Build','Slim, lean, long-limbed'],['Priority','Delts, lats, obliques, grip'],['Body fat','Lean, roughly 10–12%'],['Style','Upper/lower strength + speed and rotation']],
+  focus:'A lean upper/lower split with extra side-delt and lat work for a sharp frame without bulk. Rotational throws, chops and grip work carry over to the sword.',
+  priority:['shoulders','lats','obliques','forearms','quads'],sources:[],
+  callouts:['Sharp, capped delts','Etched obliques','Lean, quick quads','Defined upper back','Long, wide lats','Athletic glutes'],
+  days:[
+   D('Lower','Front squats and single leg',55,[E('fsquat',0,'',150,'m'),E('bss',3,'8–12/leg',90,'g'),E('rdl',3,'8–10',120),E('cossack',3,'8/side',60),E('calf',3,'12–15',45)]),
+   D('Upper A','Pulling strength and grip',55,[E('wpullup',0,'',150,'m'),E('ohp',3,'6–8',120,'g'),E('incline',3,'8–12',90),E('latraise',3,'12–20',60),E('facepull',3,'15–20',45),E('plategrip',3,'30 s',60)]),
+   D('Speed & Rotation','Sprints and cutting power',50,[E('sprint',6,'30 m',90),E('broadjump',4,3,90),E('landmine',3,'8/side',60),E('woodchop',3,'12/side',45),E('mbthrow',3,'6/side',60),E('hlr',3,'10–15',60)]),
+   D('Upper B','Dips, rows, delts',55,[E('wdips',0,'',150,'m'),E('dbrow',3,'10–12',90,'g'),E('archer',3,'4–6/side',120),E('latraise',3,'15–20',60),E('revcurl',3,'12–15',60),E('pallof',3,'10/side',45)]),
+   D('Sword Drills','Striking conditioning',35,[E('sledgehammer',6,'30 s',60),E('bag',4,'2 min',60),E('mobility',1,'15 min',0)],1)]}),
+ P({id:'hakari',name:'Kinji Hakari',series:'Jujutsu Kaisen',archetype:'Brawler',tags:['Fight','Chest','Conditioning'],kanji:'賭',
+  colors:['#c2185b','#ffffff','#f06292','#33000f'],
+  blurb:'All-in, every round. A lean, heavy-hitting brawler with a big chest, strong arms and a gas tank for long fights.',
+  physique:[90,80,85,85,85,90,85],
+  traits:[['Build','Muscular middleweight'],['Priority','Chest, shoulders, arms, abs'],['Body fat','Lean, roughly 10–13%'],['Style','Upper/lower hypertrophy + fight power']],
+  focus:'Upper/lower hypertrophy with chest, delts and arms at the top of the volume range, plus a fight-power day of throws, slams and sled work.',
+  priority:['chest','shoulders','triceps','biceps','abs'],sources:[],
+  callouts:['Round, punchy delts','Hard, visible abs','Strong, springy quads','Solid traps','Strong lats','Strong posterior chain'],
+  days:[
+   D('Upper Power','Heavy press and pull',60,[E('bench',0,'',180,'m'),E('wpullup',4,'5–8',150),E('ohp',3,'6–8',120),E('row',3,'8–12',90,'g'),E('curl',3,'8–12',60),E('skull',3,'8–12',60)]),
+   D('Lower Power','Squat and jumps',55,[E('squat',0,'',180,'m'),E('jumpsquat',4,4,90),E('rdl',3,'8–10',120),E('legcurl',3,'10–12',75),E('calf',3,'12–15',45)]),
+   D('Upper Volume','Chest and delt pump',60,[E('incline',4,'8–12',90,'g'),E('latpull',3,'10–12',90),E('latraise',4,'12–20',60),E('cablefly',3,'12–15',60),E('hlr',3,'10–15',60),E('pushdown',3,'10–15',60)]),
+   D('Fight Power','Throws, slams, sled',50,[E('clean',0,'',150,'p'),E('mbchest',4,6,60),E('slam',3,8,60),E('landmine',3,'8/side',60),E('sled',4,'20 m',90),E('situp',3,'10–15',60)]),
+   D('Jackpot Rounds','Long fight conditioning',45,[E('bag',8,'3 min',60),E('sprawl',5,10,60),E('jumprope',5,'2 min',45),E('neck',2,'15–25',45)],1)]}),
+ P({id:'choso',name:'Choso',series:'Jujutsu Kaisen',archetype:'Lean aesthetic',tags:['Aesthetics','Abs','V-taper'],kanji:'血',
+  colors:['#8e2a3a','#ffffff','#d4697b','#2a0a10'],
+  blurb:'Lean, sharp and shredded. A tall, defined build with a narrow waist, deep abs and wide shoulders.',
+  physique:[75,80,85,90,80,80,90],
+  traits:[['Build','Tall, lean, defined'],['Priority','Delts, lats, abs, arms'],['Body fat','Very lean, roughly 8–11%'],['Style','Upper/lower hypertrophy']],
+  focus:'Upper/lower hypertrophy built for the V-taper: high-volume side delts and lats, abs trained three times a week, and arms finished on both upper days.',
+  priority:['shoulders','lats','abs','biceps','triceps'],sources:[],
+  callouts:['Wide, sharp delts','Deep, blocky abs','Lean, shapely quads','Neat traps','Wide lats','Tight glutes and hamstrings'],
+  days:[
+   D('Upper A','Width and arms',60,[E('wpullup',0,'',150,'m'),E('incline',3,'8–12',90),E('latraise',4,'12–20',60,'g'),E('dbrow',3,'10–12',90),E('inclinecurl',3,'10–12',60),E('ohtri',3,'10–15',60)]),
+   D('Lower A','Squat and abs',55,[E('squat',0,'',180,'m'),E('rdl',3,'8–10',120),E('legext',3,'12–15',60),E('calf',3,'12–15',45),E('cablecrunch',3,'10–15',60)]),
+   D('Upper B','Press and delts',60,[E('ohp',0,'',150,'m'),E('latpull',4,'8–12',90,'g'),E('cablefly',3,'12–15',60),E('latraise',4,'15–20',60),E('preacher',3,'10–12',60),E('pushdown',3,'10–15',60)]),
+   D('Lower B','Hinge and abs',55,[E('deadlift',0,'',180,'m'),E('bss',3,'10/leg',90),E('legcurl',3,'10–12',75),E('hlr',4,'10–15',60,'g'),E('abwheel',3,'8–12',60)]),
+   D('Lean Conditioning','Intervals',30,[E('rower',6,'2 min',60),E('jumprope',4,'2 min',45),E('plank',3,'45 s',45)],1)]}),
+ P({id:'nobara',name:'Nobara Kugisaki',series:'Jujutsu Kaisen',archetype:'Hammer-swinging athlete',tags:['Glutes','Shoulders','Rotation'],kanji:'打',
+  colors:['#a84f2f','#ffffff','#e58a68','#2a0f05'],
+  blurb:'Fierce, quick and accurate. An athletic build with strong glutes, capable shoulders and a rotational core made for swinging a hammer.',
+  physique:[85,90,75,90,70,60,80],
+  traits:[['Build','Athletic, compact'],['Priority','Glutes, shoulders, obliques'],['Body fat','Lean, athletic range'],['Style','Glute-focused lower body + rotational power']],
+  focus:'Glutes are trained three times a week (thrusts, hinges, single leg), shoulders twice with plenty of lateral raises, and a rotation day builds the hammer swing.',
+  priority:['glutes','hamstrings','shoulders','obliques','quads'],sources:[],
+  callouts:['Toned, capped shoulders','A strong, defined core','Athletic quads','A strong upper back','Lean lats','Strong glutes and hamstrings'],
+  days:[
+   D('Lower Strength','Squat and glutes',60,[E('squat',0,'',180,'m'),E('hipthrust',4,'8–12',90,'g'),E('rdl',3,'8–10',120),E('lunge',3,'10/leg',90),E('calf',3,'12–15',45)]),
+   D('Upper','Press, pull, delts',55,[E('ohp',0,'',150,'m'),E('latpull',3,'8–12',90,'g'),E('incline',3,'8–12',90),E('latraise',4,'12–20',60),E('dbrow',3,'10–12',90)]),
+   D('Swing Power','Rotation and throws',50,[E('kbswing',4,12,60),E('mbthrow',4,'6/side',60),E('landmine',3,'8/side',60),E('woodchop',3,'12/side',45),E('russian',3,'10/side',45),E('sledgehammer',4,'30 s',60)]),
+   D('Glutes & Back','Single-leg and pulling',55,[E('hipthrust',0,'',150,'m'),E('bss',3,'8–12/leg',90),E('legcurl',3,'10–12',75),E('pullup',3,'6–10',120,'g'),E('facepull',3,'15–20',45)]),
+   D('Conditioning','Intervals',30,[E('sprint',6,'30 m',90),E('jumprope',4,'2 min',45),E('plank',3,'45 s',45)],1)]}),
+ P({id:'yuki',name:'Yuki Tsukumo',series:'Jujutsu Kaisen',archetype:'Strong and powerful',tags:['Strength','Glutes','Back'],kanji:'星',
+  colors:['#b0447e','#ffffff','#e98abf','#2e0a1e'],
+  blurb:'Tall, strong and built for heavy hits. A powerful frame with strong legs and glutes, a solid back and real pressing strength.',
+  physique:[75,95,90,85,80,75,85],
+  traits:[['Build','Tall, strong, curvy-athletic'],['Priority','Glutes, quads, back, shoulders'],['Body fat','Moderate, athletic range'],['Style','Powerbuilding upper/lower']],
+  focus:'Powerbuilding with the big three trained heavy each week, and glutes, quads and back given the most hypertrophy sets.',
+  priority:['glutes','quads','lats','upperback','shoulders'],sources:[],
+  callouts:['Strong, round delts','A strong core','Powerful quads','A strong upper back','Wide lats','Strong glutes and hamstrings'],
+  days:[
+   D('Lower Heavy','Squat strength',65,[E('squat',0,'',180,'m'),E('hipthrust',4,'6–10',120,'g'),E('rdl',3,'6–8',150),E('legext',3,'12–15',60),E('calf',3,'12–15',45)]),
+   D('Upper Heavy','Bench and rows',60,[E('bench',0,'',180,'m'),E('row',4,'6–8',120,'g'),E('ohp',3,'6–8',120),E('pullup',3,'6–10',120),E('latraise',3,'12–20',60)]),
+   D('Lower Volume','Deadlift and glutes',60,[E('deadlift',0,'',180,'m'),E('bss',3,'8–12/leg',90,'g'),E('legpress',3,'10–15',120),E('legcurl',3,'10–12',75),E('abwheel',3,'8–12',60)]),
+   D('Upper Volume','Back and delts',55,[E('incline',3,'8–12',90),E('latpull',4,'8–12',90,'g'),E('dbrow',3,'10–12',90),E('latraise',3,'15–20',60),E('facepull',3,'15–20',45),E('hammer',3,'10–12',60)]),
+   D('Star Power','Explosive conditioning',35,[E('sled',6,'20 m',90),E('slam',4,8,60),E('bike',6,'20 s',100)],1)]}),
+ /* ===== Baki ===== */
+ P({id:'yujiro',name:'Yujiro Hanma',series:'Baki',archetype:'The Ogre',tags:['Mass','Back','Strength'],kanji:'鬼',
+  colors:['#9b1c24','#ffffff','#e0525a','#2a0508'],
+  blurb:'The strongest creature on earth. A massive, dense build with a back so developed it shows a face.',
+  physique:[80,90,100,90,95,95,95],
+  traits:[['Build','Huge, dense, heavyweight'],['Priority','Back, traps, delts, chest'],['Body fat','Lean for a heavyweight, roughly 10–13%'],['Style','High-volume powerbuilding, back 3× a week']],
+  focus:'Back is trained three times a week with rows, pull-ups and deadlifts at the top of the volume range, the closest real-world route to a dense, detailed back.',
+  priority:['lats','upperback','traps','shoulders','chest'],sources:['yujiro'],
+  callouts:['Massive, striated delts','Thick, blocky abs','Huge quads','Towering traps','A back that shows a face','A powerful posterior chain'],
+  days:[
+   D('Back Heavy','Deadlift and rows',70,[E('deadlift',0,'',180,'m'),E('pendlay',4,'5–8',120),E('wpullup',4,'5–8',150,'g'),E('shrug',4,'8–12',60),E('rdelt',3,'15–20',45)]),
+   D('Push Heavy','Bench and press',65,[E('bench',0,'',180,'m'),E('ohp',4,'6–8',120),E('incline',3,'8–12',90,'g'),E('latraise',4,'12–20',60),E('skull',3,'8–12',60)]),
+   D('Legs','Squat strength and size',65,[E('squat',0,'',180,'m'),E('rdl',3,'8–10',120),E('legpress',3,'10–15',120),E('legcurl',3,'10–12',75),E('calf',4,'10–15',45),E('cablecrunch',3,'10–15',60)]),
+   D('Back Volume','Width and detail',65,[E('tbar',4,'8–12',90,'g'),E('latpull',4,'10–12',90),E('pullover',3,'12–15',60),E('facepull',3,'15–20',45),E('curl',3,'8–12',60),E('hlr',3,'10–15',60)]),
+   D('Fight','Rounds and power',40,[E('bag',6,'3 min',60),E('slam',4,8,60),E('neck',3,'15–25',45)],1)]}),
+ P({id:'jack',name:'Jack Hanma',series:'Baki',archetype:'Giant',tags:['Mass','Volume','Strength'],kanji:'牙',
+  colors:['#46607a','#ffffff','#8eaccb','#0c1824'],
+  blurb:'Enormous and relentless. A giant frame with long, thick limbs and size everywhere, built with volume most people would not survive.',
+  physique:[75,95,95,80,95,90,90],
+  traits:[['Build','Very tall, massive'],['Priority','Overall mass: legs, back, chest, arms'],['Body fat','Moderate, roughly 12–16%'],['Style','High-volume upper/lower + strength']],
+  focus:'Maximum size: every major muscle at 12–20 weekly sets across four sessions, with heavy compounds first and pump work last. Eat in a surplus to fuel it.',
+  priority:['quads','lats','chest','biceps','triceps'],sources:[],
+  callouts:['Huge delts','A thick core','Massive quads','Big traps','Wide, long lats','Huge glutes and hamstrings'],
+  days:[
+   D('Upper Heavy','Size and strength',70,[E('bench',0,'',180,'m'),E('tbar',4,'6–8',120),E('ohp',3,'6–8',120),E('wpullup',3,'6–8',150),E('curl',3,'8–12',60,'g'),E('skull',3,'8–12',60)]),
+   D('Lower Heavy','Squat and hinge',70,[E('squat',0,'',180,'m'),E('rdl',3,'6–8',150),E('hack',3,'8–12',120,'g'),E('legcurl',3,'10–12',75),E('calf',4,'10–15',45)]),
+   D('Upper Volume','Pump and detail',65,[E('incline',4,'8–12',90,'g'),E('latpull',4,'10–12',90),E('cablefly',3,'12–15',60),E('latraise',4,'12–20',60),E('preacher',3,'10–12',60),E('pushdown',3,'10–15',60)]),
+   D('Lower Volume','Deadlift and legs',70,[E('deadlift',0,'',180,'m'),E('legpress',4,'10–15',120,'g'),E('lunge',3,'10/leg',90),E('legext',3,'12–15',60),E('abwheel',3,'8–12',60)]),
+   D('Bite Conditioning','Hard intervals',35,[E('bike',8,'20 s',100),E('sled',4,'20 m',90),E('neck',3,'15–25',45)],1)]}),
+ P({id:'oliva',name:'Biscuit Oliva',series:'Baki',archetype:'Bodybuilding mass',tags:['Bodybuilding','Arms','Mass'],kanji:'鎖',
+  colors:['#b5651d','#ffffff','#e8a060','#2c1504'],
+  blurb:'Mr. Unchained. A bodybuilder built to the limit, with enormous arms, a huge chest and shoulders like boulders.',
+  physique:[60,85,90,80,100,95,95],
+  traits:[['Build','Short-limbed, extremely muscular'],['Priority','Arms, chest, shoulders'],['Body fat','Moderate, roughly 12–15%'],['Style','Bodybuilding split, each muscle twice a week']],
+  focus:'A bodybuilding upper/lower setup where arms get dedicated volume on both upper days (about 15–20 weekly sets each for biceps and triceps), plus heavy pressing for chest and delts.',
+  priority:['biceps','triceps','chest','shoulders','forearms'],sources:[],
+  callouts:['Boulder delts','A thick core','Full, round quads','Big traps','A wide back','Strong glutes and hamstrings'],
+  days:[
+   D('Chest, Delts & Arms','Heavy pressing and arms',70,[E('bench',0,'',180,'m'),E('incline',3,'8–12',90),E('latraise',4,'12–20',60),E('curl',4,'8–12',60,'g'),E('skull',4,'8–12',60),E('wristcurl',3,'12–20',45)]),
+   D('Legs A','Squat and quads',60,[E('squat',0,'',180,'m'),E('legpress',3,'10–15',120),E('legcurl',3,'10–12',75),E('calf',4,'10–15',45),E('cablecrunch',3,'10–15',60)]),
+   D('Back, Delts & Arms','Pulling and arms',70,[E('wpullup',4,'6–8',150),E('row',4,'8–12',90),E('ohp',3,'6–8',120),E('preacher',4,'10–12',60,'g'),E('ohtri',4,'10–15',60),E('hammer',3,'10–12',60)]),
+   D('Legs B','Deadlift and hamstrings',60,[E('deadlift',0,'',180,'m'),E('hack',3,'8–12',120),E('rdl',3,'8–10',120),E('legext',3,'12–15',60),E('hlr',3,'10–15',60)]),
+   D('Unchained','Strongman finisher',35,[E('farmer',4,'40 m',90),E('sled',4,'20 m',90),E('cablefly',3,'15–20',45)],1)]}),
+ P({id:'doppo',name:'Doppo Orochi',series:'Baki',archetype:'Karate master',tags:['Striking','Grip','Strength'],kanji:'拳',
+  colors:['#3b3f6b','#ffffff','#8f95d8','#0d0f24'],
+  blurb:'The Man-Eating Orochi. A thick, powerful karateka with iron forearms, a strong neck and hips that put everything into a strike.',
+  physique:[85,85,85,90,85,80,80],
+  traits:[['Build','Thick, solid middleweight'],['Priority','Hips, core, forearms, neck'],['Body fat','Moderate, roughly 12–15%'],['Style','Strength + striking power + conditioning']],
+  focus:'Strength base on the big lifts, plus hip power, rotational core and forearm work for striking, and neck training for durability.',
+  priority:['glutes','obliques','forearms','abs','shoulders'],sources:[],
+  callouts:['Strong, solid delts','An armoured core','Powerful quads','Thick traps and neck','A strong back','Explosive hips'],
+  days:[
+   D('Lower Strength','Squat and hips',60,[E('squat',0,'',180,'m'),E('hipthrust',3,'8–12',90,'g'),E('rdl',3,'8–10',120),E('cossack',3,'8/side',60),E('kicks',4,'1 min',45)]),
+   D('Upper Strength','Press, pull, grip',60,[E('bench',0,'',180,'m'),E('wpullup',4,'5–8',150),E('ohp',3,'6–8',120,'g'),E('revcurl',3,'10–15',60),E('wristcurl',3,'12–20',45),E('neck',2,'15–25',45)]),
+   D('Striking Power','Hips and rotation',50,[E('clean',0,'',150,'p'),E('mbthrow',4,'6/side',60),E('landmine',3,'8/side',60),E('russian',3,'10/side',45),E('situp',3,'10–15',60)]),
+   D('Full Body','Volume and carries',55,[E('deadlift',0,'',180,'m'),E('dbrow',3,'10–12',90,'g'),E('wdips',3,'8–12',90),E('latraise',3,'12–20',60),E('farmer',3,'40 m',90),E('neck',2,'15–25',45)]),
+   D('Kumite','Rounds',40,[E('bag',8,'3 min',60),E('kicks',4,'1 min',45),E('jumprope',4,'2 min',45)],1)]}),
+ /* ===== Dragon Ball ===== */
+ P({id:'goku',name:'Goku',series:'Dragon Ball',archetype:'Complete fighter',tags:['Muscle','Endurance','Athletic'],kanji:'悟',
+  colors:['#ef7d1a','#2a1200','#ffab5c','#2a1200'],
+  blurb:'Always training, never done. A big, athletic build that looks strong and moves well, with endurance to fight all day.',
+  physique:[90,85,90,85,85,90,90],
+  traits:[['Build','Muscular, athletic, balanced'],['Priority','Shoulders, chest, lats, quads'],['Body fat','Lean, roughly 10–12%'],['Style','Hypertrophy + strength + endurance circuits']],
+  focus:'Mirrors the popular Goku programs: muscle and strength work first, then an endurance circuit. Four sessions hit every muscle twice, with shoulders, chest and back at the top of the volume range.',
+  priority:['shoulders','chest','lats','quads','abs'],sources:['goku'],
+  callouts:['Big, rounded delts','Thick, blocky abs','Strong, full quads','Solid traps','Wide lats','Powerful glutes and hamstrings'],
+  days:[
+   D('Upper Strength','Press and pull',60,[E('bench',0,'',180,'m'),E('wpullup',4,'5–8',150,'g'),E('ohp',3,'6–8',120),E('row',3,'8–12',90),E('latraise',3,'12–20',60),E('jumprope',3,'2 min',45)]),
+   D('Lower Strength','Squat and endurance',60,[E('squat',0,'',180,'m'),E('rdl',3,'8–10',120),E('lunge',3,'10/leg',90),E('calf',3,'12–15',45),E('hlr',4,'10–15',60),E('bike',5,'20 s',100)]),
+   D('Upper Volume','Size and a circuit',60,[E('incline',4,'8–12',90,'g'),E('latpull',3,'10–12',90),E('arnold',3,'8–12',90),E('latraise',3,'15–20',60),E('pushup',3,'15–25',60),E('sprawl',3,10,60)]),
+   D('Lower Power','Deadlift and jumps',60,[E('deadlift',0,'',180,'m'),E('boxjump',4,3,90),E('bss',3,'8–12/leg',90,'g'),E('legcurl',3,'10–12',75),E('abwheel',3,'8–12',60)]),
+   D('Kaio Training','Long endurance circuit',40,[E('longrun',1,'30 min',0),E('pushup',3,'20–30',60),E('situp',3,'15–20',45)],1)]}),
+ P({id:'gohan',name:'Gohan',series:'Dragon Ball',archetype:'Lean athletic',tags:['Lean muscle','Speed','Balanced'],kanji:'獣',
+  colors:['#6a3fa0','#ffffff','#a87de0','#1a0a2e'],
+  blurb:'Quiet power. A lean, well-proportioned build with athletic legs, a strong back and sharp abs.',
+  physique:[85,85,85,85,75,80,85],
+  traits:[['Build','Lean, athletic, proportioned'],['Priority','Delts, back, legs, abs'],['Body fat','Lean, roughly 10–12%'],['Style','Upper/lower hypertrophy + speed']],
+  focus:'Balanced upper/lower hypertrophy with an athletic edge: jumps and sprints before lower sessions, and moderate, well-spread volume for a proportioned look.',
+  priority:['shoulders','lats','quads','abs','chest'],sources:[],
+  callouts:['Rounded delts','Visible abs','Athletic quads','A tight upper back','Wide lats','Strong glutes and hamstrings'],
+  days:[
+   D('Upper A','Press and pull',55,[E('bench',0,'',180,'m'),E('pullup',4,'6–10',120,'g'),E('ohp',3,'6–8',120),E('dbrow',3,'10–12',90),E('latraise',3,'12–20',60)]),
+   D('Lower A','Jumps and squats',55,[E('broadjump',4,3,90),E('squat',0,'',180,'m'),E('rdl',3,'8–10',120),E('legcurl',3,'10–12',75),E('hlr',4,'10–15',60,'g')]),
+   D('Upper B','Width and arms',55,[E('incline',3,'8–12',90,'g'),E('latpull',3,'8–12',90),E('latraise',3,'15–20',60),E('facepull',3,'15–20',45),E('curl',3,'10–12',60),E('pushdown',3,'10–15',60)]),
+   D('Lower B','Single leg and speed',55,[E('sprint',5,'30 m',90),E('bss',3,'8–12/leg',90,'g'),E('hipthrust',3,'8–12',90),E('calf',3,'12–15',45),E('cablecrunch',3,'10–15',60)]),
+   D('Beast Mode','Hard conditioning',30,[E('bike',8,'20 s',100),E('sprawl',4,10,60)],1)]}),
+ P({id:'broly',name:'Broly',series:'Dragon Ball',archetype:'Legendary mass',tags:['Max mass','Volume','Strength'],kanji:'暴',
+  colors:['#5f9e2a','#ffffff','#9bd65f','#132400'],
+  blurb:'Pure, overwhelming size. The biggest physique in the app: massive everywhere, built with maximum volume and food.',
+  physique:[60,100,100,80,100,100,100],
+  traits:[['Build','Enormous, heavyweight'],['Priority','Everything, with chest, back and quads first'],['Body fat','Moderate, roughly 14–18%'],['Style','High-volume powerbuilding, 4 big days']],
+  focus:'The high-volume end of the evidence: most major muscles get 16–20+ weekly sets, heavy compounds anchor each day, and progress depends on eating in a clear surplus.',
+  priority:['chest','lats','quads','shoulders','traps'],sources:[],
+  callouts:['Gigantic delts','A thick, powerful core','Massive quads','Huge traps','An enormous back','A huge posterior chain'],
+  days:[
+   D('Upper Heavy','Max strength and size',75,[E('bench',0,'',180,'m'),E('pendlay',4,'6–8',120),E('ohp',4,'6–8',120,'g'),E('wpullup',4,'6–8',150),E('shrug',4,'8–12',60),E('skull',3,'8–12',60)]),
+   D('Lower Heavy','Squat and hinge',75,[E('squat',0,'',180,'m'),E('rdl',4,'6–8',150),E('hack',3,'8–12',120,'g'),E('legcurl',3,'10–12',75),E('calf',4,'10–15',45)]),
+   D('Upper Volume','Pump everything',70,[E('incline',4,'8–12',90,'g'),E('tbar',4,'8–12',90),E('cablefly',3,'12–15',60),E('latraise',4,'12–20',60),E('curl',4,'8–12',60),E('pushdown',3,'10–15',60)]),
+   D('Lower Volume','Deadlift and legs',70,[E('deadlift',0,'',180,'m'),E('legpress',4,'10–15',120,'g'),E('lunge',3,'10/leg',90),E('legext',3,'12–15',60),E('abwheel',3,'8–12',60)]),
+   D('Rampage','Strongman finisher',35,[E('atlas',4,3,120),E('farmer',4,'40 m',90),E('sled',4,'20 m',90)],1)]}),
+ P({id:'piccolo',name:'Piccolo',series:'Dragon Ball',archetype:'Tall martial artist',tags:['Calisthenics','Mobility','Lean'],kanji:'魔',
+  colors:['#4f7a2a','#ffffff','#9fca6a','#132206'],
+  blurb:'Tall, long and disciplined. A lean, rangy build with strong shoulders and back from years of martial arts.',
+  physique:[85,80,85,85,75,70,85],
+  traits:[['Build','Tall, lean, long-limbed'],['Priority','Back, shoulders, core'],['Body fat','Lean, roughly 10–12%'],['Style','Weighted calisthenics + kicks + mobility']],
+  focus:'Long limbs suit bodyweight strength. Weighted pull-ups and dips lead, with handstand work for shoulders, kicks and mobility for range, and core trained three times a week.',
+  priority:['lats','upperback','shoulders','abs','obliques'],sources:[],
+  callouts:['Sharp, defined delts','A hard core','Long, lean quads','A strong upper back','Wide lats','Flexible, strong hips'],
+  days:[
+   D('Pull & Legs','Weighted pulls, pistols',55,[E('wpullup',0,'',150,'m'),E('ringrow',3,'10–15',75,'g'),E('pistol',4,'5–8/leg',90),E('nordic',3,'4–8',120),E('hlr',3,'10–15',60)]),
+   D('Push & Core','Dips and handstands',55,[E('wdips',0,'',150,'m'),E('hspu',4,'5–8',120),E('ppp',3,'8–12',90),E('lsit',4,'20 s',60),E('pallof',3,'10/side',45)]),
+   D('Kicks & Hips','Mobility and power',50,[E('broadjump',4,3,90),E('cossack',3,'8/side',60),E('bss',3,'8–12/leg',90),E('kicks',5,'1 min',45),E('mobility',1,'15 min',0)]),
+   D('Pull & Push B','Volume',55,[E('archer',4,'4–6/side',120,'g'),E('chinup',3,'8–12',90),E('pushup',3,'15–25',60),E('facepull',3,'15–20',45),E('dragonflag',3,'5–8',75)]),
+   D('Meditation Run','Easy aerobic',40,[E('longrun',1,'30 min',0),E('mobility',1,'10 min',0)],1)]}),
+ /* ===== Attack on Titan ===== */
+ P({id:'mikasa',name:'Mikasa Ackerman',series:'Attack on Titan',archetype:'Lean fighter',tags:['Power','Speed','Abs'],kanji:'守',
+  colors:['#b3263a','#ffffff','#ef6476','#2e050c'],
+  blurb:'Lean, strong and fast. Visible abs, toned arms and powerful legs, built for speed and combat rather than looks.',
+  physique:[90,90,80,95,75,65,75],
+  traits:[['Build','Lean, athletic'],['Priority','Abs, legs, glutes, back'],['Body fat','Lean, athletic range'],['Style','Undulating: power, strength, speed']],
+  focus:'Follows the undulating structure of the best-known Mikasa plan: a power day, a strength-and-abs day and a speed day, plus an extra hypertrophy day so every muscle is hit twice.',
+  priority:['abs','obliques','glutes','quads','lats'],sources:['mikasa'],
+  callouts:['Toned shoulders','A visible six-pack','Powerful quads','A strong upper back','Lean lats','Strong glutes and hamstrings'],
+  days:[
+   D('Power','Explosive work, long rests',55,[E('boxjump',4,4,120),E('clean',0,'',180,'p'),E('mbchest',4,6,90),E('sled',4,'20 m',120),E('russian',4,'8/side',60)]),
+   D('Strength & Abs','Deadlift, bench, abs',60,[E('deadlift',0,'',180,'m'),E('bench',4,8,120),E('goblet',3,10,60,'g'),E('dips',3,'AMRAP',90),E('woodchop',3,'8/side',60),E('hlr',3,'10–15',60)]),
+   D('Speed','Sprints and agility',45,[E('hillsprint',6,'50 m',90),E('skater',4,'8',90),E('broadjump',4,3,90),E('situp',3,'10–15',60)]),
+   D('Muscle','Upper and lower volume',55,[E('pullup',4,'6–10',120,'g'),E('ohp',3,'8–10',90),E('hipthrust',3,'8–12',90),E('legcurl',3,'10–12',75),E('dbrow',3,'10–12',90)]),
+   D('Martial Arts','Rounds',40,[E('bag',6,'2 min',60),E('sprawl',4,8,60),E('mobility',1,'15 min',0)],1)]}),
+ P({id:'reiner',name:'Reiner Braun',series:'Attack on Titan',archetype:'Armoured tank',tags:['Strength','Mass','Durability'],kanji:'盾',
+  colors:['#9a6b3a','#ffffff','#d4a571','#251404'],
+  blurb:'Built like armour. A thick, broad, heavily muscled frame with big traps and a powerful chest.',
+  physique:[70,90,95,85,85,95,90],
+  traits:[['Build','Broad, thick, heavy'],['Priority','Chest, traps, back, quads'],['Body fat','Moderate, roughly 13–16%'],['Style','Powerlifting-led upper/lower']],
+  focus:'Strength first: the big three are trained heavy twice a week, with hypertrophy volume for chest, traps and back on top. Neck work adds durability.',
+  priority:['chest','traps','upperback','quads','lats'],sources:[],
+  callouts:['Thick, round delts','A thick core','Big quads','Huge traps','A dense back','Strong posterior chain'],
+  days:[
+   D('Squat & Bench','Heavy strength',70,[E('squat',0,'',180,'m'),E('bench',4,'4–6',180,'g'),E('row',3,'8–10',90),E('calf',3,'10–15',45)]),
+   D('Deadlift & Press','Heavy strength',65,[E('deadlift',0,'',180,'m'),E('ohp',4,'5–8',150),E('wpullup',3,'6–8',150,'g'),E('shrug',4,'8–12',60),E('neck',2,'15–25',45)]),
+   D('Upper Volume','Chest and back size',60,[E('incline',4,'8–12',90,'g'),E('tbar',3,'8–12',90),E('cablefly',3,'12–15',60),E('latraise',3,'12–20',60),E('skull',3,'8–12',60)]),
+   D('Lower Volume','Legs and trunk',60,[E('fsquat',3,'6–8',150),E('rdl',3,'8–10',120),E('legpress',3,'10–15',120,'g'),E('zercher',3,'30 m',120),E('abwheel',3,'8–12',60)]),
+   D('Armour','Strongman finisher',35,[E('atlas',4,3,120),E('farmer',4,'40 m',90)],1)]}),
+ P({id:'eren',name:'Eren Yeager',series:'Attack on Titan',archetype:'Lean, intense athlete',tags:['Lean','Grappling','Strength'],kanji:'進',
+  colors:['#2f8f7a','#ffffff','#6fd1b9','#06221c'],
+  blurb:'Driven and relentless. A lean, wiry-strong build with a strong back, a tight core and grappling-ready grip.',
+  physique:[90,80,90,90,75,70,75],
+  traits:[['Build','Lean, wiry, athletic'],['Priority','Back, core, grip, legs'],['Body fat','Lean, roughly 9–12%'],['Style','Strength + grappling conditioning']],
+  focus:'A lean strength program: heavy pulls and squats twice a week, grip and core for grappling, and conditioning that keeps body fat low.',
+  priority:['lats','upperback','abs','forearms','quads'],sources:[],
+  callouts:['Lean, strong delts','A tight six-pack','Wiry quads','A thick upper back','Strong lats','Strong glutes and hamstrings'],
+  days:[
+   D('Lower Strength','Squat and hinge',55,[E('squat',0,'',180,'m'),E('rdl',3,'8–10',120,'g'),E('stepup',3,'8/leg',90),E('hlr',3,'10–15',60)]),
+   D('Upper Strength','Pulls and presses',55,[E('wpullup',0,'',150,'m'),E('bench',3,'6–8',150),E('row',3,'8–12',90,'g'),E('plategrip',3,'30 s',60),E('hammer',3,'10–12',60)]),
+   D('Grapple Power','Explosive full body',50,[E('clean',0,'',150,'p'),E('ropeclimb',3,1,120),E('kbswing',3,12,60),E('zercher',3,'30 m',120),E('situp',3,'10–15',60)]),
+   D('Upper & Legs Volume','Volume day',55,[E('pullup',3,'8–12',90,'g'),E('dips',3,'AMRAP',90),E('dbrow',3,'10–12',90),E('bss',3,'8–12/leg',90),E('dragonflag',3,'5–8',75)]),
+   D('Survey Run','Conditioning',40,[E('hillsprint',6,'50 m',90),E('sprawl',4,10,60),E('longrun',1,'20 min',0)],1)]}),
+ /* ===== Berserk ===== */
+ P({id:'griffith',name:'Griffith',series:'Berserk',archetype:'Elegant swordsman',tags:['Lean','Mobility','Aesthetic'],kanji:'白',
+  colors:['#7d8ca3','#ffffff','#c2cde0','#141b26'],
+  blurb:'Lean, graceful and precise. A slim, refined build with sharp shoulders, a narrow waist and excellent mobility.',
+  physique:[85,80,80,85,70,70,85],
+  traits:[['Build','Slim, refined, lean'],['Priority','Delts, lats, core, mobility'],['Body fat','Lean, roughly 9–12%'],['Style','Lean hypertrophy + footwork + mobility']],
+  focus:'Moderate-volume hypertrophy aimed at a slim V-shape (side delts and lats prioritised), with single-leg strength, footwork drills and mobility for a swordsman’s movement.',
+  priority:['shoulders','lats','abs','obliques','quads'],sources:[],
+  callouts:['Elegant, capped delts','A flat, defined core','Long, lean quads','A neat upper back','V-taper lats','Light, strong hips'],
+  days:[
+   D('Upper A','Width and posture',55,[E('wpullup',0,'',150,'m'),E('incline',3,'8–12',90),E('latraise',4,'12–20',60,'g'),E('facepull',3,'15–20',45),E('pallof',3,'10/side',45)]),
+   D('Lower A','Single leg and footwork',55,[E('fsquat',0,'',150,'m'),E('bss',3,'8–12/leg',90),E('skater',4,'6',60),E('legcurl',3,'10–12',75),E('hlr',3,'10–15',60)]),
+   D('Upper B','Press and lats',55,[E('ohp',0,'',150,'m'),E('latpull',3,'8–12',90,'g'),E('dbrow',3,'10–12',90),E('latraise',3,'15–20',60),E('woodchop',3,'12/side',45)]),
+   D('Lower B','Hinge and mobility',55,[E('rdl',3,'8–10',120,'g'),E('cossack',3,'8/side',60),E('hipthrust',3,'8–12',90),E('calf',3,'12–15',45),E('mobility',1,'15 min',0)]),
+   D('Footwork','Agility and conditioning',30,[E('sprint',6,'20 m',60),E('jumprope',4,'2 min',45),E('plank',3,'45 s',45)],1)]}),
+ P({id:'casca',name:'Casca',series:'Berserk',archetype:'Warrior commander',tags:['Athletic','Glutes','Endurance'],kanji:'戦',
+  colors:['#7a3b5e','#ffffff','#c97fa8','#260a1a'],
+  blurb:'A commander who fights on the front line. A lean, strong, athletic build with powerful legs and the endurance for long battles.',
+  physique:[90,90,80,85,70,60,75],
+  traits:[['Build','Lean, athletic, strong'],['Priority','Glutes, legs, back, core'],['Body fat','Lean, athletic range'],['Style','Lower/upper strength + conditioning']],
+  focus:'Lower body and back are the engine, trained twice a week each with heavy compounds and glute work, and conditioning builds the endurance for long campaigns.',
+  priority:['glutes','quads','hamstrings','lats','abs'],sources:[],
+  callouts:['Toned shoulders','A strong, flat core','Powerful quads','A strong upper back','Lean lats','Strong glutes and hamstrings'],
+  days:[
+   D('Lower Strength','Squat and glutes',60,[E('squat',0,'',180,'m'),E('hipthrust',4,'8–12',90,'g'),E('legcurl',3,'10–12',75),E('calf',3,'12–15',45)]),
+   D('Upper Strength','Pull and press',55,[E('pullup',4,'5–8',120,'g'),E('ohp',3,'6–8',120),E('dbrow',3,'10–12',90),E('latraise',3,'12–20',60),E('hlr',3,'10–15',60)]),
+   D('Lower Volume','Hinge and single leg',55,[E('deadlift',0,'',180,'m'),E('bss',3,'8–12/leg',90,'g'),E('stepup',3,'8/leg',90),E('woodchop',3,'12/side',45)]),
+   D('Upper & Carry','Back and grip',50,[E('latpull',3,'8–12',90),E('incline',3,'8–12',90),E('facepull',3,'15–20',45),E('farmer',3,'30 m',90),E('abwheel',3,'8–12',60)]),
+   D('Campaign','Long conditioning',40,[E('rower',4,'4 min',90),E('sledgehammer',4,'30 s',60),E('longrun',1,'20 min',0)],1)]}),
+ /* ===== Demon Slayer ===== */
+ P({id:'tanjiro',name:'Tanjiro Kamado',series:'Demon Slayer',archetype:'Lean endurance swordsman',tags:['Endurance','Lean','Core'],kanji:'日',
+  colors:['#1f7a6a','#ffffff','#5fcab4','#04211c'],
+  blurb:'Hard-working and resilient. A lean, compact, wiry build with a strong core, sturdy legs and a huge aerobic engine.',
+  physique:[100,85,80,90,70,65,75],
+  traits:[['Build','Compact, lean, wiry'],['Priority','Aerobic base, core, legs, shoulders'],['Body fat','Lean, roughly 10–12%'],['Style','Strength + endurance (concurrent training)']],
+  focus:'Concurrent training done right: hard runs are kept away from heavy leg days, strength stays at moderate volume, and core and shoulders get the extra sets.',
+  priority:['quads','obliques','abs','shoulders','lats'],sources:[],
+  callouts:['Sturdy shoulders','A strong, flat core','Enduring quads','A strong upper back','Lean lats','Strong hips'],
+  days:[
+   D('Lower Strength','Squat and single leg',55,[E('squat',0,'',180,'m'),E('bss',3,'8–12/leg',90,'g'),E('rdl',3,'8–10',120),E('calf',3,'12–15',45),E('pallof',3,'10/side',45)]),
+   D('Breathing Run','Aerobic base',45,[E('tempo',5,'400 m',90),E('jumprope',4,'2 min',45),E('plank',3,'45 s',45)]),
+   D('Upper Strength','Press and pull',55,[E('wpullup',0,'',150,'m'),E('ohp',3,'6–8',120,'g'),E('dbrow',3,'10–12',90),E('latraise',3,'12–20',60),E('hlr',3,'10–15',60)]),
+   D('Sword Power','Explosive and rotational',50,[E('clean',0,'',150,'p'),E('sledgehammer',5,'30 s',60),E('woodchop',3,'12/side',45),E('kbswing',3,15,60),E('pushup',3,'15–25',60)]),
+   D('Mountain Run','Long, easy distance',45,[E('longrun',1,'40 min',0),E('mobility',1,'10 min',0)],1)]}),
+ P({id:'tengen',name:'Tengen Uzui',series:'Demon Slayer',archetype:'Flamboyant giant',tags:['Aesthetic mass','Agility','Shoulders'],kanji:'音',
+  colors:['#a64ca6','#ffffff','#e08fe0','#2a0a2a'],
+  blurb:'Big, flashy and fast. A tall, muscular build with huge shoulders and arms, but light enough on his feet to be a shinobi.',
+  physique:[85,85,90,85,90,85,95],
+  traits:[['Build','Tall, muscular, athletic'],['Priority','Delts, arms, back, chest'],['Body fat','Lean, roughly 10–12%'],['Style','Aesthetic hypertrophy + agility']],
+  focus:'Aesthetic hypertrophy with shoulders and arms near the top of the volume range, plus plyometric and agility work to keep a big frame fast.',
+  priority:['shoulders','biceps','triceps','lats'],sources:[],
+  callouts:['Huge, flashy delts','Defined abs','Strong, athletic quads','Big traps','Wide lats','Powerful glutes'],
+  days:[
+   D('Upper A','Press and arms',60,[E('ohp',0,'',150,'m'),E('wpullup',4,'6–8',150),E('incline',3,'8–12',90),E('latraise',4,'12–20',60,'g'),E('curl',3,'8–12',60),E('skull',3,'8–12',60)]),
+   D('Lower A','Squat and jumps',55,[E('boxjump',4,3,90),E('squat',0,'',180,'m'),E('rdl',3,'8–10',120),E('legcurl',3,'10–12',75),E('calf',3,'12–15',45)]),
+   D('Upper B','Width and arms',60,[E('bench',3,'6–8',150),E('latpull',4,'8–12',90,'g'),E('arnold',3,'8–12',90),E('latraise',3,'15–20',60),E('preacher',3,'10–12',60),E('ohtri',3,'10–15',60)]),
+   D('Lower B & Agility','Single leg and speed',55,[E('skater',4,'6',60),E('bss',3,'8–12/leg',90,'g'),E('hipthrust',3,'8–12',90),E('hlr',3,'10–15',60),E('russian',3,'10/side',45)]),
+   D('Shinobi','Speed conditioning',30,[E('sprint',6,'30 m',90),E('jumprope',4,'2 min',45)],1)]}),
+ P({id:'gyomei',name:'Gyomei Himejima',series:'Demon Slayer',archetype:'Giant strongman',tags:['Strongman','Mass','Grip'],kanji:'岩',
+  colors:['#7a7468','#ffffff','#bcb5a6','#1e1c17'],
+  blurb:'The strongest Hashira. A towering, massive build with enormous arms, a thick back and a grip that swings a chain flail.',
+  physique:[85,95,100,90,100,95,95],
+  traits:[['Build','Towering, massive'],['Priority','Back, arms, grip, legs'],['Body fat','Moderate, roughly 12–15%'],['Style','Strongman + bodybuilding volume']],
+  focus:'Heavy compounds and strongman events for raw strength, with extra arm and grip volume and rotational swings for the flail.',
+  priority:['upperback','lats','biceps','forearms','quads'],sources:[],
+  callouts:['Massive delts','A thick, strong core','Huge quads','Towering traps','An enormous back','A huge posterior chain'],
+  days:[
+   D('Heavy Lower','Squat and carry',65,[E('squat',0,'',180,'m'),E('rdl',3,'6–8',150),E('zercher',4,'30 m',120,'g'),E('legpress',3,'10–15',120),E('calf',3,'12–15',45)]),
+   D('Heavy Upper','Press and row',65,[E('bench',0,'',180,'m'),E('pendlay',4,'6–8',120,'g'),E('ohp',3,'6–8',120),E('curl',4,'8–12',60),E('wristcurl',3,'12–20',45)]),
+   D('Pull & Grip','Deadlift and carries',65,[E('deadlift',0,'',180,'m'),E('wpullup',4,'6–8',150),E('farmer',4,'40 m',90),E('hammer',3,'10–12',60,'g'),E('revcurl',3,'10–15',60)]),
+   D('Chains & Stones','Odd objects and swings',60,[E('atlas',5,3,120),E('halo',3,'8/side',60),E('sledgehammer',5,'30 s',60),E('kbswing',3,15,60),E('pushdown',3,'10–15',60)]),
+   D('Waterfall','Endurance',40,[E('rower',5,'3 min',90),E('plank',3,'60 s',45),E('mobility',1,'10 min',0)],1)]}),
+ P({id:'inosuke',name:'Inosuke Hashibira',series:'Demon Slayer',archetype:'Feral athlete',tags:['Bodyweight','Mobility','Explosive'],kanji:'猪',
+  colors:['#2e5f9e','#ffffff','#7aa8ec','#081a33'],
+  blurb:'Wild, flexible and explosive. A lean, ripped, muscular build with incredible mobility and power from every angle.',
+  physique:[90,85,85,90,75,80,80],
+  traits:[['Build','Lean, ripped, compact'],['Priority','Chest, abs, legs, mobility'],['Body fat','Very lean, roughly 8–10%'],['Style','Calisthenics + plyometrics + mobility']],
+  focus:'Bodyweight strength with added load, explosive plyometrics before strength work, and daily-style mobility for that flexible, feral movement.',
+  priority:['chest','abs','quads','lats','obliques'],sources:[],
+  callouts:['Lean, hard delts','A ripped six-pack','Explosive quads','A strong upper back','Wiry lats','Powerful hips'],
+  days:[
+   D('Push & Plyo','Clap push-ups and dips',55,[E('clappush',4,'5–8',90),E('wdips',0,'',150,'m'),E('pushup',3,'15–25',60,'g'),E('hspu',3,'5–8',120),E('dragonflag',3,'5–8',75)]),
+   D('Legs & Spring','Jumps and pistols',55,[E('broadjump',4,3,90),E('pistol',4,'5–8/leg',90),E('nordic',3,'4–8',120),E('cossack',3,'8/side',60,'g'),E('calf',3,'12–20',45)]),
+   D('Pull & Core','Pull-ups and abs',55,[E('wpullup',0,'',150,'m'),E('archer',3,'4–6/side',120,'g'),E('ringrow',3,'10–15',75),E('hlr',3,'10–15',60),E('russian',3,'10/side',45)]),
+   D('Wild Power','Full-body explosive',50,[E('jumpsquat',4,5,90),E('mbthrow',4,'6/side',60),E('muscleup',4,3,120),E('kbswing',3,15,60),E('mobility',1,'15 min',0)]),
+   D('Beast Run','Hills and rounds',35,[E('hillsprint',6,'40 m',90),E('sprawl',4,10,60)],1)]}),
+ /* ===== One Punch Man ===== */
+ P({id:'saitama',name:'Saitama',series:'One Punch Man',archetype:'Everyday hero',tags:['Beginner friendly','Endurance','Full body'],kanji:'一',
+  colors:['#c9b400','#1f1c00','#f2e04b','#1f1c00'],
+  blurb:'100 push-ups, 100 sit-ups, 100 squats and a 10 km run, rebuilt with actual progression. A lean, capable hero build.',
+  physique:[95,85,75,85,70,80,75],
+  traits:[['Build','Lean, fit, athletic'],['Priority','Chest, quads, abs, aerobic base'],['Body fat','Lean, roughly 10–13%'],['Style','Progressive bodyweight + running + strength']],
+  focus:'Keeps the spirit of the famous routine but fixes the science: push-ups, squats and sit-ups get progressive overload (harder variations and weight), running builds gradually towards 10 km, and two strength days add the muscle that bodyweight volume alone will not.',
+  priority:['chest','quads','abs','triceps','glutes'],sources:['saitama'],
+  callouts:['Solid shoulders','Flat, visible abs','Strong quads','A healthy upper back','Strong lats','Strong glutes and hamstrings'],
+  days:[
+   D('Hero Strength A','Squat and bench',55,[E('squat',0,'',180,'m'),E('bench',3,'6–8',150,'g'),E('pullup',3,'6–10',120),E('situp',3,'10–15',60)]),
+   D('The Hundred','Push-ups, sit-ups, squats',45,[E('pushup',5,'20–30',60,'g'),E('goblet',4,'15–25',60),E('situp',4,'15–20',45),E('plank',3,'45 s',45)]),
+   D('Hero Strength B','Deadlift and press',55,[E('deadlift',0,'',180,'m'),E('ohp',3,'6–8',120,'g'),E('dbrow',3,'10–12',90),E('bss',3,'8–12/leg',90),E('hlr',3,'10–15',60)]),
+   D('10 km Build','Progressive running',50,[E('tempo',4,'1 km',120),E('clappush',3,'5–8',90),E('jumpsquat',3,6,90)]),
+   D('Long Run','Towards 10 km',60,[E('longrun',1,'40–60 min',0)],1)]}),
+ P({id:'sonic',name:'Speed-o’-Sound Sonic',series:'One Punch Man',archetype:'Ninja sprinter',tags:['Speed','Lean','Plyometrics'],kanji:'速',
+  colors:['#334b7a','#ffffff','#8099d6','#0a1326'],
+  blurb:'Built for pure speed. A lean, light sprinter’s body with powerful glutes and hamstrings and very low body fat.',
+  physique:[95,95,75,85,65,60,70],
+  traits:[['Build','Lean, light, sprinter'],['Priority','Glutes, hamstrings, calves, core'],['Body fat','Very lean, roughly 7–10%'],['Style','Sprint training + strength + plyometrics']],
+  focus:'Built like a sprinter’s week: max-velocity sprints and plyometrics when fresh, strength work for the posterior chain, and hamstring and calf volume to stay fast and healthy.',
+  priority:['glutes','hamstrings','calves','quads','abs'],sources:[],
+  callouts:['Lean shoulders','A tight core','Sprinter quads','Lean upper back','Lean lats','Powerful glutes and hamstrings'],
+  days:[
+   D('Acceleration','Short sprints and squats',55,[E('sprint',6,'20 m',120),E('broadjump',4,3,90),E('squat',0,'',180,'m'),E('nordic',3,'4–8',120),E('calf',4,'10–15',45)]),
+   D('Upper','Pull and press',45,[E('wpullup',0,'',150,'m'),E('pushpress',3,5,120),E('dbrow',3,'10–12',90,'g'),E('pushup',3,'15–25',60),E('hlr',3,'10–15',60)]),
+   D('Max Velocity','Flying sprints and hinge',55,[E('hillsprint',5,'40 m',120),E('pogo',3,'20',60),E('rdl',3,'6–8',150,'g'),E('hipthrust',3,'8–12',90),E('legcurl',3,'10–12',75)]),
+   D('Plyo & Core','Reactive power',45,[E('boxjump',4,3,90),E('skater',4,'6',60),E('bss',3,'8–12/leg',90),E('dragonflag',3,'5–8',75),E('calf',3,'12–20',45)]),
+   D('Recovery','Tempo and mobility',30,[E('tempo',4,'200 m',90),E('mobility',1,'15 min',0)],1)]}),
+ /* ===== My Hero Academia ===== */
+ P({id:'deku',name:'Izuku Midoriya',series:'My Hero Academia',archetype:'Athletic hero',tags:['Athletic','Power','Muscle'],kanji:'継',
+  colors:['#2f9a4e','#ffffff','#72d68e','#06240f'],
+  blurb:'Built from nothing, one rep at a time. A compact, muscular, athletic build that can absorb huge power.',
+  physique:[85,90,85,85,85,80,85],
+  traits:[['Build','Compact, muscular, athletic'],['Priority','Legs, back, delts, arms'],['Body fat','Lean, roughly 10–12%'],['Style','Strength + hypertrophy + power']],
+  focus:'Balanced athletic hypertrophy with explosive work first: kicks and jumps for his leg-based style, and arms trained twice a week to handle the punches.',
+  priority:['quads','glutes','lats','shoulders','triceps'],sources:[],
+  callouts:['Rounded delts','Visible abs','Explosive quads','A strong upper back','Wide lats','Powerful glutes and hamstrings'],
+  days:[
+   D('Lower Power','Jumps and squats',60,[E('jumpsquat',4,4,90),E('squat',0,'',180,'m'),E('rdl',3,'8–10',120,'g'),E('legcurl',3,'10–12',75),E('calf',3,'12–15',45)]),
+   D('Upper Strength','Press and pull',60,[E('bench',0,'',180,'m'),E('wpullup',4,'5–8',150,'g'),E('ohp',3,'6–8',120),E('row',3,'8–12',90),E('skull',3,'8–12',60)]),
+   D('Lower Volume & Kicks','Single leg and kicks',55,[E('bss',3,'8–12/leg',90,'g'),E('hipthrust',3,'8–12',90),E('legext',3,'12–15',60),E('kicks',4,'1 min',45),E('hlr',3,'10–15',60)]),
+   D('Upper Volume','Width and arms',55,[E('incline',3,'8–12',90),E('latpull',3,'8–12',90,'g'),E('latraise',4,'12–20',60),E('curl',3,'8–12',60),E('pushdown',3,'10–15',60),E('abwheel',3,'8–12',60)]),
+   D('Full Cowl','Conditioning',30,[E('sprint',6,'30 m',90),E('sprawl',4,10,60)],1)]}),
+ P({id:'bakugo',name:'Katsuki Bakugo',series:'My Hero Academia',archetype:'Explosive athlete',tags:['Power','Shoulders','Aggression'],kanji:'爆',
+  colors:['#e8890c','#2a1600','#ffb347','#2a1600'],
+  blurb:'Explosive by nature. A lean, powerful build with strong shoulders, arms and a core built for violent rotation.',
+  physique:[85,85,85,90,85,80,90],
+  traits:[['Build','Lean, powerful, athletic'],['Priority','Shoulders, arms, obliques'],['Body fat','Lean, roughly 10–12%'],['Style','Power + hypertrophy']],
+  focus:'Explosive power first in every session (throws, cleans, jumps), then hypertrophy with shoulders and arms at high volume. Rotation work for the obliques powers his blasts.',
+  priority:['shoulders','triceps','obliques','chest'],sources:[],
+  callouts:['Explosive, capped delts','Hard obliques and abs','Powerful quads','Strong traps','Strong lats','Explosive hips'],
+  days:[
+   D('Power Upper','Throws then press',60,[E('mbchest',4,6,90),E('bench',0,'',180,'m'),E('ohp',3,'6–8',120,'g'),E('wpullup',3,'6–8',150),E('ohtri',3,'10–15',60)]),
+   D('Power Lower','Cleans and squats',60,[E('clean',0,'',150,'p'),E('squat',3,'5–8',180),E('rdl',3,'8–10',120),E('calf',3,'12–15',45),E('russian',3,'10/side',45)]),
+   D('Hypertrophy Upper','Delts and arms',60,[E('incline',3,'8–12',90),E('latpull',3,'8–12',90),E('latraise',4,'12–20',60,'g'),E('arnold',3,'8–12',90),E('pushdown',3,'10–15',60),E('curl',3,'8–12',60)]),
+   D('Explosion Day','Rotation and legs',55,[E('mbthrow',4,'6/side',60),E('boxjump',4,3,90),E('bss',3,'8–12/leg',90,'g'),E('landmine',3,'8/side',60),E('woodchop',3,'12/side',45)]),
+   D('Blast Rounds','Conditioning',30,[E('bike',8,'20 s',100),E('slam',4,8,60)],1)]}),
+ P({id:'mirio',name:'Mirio Togata',series:'My Hero Academia',archetype:'Muscular hero',tags:['Muscle','Strength','Aesthetic'],kanji:'透',
+  colors:['#c43a3a','#ffffff','#f07a7a','#2e0808'],
+  blurb:'Big, friendly and incredibly strong. A muscular, well-built frame with a big chest, broad shoulders and thick legs.',
+  physique:[80,90,90,85,85,90,90],
+  traits:[['Build','Muscular, broad'],['Priority','Chest, shoulders, legs'],['Body fat','Lean, roughly 11–13%'],['Style','Upper/lower hypertrophy']],
+  focus:'Classic upper/lower hypertrophy for a big, balanced frame, with chest and shoulders slightly prioritised and legs trained heavy twice a week.',
+  priority:['chest','shoulders','quads','glutes','lats'],sources:[],
+  callouts:['Broad, full delts','Thick abs','Big quads','Solid traps','Wide lats','Strong posterior chain'],
+  days:[
+   D('Upper A','Chest and back',60,[E('bench',0,'',180,'m'),E('row',4,'6–10',120),E('incline',3,'8–12',90,'g'),E('latraise',3,'12–20',60),E('curl',3,'8–12',60)]),
+   D('Lower A','Squat',60,[E('squat',0,'',180,'m'),E('rdl',3,'8–10',120),E('legpress',3,'10–15',120,'g'),E('calf',3,'12–15',45),E('cablecrunch',3,'10–15',60)]),
+   D('Upper B','Shoulders and chest',60,[E('ohp',0,'',150,'m'),E('wpullup',4,'6–8',150),E('cablefly',3,'12–15',60,'g'),E('latraise',4,'15–20',60),E('skull',3,'8–12',60)]),
+   D('Lower B','Deadlift and legs',60,[E('deadlift',0,'',180,'m'),E('bss',3,'8–12/leg',90,'g'),E('legext',3,'12–15',60),E('legcurl',3,'10–12',75),E('hlr',3,'10–15',60)]),
+   D('Phase Through','Conditioning',30,[E('sled',5,'20 m',90),E('bike',6,'20 s',100)],1)]}),
+ P({id:'endeavor',name:'Endeavor',series:'My Hero Academia',archetype:'Heavyweight hero',tags:['Mass','Strength','Power'],kanji:'燃',
+  colors:['#d9481c','#ffffff','#ff8a5c','#2e0c02'],
+  blurb:'The number one hero by force. A huge, heavy, powerful build with a massive chest, shoulders and back.',
+  physique:[75,90,95,85,90,95,95],
+  traits:[['Build','Tall, heavy, massive'],['Priority','Chest, shoulders, back, traps'],['Body fat','Moderate, roughly 13–16%'],['Style','Powerbuilding']],
+  focus:'Heavy powerbuilding: big compounds for strength twice a week, and high-volume pressing and pulling for a massive upper body.',
+  priority:['chest','shoulders','lats','traps','upperback'],sources:[],
+  callouts:['Massive delts','A thick core','Big quads','Huge traps','A wide, thick back','A powerful posterior chain'],
+  days:[
+   D('Upper Heavy','Bench and rows',70,[E('bench',0,'',180,'m'),E('pendlay',4,'5–8',120),E('ohp',3,'6–8',120,'g'),E('wpullup',3,'6–8',150),E('shrug',4,'8–12',60)]),
+   D('Lower Heavy','Squat',65,[E('squat',0,'',180,'m'),E('rdl',3,'6–8',150),E('legpress',3,'10–15',120),E('calf',3,'10–15',45),E('abwheel',3,'8–12',60)]),
+   D('Upper Volume','Chest and delts',65,[E('incline',4,'8–12',90,'g'),E('tbar',3,'8–12',90),E('cablefly',3,'12–15',60),E('latraise',4,'12–20',60),E('skull',3,'8–12',60)]),
+   D('Hellflame Power','Deadlift and power',60,[E('deadlift',0,'',180,'m'),E('pushpress',4,5,120),E('atlas',4,3,120),E('rdelt',3,'15–20',45),E('hlr',3,'10–15',60)]),
+   D('Heat','Conditioning',30,[E('bike',8,'20 s',100),E('farmer',4,'40 m',90)],1)]}),
+ /* ===== Hajime no Ippo ===== */
+ P({id:'ippo',name:'Ippo Makunouchi',series:'Hajime no Ippo',archetype:'Infighter boxer',tags:['Boxing','Back','Legs'],kanji:'歩',
+  colors:['#2753a8','#ffffff','#7b9ff0','#081633'],
+  blurb:'A short, stocky infighter. A thick back, huge legs and a strong neck built for bobbing, weaving and the Dempsey Roll.',
+  physique:[95,95,90,90,80,70,80],
+  traits:[['Build','Short, stocky, dense'],['Priority','Legs, back, obliques, neck'],['Body fat','Lean, boxer range'],['Style','Strength + boxing conditioning']],
+  focus:'Strength for punching power comes from the legs and back, so they get the most volume. Rotation and neck work build the weave, and rounds build the gas tank.',
+  priority:['quads','glutes','lats','upperback','obliques'],sources:[],
+  callouts:['Strong, rounded delts','A rock-hard core','Huge quads','A thick neck and traps','A wide, thick back','Powerful hips'],
+  days:[
+   D('Legs Heavy','Squat strength',60,[E('squat',0,'',180,'m'),E('rdl',3,'8–10',120,'g'),E('lunge',3,'10/leg',90),E('calf',3,'12–15',45),E('neck',2,'15–25',45)]),
+   D('Back & Press','Pull and push',60,[E('wpullup',0,'',150,'m'),E('row',4,'8–12',90,'g'),E('bench',3,'6–8',150),E('facepull',3,'15–20',45),E('situp',3,'10–15',60)]),
+   D('Punch Power','Hips and rotation',50,[E('clean',0,'',150,'p'),E('mbthrow',4,'6/side',60),E('landmine',3,'8/side',60),E('russian',3,'10/side',45),E('jumpsquat',3,5,90)]),
+   D('Full Body Volume','Legs and back again',55,[E('fsquat',3,'6–8',150),E('bss',3,'8–12/leg',90,'g'),E('latpull',3,'8–12',90),E('dbrow',3,'10–12',90),E('neck',2,'15–25',45)]),
+   D('Rounds','Boxing conditioning',45,[E('bag',8,'3 min',60),E('jumprope',5,'2 min',45),E('longrun',1,'20 min',0)],1)]}),
+ /* ===== Kengan Ashura ===== */
+ P({id:'ohma',name:'Ohma Tokita',series:'Kengan Ashura',archetype:'Lean fighter',tags:['Fight','Muscle','Conditioning'],kanji:'修',
+  colors:['#a4502a','#ffffff','#e08d63','#2a1106'],
+  blurb:'Lean, dense and dangerous. A middleweight fighter’s body with a strong back, hard abs and serious striking power.',
+  physique:[90,85,90,95,80,80,85],
+  traits:[['Build','Lean, dense middleweight'],['Priority','Back, abs, delts, legs'],['Body fat','Very lean, roughly 8–11%'],['Style','Hypertrophy + strength + fight training']],
+  focus:'Fighter hypertrophy: back and abs get the most sets, the main lifts stay heavy for strength, and a fight-power day trains striking speed.',
+  priority:['lats','upperback','abs','shoulders','quads'],sources:[],
+  callouts:['Dense delts','Deep, hard abs','Strong quads','Thick traps','A wide, detailed back','Powerful hips'],
+  days:[
+   D('Pull','Back thickness',60,[E('deadlift',0,'',180,'m'),E('wpullup',4,'5–8',150,'g'),E('row',3,'8–12',90),E('rdelt',3,'15–20',45),E('hlr',3,'10–15',60)]),
+   D('Push','Press and abs',55,[E('bench',0,'',180,'m'),E('ohp',3,'6–8',120),E('incline',3,'8–12',90,'g'),E('latraise',3,'12–20',60),E('cablecrunch',3,'10–15',60)]),
+   D('Legs','Squat and kicks',55,[E('squat',0,'',180,'m'),E('bss',3,'8–12/leg',90,'g'),E('legcurl',3,'10–12',75),E('kicks',4,'1 min',45),E('dragonflag',3,'5–8',75)]),
+   D('Fight Power','Speed and back volume',55,[E('mbthrow',4,'6/side',60),E('clappush',3,'5–8',90),E('latpull',3,'8–12',90,'g'),E('dbrow',3,'10–12',90),E('slam',3,8,60)]),
+   D('Kengan Rounds','Conditioning',40,[E('bag',6,'3 min',60),E('sprawl',5,10,60),E('neck',2,'15–25',45)],1)]}),
+ /* ===== Naruto ===== */
+ P({id:'rocklee',name:'Rock Lee',series:'Naruto',archetype:'Taijutsu specialist',tags:['Calisthenics','Running','Kicks'],kanji:'努',
+  colors:['#56a82a','#ffffff','#94dc6a','#132a05'],
+  blurb:'Pure hard work. A lean, athletic, flexible build made entirely from bodyweight training, running and kicks.',
+  physique:[100,90,85,90,75,75,80],
+  traits:[['Build','Lean, athletic, flexible'],['Priority','Legs, core, back, chest'],['Body fat','Very lean, roughly 8–10%'],['Style','Calisthenics + martial arts + running + mobility']],
+  focus:'The four pillars of the popular Rock Lee method (bodyweight strength, martial arts, running and mobility), but with weighted progressions so strength keeps climbing instead of just adding reps.',
+  priority:['quads','abs','lats','chest','glutes'],sources:['lee'],
+  callouts:['Lean, strong delts','A ripped core','Springy, strong quads','A strong upper back','Wiry lats','Flexible, powerful hips'],
+  days:[
+   D('Strength A','Push-ups, pull-ups, pistols',55,[E('wpullup',0,'',150,'m'),E('pushup',5,'20–30',60,'g'),E('pistol',3,'8–12/leg',90),E('dragonflag',3,'5–8',75,'g'),E('hlr',4,'10–15',60)]),
+   D('Kicks & Run','Martial arts and intervals',50,[E('kicks',6,'1 min',45),E('bag',3,'3 min',60),E('sprint',8,'100 m',60)]),
+   D('Strength B','Dips, rows, legs',55,[E('wdips',0,'',150,'m'),E('archer',3,'4–6/side',120,'g'),E('bss',3,'8–12/leg',90),E('nordic',3,'4–8',120),E('lsit',4,'20 s',60)]),
+   D('Hills & Spring','Hill sprints and plyos',45,[E('hillsprint',8,'40 m',90),E('broadjump',4,3,90),E('jumpsquat',3,6,90),E('calf',3,'15–20',45)]),
+   D('Long Run & Mobility','Distance and splits work',50,[E('longrun',1,'30–40 min',0),E('mobility',1,'15 min',0)],1)]}),
+ /* ===== One Piece ===== */
+ P({id:'zoro',name:'Roronoa Zoro',series:'One Piece',archetype:'Swordsman bodybuilder',tags:['Hypertrophy','Shoulders','Forearms'],kanji:'斬',
+  colors:['#2e6b3f','#ffffff','#6fbf86','#06200d'],
+  blurb:'Broad shoulders, a thick back, dense arms and a rugged core. A swordsman who looks like he lifts the swords for fun.',
+  physique:[80,80,95,90,95,90,95],
+  traits:[['Build','Broad, muscular, rugged'],['Priority','Upper chest, lats, side and rear delts, forearms, arms'],['Body fat','Lean, roughly 10–12%'],['Style','Hypertrophy with rest-pause sets']],
+  focus:'Based on the hypertrophy plan RP Strength wrote for the live-action Zoro: priority on upper chest, lat width, side and rear delts, arms and forearms. Rest-pause sets (to failure, 20 s rest, a few more reps) are fine on isolation lifts; here each muscle is trained twice instead of once a week.',
+  priority:['chest','lats','shoulders','forearms','biceps','triceps'],sources:['zoro'],
+  callouts:['Broad side and rear delts','A rugged core','Solid quads','A thick upper back','Wide lats','Strong hamstrings'],
+  days:[
+   D('Chest, Delts & Calves','Incline-first pressing',60,[E('incline',0,'',150,'m'),E('bench',3,'6–10',150),E('cablefly',3,'12–15',60),E('latraise',4,'12–20',60,'g'),E('calf',3,'10–15',45),E('hlr',3,'10–15',60)]),
+   D('Back & Forearms','Lat width and grip',60,[E('latpull',4,'8–12',90,'g'),E('row',3,'8–12',90),E('dbrow',3,'10–12',90),E('rdelt',3,'15–20',45),E('wristcurl',3,'12–20',45),E('revcurl',3,'10–15',60)]),
+   D('Legs','Quads and hamstrings',60,[E('legpress',4,'8–12',120),E('hack',3,'8–12',120),E('rdl',3,'8–10',120),E('legcurl',3,'10–12',75),E('situp',3,'10–15',60)]),
+   D('Arms & Delts','Arm volume and shoulders',60,[E('ohp',3,'6–10',120),E('latraise',3,'15–20',60),E('preacher',3,'10–12',60,'g'),E('ohtri',3,'10–15',60),E('hammer',3,'10–12',60),E('pushdown',3,'10–15',60)]),
+   D('Three-Sword Drills','Grip and rotation',35,[E('sledgehammer',5,'30 s',60),E('farmer',3,'40 m',90),E('woodchop',3,'12/side',45)],1)]})
+);
+
+const RADAR_AXES=['Conditioning','Legs','Back','Core','Arms','Chest','Shoulders'];
+const BUILD={"itadori":1,"toji":.97,"todo":1.18,"megumi":.9,"maki":.92,"gojo":.95,"baki":1.02,"vegeta":1.08,"levi":.9,"guts":1.2,"rengoku":1.04,"garou":.92,"allmight":1.22};
+PROGRAMS.forEach(p=>{
+  p.weeks=16; p.build=BUILD[p.id]||1;
+  p.schedule=[['Mon','D1'],['Tue','D2'],['Wed','—'],['Thu','D3'],['Fri','D4'],['Sat','D5'],['Sun','—']];
+  p.days.forEach((d,i)=>{d.id='d'+(i+1);d.exercises=d.exercises.map(s=>{const L=EX[s.id];return Object.assign({name:L[0],type:L[1],cue:L[2],m:L[3],x:EXPLOSIVE.has(s.id)},s)})});
+});
+/* weekly sets per muscle, fractional (primary = 1 set, secondary ≥ .4 = half a set), for a typical Build week */
+function weeklySets(p,w=6){
+  const t={};
+  p.days.filter(d=>!d.optional).forEach(d=>d.exercises.forEach(ex=>{
+    if(ex.type==='cond') return;
+    const n=rx(ex,w).sets;
+    Object.entries(ex.m||{}).forEach(([k,v])=>{const f=v>=.8?1:v>=.4?.5:0;if(f)t[k]=(t[k]||0)+n*f;});
+  }));
+  return t;
+}
+const progById=id=>PROGRAMS.find(p=>p.id===id)||PROGRAMS[0];
+let PROGRAM=PROGRAMS[0];
+function applyTheme(p){
+  const r=document.documentElement.style;
+  ['--pc-l','--pc-on-l','--pc-d','--pc-on-d'].forEach((k,i)=>r.setProperty(k,p.colors[i]));
+}
+
+function setProgram(id){
+  if(!id){const r=document.documentElement.style;['--pc-l','--pc-on-l','--pc-d','--pc-on-d'].forEach(k=>r.removeProperty(k));return null;}
+  PROGRAM=progById(id);applyTheme(PROGRAM);return PROGRAM;
+}
+const themeVars=p=>`--pc-l:${p.colors[0]};--pc-on-l:${p.colors[1]};--pc-d:${p.colors[2]};--pc-on-d:${p.colors[3]}`;
+
+const MUSCLE_NAMES={neck:'Neck',traps:'Traps',shoulders:'Delts',chest:'Chest',serratus:'Serratus',abs:'Abs',obliques:'Obliques',biceps:'Biceps',triceps:'Triceps',forearms:'Forearms',quads:'Quads',adductors:'Adductors',shins:'Shins',calves:'Calves',lats:'Lats',upperback:'Upper back',lowerback:'Lower back',glutes:'Glutes',hamstrings:'Hamstrings'};
+function muscleLoad(days){
+  const t={}; days.forEach(d=>d.exercises.forEach(ex=>{const sets=ex.sets||4;Object.entries(ex.m||{}).forEach(([k,v])=>t[k]=(t[k]||0)+v*sets)}));
+  const max=Math.max(1,...Object.values(t)); Object.keys(t).forEach(k=>t[k]/=max); return t;
+}
+const tier=v=>v>=.55?2:v>=.2?1:0;
+
+/* Anatomy: each figure is 200×440, left half drawn and mirrored about x=100 */
+const SIL_L='M100,52 L90,54 C88,64 76,70 60,74 C46,76 37,88 37,106 C37,122 40,134 41,146 C38,164 36,180 36,190 C30,214 24,240 20,262 C14,274 16,294 26,298 C36,300 38,286 36,268 C42,242 50,214 54,194 C56,172 58,152 60,136 C64,154 66,176 68,196 C64,210 61,224 59,238 C55,270 55,300 60,322 C64,334 66,342 69,350 C67,374 69,396 71,414 C69,424 70,434 82,434 C94,434 94,424 90,414 C94,390 97,364 95,344 C99,328 99,300 99,262 L100,254 Z';
+const CENTER=[['r',88,44,24,34,null,8],['e',100,30,18,24,null]];
+const ARM_FORE=['p','M40,194 C33,212 27,238 24,262 L34,265 C40,242 47,216 51,196 Z','forearms'];
+const ANAT={
+  front:[
+    ['p','M90,58 C86,66 76,72 62,76 C72,80 84,78 92,72 L92,60 Z','traps'],
+    ['p','M92,58 C93,66 96,74 99,80 L100,80 L100,70 C97,66 95,62 94,56 Z','neck'],
+    ['p','M62,76 C48,76 39,88 39,104 C39,116 42,124 46,130 C50,116 56,102 66,92 C70,86 68,80 62,76 Z','shoulders'],
+    ['p','M99,82 L99,126 C88,132 72,132 63,124 C59,114 61,100 67,91 C73,84 86,80 99,82 Z','chest'],
+    ['p','M63,128 C66,136 68,146 69,156 L73,154 C72,144 70,136 68,130 Z','serratus'],
+    ['p','M69,132 C71,140 73,146 74,152 L77,149 C76,143 74,138 72,133 Z','serratus'],
+    ['p','M72,156 C74,176 76,196 80,216 C84,212 85,202 85,190 L85,136 C80,138 76,144 72,156 Z','obliques'],
+    ['r',87,132,11,16,'abs',4],['r',87,151,11,16,'abs',4],['r',87,170,11,16,'abs',4],
+    ['p','M87,189 L98,189 L98,232 C94,230 89,220 87,208 Z','abs'],
+    ['p','M52,130 C45,144 41,162 41,182 C45,188 51,186 55,180 C58,160 59,142 57,132 Z','biceps'],
+    ARM_FORE,
+    ['p','M91,246 L99,254 L99,284 C96,276 93,264 90,254 Z','adductors'],
+    ['p','M64,236 C59,262 58,292 62,318 C65,326 70,328 73,322 C73,292 75,264 77,240 Z','quads'],
+    ['p','M79,238 C76,262 76,292 78,318 L86,322 C89,296 91,264 89,240 Z','quads'],
+    ['p','M90,284 C95,298 96,312 92,326 C88,328 85,322 87,310 Z','quads'],
+    ['e',81,336,10,9,null],
+    ['p','M75,348 C73,370 73,392 77,410 L83,410 C83,392 83,368 83,348 Z','shins'],
+    ['p','M86,348 C93,362 93,382 88,400 L85,400 C85,382 85,364 85,348 Z','calves'],
+    ['e',81,425,10,6,null]
+  ],
+  back:[
+    ['p','M100,50 L100,152 C94,140 86,120 77,104 C71,94 65,84 60,77 C73,73 85,65 90,56 Z','traps'],
+    ['p','M60,77 C46,78 39,90 39,106 C39,117 42,124 46,130 C52,116 58,104 69,97 C67,87 64,81 60,77 Z','shoulders'],
+    ['p','M71,100 C77,108 84,120 88,130 C80,134 70,134 64,130 C63,118 66,108 71,100 Z','upperback'],
+    ['p','M63,133 C72,137 84,137 90,134 C93,152 95,172 97,190 C90,196 80,200 73,204 C70,180 66,158 62,142 Z','lats'],
+    ['p','M92,166 L99,166 L99,228 L93,228 C91,210 91,188 92,166 Z','lowerback'],
+    ['p','M50,130 C43,144 39,164 39,184 C43,190 50,188 54,182 C57,162 58,142 56,132 Z','triceps'],
+    ARM_FORE,
+    ['p','M100,230 L100,268 C90,276 75,274 67,262 C63,248 65,236 72,229 C80,223 92,225 100,230 Z','glutes'],
+    ['p','M66,272 C62,292 63,312 67,326 L78,326 C78,306 78,288 80,275 Z','hamstrings'],
+    ['p','M83,277 C83,296 84,312 86,326 L94,324 C97,306 97,288 97,273 Z','hamstrings'],
+    ['e',81,336,10,9,null],
+    ['p','M72,346 C66,362 68,380 76,394 L82,392 C82,376 82,360 80,346 Z','calves'],
+    ['p','M84,346 C82,362 84,378 86,392 L90,392 C96,378 96,360 90,346 Z','calves'],
+    ['e',81,425,10,6,null]
+  ]
+};
+const MIRROR='translate(200,0) scale(-1,1)';
+const muscleKey=s=>s[0]==='p'?s[2]:s[5];
+function shapeEl(s,attrs,inner){
+  if(s[0]==='e') return `<ellipse cx="${s[1]}" cy="${s[2]}" rx="${s[3]}" ry="${s[4]}" ${attrs}>${inner}</ellipse>`;
+  if(s[0]==='r') return `<rect x="${s[1]}" y="${s[2]}" width="${s[3]}" height="${s[4]}" rx="${s[6]||3}" ${attrs}>${inner}</rect>`;
+  return `<path d="${s[1]}" ${attrs}>${inner}</path>`;
+}
+function anatomy(view,mode,load,dx){
+  const art=mode==='art', sil=art?'var(--fig-sil)':'var(--bm-sil)';
+  const attrs=k=>{
+    if(art) return 'fill="url(#figGrad)" stroke="var(--fig-line)" stroke-width=".9" stroke-linejoin="round"';
+    const lv=k?tier(load[k]||0):0;
+    return `fill="${lv?'var(--bm-hit)':'var(--bm-base)'}"${lv===1?' fill-opacity=".5"':''} stroke="var(--bm-line)" stroke-width=".7" stroke-linejoin="round"`;
+  };
+  const draw=list=>list.map(s=>{const k=muscleKey(s);return shapeEl(s,attrs(k),k&&!art?`<title>${MUSCLE_NAMES[k]}</title>`:'')}).join('');
+  return `<g transform="translate(${dx},0)"><path d="${SIL_L}" fill="${sil}"/><path d="${SIL_L}" fill="${sil}" transform="${MIRROR}"/>${draw(CENTER)}${draw(ANAT[view])}<g transform="${MIRROR}">${draw(ANAT[view])}</g></g>`;
+}
+const viewLabels=fill=>`<text x="100" y="452" text-anchor="middle" font-size="12" font-weight="700" letter-spacing="1.6" fill="${fill}" font-family="var(--font-body)">FRONT</text><text x="320" y="452" text-anchor="middle" font-size="12" font-weight="700" letter-spacing="1.6" fill="${fill}" font-family="var(--font-body)">BACK</text>`;
+function bodyMap(load,label){
+  const prim=Object.keys(load).filter(k=>tier(load[k])===2).sort((a,b)=>load[b]-load[a]);
+  const sec=Object.keys(load).filter(k=>tier(load[k])===1).sort((a,b)=>load[b]-load[a]);
+  return `<div class="bodymap">
+    <svg viewBox="0 0 420 458" role="img" aria-label="${esc(label)}: primary ${prim.map(k=>MUSCLE_NAMES[k]).join(', ')}">
+      ${anatomy('front','map',load,0)}${anatomy('back','map',load,220)}${viewLabels('var(--muted)')}
+    </svg>
+    <div class="bm-key">
+      <span class="eyebrow">${esc(label)}</span>
+      <div class="bm-row"><i class="sw p"></i><span>Primary</span></div>
+      <p class="bm-list">${prim.map(k=>MUSCLE_NAMES[k]).join(' · ')||'—'}</p>
+      <div class="bm-row"><i class="sw s"></i><span>Secondary</span></div>
+      <p class="bm-list muted-h">${sec.map(k=>MUSCLE_NAMES[k]).join(' · ')||'—'}</p>
+    </div>
+  </div>`;
+}
+function physiqueArt(){
+  const pos=[[48,104],[92,160],[70,290],[306,98],[298,168],[302,252]];
+  const marks=pos.map((p,i)=>[i+1,p[0],p[1],(PROGRAM.callouts||DEFAULT_CALLOUTS)[i]]);
+  return `<figure class="art">
+    <svg viewBox="0 0 420 458" role="img" aria-label="Illustration of the target build, front and back: broad shoulders, narrow waist, defined abs, strong legs">
+      <defs><linearGradient id="figGrad" x1="0" y1="0" x2=".35" y2="1"><stop offset="0" style="stop-color:var(--fig-hi)"/><stop offset="1" style="stop-color:var(--fig-lo)"/></linearGradient></defs>
+      ${anatomy('front','art',{},0)}${anatomy('back','art',{},220)}${viewLabels('var(--muted)')}
+      ${marks.map(m=>`<circle cx="${m[1]}" cy="${m[2]}" r="11" fill="var(--accent)" stroke="var(--surface)" stroke-width="2"/><text x="${m[1]}" y="${m[2]+4}" text-anchor="middle" font-size="12" font-weight="700" fill="var(--on-accent)" font-family="var(--font-mono)">${m[0]}</text>`).join('')}
+    </svg>
+    <ol class="callouts">${marks.map(m=>`<li><span class="n">${m[0]}</span><span>${esc(m[3])}</span></li>`).join('')}</ol>
+  </figure>`;
+}
+const PHASES=[
+  {name:'Foundation',weeks:[1,2,3],note:'Groove the lifts with moderate weight and higher reps. Leave 2–3 reps in the tank on every set.'},
+  {name:'Build',weeks:[5,6,7],note:'Add load, drop a rep or two, and add a set to the big accessories. This is where size comes on.'},
+  {name:'Intensify',weeks:[9,10,11],note:'Heavy triples and fours on the main lifts. Bar speed stays sharp, so cut the set if it grinds.'},
+  {name:'Black Flash',weeks:[13,14],note:'Peak block. Heavy doubles and singles on the main lifts, accessories stay crisp.'},
+  {name:'Test',weeks:[15],note:'Test week. Work up to a heavy single on each main lift and log it. That is your new number.'},
+  {name:'Deload',weeks:[4,8,12,16],note:'Back off so the work lands. Lighter weights, fewer sets, done fast.'}
+];
+const BLOCKS=[['Foundation',1],['Build',5],['Intensify',9],['Black Flash',13]];
+const blockOf=w=>Math.ceil(w/4);
+const isDeload=w=>w%4===0;
+const MAIN={1:[4,8,7],2:[4,8,7.5],3:[4,8,8],4:[3,6,6],5:[4,6,7.5],6:[5,6,8],7:[5,5,8.5],8:[3,5,6],9:[5,4,8],10:[5,3,8.5],11:[6,3,9],12:[3,4,6],13:[4,2,8.5],14:[3,2,9],15:[3,1,9.5],16:[3,5,6]};
+const POWER={1:[5,3,7],2:[5,3,7],3:[6,3,7.5],4:[3,3,6],5:[6,3,7.5],6:[6,2,8],7:[7,2,8],8:[3,2,6],9:[6,2,8.5],10:[7,2,8.5],11:[8,1,8.5],12:[3,2,6],13:[5,1,9],14:[5,1,9],15:[3,1,9.5],16:[3,2,6]};
+const phaseOf=w=>PHASES.find(p=>p.weeks.includes(w));
+const dayById=id=>PROGRAM.days.find(d=>d.id===id);
+function rx(ex,w){
+  if(ex.main||ex.power){const [s,r,rpe]=(ex.main?MAIN:POWER)[w];return {sets:s,reps:String(r),rpe};}
+  let s=ex.sets; if(isDeload(w)) s=Math.max(2,s-1); else if(w>=5&&ex.grow) s+=1;
+  return {sets:s,reps:ex.reps,rpe:null};
+}
+const rirText=w=>isDeload(w)?'3–4 RIR':w<=3?'2 RIR':w<=7?'1–2 RIR':w<=11?'1 RIR':'0–1 RIR';
+const rxText=(ex,w)=>{const p=rx(ex,w);const tail=p.rpe?` · RPE ${p.rpe}`:ex.type==='cond'?'':ex.x?' · max intent':` · ${rirText(w)}`;return `${p.sets}×${p.reps}${tail}`;};
+
+/* ---------- helpers ---------- */
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function lsGet(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
+function lsSet(k,v){try{v==null?localStorage.removeItem(k):localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+const num=v=>(v===''||v==null||isNaN(Number(v)))?null:Number(v);
+const fmtTime=s=>{s=Math.max(0,Math.round(s));const m=Math.floor(s/60);return m+':'+String(s%60).padStart(2,'0')};
+const fmtDate=iso=>new Date(iso).toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short'});
+const e1rm=(w,r)=>w*(1+r/30);
+const TICK='<svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L19 7"/></svg>';
+const SKEY='archetype.sessions.v1', DKEY='archetype.draft.v1', UKEY='archetype.ui.v1';
+
+/* ---------- state ---------- */
+let sessions=lsGet(SKEY,{});
+let draft=lsGet(DKEY,null);
+const ui=Object.assign({view:'browse',week:null,active:null},lsGet(UKEY,{}));
+ui.preview=null;
+let remote=null, migrated=false, confirmKey=null, refsCol=null, assetsApi=null, pendingRef=null;
+const RKEY='archetype.refs.v1';
+let localRefs=lsGet(RKEY,{}), remoteRefs={};
+const refSrc=id=>{const r=remoteRefs[id]||localRefs[id];return r?(r.assetId?'/_blob/'+r.assetId:r.data):null;};
+if(draft&&!ui.active) ui.active=draft.prog||'itadori';
+ui.view=(ui.active||draft)?'workout':'browse';
+const keyOf=(w,d,p=PROGRAM.id)=>p==='itadori'?`w${w}-${d}`:`${p}-w${w}-${d}`;
+const sortedSessions=()=>Object.values(sessions).sort((a,b)=>b.date.localeCompare(a.date));
+function nextUp(){
+  for(let w=1;w<=PROGRAM.weeks;w++) for(const d of PROGRAM.days){ if(d.optional) continue; if(!sessions[keyOf(w,d.id)]) return {w,d}; }
+  return null;
+}
+const coreDays=p=>p.days.filter(d=>!d.optional).length;
+const totalOf=p=>p.weeks*coreDays(p);
+const doneOf=p=>Object.values(sessions).filter(s=>(s.program||'itadori')===p.id&&!p.days.find(d=>d.id===s.dayId)?.optional).length;
+const coreTotal=()=>totalOf(PROGRAM);
+const coreDone=()=>doneOf(PROGRAM);
+function lastFor(exId,skipKey){
+  for(const s of sortedSessions()){ if(s.id===skipKey) continue;
+    const e=s.entries.find(e=>e.exId===exId); if(!e) continue;
+    const done=e.sets.filter(x=>x.done); if(done.length) return done; }
+  return null;
+}
+function saveUI(){lsSet(UKEY,{view:ui.view,week:ui.week,active:ui.active})}
+
+/* ---------- storage: per-person db, local fallback ---------- */
+async function initRemote(){
+  try{
+    if(!window.claude||typeof window.claude.use!=='function') return;
+    const [db,user]=await Promise.all([window.claude.use('db'),window.claude.use('user')]);
+    if(!db||!user) return;
+    const uid=await user.id(); if(!uid) return;
+    remote=db.doc('data/users/'+uid+'/profile').collection('sessions');
+    refsCol=db.doc('data/users/'+uid+'/profile').collection('refs');
+    try{assetsApi=await window.claude.use('assets');}catch(e){assetsApi=null;}
+    refsCol.onSnapshot(snap=>{const next={};snap.docs.forEach(d=>{const v=d.data();if(v&&v.assetId)next[d.id]={assetId:v.assetId};});remoteRefs=next;if(!(ui.view==='workout'&&draft))render();},()=>{});
+    remote.onSnapshot(snap=>{
+      const next={}; snap.docs.forEach(d=>{const v=d.data(); if(v) next[d.id]=JSON.parse(JSON.stringify(v));});
+      if(!migrated){ migrated=true;
+        const localOnly=Object.values(sessions).filter(s=>!next[s.id]);
+        if(snap.empty&&localOnly.length){ (async()=>{for(const s of localOnly){try{await remote.doc(s.id).set(s)}catch(e){}}})(); localOnly.forEach(s=>next[s.id]=s); }
+      }
+      sessions=next; lsSet(SKEY,sessions);
+      if(!(ui.view==='workout'&&draft)) render(); else updateNavDot();
+    },()=>{remote=null;});
+  }catch(e){remote=null;}
+}
+async function persistSession(s){
+  sessions[s.id]=s; lsSet(SKEY,sessions);
+  if(remote){ try{await remote.doc(s.id).set(s);}catch(e){ toast(e&&e.code==='quota_exceeded'?'Storage is full. Delete old sessions to save new ones.':'Saved on this device only. Check your connection.'); } }
+}
+async function removeSession(id){
+  delete sessions[id]; lsSet(SKEY,sessions);
+  if(remote){ try{await remote.doc(id).delete();}catch(e){toast('Could not delete from your account. Try again.');} }
+}
+
+/* ---------- physique reference photos ---------- */
+function shrinkImage(file,max=900){
+  return new Promise((res,rej)=>{
+    const url=URL.createObjectURL(file),img=new Image();
+    img.onload=()=>{const k=Math.min(1,max/Math.max(img.width,img.height));const c=document.createElement('canvas');c.width=Math.round(img.width*k);c.height=Math.round(img.height*k);
+      c.getContext('2d').drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(url);c.toBlob(b=>b?res({blob:b,data:c.toDataURL('image/jpeg',.82)}):rej(new Error('encode')),'image/jpeg',.82);};
+    img.onerror=()=>{URL.revokeObjectURL(url);rej(new Error('read'));};
+    img.src=url;
+  });
+}
+async function saveRef(pid,file){
+  let shot; try{shot=await shrinkImage(file);}catch(e){toast('That file could not be read as an image');return;}
+  const old=remoteRefs[pid]&&remoteRefs[pid].assetId;
+  if(assetsApi&&refsCol){
+    try{
+      const up=await assetsApi.upload(shot.blob,{type:'image/jpeg'});
+      await refsCol.doc(pid).set({assetId:up.id,updatedAt:new Date().toISOString()});
+      remoteRefs[pid]={assetId:up.id}; delete localRefs[pid]; lsSet(RKEY,localRefs);
+      if(old){try{await assetsApi.delete(old);}catch(e){}}
+      render(); toast('Photo added'); return;
+    }catch(e){ if(e&&e.code==='quota_exceeded'){toast('Photo storage is full');return;} }
+  }
+  localRefs[pid]={data:shot.data}; lsSet(RKEY,localRefs); render(); toast('Photo saved on this device');
+}
+async function removeRef(pid){
+  const old=remoteRefs[pid]&&remoteRefs[pid].assetId;
+  delete remoteRefs[pid]; delete localRefs[pid]; lsSet(RKEY,localRefs); render();
+  if(refsCol){try{await refsCol.doc(pid).delete();}catch(e){}}
+  if(old&&assetsApi){try{await assetsApi.delete(old);}catch(e){}}
+  toast('Photo removed');
+}
+document.getElementById('refFile').addEventListener('change',e=>{const f=e.target.files&&e.target.files[0];e.target.value='';if(f&&pendingRef)saveRef(pendingRef,f);});
+
+const VIDEOS={"bench": "XFKZ6Yw8XbE", "squat": "8PMjqgR8Wa8", "fsquat": "npVgCT7NznU", "deadlift": "ntr64W6ZWB0", "rdl": "uhghy9pFIPY", "ohp": "nNMR9fRGRjQ", "wpullup": "5joIx-VL2XI", "pullup": "rmdn5X_KLkY", "chinup": "rmdn5X_KLkY", "clean": "ORGBFvyUwGs", "bss": "VPhhE6bBzZE", "incline": "OC7Qs_SAO2E", "latraise": "XPPfnSEATJA", "dips": "FCxl2y4nsTA", "wdips": "FCxl2y4nsTA", "row": "f0bFCVXB8hc", "dbrow": "gfUg6qWohTk", "latpull": "AOpi-p0cJkc", "hipthrust": "UmY5lVwpycE", "legpress": "tg-jOYwhI5w", "legcurl": "7PE3MlvGAts", "calf": "4HQ8Am9IuME", "hlr": "JXztA3fLp50", "muscleup": "6v6IsZcvqCA", "pushup": "i9sTjhN4Z3M", "hspu": "oXT2HEQe1wM", "kbswing": "bDCeXbMJVNs", "farmer": "OalyeWGbRb0", "legext": "xAUvXdHu1sI", "lunge": "I34ysEkPK7w", "nordic": "_e9vFU9-tkc", "pistol": "T74bU2vNWG4", "curl": "yifA4HmCeso", "hammer": "G7hy-AxQwcQ", "skull": "9baX4-wEYx8", "pushdown": "odbyvJm7d8s", "cablefly": "ETtXO4FW1EU", "facepull": "ljgqer1ZpXg", "shrug": "KbsQ1E8Hg0o", "boxjump": "YLPQsdRDmB0", "abwheel": "qeqofno2lSM", "ohtri": "L5Zb3VwtPvQ", "pushpress": "a8HQo8z20Uo"};
+const CAN_EMBED=!(window.claude&&typeof window.claude.use==='function');
+function exHistory(exId){
+  const out=[];
+  sortedSessions().forEach(s=>{const e=s.entries.find(e=>e.exId===exId);if(!e)return;const done=e.sets.filter(x=>x.done);if(!done.length)return;
+    let best=0;done.forEach(x=>{if(x.w>0&&x.r>0)best=Math.max(best,e1rm(x.w,x.r))});
+    out.push({s,e,done,best,top:Math.max(0,...done.map(x=>x.w||0))});});
+  return out;
+}
+function openExercise(exId){
+  const ex=dayById(draft.dayId).exercises.find(x=>x.id===exId); if(!ex) return;
+  const vid=VIDEOS[exId], q=encodeURIComponent(ex.name+' tutorial');
+  const watch=vid?`https://www.youtube.com/watch?v=${vid}`:`https://www.youtube.com/results?search_query=${q}`;
+  const hist=exHistory(exId), bests=hist.map(h=>h.best).filter(Boolean).reverse();
+  const fmtSet=(x,type)=>type==='cond'?'✓':`${x.w??(type==='bw'?'BW':0)}×${x.r??'–'}`;
+  const video=vid&&CAN_EMBED
+    ? `<div class="video"><iframe src="https://www.youtube-nocookie.com/embed/${vid}?rel=0&playsinline=1&modestbranding=1" title="${esc(ex.name)} tutorial" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen loading="lazy"></iframe></div>`
+    : `<a class="video-link" href="${watch}" target="_blank" rel="noopener"><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span><b>${vid?'Watch the tutorial':'Find a tutorial'}</b><span class="muted">${vid?(CAN_EMBED?'':'Opens YouTube · plays here in the home-screen app'):'Search YouTube for this exercise'}</span></span></a>`;
+  const sheet=document.getElementById('sheet');
+  sheet.innerHTML=`<div class="sheet-back" data-close></div>
+  <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+    <div class="sheet-grab" aria-hidden="true"></div>
+    <div class="row between" style="align-items:flex-start"><div style="min-width:0"><span class="eyebrow">${esc(rxText(ex,draft.week))}</span><h2 id="sheetTitle">${esc(ex.name)}</h2><p class="muted" style="font-size:14px">${esc(ex.cue)}</p></div><button type="button" class="btn small" data-close aria-label="Close">Close</button></div>
+    ${video}
+    <div class="hist">
+      <div class="row between"><h3>Your history</h3>${hist.length?`<span class="muted" style="font-size:13px">${hist.length} session${hist.length>1?'s':''}</span>`:''}</div>
+      ${hist.length&&ex.type!=='cond'&&bests.length?`<div class="pr-row"><div class="stat"><b>${Math.max(...hist.map(h=>h.top))||'BW'}${Math.max(...hist.map(h=>h.top))?' kg':''}</b><span>Heaviest</span></div><div class="stat"><b>${Math.round(Math.max(...bests))} kg</b><span>Best est. 1RM</span></div><div class="stat"><b>${hist[0].done.length}</b><span>Sets last time</span></div></div>${bests.length>1?`<div class="hist-spark">${spark(bests)}</div>`:''}`:''}
+      ${hist.length?`<ul class="hist-list">${hist.slice(0,12).map(h=>`<li><div><b>${fmtDate(h.s.date)}</b><span class="muted"> · W${h.s.week} · ${esc(progById(h.s.program||'itadori').name)}</span></div><div class="num">${h.done.map(x=>fmtSet(x,h.e.type)).join('  ')}</div></li>`).join('')}</ul>`
+        :`<p class="muted" style="font-size:14px">No sets logged for this exercise yet. Your weights and reps will show up here after you finish a workout.</p>`}
+    </div>
+  </div>`;
+  sheet.hidden=false; document.body.classList.add('sheet-open');
+  sheet.querySelector('.sheet-panel button[data-close]').focus();
+}
+function closeSheet(){const sh=document.getElementById('sheet');sh.hidden=true;sh.innerHTML='';document.body.classList.remove('sheet-open');}
+document.getElementById('sheet').addEventListener('click',e=>{if(e.target.closest('[data-close]'))closeSheet();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!document.getElementById('sheet').hidden)closeSheet();});
+
+/* ---------- backup & restore ---------- */
+async function saveBackup(){
+  const data={app:'archetype',version:1,exportedAt:new Date().toISOString(),active:ui.active,sessions,photos:localRefs};
+  const text=JSON.stringify(data), name='archetype-backup-'+new Date().toISOString().slice(0,10)+'.json';
+  try{
+    const dl=window.claude&&typeof window.claude.use==='function'?await window.claude.use('downloads'):null;
+    if(dl){ try{await dl.save({filename:name,data:text});toast('Backup saved');}catch(e){ if(e&&e.code!=='declined') toast('Could not save the backup here'); } return; }
+  }catch(e){}
+  const file=new File([text],name,{type:'application/json'});
+  try{ if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file],title:'Archetype backup'});return;} }catch(e){ if(e&&e.name==='AbortError') return; }
+  const a=document.createElement('a');a.href=URL.createObjectURL(file);a.download=name;document.body.appendChild(a);a.click();
+  setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},2000);toast('Backup saved');
+}
+async function restoreBackup(file){
+  let data; try{data=JSON.parse(await file.text());}catch(e){toast('That file is not a valid backup');return;}
+  if(!data||data.app!=='archetype'||typeof data.sessions!=='object'){toast('That file is not an Archetype backup');return;}
+  let added=0;
+  for(const [id,s] of Object.entries(data.sessions)){
+    if(!s||typeof s!=='object'||!s.date) continue;
+    const cur=sessions[id]; if(cur&&cur.date>=s.date) continue;
+    sessions[id]=s; added++;
+    if(remote){try{await remote.doc(id).set(s);}catch(e){}}
+  }
+  lsSet(SKEY,sessions);
+  if(data.photos&&typeof data.photos==='object'){Object.entries(data.photos).forEach(([k,v])=>{if(v&&typeof v.data==='string'&&v.data.startsWith('data:image/'))localRefs[k]={data:v.data};});lsSet(RKEY,localRefs);}
+  if(!ui.active&&data.active&&PROGRAMS.some(p=>p.id===data.active)) ui.active=data.active;
+  saveUI(); render(); toast(added?`Restored ${added} session${added>1?'s':''}`:'Nothing new to restore');
+}
+document.getElementById('restoreFile').addEventListener('change',e=>{const f=e.target.files&&e.target.files[0];e.target.value='';if(f)restoreBackup(f);});
+
+/* ---------- emblem: a seal stamped over the paint ---------- */
+function emblem(uid,p=PROGRAM){
+  const crack='0,92 34,74 44,79 62,64 74,68 92,50 100,54 120,40';
+  const A='url(#em-a-'+uid+')',B='url(#em-b-'+uid+')',N='url(#em-n-'+uid+')';
+  const body=`<rect x="10" y="10" width="100" height="100" rx="12" fill="currentColor"/>
+    <rect x="18" y="18" width="84" height="84" rx="7" fill="none" stroke="var(--seal-ink)" stroke-width="1.8"/>
+    <text x="60" y="85" text-anchor="middle" font-size="68" fill="var(--seal-ink)" lang="ja" style="font-family:var(--font-kanji)">${p.kanji}</text>`;
+  return `<svg class="emblem" viewBox="0 0 120 120" role="img" aria-label="${esc(p.name)} emblem">
+    <defs>
+      <filter id="em-n-${uid}" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="11" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4"/></filter>
+      <clipPath id="em-a-${uid}"><polygon points="0,0 120,0 ${crack.split(' ').reverse().join(' ')}"/></clipPath>
+      <clipPath id="em-b-${uid}"><polygon points="${crack} 120,120 0,120"/></clipPath>
+    </defs>
+    <g transform="rotate(-5 60 60)" filter="${N}">
+      ${p.crack?`<g clip-path="${A}"><g transform="translate(-1.5,-2)">${body}</g></g>
+      <g clip-path="${B}"><g transform="translate(2,2.5)">${body}</g></g>`:body}
+    </g>
+  </svg>`;
+}
+
+const CHEV='<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
+function viewBrowse(){
+  const series=[...new Set(PROGRAMS.map(p=>p.series))];
+  return `
+  <section class="section">
+    <div><span class="eyebrow">Browse · ${PROGRAMS.length} characters</span><h2>Characters</h2><p class="muted" style="font-size:14px">Training programs built around a character's physique.</p></div>
+    <label class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4 4"/></svg><input type="search" id="q" placeholder="Search characters, series or style" aria-label="Search characters, series or style" autocomplete="off"></label>
+    <div class="chips" aria-label="Series">${['All',...series].map((x,i)=>`<button type="button" class="chip ${i?'':'on'}" data-series="${esc(x)}">${esc(x)}</button>`).join('')}</div>
+    <div class="prog-list">
+    ${series.map(se=>`<h3 class="series-head" data-head="${esc(se)}">${esc(se)} <span class="muted">${PROGRAMS.filter(p=>p.series===se).length}</span></h3>`+PROGRAMS.filter(p=>p.series===se).map(p=>{const active=p.id===ui.active,dn=doneOf(p),tot=totalOf(p);return `
+      <button type="button" class="card prog-card themed ${active?'active':''}" style="${themeVars(p)}" data-pick="${p.id}" data-s="${esc(p.series)}" data-search="${esc((p.name+' '+p.series+' '+p.archetype+' '+p.tags.join(' ')).toLowerCase())}">
+        ${emblem('b-'+p.id,p)}
+        <span class="pc-text"><span class="eyebrow">${esc(p.series)}</span><b>${esc(p.name)}</b>
+          <span class="muted pc-meta">${p.weeks} weeks · ${coreDays(p)} + 1 days · ${esc(p.archetype)}</span>
+          <span class="tags">${p.tags.map(t=>`<span class="pill plain">${esc(t)}</span>`).join('')}</span>
+          ${dn||active?`<span class="pc-status">${active?'<span class="pill">Current</span>':''}<span class="bar"><i style="width:${Math.round(dn/tot*100)}%"></i></span><span class="num">${dn}/${tot}</span></span>`:''}
+        </span>
+      </button>`;}).join('')).join('')}
+    </div>
+    <p class="empty" id="noMatch" hidden><b>No characters match</b><span>Try a different name, series or style.</span></p>
+    <section class="card backup">
+      <div><span class="eyebrow">Your data</span><h3>Backup &amp; restore</h3><p class="muted" style="font-size:14px">Save your logged sessions, selected program and photos to a file, then restore them in another version of the app or on another device.</p></div>
+      <p class="muted" style="font-size:13px"><span class="num">${Object.keys(sessions).length}</span> sessions logged${ui.active?` · on ${esc(progById(ui.active).name)}`:''}</p>
+      <div class="row" style="flex-wrap:wrap"><button type="button" class="btn primary small" data-backup>Save backup</button><button type="button" class="btn small" data-restore>Restore from file</button></div>
+    </section>
+  </section>`;
+}
+function filterBrowse(){
+  const q=(view.querySelector('#q')?.value||'').trim().toLowerCase(), ser=view.querySelector('[data-series].on')?.dataset.series||'All';
+  let n=0; view.querySelectorAll('.prog-card').forEach(c=>{const hit=(!q||c.dataset.search.includes(q))&&(ser==='All'||c.dataset.s===ser);c.hidden=!hit;if(hit)n++});
+  view.querySelectorAll('.series-head').forEach(h=>{h.hidden=![...view.querySelectorAll('.prog-card')].some(c=>!c.hidden&&c.dataset.s===h.dataset.head);});
+  view.querySelector('#noMatch').hidden=n>0;
+}
+
+/* ---------- banner art: build outline over a seeded paint splatter ---------- */
+function hashStr(str){let h=2166136261;for(const c of str){h^=c.charCodeAt(0);h=Math.imul(h,16777619)}return h>>>0}
+function rng(seed){let x=seed||1;return()=>{x^=x<<13;x>>>=0;x^=x>>>17;x^=x<<5;x>>>=0;return x/4294967296}}
+function blobPath(r,cx,cy,base,vary,n,spikes){
+  const pts=[];
+  for(let i=0;i<n;i++){
+    const a=i/n*Math.PI*2+(r()-.5)*.25;
+    let rad=base*(1-vary/2+r()*vary);
+    if(spikes&&r()<spikes) rad+=base*(.35+r()*.6);
+    pts.push([cx+Math.cos(a)*rad,cy+Math.sin(a)*rad]);
+  }
+  const mid=(p,q)=>[(p[0]+q[0])/2,(p[1]+q[1])/2];
+  let d='M'+mid(pts[n-1],pts[0]).map(v=>v.toFixed(1)).join(',');
+  for(let i=0;i<n;i++){const p=pts[i],q=pts[(i+1)%n],m=mid(p,q);d+=` Q${p[0].toFixed(1)},${p[1].toFixed(1)} ${m[0].toFixed(1)},${m[1].toFixed(1)}`;}
+  return d+'Z';
+}
+function splatter(seed){
+  const r=rng(seed);let g=`<path d="${blobPath(r,100,205,95,.35,26,.28)}"/>`;
+  for(let i=0;i<4;i++){const a=r()*Math.PI*2,dist=95+r()*55;g+=`<path d="${blobPath(r,100+Math.cos(a)*dist,205+Math.sin(a)*dist*1.15,10+r()*16,.5,10,0)}"/>`;}
+  for(let i=0;i<18;i++){const a=r()*Math.PI*2,dist=120+r()*90;g+=`<circle cx="${(100+Math.cos(a)*dist).toFixed(1)}" cy="${(205+Math.sin(a)*dist*1.1).toFixed(1)}" r="${(1.5+r()*r()*8).toFixed(1)}"/>`;}
+  for(let i=0;i<4;i++){const a=r()*Math.PI*2,dist=100+r()*70,x=100+Math.cos(a)*dist,y=205+Math.sin(a)*dist;g+=`<ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="${(10+r()*14).toFixed(1)}" ry="${(2+r()*3).toFixed(1)}" transform="rotate(${(a*180/Math.PI).toFixed(0)} ${x.toFixed(1)} ${y.toFixed(1)})"/>`;}
+  return g;
+}
+function bannerArt(uid,p=PROGRAM){
+  const g=splatter(hashStr(p.id+uid)), src=refSrc(p.id);
+  return `<div class="banner-art ${src?'has-photo':''}" aria-hidden="true">
+    <svg class="splat-svg" viewBox="-70 0 340 410">
+      ${src?`<defs><clipPath id="sp-${uid}">${g}</clipPath></defs>`:''}
+      <g class="splat" fill="currentColor">${g}</g>
+      ${src?`<image href="${esc(src)}" x="-40" y="40" width="280" height="330" preserveAspectRatio="xMidYMid slice" clip-path="url(#sp-${uid})"/>`:''}
+    </svg>
+    ${emblem('art-'+uid,p)}
+  </div>`;
+}
+
+/* ---------- views ---------- */
+function radar(){
+  const st=RADAR_AXES.map((a,i)=>[a,PROGRAM.physique[i]]),n=st.length,cx=180,cy=152,R=96;
+  const pt=(i,r)=>{const a=-Math.PI/2+i*2*Math.PI/n;return [cx+Math.cos(a)*r,cy+Math.sin(a)*r]};
+  let g='';
+  [.25,.5,.75,1].forEach(f=>{g+=`<polygon points="${st.map((_,i)=>pt(i,R*f).join(',')).join(' ')}" fill="none" stroke="var(--line)" stroke-width="1"/>`;});
+  st.forEach((_,i)=>{const [x,y]=pt(i,R);g+=`<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="var(--line)" stroke-width="1"/>`;});
+  g+=`<polygon points="${st.map((s,i)=>pt(i,R*s[1]/100).join(',')).join(' ')}" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/>`;
+  st.forEach((s,i)=>{const [x,y]=pt(i,R*s[1]/100);g+=`<circle cx="${x}" cy="${y}" r="3.5" fill="var(--accent)"/>`;});
+  st.forEach((s,i)=>{const [x,y]=pt(i,R+16);const anc=Math.abs(x-cx)<8?'middle':(x>cx?'start':'end');
+    g+=`<text x="${x}" y="${y+4}" text-anchor="${anc}" font-size="12" font-weight="700" fill="var(--muted)" font-family="var(--font-body)">${s[0]} <tspan fill="var(--ink)" font-family="var(--font-mono)" font-weight="500">${s[1]}</tspan></text>`;});
+  return `<svg viewBox="0 0 360 300" role="img" aria-label="Target physique emphasis by muscle group">${g}</svg>`;
+}
+function viewNoProgram(where){
+  return `<span class="eyebrow">${where==='workout'?'Workout':'Program'}</span>
+  <div class="card empty"><b>No program selected</b><span>Pick a character to lock in their program. You stay on it until you choose another.</span><button type="button" class="btn primary" data-tab="browse">Browse characters</button></div>`;
+}
+function setsChart(p){
+  const t=weeklySets(p), rows=Object.entries(t).filter(([,v])=>v>=2).sort((a,b)=>b[1]-a[1]), max=Math.max(20,...rows.map(r=>r[1]));
+  return `<div class="sets-chart"><div class="row between"><span class="eyebrow">Weekly sets per muscle</span><span class="muted" style="font-size:12px">Build week · indirect sets count half</span></div>
+    ${rows.map(([k,v])=>{const pr=p.priority.includes(k);return `<div class="sc-row ${pr?'pr':''}"><span>${MUSCLE_NAMES[k]}</span><span class="sc-bar"><i style="width:${(v/max*100).toFixed(1)}%"></i><b class="sc-band" style="left:${(10/max*100).toFixed(1)}%;width:${(10/max*100).toFixed(1)}%"></b></span><span class="num">${Math.round(v*2)/2}</span></div>`;}).join('')}
+    <p class="muted" style="font-size:12px">Shaded band: 10–20 sets. Bold rows are this physique's priorities.</p></div>`;
+}
+function viewProgram(){
+  const isActive=PROGRAM.id===ui.active, cur=ui.active?progById(ui.active):null;
+  const done=coreDone(), pct=Math.round(done/coreTotal()*100), nu=nextUp();
+  const w=ui.week||(nu?nu.w:PROGRAM.weeks), ph=phaseOf(w);
+  const weekDone=wk=>PROGRAM.days.filter(d=>!d.optional).every(d=>sessions[keyOf(wk,d.id)]);
+  const action=isActive
+    ? (nu?`<button type="button" class="btn primary block" data-start="${nu.w}|${nu.d.id}">${draft?'Resume workout':'Start next session'}</button>`:'')
+    : (confirmKey==='switch'
+      ? `<div class="switch"><span>Switch from <b>${esc(cur.name)}</b>? Progress on both is kept.</span><div class="row"><button type="button" class="btn primary small" data-select>Switch</button><button type="button" class="btn small" data-cancel>Cancel</button></div></div>`
+      : `<button type="button" class="btn primary block" data-select>${cur?'Switch to this program':'Select this program'}</button>`);
+  return `
+  ${ui.preview?`<button type="button" class="btn ghost small back" data-tab="browse">‹ All characters</button>`:''}
+  <section class="hero">
+    ${isActive?'<span class="pill on-hero">Your program</span>':''}
+    <div class="hero-main"><div class="hero-copy"><span class="series-tag">${esc(PROGRAM.series)}</span><span class="eyebrow">${PROGRAM.weeks} weeks · ${coreDays(PROGRAM)} + 1 days · ${esc(PROGRAM.archetype)}</span>
+    <h1>${esc(PROGRAM.name.toUpperCase()).replace('/','/<wbr>')}</h1>
+    <p class="sub">${esc(PROGRAM.blurb)}</p>
+    <div class="photo-ctl">${refSrc(PROGRAM.id)?`<button type="button" class="btn small" data-photo>Change photo</button><button type="button" class="btn small" data-photo-rm>Remove</button>`:`<button type="button" class="btn small" data-photo>+ Add physique photo</button>`}</div></div>${bannerArt('hero')}</div>
+    <div class="meter">
+      <div class="row between"><span>${!isActive&&!done?'Not started':nu?`Next: Week ${nu.w}, ${esc(nu.d.name)}`:'Program complete'}</span><span><b>${done}</b> / ${coreTotal()} sessions</span></div>
+      <div class="bar"><i style="width:${pct}%"></i></div>
+    </div>
+    ${action}
+  </section>
+
+  <section class="section">
+    <div class="row between"><div><span class="eyebrow">Block ${blockOf(w)} of 4 · ${BLOCKS[blockOf(w)-1][0]}</span><h2>Week ${w}</h2></div><span class="pill">${ph.name}</span></div>
+    <div class="chips" role="tablist" aria-label="Week">${Array.from({length:PROGRAM.weeks},(_,i)=>i+1).map(k=>`${k>1&&k%4===1?'<span class="chip-sep" aria-hidden="true"></span>':''}<button type="button" class="chip ${k===w?'on':''} ${weekDone(k)?'done':''}" data-week="${k}" aria-selected="${k===w}">W${k}</button>`).join('')}</div>
+    <p class="muted" style="font-size:14px">${ph.note}</p>
+    ${PROGRAM.days.map((d,i)=>{const s=sessions[keyOf(w,d.id)];return `
+    <article class="card">
+      <div class="day-head">
+        <div style="min-width:0"><div class="day-num">DAY ${i+1}${d.optional?' · OPTIONAL':''}</div><h3>${esc(d.name)}</h3><p class="muted" style="font-size:13px">${esc(d.focus)} · ~${d.mins} min</p></div>
+        ${s?`<span class="pill good">Done ${fmtDate(s.date)}</span>`:''}
+      </div>
+      <ul class="ex-list">${d.exercises.map(ex=>`<li class="${ex.main||ex.power?'main':''}"><span>${esc(ex.name)}</span><span class="num">${rxText(ex,w)}</span></li>`).join('')}</ul>
+      ${isActive?`<button type="button" class="btn ${s?'':'primary'} small" data-start="${w}|${d.id}">${s?'Redo session':'Start session'}</button>`:''}
+    </article>`;}).join('')}
+  </section>
+
+  <section class="card">
+    <div class="row between"><h2>Weekly rhythm</h2><span class="muted" style="font-size:13px">D5 optional</span></div>
+    <div class="week-strip">${PROGRAM.schedule.map(([d,s])=>`<div class="${s==='—'?'':(s==='D5'?'on opt':'on')}">${d}<span>${s}</span></div>`).join('')}</div>
+  </section>
+
+  <details class="card minor" id="how">
+    <summary><span><b>How it's built</b><span class="muted">The training science behind this program</span></span>${CHEV}</summary>
+    <div class="minor-body">
+      <p>${esc(PROGRAM.focus)}</p>
+      <ul class="principles">
+        <li><b>Every muscle twice a week.</b> Two sessions per muscle improves strength gains and keeps each session's set quality high.</li>
+        <li><b>Priority muscles get about 10–20+ hard sets a week.</b> Growth keeps rising with weekly sets, with diminishing returns as volume climbs.</li>
+        <li><b>Muscle work 0–2 reps from failure, heavy lifts 2–4.</b> Training closer to failure grows more muscle; strength does not need it.</li>
+        <li><b>Double progression.</b> Hit the top of the rep range on every set, then add weight next time.</li>
+        <li><b>Deload every 4th week</b> to shed fatigue so the next block can push harder.</li>
+      </ul>
+      ${setsChart(PROGRAM)}
+      <p class="src">Sources: ${['volume','failure',...PROGRAM.sources].map(k=>`<a href="${SRC[k][1]}" target="_blank" rel="noopener">${esc(SRC[k][0])}</a>`).join(' · ')}</p>
+    </div>
+  </details>
+
+  <details class="card minor" id="phys">
+    <summary><span><b>Target physique</b><span class="muted">The build after ${PROGRAM.weeks} weeks and the muscles it targets</span></span>${CHEV}</summary>
+    <div class="minor-body">
+      ${physiqueArt()}
+      ${bodyMap(muscleLoad(PROGRAM.days.filter(d=>!d.optional)),'Whole program')}
+      <div class="physique">${radar()}
+        <dl class="traits">${PROGRAM.traits.map(t=>`<dt>${t[0]}</dt><dd>${esc(t[1])}</dd>`).join('')}</dl>
+      </div>
+      ${PROGRAM.feats?`<p class="feat">${esc(PROGRAM.feats)}</p>`:''}
+    </div>
+  </details>`;
+}
+function viewWorkoutPicker(){
+  const nu=nextUp(), w=nu?nu.w:(ui.week||1);
+  return `
+  <section class="section">
+    <span class="eyebrow">Workout</span>
+    ${nu?`<div class="hero up-next"><div class="hero-main"><div class="hero-copy"><span class="series-tag">${esc(PROGRAM.name)} · ${esc(PROGRAM.series)}</span><span class="eyebrow">Up next · Week ${nu.w} · ${phaseOf(nu.w).name}</span><h1>${esc(nu.d.name.toUpperCase())}</h1><p class="sub">${esc(nu.d.focus)} · ${nu.d.exercises.length} exercises · ~${nu.d.mins} min</p></div>${bannerArt('next')}</div><button type="button" class="btn primary block" data-start="${nu.w}|${nu.d.id}">${draft?'Resume workout':'Start'}</button></div>`
+    :`<div class="card empty"><b>All ${PROGRAM.weeks} weeks done.</b><span>Run it back, or wait for the next physique.</span></div>`}
+    <h3 style="margin-top:6px">Or pick a day from week ${w}</h3>
+    ${PROGRAM.days.map(d=>`<button type="button" class="card" style="text-align:left;flex-direction:row;align-items:center;justify-content:space-between" data-start="${w}|${d.id}"><span><b>${esc(d.name)}</b>${d.optional?' <span class="pill plain">Optional</span>':''}<br><span class="muted" style="font-size:13px">${d.exercises.length} exercises · ~${d.mins} min</span></span>${sessions[keyOf(w,d.id)]?'<span class="pill good">Done</span>':'<span class="muted">›</span>'}</button>`).join('')}
+  </section>`;
+}
+function setRow(ex,i,s){
+  if(ex.type==='cond') return `<div class="set cond ${s.done?'done':''}" data-ex="${ex.id}" data-i="${i}"><span class="idx">${i+1}</span><span class="target">${esc(rx(ex,draft.week).reps)}</span><button type="button" class="tick" data-tick aria-label="Mark set ${i+1} done" aria-pressed="${!!s.done}">${TICK}</button></div>`;
+  const ph=ex.type==='bw'?'BW':'0';
+  return `<div class="set ${s.done?'done':''}" data-ex="${ex.id}" data-i="${i}"><span class="idx">${i+1}</span>
+    <label><input type="number" inputmode="decimal" step="0.5" min="0" id="w-${ex.id}-${i}" data-f="w" value="${s.w??''}" placeholder="${ph}" aria-label="Set ${i+1} weight"><small>${ex.type==='bw'?'+kg':'kg'}</small></label>
+    <label><input type="number" inputmode="numeric" min="0" id="r-${ex.id}-${i}" data-f="r" value="${s.r??''}" placeholder="${esc(rx(ex,draft.week).reps)}" aria-label="Set ${i+1} reps"><small>reps</small></label>
+    <button type="button" class="tick" data-tick aria-label="Mark set ${i+1} done" aria-pressed="${!!s.done}">${TICK}</button></div>`;
+}
+function viewWorkout(){
+  if(!draft) return viewWorkoutPicker();
+  const d=dayById(draft.dayId), key=keyOf(draft.week,d.id);
+  return `
+  <div class="wo-head"><div style="min-width:0"><span class="day-num">WEEK ${draft.week} · ${phaseOf(draft.week).name.toUpperCase()}</span><h2>${esc(d.name)}</h2></div><span class="clock" id="clock">0:00</span></div>
+  <section class="card wo-banner">
+    <div class="hero-top"><div><span class="prog">${esc(PROGRAM.name.toUpperCase())}</span><span class="series-line">${esc(PROGRAM.series)}</span><span class="eyebrow">${esc(d.focus)} · ~${d.mins} min</span></div>${bannerArt('wo')}</div>
+    <details class="minor"><summary><span class="muted">Muscles worked today</span>${CHEV}</summary><div class="minor-body">${bodyMap(muscleLoad([d]),'Worked today')}</div></details>
+  </section>
+  ${draft.week===15?'<div class="confirm"><b>Test week.</b> On the first lift, work up in small jumps to one heavy single that still moves fast. Log it as your last set.</div>':(phaseOf(draft.week).name==='Black Flash'?'<div class="confirm"><b>Black Flash block.</b> Every set on the first lift should be fast and violent. If the bar slows, stop there.</div>':'')}
+  ${d.exercises.map(ex=>{const last=lastFor(ex.id,key);const sets=draft.entries[ex.id];return `
+  <article class="card ex-card">
+    <div class="row between" style="align-items:flex-start"><div style="min-width:0"><button type="button" class="ex-name" data-exinfo="${ex.id}"><h3>${esc(ex.name)}</h3><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 8.5v7l6-3.5z" fill="currentColor" stroke="none"/></svg></button><p class="cue">${esc(ex.cue)}</p></div><span class="pill ${ex.main||ex.power?'':'plain'}">${rxText(ex,draft.week)}</span></div>
+    ${last&&ex.type!=='cond'?`<p class="last">Last: ${last.map(s=>`${s.w??(ex.type==='bw'?'BW':0)}×${s.r??'–'}`).join(', ')}</p>`:''}
+    <div class="sets">${sets.map((s,i)=>setRow(ex,i,s)).join('')}</div>
+    <div class="set-actions"><button type="button" class="btn small" data-addset="${ex.id}">+ Set</button>${sets.length>1?`<button type="button" class="btn small ghost" data-rmset="${ex.id}">Remove last</button>`:''}</div>
+  </article>`;}).join('')}
+  <button type="button" class="btn primary block" data-finish>Finish workout</button>
+  ${confirmKey==='discard'?`<div class="confirm"><span>Discard this workout? Logged sets will be lost.</span><button type="button" class="btn small primary" data-discard-yes>Discard</button><button type="button" class="btn small" data-cancel>Keep going</button></div>`:`<button type="button" class="btn ghost" data-discard>Discard workout</button>`}`;
+}
+function viewHistory(){
+  const list=sortedSessions();
+  if(!list.length) return `<span class="eyebrow">History</span><div class="card empty"><b>No sessions yet</b><span>Finished workouts land here with every set you logged.</span><button type="button" class="btn primary" data-tab="workout">Go to workout</button></div>`;
+  return `<span class="eyebrow">History · ${list.length} session${list.length>1?'s':''}</span>
+  ${list.map(s=>`<details class="sess">
+    <summary><b>W${s.week} · ${esc(s.dayName)}</b><span class="num muted">${s.volume?Math.round(s.volume).toLocaleString()+' kg':''}</span><span class="meta">${esc(progById(s.program||'itadori').name)} · ${fmtDate(s.date)} · ${s.durationMin} min · ${s.doneSets} sets</span></summary>
+    <div class="body">${s.entries.filter(e=>e.sets.some(x=>x.done)).map(e=>`<div class="sess-ex"><span>${esc(e.name)}</span><span class="num">${e.type==='cond'?e.sets.filter(x=>x.done).length+' rounds':e.sets.filter(x=>x.done).map(x=>`${x.w??(e.type==='bw'?'BW':0)}×${x.r??'–'}`).join(' · ')}</span></div>`).join('')}
+    ${confirmKey==='del:'+s.id?`<div class="confirm"><span>Delete this session?</span><button type="button" class="btn small primary" data-del-yes="${s.id}">Delete</button><button type="button" class="btn small" data-cancel>Cancel</button></div>`:`<button type="button" class="btn ghost small" data-del="${s.id}" style="align-self:flex-start">Delete session</button>`}
+    </div></details>`).join('')}`;
+}
+function spark(pts){
+  if(pts.length<2) return '';
+  const W=300,H=40,p=4,min=Math.min(...pts),max=Math.max(...pts),rng=max-min||1;
+  const xy=pts.map((v,i)=>[p+i*(W-2*p)/(pts.length-1),H-p-(v-min)/rng*(H-2*p)]);
+  const line=xy.map(a=>a.join(',')).join(' ');
+  const [lx,ly]=xy[xy.length-1];
+  return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true"><polygon points="${p},${H} ${line} ${lx},${H}" fill="var(--accent-soft)"/><polyline points="${line}" fill="none" stroke="var(--accent)" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/><circle cx="${lx}" cy="${ly}" r="3" fill="var(--accent)"/></svg>`;
+}
+function viewProgress(){
+  const list=sortedSessions().reverse();
+  const vol=list.reduce((a,s)=>a+(s.volume||0),0), mins=list.reduce((a,s)=>a+(s.durationMin||0),0);
+  const lifts=[['squat','Back Squat'],['bench','Bench Press'],['clean','Power Clean'],['fsquat','Front Squat'],['ohp','Overhead Press'],['rdl','Romanian Deadlift'],['wpullup','Weighted Pull-up (added kg)']];
+  const rows=lifts.map(([id,name])=>{
+    const pts=[];list.forEach(s=>{const e=s.entries.find(e=>e.exId===id);if(!e)return;let best=0;e.sets.forEach(x=>{if(x.done&&x.w>0&&x.r>0)best=Math.max(best,e1rm(x.w,x.r))});if(best)pts.push(best)});
+    return {name,pts};
+  }).filter(r=>r.pts.length);
+  return `<span class="eyebrow">Progress</span>
+  <div class="stats"><div class="stat"><b>${list.length}</b><span>Sessions</span></div><div class="stat"><b>${vol>=10000?(vol/1000).toFixed(1)+'k':Math.round(vol)}</b><span>kg lifted</span></div><div class="stat"><b>${Math.round(mins/60*10)/10}</b><span>Hours</span></div></div>
+  <section class="card"><div class="row between"><h2>Estimated 1RM</h2><span class="muted" style="font-size:12px">Epley, best set</span></div>
+  ${rows.length?rows.map(r=>{const last=r.pts[r.pts.length-1],d=last-r.pts[0];return `<div class="lift"><b>${esc(r.name)}</b><span class="e1rm">${Math.round(last)} kg</span><span class="muted" style="font-size:12px">${r.pts.length} session${r.pts.length>1?'s':''}</span><span class="delta ${d>0.5?'up':'flat'}">${d>0.5?'+'+Math.round(d)+' kg':'—'}</span>${spark(r.pts)}</div>`}).join('')
+  :`<div class="empty"><b>Nothing to chart yet</b><span>Log weight and reps on Back Squat, Bench or Power Clean and your estimated max shows up here.</span></div>`}
+  </section>`;
+}
+
+/* ---------- render + nav ---------- */
+const view=document.getElementById('view');
+function updateNavDot(){document.querySelectorAll('nav.tabs button').forEach(b=>{b.classList.toggle('on',b.dataset.tab===ui.view);b.querySelector('.dot')?.remove();if(b.dataset.tab==='workout'&&draft){const s=document.createElement('span');s.className='dot';b.appendChild(s)}})}
+function render(){
+  setProgram(ui.view==='workout'&&draft?(draft.prog||'itadori'):ui.view==='program'?(ui.preview||ui.active):ui.active);
+  view.innerHTML=ui.view==='browse'?viewBrowse():ui.view==='program'?((ui.preview||ui.active)?viewProgram():viewNoProgram('program')):(ui.view==='workout'&&!ui.active&&!draft)?viewNoProgram('workout'):ui.view==='workout'?viewWorkout():ui.view==='history'?viewHistory():viewProgress();
+  updateNavDot(); tickClock();
+  const c=view.querySelector('.chips'),on=c&&c.querySelector('.chip.on');
+  if(on) c.scrollLeft=on.offsetLeft-c.clientWidth/2+on.offsetWidth/2;
+}
+function go(tab){ui.view=tab;confirmKey=null;saveUI();render();window.scrollTo({top:0});}
+document.querySelector('nav.tabs').addEventListener('click',e=>{const b=e.target.closest('[data-tab]');if(b){ui.preview=null;go(b.dataset.tab);}});
+
+/* ---------- workout actions ---------- */
+function startWorkout(w,dayId){
+  if(PROGRAM.id!==ui.active){toast('Select this program to start it');return;}
+  if(draft&&!((draft.prog||'itadori')===PROGRAM.id&&draft.week===w&&draft.dayId===dayId)){ go('workout'); toast('Finish or discard the current workout first'); return; }
+  if(!draft){
+    const d=dayById(dayId),entries={};
+    d.exercises.forEach(ex=>{const n=rx(ex,w).sets,last=lastFor(ex.id);const lw=last&&last[0].w!=null?last[0].w:'';const r=parseInt(rx(ex,w).reps);
+      entries[ex.id]=Array.from({length:n},()=>({w:lw,r:isNaN(r)?'':r,done:false}));});
+    draft={prog:PROGRAM.id,week:w,dayId,startedAt:Date.now(),entries}; lsSet(DKEY,draft);
+  }
+  go('workout');
+}
+function vol(entries){return entries.reduce((a,e)=>a+e.sets.reduce((b,s)=>b+(s.done&&s.w>0&&s.r>0?s.w*s.r:0),0),0)}
+async function finishWorkout(){
+  const d=dayById(draft.dayId);
+  const entries=d.exercises.map(ex=>({exId:ex.id,name:ex.name,type:ex.type,sets:draft.entries[ex.id].map(s=>({w:num(s.w),r:num(s.r),done:!!s.done}))}));
+  const doneSets=entries.reduce((a,e)=>a+e.sets.filter(s=>s.done).length,0);
+  if(!doneSets){toast('Tick off at least one set first');return;}
+  const id=keyOf(draft.week,d.id);
+  const s={id,program:PROGRAM.id,week:draft.week,dayId:d.id,dayName:d.name,date:new Date().toISOString(),durationMin:Math.max(1,Math.round((Date.now()-draft.startedAt)/60000)),entries,volume:Math.round(vol(entries)),doneSets};
+  draft=null; lsSet(DKEY,null); stopRest(); ui.week=null;
+  await persistSession(s);
+  go('history'); toast('Workout saved');
+}
+view.addEventListener('click',e=>{
+  const t=e.target.closest('button'); if(!t) return;
+  if(t.dataset.pick){ui.preview=t.dataset.pick===ui.active?null:t.dataset.pick;ui.week=null;go('program');return;}
+  if(t.dataset.exinfo){openExercise(t.dataset.exinfo);return;}
+  if(t.hasAttribute('data-backup')){saveBackup();return;}
+  if(t.hasAttribute('data-restore')){document.getElementById('restoreFile').click();return;}
+  if(t.hasAttribute('data-photo')){pendingRef=PROGRAM.id;document.getElementById('refFile').click();return;}
+  if(t.hasAttribute('data-photo-rm')){removeRef(PROGRAM.id);return;}
+  if(t.hasAttribute('data-select')){
+    const id=PROGRAM.id;
+    if(draft&&(draft.prog||'itadori')!==id){toast('Finish or discard your current workout first');return;}
+    if(ui.active&&ui.active!==id&&confirmKey!=='switch'){confirmKey='switch';render();return;}
+    ui.active=id;ui.preview=null;ui.week=null;confirmKey=null;saveUI();go('workout');toast('Locked in: '+PROGRAM.name);return;
+  }
+  if(t.dataset.tab==='program'){ui.preview=null;}
+  if(t.dataset.series){view.querySelectorAll('[data-series]').forEach(b=>b.classList.toggle('on',b===t));filterBrowse();return;}
+  if(t.dataset.start){const [w,d]=t.dataset.start.split('|');startWorkout(Number(w),d);return;}
+  if(t.dataset.week){ui.week=Number(t.dataset.week);saveUI();render();return;}
+  if(t.dataset.tab){go(t.dataset.tab);return;}
+  if(t.hasAttribute('data-tick')){
+    const row=t.closest('.set'),ex=row.dataset.ex,i=Number(row.dataset.i),s=draft.entries[ex][i];
+    s.done=!s.done; row.classList.toggle('done',s.done); t.setAttribute('aria-pressed',s.done); lsSet(DKEY,draft);
+    if(s.done){const exo=dayById(draft.dayId).exercises.find(x=>x.id===ex);if(exo.rest>0)startRest(exo.rest,exo.name);} return;
+  }
+  if(t.dataset.addset){const a=draft.entries[t.dataset.addset],l=a[a.length-1];a.push({w:l.w,r:l.r,done:false});lsSet(DKEY,draft);render();return;}
+  if(t.dataset.rmset){draft.entries[t.dataset.rmset].pop();lsSet(DKEY,draft);render();return;}
+  if(t.hasAttribute('data-finish')){finishWorkout();return;}
+  if(t.hasAttribute('data-discard')){confirmKey='discard';render();return;}
+  if(t.hasAttribute('data-discard-yes')){draft=null;lsSet(DKEY,null);stopRest();confirmKey=null;render();toast('Workout discarded');return;}
+  if(t.hasAttribute('data-cancel')){confirmKey=null;render();return;}
+  if(t.dataset.del){confirmKey='del:'+t.dataset.del;render();view.querySelector(`[data-del-yes="${t.dataset.del}"]`)?.closest('details')?.setAttribute('open','');return;}
+  if(t.dataset.delYes){const id=t.dataset.delYes;confirmKey=null;removeSession(id);render();toast('Session deleted');return;}
+});
+view.addEventListener('input',e=>{
+  if(e.target.id==='q'){filterBrowse();return;}
+  const inp=e.target; if(!inp.dataset.f||!draft) return;
+  const row=inp.closest('.set'); draft.entries[row.dataset.ex][Number(row.dataset.i)][inp.dataset.f]=inp.value; lsSet(DKEY,draft);
+});
+
+/* ---------- clocks ---------- */
+function tickClock(){const c=document.getElementById('clock');if(c&&draft)c.textContent=fmtTime((Date.now()-draft.startedAt)/1000);}
+setInterval(tickClock,1000);
+let restEnd=0,restTimer=null;
+const restEl=document.getElementById('rest');
+function startRest(sec,name){restEnd=Date.now()+sec*1000;document.getElementById('restL').textContent='Rest · '+name;restEl.hidden=false;clearInterval(restTimer);restTimer=setInterval(restTick,250);restTick();}
+function restTick(){const left=(restEnd-Date.now())/1000;document.getElementById('restT').textContent=fmtTime(left);if(left<=0){stopRest();toast('Rest over. Next set.');}}
+function stopRest(){clearInterval(restTimer);restEl.hidden=true;}
+document.getElementById('restAdd').onclick=()=>{restEnd+=15000;restTick();};
+document.getElementById('restSkip').onclick=stopRest;
+
+let toastT;
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>t.hidden=true,2400);}
+
+render();
+initRemote();
+</script>
+
+<script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));}</script>
+</body>
+</html>
