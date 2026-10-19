@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yuji+Syuku&display=swap&text=一修刃剣力努器天守岩影律悟愛戦打拍拳斬日星暴武歩炎無燃爆牙狼猪獣王白盾継翼血賭透速進鎖音鬼魔">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yuji+Syuku&display=swap&text=麦脚火忍青瞳豪迅滅巨奇猛宝昇香誓戯承紳月狂瞬北我鋼龍雷覇心道闘一修刃剣力努器天守岩影律悟愛戦打拍拳斬日星暴武歩炎無燃爆牙狼猪獣王白盾継翼血賭透速進鎖音鬼魔">
 <style>
 /* Layout: phone-first single column; graphite monochrome, ink hero band, physique detail tucked into collapsibles */
 :root{
@@ -28,6 +28,7 @@
   --pc-l:#17181c; --pc-on-l:#ffffff; --pc-d:#ececee; --pc-on-d:#111214;
   --accent:var(--pc-l); --on-accent:var(--pc-on-l); --accent-soft:color-mix(in srgb,var(--accent) 18%,transparent); --good:#17181c; --good-soft:rgba(23,24,28,.07);
   --hero-bg:#17181c; --hero-ink:#f3f3f5; --hero-muted:#979aa3; --hero-accent:var(--accent); --hero-on-accent:var(--on-accent); --hero-track:rgba(255,255,255,.14);
+  --bd-sil:#c4c6cc; --bd-base:#d3d5da; --bd-edge:#a3a6af; --hm-1:#f8cdb3; --hm-2:#f5ad87; --hm-3:#f08c62; --hm-4:#e96a3c;
   --bm-sil:#e7e8eb; --bm-base:#d2d4d9; --bm-line:rgba(23,24,28,.16); --bm-hit:var(--accent);
   --fig-hi:#dcdde2; --fig-lo:#878a94; --fig-sil:#5f626b; --fig-line:rgba(23,24,28,.35);
   --font-display:'Outfit',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
@@ -37,6 +38,7 @@
   --nav-h:64px;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bd-sil:#3a3c42; --bd-base:#3a3c42; --bd-edge:#55575f; --hm-1:#f8cdb3; --hm-2:#f5ad87; --hm-3:#f08c62; --hm-4:#e96a3c;
   --bg:#0f1012; --surface:#17181b; --surface-2:#202126; --ink:#ececee; --muted:#989aa2; --line:#2a2b31;
   --accent:var(--pc-d); --on-accent:var(--pc-on-d); --accent-soft:color-mix(in srgb,var(--accent) 20%,transparent); --good:#ececee; --good-soft:rgba(236,236,238,.08);
   --hero-bg:#1c1d21; --hero-ink:#f0f0f2; --hero-muted:#979aa3; --hero-accent:var(--accent); --hero-on-accent:var(--on-accent); --hero-track:rgba(255,255,255,.12);
@@ -44,6 +46,7 @@
   --fig-hi:#d8dae2; --fig-lo:#696c78; --fig-sil:#2a2c33; --fig-line:rgba(0,0,0,.5); color-scheme:dark;
 }}
 :root[data-theme="dark"]{
+  --bd-sil:#3a3c42; --bd-base:#3a3c42; --bd-edge:#55575f; --hm-1:#f8cdb3; --hm-2:#f5ad87; --hm-3:#f08c62; --hm-4:#e96a3c;
   --bg:#0f1012; --surface:#17181b; --surface-2:#202126; --ink:#ececee; --muted:#989aa2; --line:#2a2b31;
   --accent:var(--pc-d); --on-accent:var(--pc-on-d); --accent-soft:color-mix(in srgb,var(--accent) 20%,transparent); --good:#ececee; --good-soft:rgba(236,236,238,.08);
   --hero-bg:#1c1d21; --hero-ink:#f0f0f2; --hero-muted:#979aa3; --hero-accent:var(--accent); --hero-on-accent:var(--on-accent); --hero-track:rgba(255,255,255,.12);
@@ -519,6 +522,90 @@ body.sheet-open{overflow:hidden}
 .abbr-table tr:first-child th,.abbr-table tr:first-child td{border-top:0}
 .abbr-table td.est{font-weight:700;font-size:16px}
 .abbr-table td.na{font-style:italic;color:var(--muted)}
+
+/* analytics */
+.seg{display:inline-flex;align-self:flex-start;background:var(--surface-2);border-radius:11px;padding:3px;gap:2px;max-width:100%;overflow-x:auto;scrollbar-width:none}
+.seg::-webkit-scrollbar{display:none}
+.seg button{flex:0 0 auto;border:0;background:transparent;padding:7px 14px;border-radius:8px;font-size:14px;font-weight:600;color:var(--muted)}
+.seg button.on{background:var(--accent);color:var(--on-accent)}
+.seg.small button{padding:5px 10px;font-size:13px}
+.rng{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.rng button{border:0;background:var(--surface-2);border-radius:9px;padding:8px 0;font-family:var(--font-mono);font-size:13px;color:var(--muted)}
+.rng button.on{background:var(--accent);color:var(--on-accent)}
+.icon-btn{flex:0 0 auto;border:1.5px solid var(--muted);background:transparent;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;color:var(--muted);font-family:var(--font-mono);font-weight:700;font-size:14px;padding:0}
+.heat{display:flex;flex-direction:column;gap:14px}
+.heat svg{width:100%;height:auto;display:block;max-height:400px}
+.heat-key{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;font-size:14px}
+.heat-key li{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.heat-key i{width:10px;height:10px;border-radius:50%;background:var(--accent);flex:0 0 auto}
+.heat-key .num{color:var(--muted);font-size:14px;font-family:var(--font-body)}
+.mt-radar{width:100%;max-width:400px;height:auto;display:block;margin:0 auto;overflow:visible}
+.mt-table{width:100%;border-collapse:collapse;font-size:14px}
+.mt-table thead th{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left;font-weight:700;padding:0 8px 8px 0}
+.mt-table th.r,.mt-table td.num{text-align:right}
+.mt-table tbody th{text-align:left;font-weight:500;padding:9px 8px 9px 0;border-top:1px solid var(--line)}
+.mt-table td{padding:9px 8px 9px 0;border-top:1px solid var(--line);vertical-align:middle}
+.mt-table td:last-child{padding-right:0;width:38%}
+.mt-table tr.pr th{font-weight:700}
+.mt-bar{position:relative;display:block;height:8px;border-radius:4px;background:var(--surface-2);overflow:hidden}
+.mt-bar b{position:absolute;top:0;bottom:0;background:var(--line)}
+.mt-bar i{position:absolute;left:0;top:0;bottom:0;background:var(--accent);border-radius:4px}
+.mt-table.rm td:last-child{width:auto}
+.na{font-style:italic;color:var(--muted);font-size:14px;padding:6px 0}
+.trend{display:flex;flex-direction:column;gap:6px;padding-top:12px;border-top:1px solid var(--line)}
+.tchart{position:relative}
+.tchart svg{width:100%;height:auto;display:block;overflow:visible}
+.tchart .hit{cursor:pointer}
+.tchart .hit.on{stroke:var(--accent);stroke-width:1.5;stroke-dasharray:2 2}
+.ttip{position:absolute;background:var(--ink);color:var(--bg);font-size:12px;font-weight:600;padding:6px 9px;border-radius:8px;white-space:nowrap;pointer-events:none;z-index:2;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+.rec-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.rec-grid .stat small{font-size:12px;color:var(--muted);font-family:var(--font-mono)}
+.sum-mus,.sess-mus{display:flex;flex-direction:column;gap:10px}
+.sess-mus{border-top:1px solid var(--line);padding-top:10px}
+.sess-mus .heat svg{max-height:260px}
+.ex-link{border:0;background:none;padding:0;text-align:left;font:inherit;font-size:14px;color:var(--ink);text-decoration:underline dotted;text-underline-offset:3px;align-self:flex-start}
+.add-ex{border:1.5px dashed var(--line);background:transparent}
+.create-card{flex-direction:row;align-items:center;text-align:left;gap:14px;border-style:dashed;background:transparent}
+.create-card .plus{flex:0 0 auto;width:44px;height:44px;border-radius:12px;background:var(--surface-2);display:grid;place-items:center;font-size:24px;font-weight:300}
+.create-card>span:last-child{display:flex;flex-direction:column;gap:2px;font-size:14px;min-width:0}
+.create-card b{font-size:16px}
+/* builder */
+.builder .b-head{display:flex;align-items:flex-end;gap:12px}
+.builder .b-head .emblem{width:64px;height:64px;color:var(--accent)}
+.b-copy{display:flex;align-items:flex-end;gap:8px}
+.kanji-pick{display:flex;flex-wrap:wrap;gap:8px}
+.kanji-pick button{width:46px;height:46px;border-radius:10px;border:1px solid var(--line);background:var(--surface);font-family:var(--font-kanji);font-size:26px;line-height:1;padding:0}
+.kanji-pick button.on{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.swatches{display:flex;flex-wrap:wrap;gap:10px}
+.swatches button{width:32px;height:32px;border-radius:50%;border:2px solid var(--surface);box-shadow:0 0 0 1px var(--line);padding:0}
+.swatches button.on{box-shadow:0 0 0 2.5px var(--ink)}
+.b-day{gap:10px}
+.b-list{display:flex;flex-direction:column}
+.b-ex{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.b-ex:first-child{border-top:0}
+.b-name{font-weight:700;font-size:15px;min-width:0;color:var(--ink)}
+.b-ctl{display:flex;gap:4px}
+.mini-btn{border:1px solid var(--line);background:var(--surface);border-radius:8px;width:30px;height:30px;display:grid;place-items:center;font-size:14px;color:var(--muted);padding:0}
+.mini-btn:disabled{opacity:.35}
+.b-fields{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr) minmax(0,1fr) minmax(0,1fr);gap:6px}
+.b-help{font-size:12.5px;line-height:1.45}.b-help b{color:var(--ink)}
+.b-fields label{gap:2px!important}
+.b-fields small{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.form .b-fields input,.form .b-fields select{padding:8px 8px;font-size:15px}
+.form input:disabled{opacity:.55}
+@media (max-width:380px){.b-fields{grid-template-columns:1fr 1fr}}
+
+.preview{display:flex;flex-direction:column;gap:14px}
+.pv-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.pv-mus{display:flex;flex-direction:column;gap:8px}
+.pv-mus .heat svg{max-height:300px}
+.pv-list{list-style:none;margin:8px 0 0;padding:0;counter-reset:pv}
+.pv-list li{counter-increment:pv;display:flex;flex-direction:column;gap:2px;padding:10px 0 10px 30px;border-top:1px solid var(--line);position:relative;font-size:14px}
+.pv-list li:first-child{border-top:0}
+.pv-list li::before{content:counter(pv);position:absolute;left:0;top:11px;width:20px;height:20px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-family:var(--font-mono);font-size:11px;display:grid;place-items:center}
+.pv-row{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.pv-row .num{font-size:12.5px;color:var(--muted);text-align:right;flex:0 0 auto}
+.pv-list .muted{font-size:13px}
 </style>
 
 <div class="app" id="view"></div>
@@ -1343,9 +1430,372 @@ PROGRAMS.push(
    D('Three-Sword Drills','Grip and rotation',35,[E('sledgehammer',5,'30 s',60),E('farmer',3,'40 m',90),E('woodchop',3,'12/side',45)],1)]})
 );
 
+/* ===== Expansion 3: more One Piece, Naruto, Ippo, Kengan + Hunter x Hunter, Solo Leveling, Vinland Saga, JoJo, Bleach, Fist of the North Star ===== */
+Object.assign(SRC,{
+  luffy:['Action Hero Flex: Train like Luffy','https://actionheroflex.substack.com/p/train-like-luffy-the-ultimate-one'],
+  sanji:['Sole: Taz Skylar workout routine for One Piece','https://www.soletreadmills.com/blogs/news/taz-skylar-workout-routine-diet-for-one-piece'],
+  sololeveling:["We Got This Covered: The Solo Leveling workout, explained",'https://wegotthiscovered.com/anime/the-solo-leveling-workout-explained/']
+});
+PROGRAMS.push(
+ /* ===== One Piece ===== */
+ P({id:'luffy',name:'Monkey D. Luffy',series:'One Piece',archetype:'Rubber brawler',tags:['Lean','Calisthenics','Work capacity'],kanji:'麦',
+  colors:['#d23a2f','#ffffff','#ff7a6e','#2a0705'],
+  blurb:'Wiry, lean and impossible to tire out. Defined shoulders, a tight waist and the work capacity of someone raised by Garp.',
+  physique:[95,80,80,90,75,70,80],
+  traits:[['Build','Lean, wiry, light on his feet'],['Priority','Work capacity, shoulders, back, core'],['Body fat','Very lean, roughly 8–10%'],['Style','Calisthenics strength + kettlebell and carry circuits']],
+  focus:'Built on the Garp-style routine (swings, push-ups, jump squats, hanging leg raises, sandbag carries and 400 m runs), but periodised: pull-ups and dips get progressive loading so the lean frame actually builds muscle, and the circuit gets its own day so it does not eat into strength work.',
+  priority:['lats','shoulders','abs','quads','chest'],sources:['luffy'],
+  callouts:['Capped, defined shoulders','A tight, visible six-pack','Lean, springy legs','A defined upper back','Wiry lats','Strong glutes from sprinting'],
+  days:[
+   D('Pull & Hang','Weighted pull-ups and core',55,[E('wpullup',0,'',150,'m'),E('ringrow',3,'8–12',90,'g'),E('chinup',3,'6–10',90),E('hlr',4,'10–15',60),E('facepull',3,'15–20',45)]),
+   D('Push & Legs','Dips, push-ups and single-leg',55,[E('wdips',0,'',150,'m'),E('pushup',3,'15–25',60,'g'),E('bss',3,'8–12/leg',90),E('jumpsquat',3,6,90),E('latraise',3,'12–20',45),E('situp',3,'15–20',45)]),
+   D('Garp Circuit','Swings, carries, runs',45,[E('kbswing',4,20,60),E('farmer',4,'30 m',75),E('jumprope',4,'2 min',45),E('sprint',6,'60 m',90),E('plank',3,'45 s',45)]),
+   D('Full Body Volume','Hinge, dips, rows',55,[E('rdl',3,'8–10',120,'g'),E('dips',3,'8–15',90),E('dbrow',3,'10–12',90),E('pistol',3,'5–8/leg',90),E('abwheel',3,'8–12',60),E('latraise',3,'15–20',45)]),
+   D('Gear Second','Long run and mobility',40,[E('longrun',1,'30 min',0),E('mobility',1,'10 min',0)],1)]}),
+ P({id:'sanji',name:'Sanji',series:'One Piece',archetype:'Black Leg kicker',tags:['Legs','Mobility','Lean'],kanji:'脚',
+  colors:['#c8961a','#1d1400','#f0c75a','#231a00'],
+  blurb:'Long, lean and fast, with legs that do all the fighting. Powerful glutes and hamstrings, a slim waist and serious hip mobility.',
+  physique:[85,95,75,85,65,70,70],
+  traits:[['Build','Tall, slim, long-legged'],['Priority','Glutes, hamstrings, quads, hips, core'],['Body fat','Lean, roughly 10–12%'],['Style','Lower-body strength + kick power + mobility']],
+  focus:'Modelled on the prep Taz Skylar did for live-action Sanji: pistol squats, box jumps, core work and daily kick and flexibility drills. The legs also get properly loaded here, because kicking power comes from strong hips, while upper-body work stays light to keep the slim frame.',
+  priority:['glutes','hamstrings','quads','abs'],sources:['sanji'],
+  callouts:['Lean, athletic shoulders','A tight core','Long, sculpted quads','A light upper back','Slim lats','Powerful glutes and hamstrings'],
+  days:[
+   D('Legs Heavy','Squat and hinge',60,[E('squat',0,'',180,'m'),E('rdl',3,'6–8',150,'g'),E('cossack',3,'6–8/side',60),E('nordic',3,'4–6',120),E('calf',3,'12–15',45)]),
+   D('Kicks & Core','Kick power and mobility',45,[E('kicks',6,'2 min',60),E('boxjump',4,3,90),E('hlr',3,'10–15',60),E('russian',3,'12/side',45),E('mobility',1,'10 min',0)]),
+   D('Single-Leg Volume','Hips and balance',55,[E('hipthrust',0,'',150,'m'),E('bss',3,'8–12/leg',90,'g'),E('pistol',3,'5–8/leg',90),E('legcurl',3,'10–12',60),E('stepup',3,'10/leg',60)]),
+   D('Upper Light','Pull-ups and push-ups',45,[E('pullup',3,'6–10',90),E('pushup',3,'15–25',60),E('latraise',3,'15–20',45),E('dbrow',3,'10–12',75),E('dragonflag',3,'5–8',75)]),
+   D('Diable Jambe','Sprints and stretching',35,[E('sprint',8,'40 m',90),E('skater',3,'10/side',45),E('mobility',1,'15 min',0)],1)]}),
+ P({id:'ace',name:'Portgas D. Ace',series:'One Piece',archetype:'Athletic pirate',tags:['Athletic','Upper body','Lean'],kanji:'火',
+  colors:['#e0601c','#ffffff','#ff9a5c','#2b1004'],
+  blurb:'Athletic and broad through the shoulders and chest, with a lean waist and arms built for throwing fire punches.',
+  physique:[80,80,85,85,85,85,90],
+  traits:[['Build','Athletic, broad-shouldered, lean'],['Priority','Chest, shoulders, arms, abs'],['Body fat','Lean, roughly 10%'],['Style','Upper/lower split with extra pressing']],
+  focus:'An upper/lower split weighted toward the torso: pressing twice a week, side delts on every upper day and enough leg and power work to stay athletic.',
+  priority:['chest','shoulders','abs','lats','triceps'],sources:[],
+  callouts:['Broad, capped shoulders','Sharp abs','Athletic quads','Thick traps','Wide lats','Strong glutes'],
+  days:[
+   D('Upper Strength','Bench and pull',60,[E('bench',0,'',180,'m'),E('wpullup',4,'5–8',150,'g'),E('ohp',3,'6–8',120),E('dbrow',3,'8–12',90),E('latraise',3,'12–20',45)]),
+   D('Lower','Squat and hinge',55,[E('squat',0,'',180,'m'),E('rdl',3,'8–10',120),E('lunge',3,'10/leg',90),E('calf',3,'12–15',45),E('hlr',3,'10–15',60)]),
+   D('Upper Volume','Chest, delts, arms',60,[E('incline',4,'8–12',120,'g'),E('latpull',3,'8–12',90),E('arnold',3,'8–12',90),E('latraise',3,'15–20',45),E('skull',3,'10–12',60),E('curl',3,'10–12',60)]),
+   D('Athletic Lower','Power and single-leg',50,[E('clean',0,'',150,'p'),E('bss',3,'8–12/leg',90),E('legcurl',3,'10–12',60),E('abwheel',3,'8–12',60),E('mbthrow',3,'6/side',60)]),
+   D('Fire Fist','Bag and conditioning',35,[E('bag',6,'2 min',60),E('slam',4,8,60),E('jumprope',3,'2 min',45)],1)]}),
+ /* ===== Naruto ===== */
+ P({id:'naruto',name:'Naruto Uzumaki',series:'Naruto',archetype:'Ninja athlete',tags:['Lean','Endurance','Hybrid'],kanji:'忍',
+  colors:['#e8862a','#1f1002','#ffb066','#2a1400'],
+  blurb:'Lean, athletic and relentless. Defined shoulders, a solid core and the stamina to keep going long after everyone else has stopped.',
+  physique:[95,85,80,85,75,75,80],
+  traits:[['Build','Medium height, lean, athletic'],['Priority','Endurance, legs, shoulders, core'],['Body fat','Lean, roughly 10–12%'],['Style','Hybrid: strength + running + calisthenics']],
+  focus:'A hybrid plan with two strength days, a calisthenics day and a run day. The shadow-clone-level volume comes from easy runs rather than grinding sets, so recovery holds up across 16 weeks.',
+  priority:['quads','shoulders','lats','abs','glutes'],sources:[],
+  callouts:['Defined shoulders','A solid core','Strong quads','A capable upper back','Lean lats','Springy glutes and calves'],
+  days:[
+   D('Strength A','Squat and pull',55,[E('squat',0,'',180,'m'),E('pullup',4,'6–10',120,'g'),E('dbohp',3,'8–12',90),E('legcurl',3,'10–12',60),E('plank',3,'45 s',45)]),
+   D('Run & Core','Intervals and abs',40,[E('sprint',8,'100 m',60),E('hlr',3,'10–15',60),E('russian',3,'12/side',45),E('jumprope',3,'2 min',45)]),
+   D('Strength B','Hinge and push',55,[E('deadlift',0,'',180,'m'),E('pushup',4,'15–25',60,'g'),E('bss',3,'8–12/leg',90),E('dbrow',3,'10–12',90),E('latraise',3,'15–20',45)]),
+   D('Calisthenics','Shadow clone volume',50,[E('chinup',3,'6–10',90),E('dips',3,'8–15',90),E('pistol',3,'5–8/leg',90),E('jumpsquat',3,8,75),E('abwheel',3,'8–12',60)]),
+   D('Long Run','Easy distance',40,[E('longrun',1,'30–40 min',0),E('mobility',1,'10 min',0)],1)]}),
+ P({id:'guy',name:'Might Guy',series:'Naruto',archetype:'Taijutsu master',tags:['Calisthenics','Legs','Endurance'],kanji:'青',
+  colors:['#1f8a4c','#ffffff','#5fd18f','#062012'],
+  blurb:'Thick, powerful legs and a dense, muscular upper body built entirely on effort. Kicks, push-ups and laps that never end.',
+  physique:[95,95,85,90,85,85,85],
+  traits:[['Build','Muscular, compact, huge legs'],['Priority','Legs, glutes, chest, core, conditioning'],['Body fat','Lean, roughly 10–12%'],['Style','Hybrid taijutsu: bodyweight strength, kicks, sprints, runs']],
+  focus:'Built on the Rock Lee and Might Guy hybrid method: progressive bodyweight strength (push-ups, pull-ups, pistols, leg raises), kicking drills, hill sprints and long runs. Weighted squats and dips are added so the legs and chest keep growing once bodyweight gets easy.',
+  priority:['quads','glutes','hamstrings','chest','abs'],sources:['lee'],
+  callouts:['Strong, rounded delts','A rock-hard core','Huge quads','Thick traps','A strong back','Powerful glutes and hamstrings'],
+  days:[
+   D('Legs of Youth','Squat strength and kicks',60,[E('squat',0,'',180,'m'),E('pistol',3,'5–8/leg',90,'g'),E('nordic',3,'4–6',120),E('kicks',4,'2 min',60),E('calf',3,'12–15',45)]),
+   D('Bodyweight Strength','Push, pull, core',55,[E('wdips',0,'',150,'m'),E('wpullup',4,'5–8',150,'g'),E('clappush',3,6,90),E('dragonflag',3,'5–8',75),E('hlr',3,'10–15',60)]),
+   D('Hill Sprints','Speed, power and hamstrings',45,[E('hillsprint',8,'15 s',90),E('rdl',3,'8–10',120),E('broadjump',4,3,90),E('jumpsquat',3,6,75),E('plank',3,'60 s',45)]),
+   D('Volume Day','Legs and chest again',55,[E('fsquat',3,'6–8',150),E('bss',3,'8–12/leg',90,'g'),E('pushup',4,'20–40',60,'g'),E('ringrow',3,'8–12',75),E('situp',3,'15–20',45)]),
+   D('Lap 500','Long run and stretching',45,[E('longrun',1,'40 min',0),E('mobility',1,'15 min',0)],1)]}),
+ P({id:'sasuke',name:'Sasuke Uchiha',series:'Naruto',archetype:'Swift avenger',tags:['Lean','Speed','Aesthetic'],kanji:'瞳',
+  colors:['#4b3f8f','#ffffff','#9b8fe0','#120d2b'],
+  blurb:'Lean, sharp and fast. A slim waist, defined shoulders and arms, and nothing extra slowing him down.',
+  physique:[85,80,80,85,80,75,85],
+  traits:[['Build','Slim, lean, athletic'],['Priority','Shoulders, back, arms, abs'],['Body fat','Very lean, roughly 8–10%'],['Style','Aesthetic upper/lower with speed work']],
+  focus:'An aesthetic upper/lower split: side delts and lats for a narrow-waisted taper, arms trained twice and sprint work to stay fast. Calories sit at maintenance or a small deficit to keep the lean look.',
+  priority:['shoulders','lats','biceps','triceps','abs'],sources:[],
+  callouts:['Sharp, capped shoulders','Etched abs','Lean quads','A defined upper back','A V-taper from the lats','Athletic glutes'],
+  days:[
+   D('Upper A','Pull focus',55,[E('wpullup',0,'',150,'m'),E('incline',3,'8–12',120),E('row',3,'8–12',90,'g'),E('latraise',4,'12–20',45,'g'),E('dips',3,'8–12',90),E('curl',3,'10–12',60)]),
+   D('Lower A','Squat and sprint',50,[E('squat',3,'6–8',180),E('rdl',3,'8–10',120),E('sprint',6,'40 m',90),E('hlr',3,'10–15',60)]),
+   D('Upper B','Press focus',55,[E('ohp',0,'',150,'m'),E('latpull',3,'8–12',90,'g'),E('dbbench',3,'8–12',90),E('latraise',3,'15–20',45),E('pushdown',3,'10–15',60),E('hammer',3,'10–12',60)]),
+   D('Lower B','Single-leg and core',45,[E('bss',3,'8–12/leg',90),E('legcurl',3,'10–12',60),E('boxjump',4,3,90),E('abwheel',3,'8–12',60),E('calf',3,'12–15',45)]),
+   D('Chidori','Speed conditioning',30,[E('jumprope',4,'2 min',45),E('skater',3,'10/side',45),E('mobility',1,'10 min',0)],1)]}),
+ /* ===== Hajime no Ippo ===== */
+ P({id:'takamura',name:'Mamoru Takamura',series:'Hajime no Ippo',archetype:'Middleweight monster',tags:['Power','Boxing','Muscle'],kanji:'豪',
+  colors:['#9c1f2b','#ffffff','#e6606c','#2a0609'],
+  blurb:'A heavyweight frame cut down to middleweight. Huge shoulders and back, thick arms and a waist that has survived a hundred weight cuts.',
+  physique:[90,85,95,90,90,85,95],
+  traits:[['Build','Tall, broad, heavily muscled'],['Priority','Shoulders, back, chest, punching power'],['Body fat','Lean, roughly 8–10% at weigh-in'],['Style','Powerbuilding + boxing conditioning']],
+  focus:'Powerbuilding for a big boxer: heavy bench, squat and weighted pull-ups build the frame, rotational and push-press power drives the punches, and rounds on the bag keep the engine. Extra volume goes to shoulders and back for that heavyweight silhouette.',
+  priority:['shoulders','lats','upperback','chest','quads'],sources:[],
+  callouts:['Massive, rounded delts','Thick, hard abs','Powerful quads','Huge traps','Wide, thick lats','Strong hips'],
+  days:[
+   D('Heavy Upper','Bench and weighted pull-ups',60,[E('bench',0,'',180,'m'),E('wpullup',4,'5–8',150,'g'),E('ohp',3,'6–8',120),E('pendlay',3,'6–8',120),E('latraise',3,'12–20',45)]),
+   D('Heavy Lower','Squat and hinge',60,[E('squat',0,'',180,'m'),E('rdl',3,'6–8',150),E('bss',3,'8–10/leg',90),E('neck',2,'15–25',45),E('calf',3,'12–15',45)]),
+   D('Punch Power','Rotation and explosiveness',45,[E('pushpress',0,'',150,'p'),E('mbthrow',4,'6/side',60),E('landmine',3,'8/side',60),E('jumpsquat',3,5,75),E('bag',6,'3 min',60)]),
+   D('Volume Upper','Shoulders, back, arms',60,[E('incline',3,'8–12',120,'g'),E('latpull',3,'8–12',90,'g'),E('arnold',3,'8–12',90),E('latraise',4,'15–20',45,'g'),E('facepull',3,'15–20',45),E('hammer',3,'10–12',60)]),
+   D('Roadwork','Morning run and rope',40,[E('longrun',1,'30 min',0),E('jumprope',5,'3 min',45)],1)]}),
+ P({id:'miyata',name:'Ichiro Miyata',series:'Hajime no Ippo',archetype:'Counter-puncher',tags:['Speed','Lean','Boxing'],kanji:'迅',
+  colors:['#3a6f8f','#ffffff','#7fb6d6','#0a1d29'],
+  blurb:'Lean, quick and precise. A featherweight outboxer with springy legs, a tight core and fast hands.',
+  physique:[95,85,80,85,75,70,80],
+  traits:[['Build','Slim, featherweight, long-limbed'],['Priority','Footwork, legs, core, shoulder endurance'],['Body fat','Very lean, roughly 7–9%'],['Style','Speed-strength + boxing conditioning']],
+  focus:'An outboxer has to make weight, so strength work is low-rep and explosive rather than bulky, with plenty of footwork and rounds. Muscle work goes to shoulders and core endurance for a sharp jab and fast counters.',
+  priority:['quads','glutes','shoulders','abs','calves'],sources:[],
+  callouts:['Lean, enduring shoulders','A tight core','Springy quads','A lean upper back','Slim lats','Quick, strong glutes'],
+  days:[
+   D('Speed-Strength Lower','Jump and squat',50,[E('broadjump',4,3,90),E('squat',0,'',180,'m'),E('slrdl',3,'8/leg',75),E('calf',4,'12–15',45),E('pallof',3,'10/side',45)]),
+   D('Rounds','Footwork and bag',50,[E('jumprope',4,'3 min',45),E('bag',6,'3 min',60),E('skater',3,'10/side',45),E('hlr',3,'10–15',60)]),
+   D('Upper Speed','Pull, press, throw',50,[E('pullup',4,'6–10',90,'g'),E('pushup',3,'15–25',60),E('dbohp',3,'8–12',90),E('mbchest',4,5,60),E('russian',3,'12/side',45),E('calf',3,'12–15',45)]),
+   D('Athletic Full Body','Power and single-leg',50,[E('clean',0,'',150,'p'),E('bss',3,'8–10/leg',90,'g'),E('dbrow',3,'10–12',75),E('latraise',3,'15–20',45),E('hlr',3,'10–15',60)]),
+   D('Roadwork','Intervals',35,[E('sprint',8,'100 m',60),E('mobility',1,'10 min',0)],1)]}),
+ /* ===== Kengan Ashura ===== */
+ P({id:'agito',name:'Agito Kanoh',series:'Kengan Ashura',archetype:'Fang of Metsudo',tags:['Muscle','Power','Fight'],kanji:'滅',
+  colors:['#5a2d82','#ffffff','#a77ad6','#170b24'],
+  blurb:'The Kengan Association’s strongest fighter. Heavily muscled but athletic, with a thick back, wide shoulders and real fight conditioning.',
+  physique:[85,90,95,90,90,90,90],
+  traits:[['Build','Tall, heavily muscled, athletic'],['Priority','Back, shoulders, chest, legs'],['Body fat','Lean, roughly 10–12%'],['Style','Powerbuilding + MMA conditioning']],
+  focus:'Powerbuilding for a big fighter: heavy compounds for strength, then hypertrophy volume on back, shoulders and chest, plus an optional conditioning day of rounds and sprawls.',
+  priority:['lats','upperback','shoulders','chest','quads'],sources:[],
+  callouts:['Wide, heavy delts','A thick core','Big quads','Huge traps','A wide back','Powerful hips'],
+  days:[
+   D('Strength Upper','Bench and row',60,[E('bench',0,'',180,'m'),E('pendlay',4,'6–8',120,'g'),E('wpullup',3,'5–8',150),E('ohp',3,'6–8',120),E('latraise',3,'12–20',45)]),
+   D('Strength Lower','Deadlift and squat',60,[E('deadlift',0,'',210,'m'),E('fsquat',3,'6–8',150),E('bss',3,'8–10/leg',90),E('hlr',3,'10–15',60)]),
+   D('Hypertrophy Upper','Back and shoulders',60,[E('latpull',4,'8–12',90,'g'),E('incline',3,'8–12',120),E('row',3,'10–12',90),E('latraise',4,'15–20',45,'g'),E('facepull',3,'15–20',45),E('dips',3,'8–12',90)]),
+   D('Hypertrophy Lower','Quads, hamstrings, power',55,[E('hack',3,'8–12',120,'g'),E('rdl',3,'8–10',120),E('legcurl',3,'10–12',60),E('mbthrow',3,'6/side',60),E('calf',3,'12–15',45)]),
+   D('Fight Rounds','MMA conditioning',40,[E('bag',6,'3 min',60),E('sprawl',5,'30 s',30),E('neck',2,'15–25',45)],1)]}),
+ P({id:'julius',name:'Julius Reinhold',series:'Kengan Ashura',archetype:'Mass monster',tags:['Mass','Strength','Bodybuilding'],kanji:'巨',
+  colors:['#7a3b1e','#ffffff','#d0805a','#251006'],
+  blurb:'Pure size. A bodybuilder-strongman hybrid with enormous traps, chest, arms and legs, built by moving heavy things often.',
+  physique:[65,95,95,80,95,95,95],
+  traits:[['Build','Enormous, thick everywhere'],['Priority','Everything, extra chest, traps and arms'],['Body fat','Moderate, roughly 12–15%'],['Style','High-volume bodybuilding + strongman']],
+  focus:'A mass program: heavy basics plus 15–20 weekly sets for the biggest muscles, and strongman carries for traps and grip. It needs a calorie surplus, because size like this does not come at maintenance.',
+  priority:['chest','traps','biceps','triceps','quads','lats'],sources:[],
+  callouts:['Huge, round delts','A thick midsection','Massive quads','Mountainous traps','A very wide back','Huge glutes and hamstrings'],
+  days:[
+   D('Chest & Arms','Heavy pressing',65,[E('bench',0,'',180,'m'),E('incline',3,'8–12',120,'g'),E('wdips',3,'6–10',120),E('curl',3,'8–12',60),E('skull',3,'8–12',60)]),
+   D('Legs','Squat and press',65,[E('squat',0,'',210,'m'),E('legpress',4,'10–15',120,'g'),E('rdl',3,'8–10',120),E('legext',3,'12–15',60),E('calf',4,'10–15',45)]),
+   D('Back & Traps','Rows, pulls, carries',70,[E('deadlift',3,'4–6',210),E('dbbench',3,'10–12',90),E('row',4,'8–12',90,'g'),E('latpull',3,'8–12',90),E('shrug',4,'10–15',60,'g'),E('farmer',3,'30 m',90)]),
+   D('Shoulders, Arms & Legs','Pump volume',65,[E('ohp',0,'',150,'m'),E('latraise',4,'12–20',45,'g'),E('hack',3,'8–12',120),E('preacher',3,'10–12',60),E('pushdown',3,'10–15',60),E('hammer',3,'10–12',60)]),
+   D('Strongman','Stones, sled, Zerchers',40,[E('atlas',5,'3',120),E('sled',5,'20 m',90),E('zercher',3,'5',120)],1)]}),
+ /* ===== Hunter x Hunter ===== */
+ P({id:'hisoka',name:'Hisoka Morow',series:'Hunter x Hunter',archetype:'Acrobat fighter',tags:['Lean','Mobility','Gymnastics'],kanji:'奇',
+  colors:['#c2318a','#ffffff','#f07ac0','#2b0720'],
+  blurb:'Tall, lean and flexible. A gymnast-like build with defined shoulders and abs, long muscles and serious mobility.',
+  physique:[85,80,85,90,80,80,85],
+  traits:[['Build','Tall, lean, flexible'],['Priority','Shoulders, abs, back, mobility'],['Body fat','Lean, roughly 9–11%'],['Style','Gymnastics strength + hypertrophy + mobility']],
+  focus:'Gymnastics-style strength (handstands, L-sits, muscle-ups, pseudo-planche push-ups) builds the shoulders and core, dumbbell hypertrophy fills out the frame, and a mobility day keeps the flexibility.',
+  priority:['shoulders','abs','lats','chest','obliques'],sources:[],
+  callouts:['Defined, round shoulders','Sharp, etched abs','Long, lean quads','A defined upper back','Lean lats','Athletic glutes'],
+  days:[
+   D('Gymnastics Push','Handstands and dips',60,[E('handstand',4,'30 s',60),E('woodchop',3,'12/side',45),E('wdips',0,'',150,'m'),E('hspu',3,'5–8',120,'g'),E('ppp',3,'8–12',90),E('lsit',4,'15 s',60)]),
+   D('Legs & Core','Squat and single-leg',50,[E('fsquat',3,'6–8',150),E('cossack',3,'6–8/side',60),E('slrdl',3,'8/leg',75),E('dragonflag',3,'5–8',75),E('russian',3,'12/side',45)]),
+   D('Gymnastics Pull','Muscle-ups and rows',55,[E('muscleup',4,'3–5',120),E('wpullup',0,'',150,'m'),E('ringrow',3,'8–12',75,'g'),E('latraise',4,'15–20',45,'g'),E('hlr',3,'10–15',60)]),
+   D('Hypertrophy','Dumbbell volume',50,[E('dbbench',3,'8–12',90),E('dbrow',3,'10–12',75),E('arnold',3,'8–12',90),E('bss',3,'8–12/leg',90),E('abwheel',3,'8–12',60)]),
+   D('Bungee Gum','Mobility and flow',35,[E('mobility',1,'20 min',0),E('jumprope',3,'2 min',45)],1)]}),
+ P({id:'uvogin',name:'Uvogin',series:'Hunter x Hunter',archetype:'Brute strongman',tags:['Mass','Strength','Power'],kanji:'猛',
+  colors:['#8a5a2b','#ffffff','#d39a62','#26170a'],
+  blurb:'A walking wall of muscle. A massive chest, shoulders and arms on a frame built to take hits and keep swinging.',
+  physique:[70,90,95,85,95,95,95],
+  traits:[['Build','Huge, heavy, powerful'],['Priority','Chest, shoulders, arms, back, legs'],['Body fat','Moderate, roughly 12–15%'],['Style','Powerbuilding with strongman finishers']],
+  focus:'Heavy powerbuilding: big compound lifts in low reps, then high-volume upper-body hypertrophy. It needs a calorie surplus to build this much mass.',
+  priority:['chest','shoulders','triceps','biceps','quads'],sources:[],
+  callouts:['Massive delts','A thick, strong core','Huge quads','Towering traps','A broad back','Powerful hips'],
+  days:[
+   D('Heavy Push','Bench and press',60,[E('bench',0,'',180,'m'),E('ohp',3,'5–8',150),E('wdips',3,'6–10',120,'g'),E('latraise',3,'12–20',45),E('skull',3,'8–12',60)]),
+   D('Heavy Legs','Squat and pull',60,[E('squat',0,'',210,'m'),E('deadlift',2,'3–5',210),E('legpress',3,'10–12',120,'g'),E('calf',3,'10–15',45),E('hlr',3,'10–15',60)]),
+   D('Big Pump Upper','Chest, back, arms',60,[E('incline',4,'8–12',120,'g'),E('row',4,'8–12',90),E('latpull',3,'10–12',90),E('curl',3,'8–12',60),E('pushdown',3,'10–15',60),E('shrug',3,'10–15',60)]),
+   D('Power & Legs','Push press and front squats',55,[E('pushpress',0,'',150,'p'),E('fsquat',3,'6–8',150),E('rdl',3,'8–10',120),E('latraise',3,'15–20',45),E('hammer',3,'10–12',60)]),
+   D('Big Bang Impact','Strongman',40,[E('atlas',5,'3',120),E('sledgehammer',5,'30 s',60),E('farmer',3,'30 m',90)],1)]}),
+ P({id:'bisky',name:'Biscuit Krueger',series:'Hunter x Hunter',archetype:'Hidden powerhouse',tags:['Strength','Muscle','Powerbuilding'],kanji:'宝',
+  colors:['#d4609a','#ffffff','#f39ac4','#2b0a1b'],
+  blurb:'Her true form is a towering, heavily muscled powerhouse: big shoulders, a thick back and strong legs with real strength behind them.',
+  physique:[80,95,90,90,90,85,95],
+  traits:[['Build','Tall, heavily muscled'],['Priority','Legs, back, shoulders, arms'],['Body fat','Moderate, roughly 18–22%'],['Style','Powerbuilding']],
+  focus:'Powerbuilding for a strong female physique: heavy squats, deadlifts and presses for strength, then hypertrophy volume on shoulders, back and arms. Body-fat targets are set for women.',
+  priority:['quads','glutes','lats','shoulders','hamstrings'],sources:[],
+  callouts:['Big, rounded shoulders','A strong core','Powerful quads','Thick traps','A wide back','Strong glutes'],
+  days:[
+   D('Lower Heavy','Squat strength',60,[E('squat',0,'',180,'m'),E('rdl',3,'6–8',150,'g'),E('bss',3,'8–12/leg',90),E('calf',3,'12–15',45),E('plank',3,'45 s',45)]),
+   D('Upper Heavy','Press and pull',60,[E('ohp',0,'',150,'m'),E('wpullup',4,'4–8',150,'g'),E('bench',3,'6–8',150),E('row',3,'8–12',90),E('latraise',3,'15–20',45)]),
+   D('Lower Volume','Hinge and glutes',55,[E('deadlift',0,'',210,'m'),E('hipthrust',3,'8–12',120,'g'),E('legpress',3,'10–15',120),E('legcurl',3,'10–12',60),E('hlr',3,'10–15',60)]),
+   D('Upper Volume','Shoulders and arms',55,[E('incline',3,'8–12',120),E('latpull',3,'8–12',90,'g'),E('arnold',3,'8–12',90),E('latraise',3,'15–20',45),E('pushdown',3,'10–15',60),E('curl',3,'10–12',60)]),
+   D('Carries','Strongman conditioning',35,[E('farmer',4,'30 m',90),E('sled',4,'20 m',90),E('rower',4,'2 min',60)],1)]}),
+ /* ===== Solo Leveling ===== */
+ P({id:'jinwoo',name:'Sung Jinwoo',series:'Solo Leveling',archetype:'Shadow Monarch',tags:['Lean','Athletic','Daily quest'],kanji:'昇',
+  colors:['#3d3a9e','#ffffff','#8c88f0','#0e0c2e'],
+  blurb:'From the weakest hunter to lean, athletic and powerful. Broad shoulders, a hard core and the endurance of someone who never skipped the daily quest.',
+  physique:[95,85,85,90,80,80,85],
+  traits:[['Build','Tall, lean, athletic'],['Priority','Chest, shoulders, back, core, endurance'],['Body fat','Lean, roughly 9–11%'],['Style','The daily quest, periodised: strength + volume + running']],
+  focus:'The System’s daily quest (100 push-ups, 100 sit-ups, 100 squats and a 10 km run) is the base, but doing it every day with no rest burns people out. Here the push-ups, sit-ups and squats become progressive sets, the 10 km becomes a weekly long run, and heavy lifting does the real muscle building.',
+  priority:['chest','shoulders','lats','abs','quads'],sources:['sololeveling'],
+  callouts:['Broad, capped shoulders','A hard six-pack','Strong quads','A thick upper back','Wide lats','Powerful glutes'],
+  days:[
+   D('Daily Quest A','Squats, push-ups, sit-ups',55,[E('squat',0,'',180,'m'),E('pushup',4,'20–30',60,'g'),E('situp',4,'20–25',45),E('wpullup',3,'5–8',150),E('latraise',3,'15–20',45)]),
+   D('Interval Run','Speed endurance',40,[E('sprint',8,'200 m',90),E('hlr',3,'10–15',60),E('jumprope',3,'2 min',45)]),
+   D('Daily Quest B','Bench and hinge',55,[E('bench',0,'',180,'m'),E('deadlift',3,'4–6',180),E('row',3,'8–12',90,'g'),E('ohp',3,'6–10',120),E('abwheel',3,'8–12',60)]),
+   D('Hunter Volume','Legs and back',55,[E('bss',3,'8–12/leg',90,'g'),E('latpull',3,'8–12',90),E('dips',3,'8–15',90),E('legcurl',3,'10–12',60),E('situp',3,'20–25',45)]),
+   D('10 km','The long run',60,[E('longrun',1,'10 km',0),E('mobility',1,'10 min',0)],1)]}),
+ P({id:'chahaein',name:'Cha Hae-In',series:'Solo Leveling',archetype:'S-rank swordswoman',tags:['Athletic','Lean','Agility'],kanji:'香',
+  colors:['#c79a2e','#1d1500','#ecc768','#231a02'],
+  blurb:'Graceful but strong. A lean, athletic swordswoman with strong legs and glutes, a tight core and shoulders built for fast strikes.',
+  physique:[90,90,80,90,75,70,85],
+  traits:[['Build','Lean, athletic, graceful'],['Priority','Glutes, legs, shoulders, core'],['Body fat','Lean, roughly 18–21%'],['Style','Lower/upper split with agility and rotation']],
+  focus:'A lower/upper split built for a swordswoman: strong legs and glutes for footwork, rotational core work for cuts and shoulder endurance for fast strikes. Body-fat targets are set for women.',
+  priority:['glutes','quads','hamstrings','shoulders','obliques'],sources:[],
+  callouts:['Toned, capped shoulders','A tight, defined core','Strong quads','An athletic upper back','Lean lats','Powerful glutes'],
+  days:[
+   D('Lower A','Squat and glutes',55,[E('squat',0,'',180,'m'),E('hipthrust',3,'8–12',120,'g'),E('legcurl',3,'10–12',60),E('woodchop',3,'12/side',45),E('calf',3,'12–15',45)]),
+   D('Upper A','Pull and press',50,[E('pullup',4,'5–8',120,'g'),E('dbohp',3,'8–12',90),E('dbrow',3,'10–12',75),E('latraise',3,'15–20',45),E('pallof',3,'10/side',45)]),
+   D('Lower B','Hinge and single-leg',55,[E('rdl',0,'',150,'m'),E('bss',3,'8–12/leg',90,'g'),E('skater',3,'10/side',45),E('stepup',3,'10/leg',60),E('hlr',3,'10–15',60)]),
+   D('Upper B & Agility','Push, rotate, sprint',50,[E('dbbench',3,'8–12',90),E('latpull',3,'8–12',90),E('latraise',3,'15–20',45),E('mbthrow',4,'6/side',60),E('sprint',6,'40 m',90)]),
+   D('Sword Drills','Conditioning and mobility',35,[E('sledgehammer',5,'30 s',60),E('jumprope',3,'2 min',45),E('mobility',1,'10 min',0)],1)]}),
+ /* ===== Vinland Saga ===== */
+ P({id:'thorfinn',name:'Thorfinn',series:'Vinland Saga',archetype:'Wiry warrior',tags:['Shredded','Grip','Endurance'],kanji:'誓',
+  colors:['#4f6b74','#ffffff','#8fb0ba','#0f1d21'],
+  blurb:'Wiry, shredded and fast. A small, hard frame with every muscle visible, built from climbing, fighting and years of farm labour.',
+  physique:[95,85,85,90,80,70,80],
+  traits:[['Build','Small, wiry, very lean'],['Priority','Back, grip, core, legs, endurance'],['Body fat','Very lean, roughly 7–9%'],['Style','Calisthenics + farm strength + conditioning']],
+  focus:'A wiry, lean build comes from relative strength and lots of work, not bulk: weighted pull-ups and dips, rope climbs and carries for grip, sprints, and a farm-work day of deadlifts, swings and carries.',
+  priority:['lats','upperback','abs','forearms','quads'],sources:[],
+  callouts:['Lean, defined shoulders','Shredded abs','Wiry quads','A knotted upper back','Lean lats','Strong glutes'],
+  days:[
+   D('Climb & Pull','Weighted pull-ups and grip',55,[E('wpullup',0,'',150,'m'),E('ropeclimb',4,1,120),E('ringrow',3,'8–12',75,'g'),E('deadhang',3,'30–45 s',60),E('hlr',4,'10–15',60)]),
+   D('Legs & Speed','Squat and sprint',50,[E('fsquat',0,'',150,'m'),E('sprint',6,'40 m',90),E('bss',3,'8–12/leg',90),E('nordic',3,'4–6',120)]),
+   D('Push & Core','Dips and dragon flags',50,[E('wdips',3,'5–8',150,'g'),E('pushup',3,'15–25',60),E('archer',3,'4–6/side',90),E('facepull',3,'15–20',45),E('dragonflag',3,'5–8',75),E('russian',3,'12/side',45)]),
+   D('Farm Work','Carries and hinge',50,[E('deadlift',0,'',180,'m'),E('farmer',4,'40 m',90),E('kbswing',4,15,60),E('suitcase',3,'30 m/side',60),E('stepup',3,'10/leg',60)]),
+   D('No Enemies','Long run and mobility',40,[E('longrun',1,'30 min',0),E('mobility',1,'15 min',0)],1)]}),
+ P({id:'thorkell',name:'Thorkell',series:'Vinland Saga',archetype:'Giant berserker',tags:['Mass','Strength','Strongman'],kanji:'戯',
+  colors:['#a3432a','#ffffff','#e58468','#2a0d06'],
+  blurb:'A giant who fights for fun. Huge, strong and durable, with a thick torso and arms that throw logs.',
+  physique:[75,95,95,85,95,90,90],
+  traits:[['Build','Giant, thick, very strong'],['Priority','Back, legs, traps, arms, grip'],['Body fat','Moderate, roughly 14–16%'],['Style','Strongman + powerbuilding']],
+  focus:'Strongman-style strength (deadlifts, heavy presses, stones, carries) builds thick, useful mass, and bodybuilding volume on back, arms and legs fills it out. Eat in a surplus.',
+  priority:['lats','traps','quads','glutes','biceps'],sources:[],
+  callouts:['Huge, round delts','A thick midsection','Massive quads','Mountainous traps','A broad back','Huge hips'],
+  days:[
+   D('Deadlift & Back','Pull heavy',60,[E('deadlift',0,'',210,'m'),E('row',4,'6–10',120,'g'),E('wpullup',3,'5–8',150),E('shrug',3,'8–12',60),E('hammer',3,'10–12',60)]),
+   D('Press','Overhead strength and lats',65,[E('ohp',0,'',180,'m'),E('latpull',3,'8–12',90),E('incline',3,'8–12',120,'g'),E('wdips',3,'6–10',120),E('latraise',3,'12–20',45),E('pushdown',3,'10–15',60)]),
+   D('Squat & Legs','Squat heavy',60,[E('squat',0,'',210,'m'),E('legpress',3,'10–12',120,'g'),E('legcurl',3,'10–12',60),E('calf',3,'12–15',45),E('hlr',3,'10–15',60)]),
+   D('Stones & Carries','Strongman day',55,[E('atlas',5,'2–3',150),E('zercher',3,'5–6',150),E('farmer',4,'30 m',90),E('sled',4,'20 m',90),E('curl',3,'8–12',60)]),
+   D('Battle','Conditioning',35,[E('sledgehammer',6,'30 s',60),E('slam',4,8,60),E('bag',4,'2 min',60)],1)]}),
+ /* ===== JoJo's Bizarre Adventure ===== */
+ P({id:'jotaro',name:'Jotaro Kujo',series:'JoJo’s Bizarre Adventure',archetype:'Stoic powerhouse',tags:['Muscle','Strength','Tall'],kanji:'承',
+  colors:['#2b3a67','#ffffff','#7d93d6','#0a1022'],
+  blurb:'Tall, broad and heavily built under the long coat. A big chest and shoulders, thick arms and a solid, athletic frame.',
+  physique:[75,85,90,85,90,95,90],
+  traits:[['Build','Very tall, broad, muscular'],['Priority','Chest, shoulders, arms, back'],['Body fat','Lean, roughly 11–13%'],['Style','Upper/lower powerbuilding']],
+  focus:'Upper/lower powerbuilding with extra chest, shoulder and arm volume for the broad, heavy-topped silhouette. Heavy compounds first, hypertrophy after, and legs twice a week to keep it athletic.',
+  priority:['chest','shoulders','triceps','biceps','lats'],sources:[],
+  callouts:['Broad, heavy delts','A solid core','Strong quads','Thick traps','Wide lats','Powerful hips'],
+  days:[
+   D('Upper Heavy','Bench and rows',60,[E('bench',0,'',180,'m'),E('pendlay',4,'6–8',120,'g'),E('ohp',3,'6–8',120),E('wpullup',3,'5–8',150),E('latraise',3,'12–20',45),E('hammer',3,'10–12',60)]),
+   D('Lower Heavy','Squat and hinge',55,[E('squat',0,'',180,'m'),E('rdl',3,'8–10',120),E('legpress',3,'10–12',120),E('calf',3,'12–15',45),E('hlr',3,'10–15',60)]),
+   D('Upper Volume','Chest, delts, arms',60,[E('incline',4,'8–12',120,'g'),E('latpull',3,'8–12',90),E('cablefly',3,'12–15',60),E('latraise',3,'15–20',45),E('curl',3,'8–12',60,'g'),E('skull',3,'8–12',60)]),
+   D('Lower & Punch','Power and legs',50,[E('pushpress',0,'',150,'p'),E('bss',3,'8–12/leg',90,'g'),E('legcurl',3,'10–12',60),E('mbchest',4,5,60),E('pushdown',3,'10–15',60),E('abwheel',3,'8–12',60)]),
+   D('Ora Ora','Fast hands',30,[E('bag',6,'2 min',60),E('jumprope',3,'2 min',45)],1)]}),
+ P({id:'jonathan',name:'Jonathan Joestar',series:'JoJo’s Bizarre Adventure',archetype:'Gentleman giant',tags:['Mass','Classic','Strength'],kanji:'紳',
+  colors:['#2c6e8a','#ffffff','#72b5d1','#08202a'],
+  blurb:'A rugby-playing Victorian gentleman with a classic, heavily muscled physique: a huge chest and shoulders, thick legs and real strength.',
+  physique:[80,90,90,85,90,95,90],
+  traits:[['Build','Very tall, broad, classic'],['Priority','Chest, shoulders, legs, back'],['Body fat','Moderate-lean, roughly 12–14%'],['Style','Classic strength + hypertrophy']],
+  focus:'Old-school strength: every day starts with a big lift (squat, press, deadlift), like a classic strongman, followed by hypertrophy accessories. Rugby-style sprints and sled pushes keep him athletic.',
+  priority:['chest','shoulders','quads','lats','traps'],sources:[],
+  callouts:['Huge, round delts','A strong core','Massive quads','Thick traps','A broad back','Powerful hips'],
+  days:[
+   D('Squat & Bench','Classic heavy day',65,[E('squat',0,'',180,'m'),E('bench',3,'5–8',180,'g'),E('row',3,'8–12',90),E('latraise',3,'12–20',45),E('situp',3,'15–20',45)]),
+   D('Press & Pull','Overhead and back',60,[E('ohp',0,'',150,'m'),E('wpullup',4,'5–8',150,'g'),E('incline',3,'8–12',120),E('shrug',3,'10–15',60),E('curl',3,'8–12',60)]),
+   D('Deadlift & Legs','Hinge heavy',60,[E('deadlift',0,'',210,'m'),E('fsquat',3,'6–8',150),E('legcurl',3,'10–12',60),E('calf',3,'12–15',45),E('hlr',3,'10–15',60)]),
+   D('Hypertrophy','Chest, delts, arms, legs',60,[E('dbbench',3,'8–12',90,'g'),E('legpress',3,'10–15',120,'g'),E('latpull',3,'10–12',90),E('latraise',3,'15–20',45),E('pushdown',3,'10–15',60)]),
+   D('Rugby','Sprints and sled',35,[E('sprint',8,'40 m',90),E('sled',4,'20 m',90)],1)]}),
+ /* ===== Bleach ===== */
+ P({id:'ichigo',name:'Ichigo Kurosaki',series:'Bleach',archetype:'Substitute Soul Reaper',tags:['Athletic','Lean','Swordsman'],kanji:'月',
+  colors:['#e2711d','#ffffff','#ffa865','#2a1203'],
+  blurb:'Lean and athletic, with broad shoulders, a tight waist and a strong back from swinging a huge sword.',
+  physique:[85,85,90,90,80,80,90],
+  traits:[['Build','Tall, lean, athletic'],['Priority','Shoulders, back, core, forearms'],['Body fat','Lean, roughly 10–12%'],['Style','Upper/lower athletic hypertrophy + rotation']],
+  focus:'Upper/lower athletic hypertrophy: shoulders and back for the swordsman’s taper, rotational core and grip work for swinging a big blade, and legs twice a week for speed.',
+  priority:['shoulders','lats','upperback','obliques','forearms'],sources:[],
+  callouts:['Broad, capped shoulders','Defined abs and obliques','Athletic quads','A thick upper back','Wide lats','Strong glutes'],
+  days:[
+   D('Upper A','Pull and press',55,[E('wpullup',0,'',150,'m'),E('ohp',3,'6–8',120,'g'),E('row',3,'8–12',90),E('latraise',3,'12–20',45),E('wristcurl',3,'12–20',45)]),
+   D('Lower A','Squat and rotation',55,[E('squat',0,'',180,'m'),E('rdl',3,'8–10',120),E('woodchop',3,'12/side',45),E('calf',3,'12–15',45),E('hlr',3,'10–15',60)]),
+   D('Upper B','Delts and back volume',55,[E('incline',3,'8–12',120),E('latpull',3,'8–12',90,'g'),E('arnold',3,'8–12',90),E('latraise',4,'15–20',45,'g'),E('facepull',3,'15–20',45),E('revcurl',3,'10–15',60)]),
+   D('Lower B & Swing','Single-leg and power',50,[E('bss',3,'8–12/leg',90,'g'),E('legcurl',3,'10–12',60),E('landmine',3,'8/side',60),E('sledgehammer',4,'30 s',60),E('abwheel',3,'8–12',60)]),
+   D('Getsuga','Sprints',30,[E('sprint',8,'60 m',90),E('mobility',1,'10 min',0)],1)]}),
+ P({id:'kenpachi',name:'Kenpachi Zaraki',series:'Bleach',archetype:'Battle maniac',tags:['Mass','Strength','Fight'],kanji:'狂',
+  colors:['#6d6a1e','#ffffff','#bdb95a','#1d1c05'],
+  blurb:'A towering, scarred brawler who lives for fighting. Huge, dense, strong and almost impossible to wear down.',
+  physique:[85,90,95,90,90,90,90],
+  traits:[['Build','Very tall, heavily muscled'],['Priority','Back, shoulders, traps, legs, grip'],['Body fat','Moderate, roughly 12–14%'],['Style','Powerbuilding + brawler conditioning']],
+  focus:'Heavy powerbuilding for size and strength, carries and grip work for swinging a sword one-handed, and a hard conditioning day because he never gets tired of fighting.',
+  priority:['lats','upperback','traps','shoulders','quads'],sources:[],
+  callouts:['Huge, heavy delts','A thick core','Big quads','Massive traps','A very wide back','Powerful hips'],
+  days:[
+   D('Heavy Pull','Deadlift and rows',60,[E('deadlift',0,'',210,'m'),E('pendlay',4,'6–8',120,'g'),E('wpullup',3,'5–8',150),E('shrug',3,'8–12',60),E('plategrip',3,'30 s',60)]),
+   D('Heavy Push','Bench and press',60,[E('bench',0,'',180,'m'),E('ohp',3,'6–8',120,'g'),E('wdips',3,'6–10',120),E('latraise',3,'12–20',45),E('facepull',3,'15–20',45),E('hlr',3,'10–15',60)]),
+   D('Legs','Squat and single-leg',60,[E('squat',0,'',210,'m'),E('bss',3,'8–10/leg',90,'g'),E('legcurl',3,'10–12',60),E('calf',3,'12–15',45),E('suitcase',3,'30 m/side',60)]),
+   D('Volume','Back, delts, arms',60,[E('latpull',4,'8–12',90,'g'),E('dbrow',3,'10–12',75),E('arnold',3,'8–12',90),E('latraise',3,'15–20',45),E('hack',3,'8–12',120),E('pushdown',3,'10–15',60)]),
+   D('Brawl','Fight conditioning',40,[E('sledgehammer',6,'30 s',60),E('sprawl',5,'30 s',30),E('bag',4,'3 min',60)],1)]}),
+ P({id:'yoruichi',name:'Yoruichi Shihoin',series:'Bleach',archetype:'Flash goddess',tags:['Speed','Athletic','Plyometrics'],kanji:'瞬',
+  colors:['#6a3fa0','#ffffff','#b28be6','#1b0d2b'],
+  blurb:'The fastest fighter in Soul Society. Lean, athletic and explosive, with strong legs, a tight core and defined shoulders.',
+  physique:[95,95,80,90,75,70,85],
+  traits:[['Build','Lean, athletic, explosive'],['Priority','Legs, glutes, core, shoulders, speed'],['Body fat','Lean, roughly 17–20%'],['Style','Speed-strength + plyometrics + strikes']],
+  focus:'Speed-strength: power cleans, jumps and sprints come first while fresh, then strength and muscle work for legs and glutes, plus shoulders and core for strikes. Body-fat targets are set for women.',
+  priority:['glutes','quads','hamstrings','abs','shoulders'],sources:[],
+  callouts:['Defined shoulders','A tight, visible core','Strong, springy quads','An athletic upper back','Lean lats','Powerful glutes'],
+  days:[
+   D('Speed-Strength','Clean and jump',55,[E('clean',0,'',150,'p'),E('boxjump',4,3,90),E('fsquat',3,'5–8',150,'g'),E('nordic',3,'4–6',120),E('hlr',3,'10–15',60)]),
+   D('Upper','Pull and press',50,[E('pullup',4,'5–8',120,'g'),E('dbohp',3,'8–12',90),E('dbrow',3,'10–12',75),E('latraise',3,'15–20',45),E('russian',3,'12/side',45)]),
+   D('Lower Strength','Hinge and glutes',55,[E('rdl',0,'',150,'m'),E('hipthrust',3,'8–12',120,'g'),E('bss',3,'8–12/leg',90),E('calf',3,'12–15',45),E('abwheel',3,'8–12',60)]),
+   D('Flash Step','Sprints and strikes',45,[E('sprint',8,'30 m',90),E('skater',3,'10/side',45),E('kicks',4,'2 min',60),E('pushup',3,'12–20',60),E('latraise',3,'15–20',45)]),
+   D('Shunko','Conditioning and mobility',30,[E('jumprope',4,'2 min',45),E('mobility',1,'15 min',0)],1)]}),
+ /* ===== Fist of the North Star ===== */
+ P({id:'kenshiro',name:'Kenshiro',series:'Fist of the North Star',archetype:'Hokuto successor',tags:['Mass','Martial arts','Classic'],kanji:'北',
+  colors:['#24324f','#ffffff','#7a8fbf','#090e1a'],
+  blurb:'The classic 80s hero: a huge chest and shoulders, a thick back and arms, and the martial-arts conditioning to use them.',
+  physique:[85,90,90,90,90,95,95],
+  traits:[['Build','Tall, broad, very muscular'],['Priority','Chest, shoulders, back, arms'],['Body fat','Lean, roughly 10–12%'],['Style','Bodybuilding + martial-arts conditioning']],
+  focus:'A classic bodybuilding split for the heavy upper body, with chest and shoulders twice a week and legs twice to stay athletic, plus a day of strikes and kicks.',
+  priority:['chest','shoulders','lats','triceps','biceps'],sources:[],
+  callouts:['Huge, rounded delts','A hard, defined core','Strong quads','Thick traps','A wide back','Powerful hips'],
+  days:[
+   D('Chest & Shoulders','Heavy pressing',60,[E('bench',0,'',180,'m'),E('incline',3,'8–12',120,'g'),E('ohp',3,'6–8',120),E('latraise',4,'12–20',45,'g'),E('dips',3,'8–12',90)]),
+   D('Back & Arms','Rows and pulls',60,[E('wpullup',0,'',150,'m'),E('row',4,'8–12',90,'g'),E('latpull',3,'10–12',90),E('curl',3,'8–12',60),E('skull',3,'8–12',60)]),
+   D('Legs','Squat and hinge',55,[E('squat',0,'',180,'m'),E('rdl',3,'8–10',120),E('legpress',3,'10–12',120),E('calf',3,'12–15',45),E('hlr',3,'10–15',60)]),
+   D('Upper Volume & Legs','Pump and single-leg',60,[E('dbbench',3,'8–12',90),E('dbrow',3,'10–12',75),E('arnold',3,'8–12',90),E('bss',3,'8–12/leg',90),E('pushdown',3,'10–15',60),E('hammer',3,'10–12',60)]),
+   D('Hokuto Shinken','Strikes and kicks',35,[E('bag',6,'2 min',60),E('kicks',4,'2 min',60),E('neck',2,'15–25',45)],1)]})
+);
+const RANKS_EXTRA={
+ 'Hunter x Hunter':['Rookie Hunter','Licensed Hunter','Nen User','Single-Star Hunter','Double-Star Hunter','Triple-Star Hunter'],
+ 'Solo Leveling':['E-Rank','D-Rank','C-Rank','B-Rank','A-Rank','S-Rank','National Level','Shadow Monarch'],
+ 'Vinland Saga':['Thrall','Farmhand','Warrior','Jomsviking','Commander','True Warrior'],
+ 'JoJo’s Bizarre Adventure':['Stand User','Crusader','Ripple Master','Stand Master','Joestar Legacy'],
+ 'Bleach':['Academy Student','Unseated Officer','Seated Officer','Lieutenant','Captain','Bankai Master'],
+ 'Fist of the North Star':['Wanderer','Martial Artist','Hokuto Student','Hokuto Successor','King of Fists']
+};
+
+/* ---------- extra exercises used as swaps ---------- */
+Object.assign(EX,{
+  dbbench:['Dumbbell Bench Press','load','Kg per dumbbell. Deep stretch, press up and in.',{chest:1,shoulders:.6,triceps:.5}],
+  dbohp:['Seated Dumbbell Press','load','Kg per dumbbell. Elbows slightly forward.',{shoulders:1,triceps:.5}],
+  dbrdl:['Dumbbell Romanian Deadlift','load','Kg per dumbbell. Hips back, bells close.',{hamstrings:1,glutes:1,lowerback:.6}],
+  slrdl:['Single-Leg RDL','load','Hold onto something if needed. Square hips.',{hamstrings:1,glutes:.8}],
+  dbfly:['Dumbbell Fly','load','Soft elbows, deep stretch.',{chest:1}],
+  dbsnatch:['Dumbbell Snatch','load','One arm, hips drive it up.',{glutes:.8,shoulders:.6,hamstrings:.6,traps:.5}],
+  dbpullover:['Dumbbell Pullover','load','Long arms, stretch the lats.',{lats:1,chest:.5,serratus:.4}],
+  ytw:['Prone Y-T-W Raise','bw','Face down, thumbs up, squeeze the shoulder blades.',{shoulders:.8,upperback:.8}],
+  glutebridge:['Glute Bridge','bw','Drive through heels, squeeze at the top.',{glutes:1,hamstrings:.4}],
+  diamond:['Diamond Push-up','bw','Hands together, elbows tucked.',{triceps:1,chest:.6}]
+});
 const RADAR_AXES=['Conditioning','Legs','Back','Core','Arms','Chest','Shoulders'];
 const BUILD={"itadori":1,"toji":.97,"todo":1.18,"megumi":.9,"maki":.92,"gojo":.95,"baki":1.02,"vegeta":1.08,"levi":.9,"guts":1.2,"rengoku":1.04,"garou":.92,"allmight":1.22};
-const FEMALE=new Set(['maki','nobara','yuki','mikasa','casca']);
+Object.assign(BUILD,{julius:1.25,uvogin:1.2,thorkell:1.25,kenpachi:1.15,jonathan:1.15,jotaro:1.08,kenshiro:1.12,agito:1.1,takamura:1.08,miyata:.88,thorfinn:.88,luffy:.9,sasuke:.9,sanji:.92});
+const FEMALE=new Set(['bisky','chahaein','yoruichi','maki','nobara','yuki','mikasa','casca']);
 PROGRAMS.forEach(p=>{
   p.weeks=16; p.build=BUILD[p.id]||1; p.female=FEMALE.has(p.id);
   p.schedule=[['Mon','D1'],['Tue','D2'],['Wed','—'],['Thu','D3'],['Fri','D4'],['Sat','D5'],['Sun','—']];
@@ -1374,7 +1824,7 @@ function setProgram(id){
 }
 const themeVars=p=>`--pc-l:${p.colors[0]};--pc-on-l:${p.colors[1]};--pc-d:${p.colors[2]};--pc-on-d:${p.colors[3]}`;
 
-const MUSCLE_NAMES={neck:'Neck',traps:'Traps',shoulders:'Delts',chest:'Chest',serratus:'Serratus',abs:'Abs',obliques:'Obliques',biceps:'Biceps',triceps:'Triceps',forearms:'Forearms',quads:'Quads',adductors:'Adductors',shins:'Shins',calves:'Calves',lats:'Lats',upperback:'Upper back',lowerback:'Lower back',glutes:'Glutes',hamstrings:'Hamstrings'};
+const MUSCLE_NAMES={neck:'Neck',traps:'Traps',shoulders:'Delts',fdelts:'Front delts',mdelts:'Mid delts',rdelts:'Rear delts',chest:'Chest',serratus:'Serratus',abs:'Abs',obliques:'Obliques',biceps:'Biceps',triceps:'Triceps',forearms:'Forearms',quads:'Quads',adductors:'Adductors',shins:'Shins',calves:'Calves',lats:'Lats',upperback:'Upper back',lowerback:'Lower back',glutes:'Glutes',hamstrings:'Hamstrings'};
 function muscleLoad(days){
   const t={}; days.forEach(d=>d.exercises.forEach(ex=>{const sets=ex.sets||4;Object.entries(ex.m||{}).forEach(([k,v])=>t[k]=(t[k]||0)+v*sets)}));
   const max=Math.max(1,...Object.values(t)); Object.keys(t).forEach(k=>t[k]/=max); return t;
@@ -1398,8 +1848,8 @@ const ANAT={
     ['p','M87,189 L98,189 L98,232 C94,230 89,220 87,208 Z','abs'],
     ['p','M52,130 C45,144 41,162 41,182 C45,188 51,186 55,180 C58,160 59,142 57,132 Z','biceps'],
     ARM_FORE,
-    ['p','M91,246 L99,254 L99,284 C96,276 93,264 90,254 Z','adductors'],
     ['p','M64,236 C59,262 58,292 62,318 C65,326 70,328 73,322 C73,292 75,264 77,240 Z','quads'],
+    ['p','M91,246 L99,254 L99,284 C96,276 93,264 90,254 Z','adductors'],
     ['p','M79,238 C76,262 76,292 78,318 L86,322 C89,296 91,264 89,240 Z','quads'],
     ['p','M90,284 C95,298 96,312 92,326 C88,328 85,322 87,310 Z','quads'],
     ['e',81,336,10,9,null],
@@ -1415,9 +1865,9 @@ const ANAT={
     ['p','M92,166 L99,166 L99,228 L93,228 C91,210 91,188 92,166 Z','lowerback'],
     ['p','M50,130 C43,144 39,164 39,184 C43,190 50,188 54,182 C57,162 58,142 56,132 Z','triceps'],
     ARM_FORE,
-    ['p','M100,230 L100,268 C90,276 75,274 67,262 C63,248 65,236 72,229 C80,223 92,225 100,230 Z','glutes'],
     ['p','M66,272 C62,292 63,312 67,326 L78,326 C78,306 78,288 80,275 Z','hamstrings'],
     ['p','M83,277 C83,296 84,312 86,326 L94,324 C97,306 97,288 97,273 Z','hamstrings'],
+    ['p','M100,230 L100,268 C90,276 75,274 67,262 C63,248 65,236 72,229 C80,223 92,225 100,230 Z','glutes'],
     ['e',81,336,10,9,null],
     ['p','M72,346 C66,362 68,380 76,394 L82,392 C82,376 82,360 80,346 Z','calves'],
     ['p','M84,346 C82,362 84,378 86,392 L90,392 C96,378 96,360 90,346 Z','calves'],
@@ -1558,7 +2008,7 @@ async function initRemote(){
     refsCol=db.doc('data/users/'+uid+'/profile').collection('refs');
     userDoc=db.doc('data/users/'+uid+'/profile'); bodyCol=userDoc.collection('body');
     userDoc.onSnapshot(snap=>{const v=snap.exists?snap.data():null;
-      if(v&&v.profile){profile=Object.assign({},PROFILE_DEFAULT,JSON.parse(JSON.stringify(v.profile)));lsSet(PKEY,profile);safeRender();}
+      if(v&&v.profile){profile=Object.assign({},PROFILE_DEFAULT,JSON.parse(JSON.stringify(v.profile)));lsSet(PKEY,profile);applyCustom();safeRender();}
       else if(hasProfile()&&!snap.metadata.hasPendingWrites){saveProfile();}},()=>{});
     let bodyMigrated=false;
     bodyCol.onSnapshot(snap=>{const next={};snap.docs.forEach(d=>{const v=d.data();if(v)next[d.id]=JSON.parse(JSON.stringify(v));});
@@ -1628,13 +2078,17 @@ function exHistory(exId){
     out.push({s,e,done,best,top:Math.max(0,...done.map(x=>x.w||0))});});
   return out;
 }
-function openExercise(exId){
-  const ex=draftExercises().find(x=>x.id===exId); if(!ex) return;
-  const sug=suggestFor(ex,draft.week,keyOf(draft.week,draft.dayId)), w0=num((draft.entries[exId]||[])[0]?.w)||(sug&&sug.w)||null;
-  const vid=VIDEOS[exId], q=encodeURIComponent(ex.name+' tutorial');
+function openExercise(exId,from){
+  const inDraft=draft&&!from?draftExercises().find(x=>x.id===exId):null;
+  const M=exMeta(exId); if(!inDraft&&!M) return;
+  const ex=inDraft||Object.assign({},M,{x:EXPLOSIVE.has(exId)});
+  const mine=!!(profile.customEx||{})[exId];
+  const sug=inDraft?suggestFor(ex,draft.week,keyOf(draft.week,draft.dayId)):null, w0=inDraft?(num((draft.entries[exId]||[])[0]?.w)||(sug&&sug.w)||null):null;
+  const vid=VIDEOS[exId], q=encodeURIComponent(ex.name+' exercise tutorial');
   const watch=vid?`https://www.youtube.com/watch?v=${vid}`:`https://www.youtube.com/results?search_query=${q}`;
-  const hist=exHistory(exId), bests=hist.map(h=>h.best).filter(Boolean).reverse();
+  const hist=exHistory(exId);
   const fmtSet=(x,type)=>type==='cond'?'✓':`${x.w??(type==='bw'?'BW':0)}×${x.r??'–'}`;
+  const prim=Object.entries(ex.m||{}).filter(([,v])=>v>=.8).map(([k])=>MUSCLE_NAMES[k]), sec=Object.entries(ex.m||{}).filter(([,v])=>v>=.4&&v<.8).map(([k])=>MUSCLE_NAMES[k]);
   const video=vid&&CAN_EMBED
     ? `<div class="video"><iframe src="https://www.youtube-nocookie.com/embed/${vid}?rel=0&playsinline=1&modestbranding=1" title="${esc(ex.name)} tutorial" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen loading="lazy"></iframe></div>`
     : `<a class="video-link" href="${watch}" target="_blank" rel="noopener"><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span><b>${vid?'Watch the tutorial':'Find a tutorial'}</b><span class="muted">${vid?(CAN_EMBED?'':'Opens YouTube · plays here in the home-screen app'):'Search YouTube for this exercise'}</span></span></a>`;
@@ -1642,15 +2096,16 @@ function openExercise(exId){
   sheet.innerHTML=`<div class="sheet-back" data-close></div>
   <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
     <div class="sheet-grab" aria-hidden="true"></div>
-    <div class="row between" style="align-items:flex-start"><div style="min-width:0"><span class="eyebrow">${rxHTML(ex,draft.week)}</span><h2 id="sheetTitle">${esc(ex.name)}</h2><p class="muted" style="font-size:14px">${esc(ex.cue)}</p></div><button type="button" class="btn small" data-close aria-label="Close">Close</button></div>
+    ${from==='lib'?'<button type="button" class="btn ghost small back" data-exlib>‹ All exercises</button>':''}
+    <div class="row between" style="align-items:flex-start"><div style="min-width:0"><span class="eyebrow">${inDraft?rxHTML(ex,draft.week):esc(prim.join(' · ')||({cond:'Conditioning',bw:'Bodyweight',load:'Weights'})[ex.type])}</span><h2 id="sheetTitle">${esc(ex.name)}</h2><p class="muted" style="font-size:14px">${esc(ex.cue)}</p>${!inDraft&&sec.length?`<p class="muted" style="font-size:13px">Also works: ${esc(sec.join(', '))}</p>`:''}</div><button type="button" class="btn small" data-close aria-label="Close">Close</button></div>
     ${video}
     ${sug?`<p class="sugg"><b>${sug.w!=null?`Try ${sug.w} kg`:'Target'}</b> ${esc(sug.why)}</p>`:''}
     ${BARBELL.has(ex.id)?`<div class="platecalc"><div class="row between"><h3>Plate calculator</h3><label class="pc-in"><input type="number" inputmode="decimal" step="0.5" id="plateIn" value="${w0||''}" aria-label="Total weight in kg"><small>kg</small></label></div><div id="plateOut">${plateVisual(w0||Number(profile.bar)||20)}</div></div>`:''}
-    <button type="button" class="btn small" data-swap-open="${ex.id}" style="align-self:flex-start">Swap this exercise</button>
+    ${inDraft&&!ex.extra||mine?`<div class="row" style="gap:8px;flex-wrap:wrap">${inDraft&&!ex.extra?`<button type="button" class="btn small" data-swap-open="${ex.id}">Swap this exercise</button>`:''}${mine?`<button type="button" class="btn small" data-cx-edit="${exId}">Edit exercise</button>`:''}</div>`:''}
+    ${exStatsHTML(exId,ex.type)}
     <div class="hist">
       <div class="row between"><h3>Your history</h3>${hist.length?`<span class="muted" style="font-size:13px">${hist.length} session${hist.length>1?'s':''}</span>`:''}</div>
-      ${hist.length&&ex.type!=='cond'&&bests.length?`<div class="pr-row"><div class="stat"><b>${Math.max(...hist.map(h=>h.top))||'BW'}${Math.max(...hist.map(h=>h.top))?' kg':''}</b><span>Heaviest</span></div><div class="stat"><b>${Math.round(Math.max(...bests))} kg</b><span>Best est. <button type="button" class="abbr" data-abbr="1RM" data-ex="${exId}">1RM</button></span></div><div class="stat"><b>${hist[0].done.length}</b><span>Sets last time</span></div></div>${bests.length>1?`<div class="hist-spark">${spark(bests)}</div>`:''}`:''}
-      ${hist.length?`<ul class="hist-list">${hist.slice(0,12).map(h=>`<li><div><b>${fmtDate(h.s.date)}</b><span class="muted"> · W${h.s.week} · ${esc(progById(h.s.program||'itadori').name)}</span></div><div class="num">${h.done.map(x=>fmtSet(x,h.e.type)).join('  ')}</div></li>`).join('')}</ul>`
+      ${hist.length?`<ul class="hist-list">${hist.slice(0,12).map(h=>`<li><div><b>${fmtDate(h.s.date)}</b><span class="muted"> · W${h.s.week} · ${esc(progName(h.s.program))}</span></div><div class="num">${h.done.map(x=>fmtSet(x,h.e.type)).join('  ')}</div></li>`).join('')}</ul>`
         :`<p class="muted" style="font-size:14px">No sets logged for this exercise yet. Your weights and reps will show up here after you finish a workout.</p>`}
     </div>
   </div>`;
@@ -1686,9 +2141,12 @@ async function restoreBackup(file){
   }
   lsSet(SKEY,sessions);
   if(data.photos&&typeof data.photos==='object'){Object.entries(data.photos).forEach(([k,v])=>{if(v&&typeof v.data==='string'&&v.data.startsWith('data:image/'))localRefs[k]={data:v.data};});lsSet(RKEY,localRefs);}
-  if(!ui.active&&data.active&&PROGRAMS.some(p=>p.id===data.active)) ui.active=data.active;
+  
   if(data.profile&&typeof data.profile==='object'&&!hasProfile()){profile=Object.assign({},PROFILE_DEFAULT,data.profile);saveProfile();}
+  else if(data.profile&&typeof data.profile==='object'){let ch=false;['customEx','customPrograms'].forEach(k=>{const src=data.profile[k];if(src&&typeof src==='object'){const cur=Object.assign({},profile[k]);Object.entries(src).forEach(([id,v])=>{if(!cur[id]){cur[id]=v;ch=true;}});profile[k]=cur;}});if(ch)saveProfile();}
+  applyCustom();
   if(data.body&&typeof data.body==='object'){for(const [k,e] of Object.entries(data.body)){if(e&&e.date&&!bodyEntries[k]){const c=Object.assign({},e);if(c.photoAsset&&!c.photo)delete c.photoAsset;await saveBody(c);}}}
+  if(!ui.active&&data.active&&PROGRAMS.some(p=>p.id===data.active)) ui.active=data.active;
   saveUI(); render(); toast(added?`Restored ${added} session${added>1?'s':''}`:'Nothing new to restore');
 }
 document.getElementById('restoreFile').addEventListener('change',e=>{const f=e.target.files&&e.target.files[0];e.target.value='';if(f)restoreBackup(f);});
@@ -1718,15 +2176,16 @@ function viewBrowse(){
   const series=[...new Set(PROGRAMS.map(p=>p.series))];
   return `
   <section class="section">
-    <div><span class="eyebrow">Browse · ${PROGRAMS.length} characters</span><h2>Characters</h2><p class="muted" style="font-size:14px">Training programs built around a character's physique.</p></div>
+    <div><span class="eyebrow">Browse · ${PROGRAMS.filter(p=>!p.custom).length} characters</span><h2>Characters</h2><p class="muted" style="font-size:14px">Training programs built around a character's physique.</p></div>
     <label class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4 4"/></svg><input type="search" id="q" placeholder="Search characters, series or style" aria-label="Search characters, series or style" autocomplete="off"></label>
     <div class="chips" aria-label="Series">${['All',...series].map((x,i)=>`<button type="button" class="chip ${i?'':'on'}" data-series="${esc(x)}">${esc(x)}</button>`).join('')}</div>
+    <button type="button" class="card create-card" data-cp-new><span class="plus" aria-hidden="true">+</span><span><b>Build your own program</b><span class="muted">Pick your days and exercises. Same 16-week engine, ranks and stats.</span></span></button>
     <div class="prog-list">
     ${series.map(se=>`<h3 class="series-head" data-head="${esc(se)}">${esc(se)} <span class="muted">${PROGRAMS.filter(p=>p.series===se).length}</span></h3>`+PROGRAMS.filter(p=>p.series===se).map(p=>{const active=p.id===ui.active,dn=doneOf(p),tot=totalOf(p);return `
       <button type="button" class="card prog-card themed ${active?'active':''}" style="${themeVars(p)}" data-pick="${p.id}" data-s="${esc(p.series)}" data-search="${esc((p.name+' '+p.series+' '+p.archetype+' '+p.tags.join(' ')+(p.female?' female woman women':'')).toLowerCase())}">
         ${emblem('b-'+p.id,p)}
         <span class="pc-text"><span class="eyebrow">${esc(p.series)}</span><b>${esc(p.name)}</b>
-          <span class="muted pc-meta">${p.weeks} weeks · ${coreDays(p)} + 1 days · ${esc(p.archetype)}</span>
+          <span class="muted pc-meta">${p.weeks} weeks · ${daysText(p)} · ${esc(p.archetype)}</span>
           <span class="tags">${p.female?'<span class="pill fem-pill">Female physique</span>':''}${p.tags.map(t=>`<span class="pill plain">${esc(t)}</span>`).join('')}</span>
           ${dn||active?`<span class="pc-status">${active?'<span class="pill">Current</span>':''}<span class="bar"><i style="width:${Math.round(dn/tot*100)}%"></i></span><span class="num">${dn}/${tot}</span></span>`:''}
         </span>
@@ -1818,10 +2277,10 @@ function viewProgram(){
   return `
   ${ui.preview?`<button type="button" class="btn ghost small back" data-tab="browse">‹ All characters</button>`:''}
   <section class="hero">
-    <div class="hero-main"><div class="hero-copy"><div class="tag-row"><span class="series-tag">${esc(PROGRAM.series)}</span>${PROGRAM.female?'<span class="mine fem">Female physique</span>':''}${isActive?'<span class="mine">Your program</span>':''}</div><span class="eyebrow">${PROGRAM.weeks} weeks · ${coreDays(PROGRAM)}+1 days</span>
+    <div class="hero-main"><div class="hero-copy"><div class="tag-row"><span class="series-tag">${esc(PROGRAM.series)}</span>${PROGRAM.female?'<span class="mine fem">Female physique</span>':''}${isActive?'<span class="mine">Your program</span>':''}</div><span class="eyebrow">${PROGRAM.weeks} weeks · ${daysText(PROGRAM)}</span>
     <h1>${esc(PROGRAM.name.toUpperCase()).replace('/','/<wbr>')}</h1><span class="arch">${esc(PROGRAM.archetype)}</span></div>${bannerArt('hero')}</div>
     <p class="sub">${esc(PROGRAM.blurb)}</p>
-    <div class="photo-ctl">${refSrc(PROGRAM.id)?`<button type="button" class="btn small" data-photo>Change photo</button><button type="button" class="btn small" data-photo-rm>Remove</button>`:`<button type="button" class="btn small" data-photo>+ Add physique photo</button>`}</div>
+    <div class="photo-ctl">${PROGRAM.custom?`<button type="button" class="btn small" data-cp-edit="${PROGRAM.id}">Edit program</button>`:''}${refSrc(PROGRAM.id)?`<button type="button" class="btn small" data-photo>Change photo</button><button type="button" class="btn small" data-photo-rm>Remove</button>`:`<button type="button" class="btn small" data-photo>+ Add physique photo</button>`}</div>
     <div class="meter">
       <div class="row between"><span>${!isActive&&!done?'Not started':nu?`Next: Week ${nu.w}, ${esc(nu.d.name)}`:'Program complete'}</span><span><b>${done}</b> / ${coreTotal()} sessions</span></div>
       <div class="bar"><i style="width:${pct}%"></i></div>
@@ -1846,8 +2305,8 @@ function viewProgram(){
   </section>
 
   <section class="card">
-    <div class="row between"><h2>Weekly rhythm</h2><span class="muted" style="font-size:13px">D5 optional</span></div>
-    <div class="week-strip">${PROGRAM.schedule.map(([d,s])=>`<div class="${s==='—'?'':(s==='D5'?'on opt':'on')}">${d}<span>${s}</span></div>`).join('')}</div>
+    <div class="row between"><h2>Weekly rhythm</h2><span class="muted" style="font-size:13px">${PROGRAM.days.map((d,i)=>d.optional?'D'+(i+1):'').filter(Boolean).join(', ')}${PROGRAM.days.some(d=>d.optional)?' optional':''}</span></div>
+    <div class="week-strip">${PROGRAM.schedule.map(([d,s])=>`<div class="${s==='—'?'':(PROGRAM.days[+s.slice(1)-1]?.optional?'on opt':'on')}">${d}<span>${s}</span></div>`).join('')}</div>
   </section>
 
   <details class="card minor" id="how">
@@ -1870,7 +2329,7 @@ function viewProgram(){
     <summary><span><b>Target physique</b><span class="muted">The build after ${PROGRAM.weeks} weeks and the muscles it targets</span></span>${CHEV}</summary>
     <div class="minor-body">
       ${physiqueArt()}
-      ${bodyMap(muscleLoad(PROGRAM.days.filter(d=>!d.optional)),'Whole program')}
+      <div><span class="eyebrow">Planned sets per week</span>${(()=>{const ws=plannedSets(PROGRAM.days.filter(d=>!d.optional).flatMap(d=>d.exercises),6);return bodyHeat(ws,null,'Planned sets per week');})()}</div>
       <div class="physique">${radar()}
         <dl class="traits">${PROGRAM.traits.map(t=>`<dt>${t[0]}</dt><dd>${esc(t[1])}</dd>`).join('')}</dl>
       </div>
@@ -1905,14 +2364,14 @@ function viewWorkout(){
   <div class="wo-head"><div style="min-width:0"><span class="day-num">WEEK ${draft.week} · ${phaseOf(draft.week).name.toUpperCase()}</span><h2>${esc(d.name)}</h2></div><span class="started"><span class="eyebrow">Started</span><b class="num">${fmtClock(draft.startedAt)}</b></span></div>
   <section class="card wo-banner">
     <div class="hero-top"><div><span class="prog">${esc(PROGRAM.name.toUpperCase())}</span><span class="series-line">${esc(PROGRAM.series)}${PROGRAM.female?' · Female physique':''}</span><span class="eyebrow">${esc(d.focus)} · ~${d.mins} min</span></div>${bannerArt('wo')}</div>
-    <details class="minor"><summary><span class="muted">Muscles worked today</span>${CHEV}</summary><div class="minor-body">${bodyMap(muscleLoad([d]),'Worked today')}</div></details>
+    <details class="minor"><summary><span class="muted">Muscles worked today</span>${CHEV}</summary><div class="minor-body">${sessHeat(plannedSets(draftExercises(),draft.week),'Planned sets today')}</div></details>
   </section>
   ${draft.week===15?'<div class="confirm"><b>Test week.</b> On the first lift, work up in small jumps to one heavy single that still moves fast. Log it as your last set.</div>':(phaseOf(draft.week).name==='Black Flash'?'<div class="confirm"><b>Black Flash block.</b> Every set on the first lift should be fast and violent. If the bar slows, stop there.</div>':'')}
   ${draft.autoSwapped&&draft.autoSwapped.length?`<div class="confirm"><span>Swapped for your equipment: ${draft.autoSwapped.map(x=>esc(x)).join(', ')}.</span></div>`:''}
   ${draftExercises().map(ex=>{const last=lastFor(ex.id,key);const sets=draft.entries[ex.id]||[];const sug=suggestFor(ex,draft.week,key);const st=stressFor(ex.id);const w0=num(sets[0]&&sets[0].w);return `
   <article class="card ex-card" data-card="${ex.id}">
-    <div class="row between" style="align-items:flex-start"><div style="min-width:0"><button type="button" class="ex-name" data-exinfo="${ex.id}"><h3>${esc(ex.name)}</h3><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 8.5v7l6-3.5z" fill="currentColor" stroke="none"/></svg></button><p class="cue">${esc(ex.cue)}${ex.rest>0?` <span class="rest-hint">Rest ${fmtRest(ex.rest)}</span>`:''}</p></div><div class="ex-side"><span class="pill ${ex.main||ex.power?'':'plain'}">${rxHTML(ex,draft.week)}</span><button type="button" class="swap-btn" data-swap="${ex.id}" aria-label="Swap ${esc(ex.name)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h11l-3-3M17 17H6l3 3"/></svg>Swap</button></div></div>
-    ${ex.swappedFrom?`<p class="last">Swapped from ${esc(EX[ex.swappedFrom]?EX[ex.swappedFrom][0]:ex.swappedFrom)}</p>`:''}
+    <div class="row between" style="align-items:flex-start"><div style="min-width:0"><button type="button" class="ex-name" data-exinfo="${ex.id}"><h3>${esc(ex.name)}</h3><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 8.5v7l6-3.5z" fill="currentColor" stroke="none"/></svg></button><p class="cue">${esc(ex.cue)}${ex.rest>0?` <span class="rest-hint">Rest ${fmtRest(ex.rest)}</span>`:''}</p></div><div class="ex-side"><span class="pill ${ex.main||ex.power?'':'plain'}">${rxHTML(ex,draft.week)}</span>${ex.extra?`<button type="button" class="swap-btn" data-rmex="${ex.id}" aria-label="Remove ${esc(ex.name)}">${confirmKey==='rmex:'+ex.id?'Tap to remove':'Remove'}</button>`:`<button type="button" class="swap-btn" data-swap="${ex.id}" aria-label="Swap ${esc(ex.name)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h11l-3-3M17 17H6l3 3"/></svg>Swap</button>`}</div></div>
+    ${ex.extra?'<p class="last">Added by you</p>':''}${ex.swappedFrom?`<p class="last">Swapped from ${esc(EX[ex.swappedFrom]?EX[ex.swappedFrom][0]:ex.swappedFrom)}</p>`:''}
     ${st.length?`<p class="warn">Easy on your ${st.map(k=>INJURY_NAMES[k].toLowerCase()).join(' and ')}: stop if it hurts, or tap Swap.</p>`:''}
     ${last&&ex.type!=='cond'?`<p class="last">Last: ${last.map(s=>`${s.w??(ex.type==='bw'?'BW':0)}×${s.r??'–'}`).join(', ')}</p>`:''}
     ${sug?`<p class="sugg"><b>${sug.w!=null?`Try ${sug.w} kg`:'Target'}</b> ${esc(sug.why)}</p>`:''}
@@ -1921,16 +2380,21 @@ function viewWorkout(){
     <div class="effort-slot">${effortNote(ex,sets)}</div>
     <div class="set-actions"><button type="button" class="btn small" data-addset="${ex.id}">+ Set</button>${sets.length>1?`<button type="button" class="btn small ghost" data-rmset="${ex.id}">Remove last</button>`:''}</div>
   </article>`;}).join('')}
+  <button type="button" class="btn block add-ex" data-addex>+ Add exercise</button>
   <button type="button" class="btn primary block" data-finish>Finish workout</button>
   ${confirmKey==='discard'?`<div class="confirm"><span>Discard this workout? Logged sets will be lost.</span><button type="button" class="btn small primary" data-discard-yes>Discard</button><button type="button" class="btn small" data-cancel>Keep going</button></div>`:`<button type="button" class="btn ghost" data-discard>Discard workout</button>`}`;
 }
 function viewHistory(){
   const list=sortedSessions();
-  if(!list.length) return `<span class="eyebrow">History</span><div class="card empty"><b>No sessions yet</b><span>Finished workouts land here with every set you logged.</span><button type="button" class="btn primary" data-tab="workout">Go to workout</button></div>`;
-  return `<span class="eyebrow">History · ${list.length} session${list.length>1?'s':''}</span>
-  ${list.map(s=>`<details class="sess">
-    <summary><b>W${s.week} · ${esc(s.dayName)}</b><span class="num muted">${s.volume?Math.round(s.volume).toLocaleString()+' kg':''}</span><span class="meta">${esc(progById(s.program||'itadori').name)} · ${fmtDate(s.date)} · ${sessTimes(s)} (${fmtDur(s.durationMin)}) · ${s.doneSets} sets</span></summary>
-    <div class="body">${s.entries.filter(e=>e.sets.some(x=>x.done)).map(e=>`<div class="sess-ex"><span>${esc(e.name)}</span><span class="num">${e.type==='cond'?e.sets.filter(x=>x.done).length+' rounds':e.sets.filter(x=>x.done).map(x=>`${x.w??(e.type==='bw'?'BW':0)}×${x.r??'–'}`).join(' · ')}</span></div>`).join('')}
+  return `<div class="row between"><div><span class="eyebrow">History${list.length?` · ${list.length} session${list.length>1?'s':''}`:''}</span><h2>Analytics</h2></div><button type="button" class="btn small" data-exlib>Exercises</button></div>
+  ${muscleTracker()}
+  ${trainingTrends()}
+  <h2 style="margin-top:4px">Sessions</h2>
+  ${!list.length?`<div class="card empty"><b>No sessions yet</b><span>Finished workouts land here with every set you logged.</span><button type="button" class="btn primary" data-tab="workout">Go to workout</button></div>`
+  :list.map(s=>`<details class="sess" data-sid="${s.id}">
+    <summary><b>W${s.week} · ${esc(s.dayName)}</b><span class="num muted">${s.volume?Math.round(s.volume).toLocaleString()+' kg':''}</span><span class="meta">${esc(progName(s.program))} · ${fmtDate(s.date)} · ${sessTimes(s)} (${fmtDur(s.durationMin)}) · ${s.doneSets} sets</span></summary>
+    <div class="body">${s.entries.filter(e=>e.sets.some(x=>x.done)).map(e=>`<div class="sess-ex"><button type="button" class="ex-link" data-exopen="${esc(e.exId)}">${esc(e.name)}</button><span class="num">${e.type==='cond'?e.sets.filter(x=>x.done).length+' rounds':e.sets.filter(x=>x.done).map(x=>`${x.w??(e.type==='bw'?'BW':0)}×${x.r??'–'}`).join(' · ')}</span></div>`).join('')}
+    <div class="sess-mus"><span class="eyebrow">Muscles worked</span><div class="sess-mus-slot"></div></div>
     ${confirmKey==='del:'+s.id?`<div class="confirm"><span>Delete this session?</span><button type="button" class="btn small primary" data-del-yes="${s.id}">Delete</button><button type="button" class="btn small" data-cancel>Cancel</button></div>`:`<button type="button" class="btn ghost small" data-del="${s.id}" style="align-self:flex-start">Delete session</button>`}
     </div></details>`).join('')}`;
 }
@@ -1962,19 +2426,7 @@ function viewProgress(){
    PROFILE, PERSONALISATION, SUGGESTIONS, SWAPS, RANKS, BODY, NUTRITION
    ===================================================================== */
 
-/* ---------- extra exercises used as swaps ---------- */
-Object.assign(EX,{
-  dbbench:['Dumbbell Bench Press','load','Kg per dumbbell. Deep stretch, press up and in.',{chest:1,shoulders:.6,triceps:.5}],
-  dbohp:['Seated Dumbbell Press','load','Kg per dumbbell. Elbows slightly forward.',{shoulders:1,triceps:.5}],
-  dbrdl:['Dumbbell Romanian Deadlift','load','Kg per dumbbell. Hips back, bells close.',{hamstrings:1,glutes:1,lowerback:.6}],
-  slrdl:['Single-Leg RDL','load','Hold onto something if needed. Square hips.',{hamstrings:1,glutes:.8}],
-  dbfly:['Dumbbell Fly','load','Soft elbows, deep stretch.',{chest:1}],
-  dbsnatch:['Dumbbell Snatch','load','One arm, hips drive it up.',{glutes:.8,shoulders:.6,hamstrings:.6,traps:.5}],
-  dbpullover:['Dumbbell Pullover','load','Long arms, stretch the lats.',{lats:1,chest:.5,serratus:.4}],
-  ytw:['Prone Y-T-W Raise','bw','Face down, thumbs up, squeeze the shoulder blades.',{shoulders:.8,upperback:.8}],
-  glutebridge:['Glute Bridge','bw','Drive through heels, squeeze at the top.',{glutes:1,hamstrings:.4}],
-  diamond:['Diamond Push-up','bw','Hands together, elbows tucked.',{triceps:1,chest:.6}]
-});
+
 const EQUIP={squat:'B',fsquat:'B',deadlift:'B',rdl:'B',goodmorning:'B',bench:'B',ohp:'B',pushpress:'B',clean:'B',pendlay:'B',tbar:'B',curl:'B',landmine:'B',zercher:'B',preacher:'B',plategrip:'B',
   incline:'D',bss:'D',lunge:'D',stepup:'D',dbrow:'D',latraise:'D',rdelt:'D',arnold:'D',hammer:'D',inclinecurl:'D',revcurl:'D',wristcurl:'D',farmer:'D',suitcase:'D',goblet:'D',row:'D',skull:'D',shrug:'D',calf:'D',hipthrust:'D',ohtri:'D',kbswing:'D',halo:'D',neck:'D',
   dbbench:'D',dbohp:'D',dbrdl:'D',slrdl:'D',dbfly:'D',dbsnatch:'D',dbpullover:'D',
@@ -2027,12 +2479,12 @@ function makeEx(base,newId){
 /* exercises for the current draft, with swaps applied */
 function draftExercises(){
   const d=dayById(draft.dayId); const sw=draft.swaps||{};
-  return d.exercises.map(ex=>sw[ex.id]?makeEx(ex,sw[ex.id]):ex);
+  return d.exercises.map(ex=>sw[ex.id]?makeEx(ex,sw[ex.id]):ex).concat((draft.extra||[]).filter(x=>EX[x.id]).map(extraEx));
 }
 
 /* ---------- profile ---------- */
 const PKEY='archetype.profile.v1', BKEY='archetype.body.v1';
-const PROFILE_DEFAULT={name:'',sex:'',age:'',height:'',weight:'',experience:'intermediate',activity:'moderate',goal:'auto',equipment:'gym',injuries:[],bar:20,plates:[25,20,15,10,5,2.5,1.25],swaps:{}};
+const PROFILE_DEFAULT={name:'',sex:'',age:'',height:'',weight:'',experience:'intermediate',activity:'moderate',goal:'auto',equipment:'gym',injuries:[],bar:20,plates:[25,20,15,10,5,2.5,1.25],swaps:{},autoProg:true,customEx:{},customPrograms:{}};
 let profile=Object.assign({},PROFILE_DEFAULT,lsGet(PKEY,{}));
 let userDoc=null, bodyCol=null, bodyEntries=lsGet(BKEY,{}), youEditing=false;
 const hasProfile=()=>!!(profile.sex&&profile.age&&profile.height&&profile.weight);
@@ -2052,7 +2504,7 @@ async function deleteBody(id){
   if(e&&e.photoAsset&&assetsApi){try{await assetsApi.delete(e.photoAsset);}catch(err){}}
 }
 const bodyPhotoSrc=e=>e.photoAsset?'/_blob/'+e.photoAsset:(e.photo||null);
-function safeRender(){ if(ui.view==='workout'&&draft) updateNavDot(); else if(ui.view==='you'&&youEditing) return; else render(); }
+function safeRender(){ if(ui.view==='workout'&&draft) updateNavDot(); else if((ui.view==='you'&&youEditing)||ui.view==='builder') return; else render(); }
 
 /* ---------- loads, increments, suggestions ---------- */
 const BARBELL=new Set(['squat','fsquat','deadlift','rdl','goodmorning','bench','ohp','pushpress','clean','pendlay','hipthrust','zercher','curl','shrug','logpress']);
@@ -2079,7 +2531,8 @@ function startingWeight(ex,w){
 }
 function suggestFor(ex,w,skipKey){
   if(ex.type==='cond') return null;
-  const hist=exHistory(ex.id).filter(h=>h.s.id!==skipKey), last=hist[0], p=rx(ex,w), rng=repRange(p.reps);
+  const hist=exHistory(ex.id).filter(h=>h.s.id!==skipKey), p=rx(ex,w), rng=repRange(p.reps);
+  const last=isDeload(w)?hist[0]:(hist.find(h=>!isDeload(h.s.week))||hist[0]);
   if(!last){const sw=startingWeight(ex,w);return sw?{w:sw,why:'Starting estimate from your profile. Adjust so the last reps feel right.'}:null;}
   const top=Math.max(0,...last.done.map(x=>x.w||0));
   if(ex.main||ex.power){
@@ -2088,6 +2541,7 @@ function suggestFor(ex,w,skipKey){
     const r=parseInt(p.reps)||5, target=best/(1+(r+(10-(p.rpe||8)))/30);
     return {w:roundTo(target,stepFor(ex)),why:`From your estimated max of ${Math.round(best)} kg, for ${r} reps at RPE ${p.rpe}.`};
   }
+  if(isDeload(w)&&top>0) return {w:Math.max(0,roundTo(top*0.9,stepFor(ex))),why:'Deload week: about 10% lighter than last time. Stop well short of failure.'};
   if(!top) { /* bodyweight work: rep targets */
     const reps=last.done.map(x=>x.r||0); const minR=Math.min(...reps);
     if(rng&&minR>=rng.hi) return {w:ex.type==='bw'?incFor(ex):null,why:`You hit ${rng.hi}+ on every set. Add ${incFor(ex)} kg or use a harder variation.`};
@@ -2151,6 +2605,7 @@ const RANKS={
  'Naruto':['Academy Student','Genin','Chunin','Special Jonin','Jonin','Kage'],
  'One Piece':['Rookie Pirate','First Bounty','Supernova','Warlord','Emperor Commander','Emperor']
 };
+Object.assign(RANKS,RANKS_EXTRA);
 function rankOf(p,done){
   const r=RANKS[p.series]||['Rookie','Regular','Veteran','Elite','Legend'], tot=totalOf(p);
   const i=done>=tot?r.length-1:Math.min(r.length-2,Math.floor(done/tot*(r.length-1)));
@@ -2197,7 +2652,7 @@ function calendarHTML(weeks=16){
 }
 
 /* ---------- nutrition ---------- */
-const DIET={todo:'bulk',broly:'bulk',jack:'bulk',oliva:'bulk',guts:'bulk',gyomei:'bulk',yujiro:'bulk',reiner:'bulk',endeavor:'bulk',allmight:'bulk',
+const DIET={luffy:'cut',sanji:'cut',ace:'leanbulk',naruto:'recomp',guy:'leanbulk',sasuke:'cut',takamura:'leanbulk',miyata:'cut',agito:'leanbulk',julius:'bulk',hisoka:'recomp',uvogin:'bulk',bisky:'leanbulk',jinwoo:'recomp',chahaein:'recomp',thorfinn:'cut',thorkell:'bulk',jotaro:'leanbulk',jonathan:'bulk',ichigo:'recomp',kenpachi:'bulk',yoruichi:'recomp',kenshiro:'leanbulk',todo:'bulk',broly:'bulk',jack:'bulk',oliva:'bulk',guts:'bulk',gyomei:'bulk',yujiro:'bulk',reiner:'bulk',endeavor:'bulk',allmight:'bulk',
   itadori:'leanbulk',goku:'leanbulk',vegeta:'leanbulk',gojo:'leanbulk',mirio:'leanbulk',tengen:'leanbulk',hakari:'leanbulk',nanami:'leanbulk',yuki:'leanbulk',zoro:'leanbulk',deku:'leanbulk',bakugo:'leanbulk',doppo:'leanbulk',ippo:'leanbulk',
   megumi:'recomp',gohan:'recomp',piccolo:'recomp',eren:'recomp',griffith:'recomp',casca:'recomp',nobara:'recomp',maki:'recomp',yuta:'recomp',tanjiro:'recomp',choso:'recomp',saitama:'recomp',rengoku:'recomp',
   baki:'cut',levi:'cut',toji:'cut',garou:'cut',sonic:'cut',rocklee:'cut',inosuke:'cut',ohma:'cut',mikasa:'recomp'};
@@ -2242,6 +2697,7 @@ function openSummary(sum){
     <p class="muted" style="font-size:14px">Week ${s.week} · ${fmtDate(s.date)}</p>
     <div class="times"><div><span class="eyebrow">Started</span><b class="num">${fmtClock(sessStart(s))}</b></div><span class="arrow" aria-hidden="true">→</span><div><span class="eyebrow">Finished</span><b class="num">${fmtClock(s.finishedAt||s.date)}</b></div><div class="dur"><span class="eyebrow">Workout time</span><b class="num">${fmtDur(s.durationMin)}</b></div></div>
     <div class="pr-row"><div class="stat"><b>${s.doneSets}</b><span>Sets</span></div><div class="stat"><b>${s.volume>=10000?(s.volume/1000).toFixed(1)+'k':s.volume}</b><span>kg moved</span></div></div>
+    ${Object.keys(muscleSets([s])).length?`<div class="sum-mus"><h3>Muscles worked</h3>${sessHeat(muscleSets([s]),'Sets per muscle this session')}</div>`:''}
     ${sum.rankUp?`<div class="rankup"><span class="eyebrow">Rank up</span><b>${esc(sum.rankAfter.name)}</b><span class="muted">from ${esc(sum.rankBefore.name)}</span></div>`:''}
     ${sum.prs.length?`<div class="prs"><h3>New personal records</h3><ul>${sum.prs.map(x=>`<li><b>${esc(x.name)}</b><span>${esc(x.text)}</span></li>`).join('')}</ul></div>`:''}
     <div class="row" style="justify-content:space-between;flex-wrap:wrap;gap:8px"><span class="muted" style="font-size:14px">${sum.streak?`<b class="num">${sum.streak}</b>-week streak`:'Two sessions this week starts a streak'}</span><span class="muted" style="font-size:14px">${esc(rankOf(p,doneOf(p)).name)}</span></div>
@@ -2451,8 +2907,19 @@ document.getElementById('bodyPhoto').addEventListener('change',async e=>{
 
 /* ---------- sheet actions ---------- */
 document.getElementById('sheet').addEventListener('click',e=>{
+  const tp=e.target.closest('[data-tip]'); if(tp){showTip(tp);return;}
   const t=e.target.closest('button'); if(!t) return;
   if(t.dataset.abbr){openAbbr(t.dataset);return;}
+  if(t.dataset.startGo){const [w,d]=t.dataset.startGo.split('|');closeSheet();startWorkout(Number(w),d);return;}
+  if(t.dataset.tabGo){closeSheet();go(t.dataset.tabGo);return;}
+  if(t.hasAttribute('data-exlib')){openLibrary();return;}
+  if(t.dataset.exopen){openExercise(t.dataset.exopen,'lib');return;}
+  if(t.dataset.libf){libFilter=t.dataset.libf;t.parentElement.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b===t));filterLibrary();return;}
+  if(t.dataset.exmetric){t.parentElement.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b===t));const c=document.getElementById('exChart');if(c)c.innerHTML=exChartHTML(t.dataset.ex,t.dataset.exmetric);return;}
+  if(t.hasAttribute('data-cx-new')){openCxForm(null,t.dataset.cxNew==='pick'?{pick:pickCtx}:null);return;}
+  if(t.dataset.cxEdit){confirmKey=null;openCxForm(t.dataset.cxEdit);return;}
+  if(t.dataset.cxDel){const id=t.dataset.cxDel;if(confirmKey==='cxdel:'+id)deleteCx(id);else{confirmKey='cxdel:'+id;t.textContent='Tap again to delete';t.classList.remove('ghost');}return;}
+  if(t.dataset.pickex){pickExercise(t.dataset.pickex);return;}
   if(t.dataset.swapTo){applySwap(t.dataset.swapFrom,t.dataset.swapTo,document.getElementById('swapAlways')?.checked);return;}
   if(t.hasAttribute('data-share-card')){shareCard();return;}
   if(t.dataset.swapOpen){openSwap(t.dataset.swapOpen);return;}
@@ -2460,6 +2927,8 @@ document.getElementById('sheet').addEventListener('click',e=>{
   if(t.dataset.photoView){/* handled by img */}
 });
 document.getElementById('sheet').addEventListener('input',e=>{
+  if(e.target.id==='libq'){filterLibrary();return;}
+  if(e.target.id==='pickq'){const q=e.target.value.trim().toLowerCase();document.querySelectorAll('#pickList li').forEach(li=>li.hidden=!!q&&!li.dataset.search.includes(q));return;}
   if(e.target.id==='plateIn'){const out=document.getElementById('plateOut');if(out)out.innerHTML=plateVisual(num(e.target.value)||0);}
 });
 
@@ -2496,6 +2965,7 @@ function profileForm(){
     <label>Diet goal${sel('pf-goal',[['auto','Match my character’s physique'],['cut','Lean down'],['maintain','Maintain'],['leanbulk','Lean bulk'],['bulk','Bulk']],P.goal)}</label>
     <label>Equipment${sel('pf-equip',Object.entries(EQUIP_NAMES),P.equipment)}</label>
     <fieldset><legend>Anything to go easy on?</legend><div class="checks">${Object.entries(INJURY_NAMES).map(([k,l])=>`<label class="chk"><input type="checkbox" value="${k}" ${P.injuries&&P.injuries.includes(k)?'checked':''}> ${l}</label>`).join('')}</div></fieldset>
+    <label class="chk" style="align-self:flex-start"><input type="checkbox" id="pf-auto" ${P.autoProg!==false?'checked':''}> Auto progression: pre-fill suggested weights</label>
     <div class="grid2"><label><span class="lt">Bar weight <small>kg</small></span><input type="number" inputmode="decimal" id="pf-bar" value="${P.bar||20}"></label>
     <label><span class="lt">Plates you have <small>kg</small></span><input type="text" id="pf-plates" value="${(P.plates||PROFILE_DEFAULT.plates).join(', ')}"></label></div>
     <div class="row" style="gap:8px"><button type="submit" class="btn primary">Save profile</button>${hasProfile()?'<button type="button" class="btn" data-profile-cancel>Cancel</button>':''}</div>
@@ -2538,12 +3008,477 @@ function viewYou(){
   ${viewProgress().replace('<span class="eyebrow">Progress</span>','<span class="eyebrow" style="margin-top:6px">Lifting stats</span>')}`;
 }
 
+
+/* =====================================================================
+   ANALYTICS: muscle tracker, training trends, exercise charts & records
+   ===================================================================== */
+const exMeta=id=>EX[id]?{id,name:EX[id][0],type:EX[id][1],cue:EX[id][2],m:EX[id][3]||{}}:null;
+const setFrac=v=>v>=.8?1:v>=.4?.5:0;
+const fmtSets=v=>String(Math.round(v*2)/2);
+const progName=id=>(PROGRAMS.find(p=>p.id===(id||'itadori'))||{name:'Deleted program'}).name;
+function muscleSets(list){
+  const t={};
+  list.forEach(s=>(s.entries||[]).forEach(e=>{
+    if(e.type==='cond') return; const M=exMeta(e.exId); if(!M) return;
+    const n=e.sets.filter(x=>x.done).length; if(!n) return;
+    addMuscles(t,M.m,n,e.exId);
+  }));
+  return t;
+}
+function plannedSets(exs,w){
+  const t={}; exs.forEach(ex=>{if(ex.type==='cond')return;addMuscles(t,ex.m,rx(ex,w).sets,ex.id);}); return t;
+}
+const RANGES={'7D':7,'30D':30,'90D':90,'1Y':365,'All':0};
+function inRange(r){const d=RANGES[r],list=sortedSessions();if(!d)return list;const cut=Date.now()-d*864e5;return list.filter(s=>new Date(s.date).getTime()>=cut);}
+function rangeWeeks(r){
+  const all=sortedSessions(); if(!all.length) return 1;
+  const span=(Date.now()-new Date(all[all.length-1].date).getTime())/864e5+1, d=RANGES[r];
+  return Math.max(1,(d?Math.min(d,span):span)/7);
+}
+const HEAT_OP=[0,.38,.68,1];
+const heatCol=t=>!t?'var(--bm-base)':t>=3?'var(--bm-hit)':`color-mix(in srgb,var(--bm-hit) ${Math.round(HEAT_OP[t]*100)}%,var(--bm-base))`;
+const tierWeek=v=>!(v>0)?0:v<4?1:v<10?2:3;
+const tierSess=v=>!(v>0)?0:v<2?1:v<5?2:3;
+/* ---------- body model: polygon data from react-body-highlighter (github.com/GV79/react-body-highlighter)
+MIT License
+
+Copyright (c) 2020 GV79
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+   Each entry: [our muscle keys (space separated, coloured by the most-trained one), polygons]. ---------- */
+const BODY_MODEL={"front":[["chest",["51.8 41.6 51 55.1 58 58 67.8 55.5 70.6 47.3 62 41.6","29.8 46.5 31.4 55.5 40.8 58 48.2 55.1 47.8 42 37.6 42"]],["obliques",["68.6 63.3 67.3 57.1 58.8 59.6 60 64.1 60.4 83.3 65.7 78.8 66.5 69.8","33.9 78.4 33.1 71.8 31 63.3 32.2 57.1 40.8 59.2 39.2 63.3 39.2 83.7"]],["abs",["56.3 59.2 58 64.1 58.4 78 58.4 92.7 56.3 98.4 55.1 104.1 51.4 107.8 51 84.5 50.6 67.3 51 57.1","43.7 58.8 48.6 57.1 49 67.3 48.6 84.5 48.2 107.3 44.5 103.7 40.8 91.4 40.8 78.4 41.2 64.5"]],["biceps",["16.7 68.2 18 71.4 22.9 66.1 29 53.9 27.8 49.4 20.4 55.9","71.4 49.4 70.2 54.7 76.3 66.1 81.6 71.8 82.9 69 78.8 55.5"]],["triceps",["69.4 55.5 69.4 61.6 75.9 72.7 77.6 70.2 75.5 67.3","22.4 69.4 29.8 55.5 29.8 60.8 22.9 73.1"]],["traps neck",["55.5 23.7 50.6 33.5 50.6 39.2 61.6 40 70.6 44.9 69.4 36.7 63.3 35.1 58.4 30.6","29 44.9 30.2 37.1 36.3 35.1 41.2 30.2 44.5 24.5 49 33.9 48.6 39.2 38 39.6"]],["fdelts mdelts",["78.4 53.1 79.6 47.8 79.2 41.2 75.9 38 71 36.3 72.2 42.9 71.4 47.3","28.2 47.3 21.2 53.1 20 47.8 20.4 40.8 24.5 37.1 28.6 37.1 26.9 43.3"]],["",["42.4 2.9 40 11.8 42 19.6 46.1 23.3 49.8 25.3 54.7 22.4 57.6 19.2 59.2 10.2 57.1 2.4 49.8 0"]],["adductors",["52.7 110.2 54.3 124.9 60 110.2 62 100 64.9 94.3 60 92.7 56.7 104.5","47.8 110.6 44.9 125.3 42 115.9 40.4 113.1 39.6 107.3 38 102.4 34.7 93.9 39.6 92.2 41.6 99.2 43.7 105.3"]],["quads",["34.7 98.8 37.1 108.2 37.1 127.8 34.3 137.1 31 132.7 29.4 120 28.2 111.4 29.4 100.8 32.2 94.7","63.3 105.7 64.5 100 66.9 94.7 70.2 101.2 71 111.8 68.2 133.1 65.3 137.6 62.4 128.6 62 111.4","38.8 129.4 38.4 112.2 41.2 118.4 44.5 129.4 42.9 135.1 40 146.1 36.3 146.5 35.5 140","59.6 145.7 55.5 129 60.8 113.9 61.2 130.2 64.1 139.6 62.9 146.5","32.7 138.4 26.5 145.7 25.7 136.7 25.7 127.3 26.9 114.3 29.4 133.5","71.8 113.1 73.9 124.1 73.9 140.4 72.7 145.7 66.5 138.4 70.2 133.5"]],["",["33.9 140 34.7 143.3 35.5 147.3 36.3 151 35.1 156.7 29.8 156.7 27.3 152.7 27.3 147.3 30.2 144.1","65.7 140 72.2 147.8 72.2 152.2 69.8 157.1 64.9 156.7 62.9 151"]],["calves shins",["71.4 160.4 73.5 153.5 76.7 161.2 79.6 167.8 78.4 187.8 79.6 195.5 74.7 195.5","24.9 194.7 27.8 164.9 28.2 160.4 26.1 154.3 24.9 157.6 22.4 161.6 20.8 167.8 22 188.2 20.8 195.5","72.7 195.1 69.8 159.2 65.3 158.4 64.1 162.4 64.1 165.3 65.7 177.1","35.5 158.4 35.9 162.4 35.9 166.9 35.1 172.2 35.1 176.7 32.2 182 30.6 187.3 26.9 194.7 27.3 187.8 28.2 180.4 28.6 175.5 29 169.8 29.8 164.1 30.2 158.8"]],["forearms",["6.1 88.6 10.2 75.1 14.7 70.2 16.3 74.3 19.2 73.5 4.5 97.6 0 100","84.5 69.8 83.3 73.5 80 73.1 95.1 98.4 100 100.4 93.5 89.4 89.8 76.3","77.6 72.2 77.6 77.6 80.4 84.1 85.3 89.8 92.2 101.2 94.7 99.6","6.9 101.2 13.5 90.6 18.8 84.1 21.6 77.1 21.2 71.8 4.9 98.8"]]],"back":[["",["50.6 0 46 0.9 40.9 5.5 40.4 12.8 45.1 20 55.7 20 59.1 13.6 59.6 4.7 55.7 1.3"]],["traps",["44.7 21.7 47.7 21.7 47.2 38.3 47.7 64.7 38.3 53.2 35.3 40.9 31.1 36.6 39.1 33.2 43.8 27.2","52.3 21.7 55.7 21.7 56.6 27.2 60.9 32.8 68.9 36.6 64.7 40.4 61.7 53.2 52.3 64.7 53.2 38.3"]],["rdelts mdelts",["29.4 37 23 39.1 17.4 44.3 18.3 53.6 24.3 49.4 27.2 46.4","71.1 37 78.3 39.6 82.6 44.7 81.7 53.6 74.9 48.9 72.3 45.1"]],["lats upperback",["31.1 38.7 28.1 48.9 28.5 55.3 34 75.3 47.2 71.1 47.2 66.4 36.6 54 33.6 41.3","68.9 38.7 71.9 49.4 71.5 56.2 66 75.3 52.8 71.1 52.8 66.4 63.4 54.5 66.4 41.7"]],["triceps",["26.8 49.8 17.9 55.7 14.5 72.3 16.6 81.7 21.7 63.8 26.8 55.7","73.6 50.2 82.1 55.7 86 73.2 83.4 82.1 77.9 63 73.2 55.7","26.8 58.3 26.8 68.5 23 75.3 19.1 77.4 22.6 65.5","72.8 58.3 77 64.7 80.4 77.4 76.6 75.3 72.8 68.9"]],["lowerback",["47.7 72.8 34.5 77 35.3 83.4 49.4 102.1 46.8 83","52.3 72.8 65.5 77 64.7 83.4 50.6 102.1 53.2 83.8"]],["forearms",["86.4 75.7 91.1 83.4 93.2 94 100 106.4 96.2 104.3 88.1 89.4 84.3 83.8","13.6 75.7 8.9 83.8 6.8 93.6 0 106.4 3.8 104.3 12.3 88.5 15.7 83","81.3 79.6 77.4 77.9 79.1 84.7 91.1 103.8 93.2 108.9 94.5 104.7","18.7 79.6 22.1 77.9 20.9 84.3 9.4 103 6.8 108.5 5.1 104.7"]],["glutes",["44.7 99.6 30.2 108.5 29.8 118.7 31.5 126 47.2 121.3 49.4 114.9","55.3 99.1 51.1 114.5 52.3 120.9 68.1 126 69.8 119.1 69.4 108.5"]],["adductors",["48.1 123 44.7 123 41.3 125.5 45.1 144.3 48.5 135.7 48.9 129.4","51.9 122.6 55.7 123.4 59.1 126 54.9 144.3 51.9 136.2 51.1 129.4"]],["hamstrings",["28.9 122.1 31.1 129.4 36.6 126 35.3 135.3 34.5 150.2 29.4 158.3 28.9 146.8 27.7 141.3 27.2 131.5","71.5 121.7 69.4 128.9 63.8 126 65.5 136.6 66.4 150.2 71.1 158.3 71.5 147.7 72.8 142.1 73.6 131.9","38.7 125.5 44.3 146 40.4 166.8 36.2 152.8 37 135.3","61.7 125.5 63.4 136.2 64.3 153.2 60 166.8 56.2 146.4"]],["",["34.5 153.2 31.1 159.1 33.6 166.4 37.4 162.6","66.4 153.6 63 163 66.8 166.4 69.4 159.1"]],["calves",["29.4 160.4 28.5 167.2 24.7 179.6 23.8 192.8 25.5 197 28.5 193.2 29.8 180 31.9 171.1 31.9 166.8","37.4 165.1 35.3 167.7 33.2 171.9 31.1 180.4 30.2 191.9 34 200 38.7 190.6 39.1 168.9","63 165.1 61.3 168.5 61.7 190.6 66.4 199.6 70.6 191.9 68.9 179.6 66.8 170.2","70.6 160.4 72.3 168.5 75.7 179.1 76.6 192.8 74.5 196.6 72.3 193.6 70.6 179.6 68.1 168.1"]],["calves",["28.5 195.7 30.2 195.7 33.6 201.7 30.6 220 28.5 213.6 26.8 198.3"]],["calves",["69.8 195.7 71.9 195.7 73.6 198.3 71.9 213.2 70.2 219.6 67.2 202.1"]]]};
+const DELT_SPLIT={};
+[['ohp pushpress arnold hspu dbohp logpress handstand sledgehammer slam bag mbthrow landmine jumprope',{fdelts:1,mdelts:.5}],
+ ['bench incline dbbench dips wdips pushup ppp mbchest clappush cablefly dbfly',{fdelts:1}],
+ ['latraise',{mdelts:1}],['halo',{mdelts:1,rdelts:.5}],['dbsnatch',{mdelts:1,fdelts:.5}],
+ ['rdelt facepull row',{rdelts:1}],['ytw',{rdelts:1,mdelts:.5}]].forEach(([ids,o])=>ids.split(' ').forEach(id=>DELT_SPLIT[id]=o));
+function addMuscles(t,m,n,exId){
+  Object.entries(m||{}).forEach(([k,v])=>{const f=setFrac(v);if(!f)return;
+    if(k==='shoulders'){Object.entries(DELT_SPLIT[exId]||{fdelts:1,mdelts:1,rdelts:1}).forEach(([p,sh])=>t[p]=(t[p]||0)+n*f*sh);}
+    else t[k]=(t[k]||0)+n*f;});
+}
+const heatTier=(v,max)=>{if(!(v>0))return 0;const r=v/max;return r>=.8?4:r>=.55?3:r>=.3?2:1;};
+function heatFigure(view,tiers,dx){
+  return `<g transform="translate(${dx},0)">${BODY_MODEL[view].map(([keys,polys])=>{
+    const ks=keys?keys.split(' '):[], t=Math.max(0,...ks.map(k=>tiers[k]||0)), hit=ks.filter(k=>tiers[k]);
+    const fill=!keys?'var(--bd-sil)':t?`var(--hm-${t})`:'var(--bd-base)';
+    return polys.map(p=>`<polygon points="${p}" fill="${fill}">${ks.length?`<title>${(hit.length?hit:ks).map(k=>MUSCLE_NAMES[k]).join(' / ')}</title>`:''}</polygon>`).join('');}).join('')}</g>`;
+}
+function bodyHeat(vals,_t,label){
+  const rows=Object.entries(vals).filter(([k,v])=>v>0&&MUSCLE_NAMES[k]).sort((a,b)=>b[1]-a[1]), n=rows.length, tiers={};
+  rows.forEach(([k,v],i)=>{const j=rows.findIndex(r=>r[1]===v),q=n>1?j/n:0;tiers[k]=q<.2?4:q<.45?3:q<.75?2:1;});
+  return `<div class="heat">
+    <svg viewBox="0 0 210 222" role="img" aria-label="${esc(label||'Muscles worked')}: ${rows.map(([k,v])=>MUSCLE_NAMES[k]+' '+v.toFixed(1)+' sets').join(', ')||'none yet'}">${heatFigure('front',tiers,0)}${heatFigure('back',tiers,110)}</svg>
+    ${rows.length?`<ul class="heat-key">${rows.map(([k,v])=>`<li><i style="background:var(--hm-${tiers[k]})"></i>${MUSCLE_NAMES[k]}<span class="num">${v.toFixed(1)}</span></li>`).join('')}</ul>`:''}
+  </div>`;
+}
+const tiersOf=(vals,fn)=>{const o={};Object.entries(vals).forEach(([k,v])=>o[k]=fn(v));return o;};
+const sessHeat=(vals,label)=>bodyHeat(vals,tiersOf(vals,tierSess),label);
+
+/* ---------- muscle tracker card ---------- */
+const mt={mode:'body',range:'7D'};
+const RADAR_M=['chest','fdelts','mdelts','rdelts','lats','upperback','biceps','triceps','abs','quads','hamstrings','glutes','calves'];
+function muscleRadar(per){
+  const n=RADAR_M.length,cx=180,cy=158,R=104,max=Math.max(20,...RADAR_M.map(k=>per[k]||0));
+  const pt=(i,v)=>{const a=-Math.PI/2+i*2*Math.PI/n,r=R*v/max;return [cx+Math.cos(a)*r,cy+Math.sin(a)*r];};
+  const poly=v=>RADAR_M.map((_,i)=>pt(i,typeof v==='function'?v(i):v).map(x=>x.toFixed(1)).join(',')).join(' ');
+  let g=`<polygon points="${poly(20)}" fill="var(--accent-soft)" stroke="none"/><polygon points="${poly(10)}" fill="var(--surface)" stroke="none"/>`;
+  [5,10,15,20].forEach(v=>{g+=`<polygon points="${poly(v)}" fill="none" stroke="var(--line)" stroke-width="1"${v===10||v===20?'':' stroke-dasharray="3 4"'}/>`;});
+  RADAR_M.forEach((_,i)=>{const [x,y]=pt(i,max);g+=`<line x1="${cx}" y1="${cy}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" stroke="var(--line)"/>`;});
+  g+=`<polygon points="${poly(i=>per[RADAR_M[i]]||0)}" fill="color-mix(in srgb,var(--accent) 30%,transparent)" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/>`;
+  RADAR_M.forEach((k,i)=>{const [x,y]=pt(i,per[k]||0);g+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="3" fill="var(--accent)"/>`;});
+  RADAR_M.forEach((k,i)=>{const a=-Math.PI/2+i*2*Math.PI/n,x=cx+Math.cos(a)*(R+14),y=cy+Math.sin(a)*(R+14),anc=Math.abs(x-cx)<10?'middle':x>cx?'start':'end';
+    g+=`<text x="${x.toFixed(1)}" y="${(y+4).toFixed(1)}" text-anchor="${anc}" font-size="11" font-weight="700" fill="var(--muted)" font-family="var(--font-body)">${MUSCLE_NAMES[k]} <tspan fill="var(--ink)" font-family="var(--font-mono)" font-weight="500">${fmtSets(per[k]||0)}</tspan></text>`;});
+  return `<svg class="mt-radar" viewBox="0 0 360 320" role="img" aria-label="Average sets per week by muscle">${g}</svg>
+    <p class="muted" style="font-size:12px;text-align:center">Sets per week. Shaded ring: 10–20 sets, where most growth happens.</p>`;
+}
+function muscleTable(tot,per){
+  const rows=Object.keys(MUSCLE_NAMES).filter(k=>k!=='shoulders'&&tot[k]>0).sort((a,b)=>tot[b]-tot[a]);
+  const pr=(ui.active?(progById(ui.active).priority||[]):[]).flatMap(k=>k==='shoulders'?['fdelts','mdelts','rdelts']:[k]);
+  pr.forEach(k=>{if(!rows.includes(k)&&MUSCLE_NAMES[k])rows.push(k);});
+  const max=Math.max(25,...rows.map(k=>per[k]||0));
+  return `<table class="mt-table"><thead><tr><th scope="col">Muscle</th><th scope="col" class="r">Sets</th><th scope="col" class="r">/ week</th><th scope="col">vs 10–20</th></tr></thead><tbody>
+    ${rows.map(k=>{const v=per[k]||0;return `<tr class="${pr.includes(k)?'pr':''}"><th scope="row">${MUSCLE_NAMES[k]}</th><td class="num">${fmtSets(tot[k]||0)}</td><td class="num">${(Math.round(v*10)/10)}</td><td><span class="mt-bar" title="${v<10?'Below':v>20?'Above':'In'} the 10–20 range"><b style="left:${(10/max*100).toFixed(1)}%;width:${(10/max*100).toFixed(1)}%"></b><i style="width:${Math.min(100,v/max*100).toFixed(1)}%"></i></span></td></tr>`;}).join('')}
+  </tbody></table>${pr.length?`<p class="muted" style="font-size:12px">Bold rows are priorities for ${esc(progById(ui.active).name)}.</p>`:''}`;
+}
+function muscleTracker(){
+  const list=inRange(mt.range), tot=muscleSets(list), wk=rangeWeeks(mt.range), per={};
+  Object.keys(tot).forEach(k=>per[k]=tot[k]/wk);
+  const has=Object.keys(tot).length>0;
+  return `<section class="card" id="mt">
+    <div class="row between"><h2>Muscle tracker</h2><button type="button" class="icon-btn" data-mt-info aria-label="How the muscle tracker works">i</button></div>
+    <div class="seg" role="tablist" aria-label="Muscle tracker view">${[['body','Body'],['radar','Radar'],['table','Table']].map(([k,l])=>`<button type="button" role="tab" class="${mt.mode===k?'on':''}" aria-selected="${mt.mode===k}" data-mt-mode="${k}">${l}</button>`).join('')}</div>
+    <div class="rng" aria-label="Time range">${Object.keys(RANGES).map(r=>`<button type="button" class="${mt.range===r?'on':''}" aria-pressed="${mt.range===r}" data-mt-range="${r}">${r}</button>`).join('')}</div>
+    ${!has?`<p class="na">Not available just yet. Finish a workout${mt.range!=='All'?' in this range':''} and your muscle breakdown shows up here.</p>`
+      :mt.mode==='body'?bodyHeat(tot,tiersOf(per,tierWeek),'Sets per muscle')
+      :mt.mode==='radar'?muscleRadar(per):muscleTable(tot,per)}
+    ${has?`<p class="muted" style="font-size:12px">${list.length} session${list.length===1?'':'s'} · ${mt.mode==='body'?'total sets in this range':'averaged over '+(Math.round(wk*10)/10)+' week'+(wk>=1.05?'s':'')}</p>`:''}
+  </section>`;
+}
+function openMtInfo(){
+  openSheet(`<div class="row between" style="align-items:flex-start"><div><span class="eyebrow">Muscle tracker</span><h2>How it's counted</h2></div><button type="button" class="btn small" data-close>Close</button></div>
+   <table class="abbr-table"><tbody>
+    <tr><th scope="row">Sets</th><td>Every set you tick off counts as 1 set for the muscles an exercise mainly trains, and half a set for muscles it hits indirectly. Conditioning rounds don't count.</td></tr>
+    <tr><th scope="row">Colours</th><td>Compare muscles to each other in the range you picked: orange is your most-trained, then amber and gold, down to brown for the least.</td></tr>
+    <tr><th scope="row">Target</th><td>About 10–20 hard sets a week is where most muscle growth happens. Fewer still keeps what you have.</td></tr>
+    <tr><th scope="row">Ranges</th><td>7D to 1Y look back from today. All uses everything you've logged.</td></tr>
+   </tbody></table>`);
+}
+
+/* ---------- line charts with tap tooltips ---------- */
+function niceStep(v){if(!(v>0))return 1;const p=Math.pow(10,Math.floor(Math.log10(v))),n=v/p;return (n<=1?1:n<=2?2:n<=5?5:10)*p;}
+function niceMax(v){if(!(v>0))return 1;const p=Math.pow(10,Math.floor(Math.log10(v))),n=v/p;return (n<=1?1:n<=2?2:n<=2.5?2.5:n<=5?5:10)*p;}
+const fmtK=v=>Math.abs(v)>=1000?(Math.round(v/100)/10).toString().replace(/\.0$/,'')+'K':String(Math.round(v*10)/10);
+function trendChart(pts,o={}){
+  if(!pts.length) return `<p class="na">${o.empty||'Not available just yet'}</p>`;
+  const W=340,H=170,pl=40,pr=14,pt=14,pb=26, vals=pts.map(p=>p.v);
+  let lo=o.zero?0:Math.min(...vals), hi=Math.max(...vals);
+  if(o.zero){const st=niceStep(Math.max(hi,o.int?4:1)/4);hi=st*4;}else{const pad=Math.max((hi-lo)*.15,hi*.02,1);lo=Math.max(0,lo-pad);hi=hi+pad;}
+  const t0=pts[0].t,t1=pts[pts.length-1].t,ts=t1-t0;
+  const X=t=>ts?pl+(t-t0)/ts*(W-pl-pr):(pl+W-pr)/2, Y=v=>pt+(1-(v-lo)/(hi-lo||1))*(H-pt-pb);
+  let g='';
+  for(let i=0;i<=4;i++){const v=lo+(hi-lo)*i/4,y=Y(v);g+=`<line x1="${pl}" x2="${W-pr}" y1="${y.toFixed(1)}" y2="${y.toFixed(1)}" stroke="var(--line)"/><text x="${pl-6}" y="${(y+3.5).toFixed(1)}" text-anchor="end" font-size="10" fill="var(--muted)" font-family="var(--font-mono)">${fmtK(v)}</text>`;}
+  const long=ts>300*864e5, fd=t=>new Date(t).toLocaleDateString(undefined,long?{month:'short',year:'2-digit'}:{day:'numeric',month:'short'});
+  const nl=ts?Math.min(4,pts.length):1;
+  for(let i=0;i<nl;i++){const t=nl===1?t0:t0+ts*i/(nl-1),x=X(t);g+=`<text x="${x.toFixed(1)}" y="${H-6}" text-anchor="${nl===1?'middle':i===0?'start':i===nl-1?'end':'middle'}" font-size="10" fill="var(--muted)" font-family="var(--font-body)">${fd(t)}</text>`;}
+  const xy=pts.map(p=>[X(p.t),Y(p.v)]), line=xy.map(a=>a[0].toFixed(1)+','+a[1].toFixed(1)).join(' ');
+  if(pts.length>1) g+=`<polygon points="${xy[0][0].toFixed(1)},${Y(lo).toFixed(1)} ${line} ${xy[xy.length-1][0].toFixed(1)},${Y(lo).toFixed(1)}" fill="var(--accent-soft)"/><polyline points="${line}" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>`;
+  const dots=pts.length<=60;
+  xy.forEach(([x,y],i)=>{if(dots||i===xy.length-1)g+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="3.4" fill="var(--accent)" stroke="var(--surface)" stroke-width="1.5"/>`;
+    g+=`<circle class="hit" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="11" fill="transparent" data-tip="${esc(pts[i].tip||'')}" data-x="${(x/W*100).toFixed(2)}" data-y="${(y/H*100).toFixed(2)}"/>`;});
+  return `<div class="tchart"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(o.label||'Chart')}: ${pts.length} points, latest ${esc(pts[pts.length-1].tip||'')}">${g}</svg><span class="ttip" hidden></span></div>`;
+}
+function showTip(el){
+  const box=el.closest('.tchart'); if(!box) return; const tip=box.querySelector('.ttip');
+  box.querySelectorAll('.hit.on').forEach(h=>h.classList.remove('on')); el.classList.add('on');
+  tip.textContent=el.dataset.tip; tip.style.left=el.dataset.x+'%'; tip.style.top=el.dataset.y+'%'; tip.hidden=false;
+  const x=Number(el.dataset.x); tip.style.transform=`translate(${x<18?'-12%':x>82?'-88%':'-50%'},calc(-100% - 12px))`;
+}
+
+/* ---------- training trends card ---------- */
+const tt={range:'90D',group:'W'};
+function trendBuckets(){
+  const now=new Date(), d=RANGES[tt.range]; let group=tt.group;
+  if(tt.range==='7D') group='D'; else if(group==='D'&&(!d||d>90)) group='W';
+  let start; if(d) start=new Date(now.getTime()-(d-1)*864e5); else {const all=sortedSessions();start=all.length?new Date(all[all.length-1].date):new Date(now.getTime()-29*864e5);}
+  const al=x=>{const y=new Date(x);y.setHours(0,0,0,0);if(group==='W')return weekStart(y);if(group==='M')y.setDate(1);return y;};
+  const step=x=>{const y=new Date(x);if(group==='D')y.setDate(y.getDate()+1);else if(group==='W')y.setDate(y.getDate()+7);else y.setMonth(y.getMonth()+1);return y;};
+  const out=[]; for(let b=al(start);b<=now&&out.length<400;b=step(b)) out.push({s:b,e:step(b)});
+  const lab=b=>group==='M'?b.s.toLocaleDateString(undefined,{month:'short',year:'numeric'}):group==='W'?'Week of '+b.s.toLocaleDateString(undefined,{day:'numeric',month:'short'}):b.s.toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short'});
+  return {list:out,group,lab};
+}
+function trainingTrends(){
+  const {list,group,lab}=trendBuckets(), all=sortedSessions();
+  const per=list.map(b=>{const ss=all.filter(s=>{const t=new Date(s.date);return t>=b.s&&t<b.e;});return {b,n:ss.length,vol:ss.reduce((a,s)=>a+(s.volume||0),0),min:ss.reduce((a,s)=>a+(s.durationMin||0),0),sets:ss.reduce((a,s)=>a+(s.doneSets||0),0)};});
+  const has=all.length>0;
+  const mk=(key,unit,f)=>has?per.map(p=>({t:p.b.s.getTime(),v:p[key],tip:`${lab(p.b)}: ${f?f(p[key]):p[key]} ${unit}`})):[];
+  const d=RANGES[tt.range], cut=d?Date.now()-d*864e5:0;
+  const bw=bodyList().filter(e=>e.weight&&new Date(e.date).getTime()>=cut).map(e=>({t:new Date(e.date).getTime(),v:e.weight,tip:`${new Date(e.date).toLocaleDateString(undefined,{day:'numeric',month:'short'})}: ${e.weight} kg`}));
+  if(num(profile.weight)&&profile.since&&new Date(profile.since).getTime()>=cut&&!bw.some(p=>p.t<=new Date(profile.since).getTime())) bw.unshift({t:new Date(profile.since).getTime(),v:num(profile.weight),tip:`Start: ${profile.weight} kg`});
+  const groups=tt.range==='7D'?[]:(d&&d<=90?['D','W','M']:['W','M']);
+  const empty='Not available just yet. Finish a workout to start this chart.';
+  return `<section class="card" id="tt">
+    <h2>Training trends</h2>
+    <div class="row between" style="gap:8px;flex-wrap:wrap"><span class="muted" style="font-size:13px">Tap a point for details</span>${groups.length?`<div class="seg small" aria-label="Group by">${groups.map(g=>`<button type="button" class="${group===g?'on':''}" aria-pressed="${group===g}" data-tt-group="${g}">${{D:'Day',W:'Week',M:'Month'}[g]}</button>`).join('')}</div>`:''}</div>
+    <div class="rng" aria-label="Time range">${Object.keys(RANGES).map(r=>`<button type="button" class="${tt.range===r?'on':''}" aria-pressed="${tt.range===r}" data-tt-range="${r}">${r}</button>`).join('')}</div>
+    <div class="trend"><div class="row between"><h3>Volume</h3><span class="muted" style="font-size:12px">kg per ${{D:'day',W:'week',M:'month'}[group]}</span></div>${trendChart(mk('vol','kg',v=>Math.round(v).toLocaleString()),{zero:true,label:'Volume',empty})}</div>
+    <div class="trend"><div class="row between"><h3>Frequency</h3><span class="muted" style="font-size:12px">workouts per ${{D:'day',W:'week',M:'month'}[group]}</span></div>${trendChart(mk('n','workouts'),{zero:true,int:true,label:'Frequency',empty})}</div>
+    <div class="trend"><div class="row between"><h3>Workout time</h3><span class="muted" style="font-size:12px">minutes per ${{D:'day',W:'week',M:'month'}[group]}</span></div>${trendChart(mk('min','min'),{zero:true,label:'Workout time',empty})}</div>
+    <div class="trend"><div class="row between"><h3>Bodyweight</h3><button type="button" class="btn small" data-body-log>+ Weigh-in</button></div>${trendChart(bw,{label:'Bodyweight',empty:'Not available just yet. Log your weight to see this chart.'})}</div>
+  </section>`;
+}
+
+/* ---------- exercise library, charts & records ---------- */
+let libFilter='all';
+function openLibrary(){
+  const counts={}; Object.values(sessions).forEach(s=>(s.entries||[]).forEach(e=>{if(e.sets.some(x=>x.done))counts[e.exId]=(counts[e.exId]||0)+1;}));
+  const mine=new Set(Object.keys(profile.customEx||{}));
+  const ids=Object.keys(EX).sort((a,b)=>EX[a][0].localeCompare(EX[b][0]));
+  const prim=id=>Object.entries(EX[id][3]||{}).filter(([,v])=>v>=.8).map(([k])=>MUSCLE_NAMES[k]).join(', ');
+  openSheet(`<div class="row between" style="align-items:flex-start"><div><span class="eyebrow">${ids.length} exercises</span><h2>Exercises</h2></div><button type="button" class="btn small" data-close>Close</button></div>
+   <label class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4 4"/></svg><input type="search" id="libq" placeholder="Search exercises or muscles" aria-label="Search exercises or muscles" autocomplete="off"></label>
+   <div class="row between" style="flex-wrap:wrap;gap:8px"><div class="seg small">${[['all','All'],['logged','Logged'],['mine','Yours']].map(([k,l])=>`<button type="button" class="${libFilter===k?'on':''}" data-libf="${k}">${l}</button>`).join('')}</div><button type="button" class="btn small primary" data-cx-new>+ Create exercise</button></div>
+   <ul class="swap-list" id="libList">${ids.map(id=>`<li data-search="${esc((EX[id][0]+' '+prim(id)).toLowerCase())}" data-logged="${counts[id]?1:0}" data-mine="${mine.has(id)?1:0}"><button type="button" class="swap-opt" data-exopen="${id}"><span><b>${esc(EX[id][0])}${mine.has(id)?' <span class="pill plain">Yours</span>':''}</b><span class="muted">${esc(prim(id)||({cond:'Conditioning',bw:'Bodyweight',load:'Weights'})[EX[id][1]])}</span></span><span class="muted num" style="font-size:12px">${counts[id]?counts[id]+'×':'›'}</span></button></li>`).join('')}</ul>
+   <p class="na" id="libNone" hidden>No exercises match.</p>`);
+  filterLibrary();
+}
+function filterLibrary(){
+  const q=(document.getElementById('libq')?.value||'').trim().toLowerCase(); let n=0;
+  document.querySelectorAll('#libList li').forEach(li=>{const hit=(!q||li.dataset.search.includes(q))&&(libFilter==='all'||(libFilter==='logged'&&li.dataset.logged==='1')||(libFilter==='mine'&&li.dataset.mine==='1'));li.hidden=!hit;if(hit)n++;});
+  const none=document.getElementById('libNone'); if(none){none.hidden=n>0;none.textContent=libFilter==='mine'&&!q?'Not available just yet. Tap “+ Create exercise” to add your own.':libFilter==='logged'&&!q?'Not available just yet. Finish a workout and your exercises show up here.':'No exercises match.';}
+}
+function exRecords(exId){
+  const hist=exHistory(exId); if(!hist.length) return null;
+  const r={heavy:null,best:null,reps:null,setVol:null,sessVol:null,rm:{},sessions:hist.length,sets:0};
+  hist.forEach(h=>{let sv=0; const date=h.s.date;
+    h.done.forEach(x=>{r.sets++; const w=x.w||0,n=x.r||0;
+      if(n>0&&(!r.reps||n>r.reps.r||(n===r.reps.r&&w>r.reps.w)))r.reps={r:n,w,date};
+      if(w>0&&n>0){ if(!r.heavy||w>r.heavy.w||(w===r.heavy.w&&n>r.heavy.r))r.heavy={w,r:n,date};
+        const e=e1rm(w,n); if(!r.best||e>r.best.e)r.best={e,w,r:n,date};
+        if(!r.setVol||w*n>r.setVol.v)r.setVol={v:w*n,w,r:n,date}; sv+=w*n;
+        [1,2,3,4,5,6,8,10,12,15].forEach(k=>{if(n>=k&&(!r.rm[k]||w>r.rm[k].w))r.rm[k]={w,date};}); }});
+    if(sv&&(!r.sessVol||sv>r.sessVol.v))r.sessVol={v:sv,date};});
+  return r;
+}
+const shortDate=d=>{const x=new Date(d);return x.toLocaleDateString(undefined,x.getFullYear()===new Date().getFullYear()?{day:'numeric',month:'short'}:{day:'numeric',month:'short',year:'2-digit'});};
+const EXM={e1rm:['Est. 1RM','kg'],top:['Heaviest','kg'],vol:['Volume','kg'],reps:['Best reps','reps'],sets:['Sets','sets']};
+function exSeries(exId,metric){
+  return exHistory(exId).slice().reverse().map(h=>{const t=new Date(h.s.date).getTime();let v=0;
+    if(metric==='e1rm')v=h.best; else if(metric==='top')v=h.top; else if(metric==='vol')v=h.done.reduce((a,x)=>a+(x.w>0&&x.r>0?x.w*x.r:0),0); else if(metric==='reps')v=Math.max(0,...h.done.map(x=>x.r||0)); else v=h.done.length;
+    return {t,v:Math.round(v*10)/10,tip:`${new Date(t).toLocaleDateString(undefined,{day:'numeric',month:'short'})}: ${metric==='vol'?Math.round(v).toLocaleString():Math.round(v*10)/10} ${EXM[metric][1]}`};}).filter(p=>p.v>0);
+}
+function exMetrics(exId,type){const r=exRecords(exId);if(type==='cond')return ['sets'];return r&&r.heavy?['e1rm','top','vol','reps']:['reps','sets'];}
+function exChartHTML(exId,metric){const pts=exSeries(exId,metric);return trendChart(pts,{label:EXM[metric][0],zero:metric==='sets'||metric==='reps',int:metric==='sets'||metric==='reps',empty:'Not available just yet'});}
+function exStatsHTML(exId,type){
+  const r=exRecords(exId);
+  if(!r) return `<div class="hist"><h3>Charts &amp; records</h3><p class="na">Not available just yet. Log this exercise and your charts and records show up here.</p></div>`;
+  const ms=exMetrics(exId,type), m0=ms[0];
+  const rec=(label,val,sub)=>`<div class="stat"><b>${val}</b><span>${label}</span>${sub?`<small>${sub}</small>`:''}</div>`;
+  const recs=type==='cond'?[rec('Sessions',r.sessions),rec('Rounds logged',r.sets)]
+    :r.heavy?[rec('Best est. <button type="button" class="abbr" data-abbr="1RM" data-ex="'+exId+'">1RM</button>',Math.round(r.best.e)+' kg',`${r.best.w}×${r.best.r} · ${shortDate(r.best.date)}`),rec('Heaviest',r.heavy.w+' kg',`×${r.heavy.r} · ${shortDate(r.heavy.date)}`),rec('Most reps',r.reps.r,`${r.reps.w?r.reps.w+' kg · ':''}${shortDate(r.reps.date)}`),rec('Best set',Math.round(r.setVol.v).toLocaleString()+' kg',`${r.setVol.w}×${r.setVol.r}`),rec('Best session',r.sessVol?Math.round(r.sessVol.v).toLocaleString()+' kg':'—',r.sessVol?shortDate(r.sessVol.date):''),rec('Total sets',r.sets,`${r.sessions} session${r.sessions===1?'':'s'}`)]
+    :[rec('Most reps',r.reps?r.reps.r:'—',r.reps?shortDate(r.reps.date):''),rec('Total sets',r.sets,`${r.sessions} session${r.sessions===1?'':'s'}`)];
+  const rmRows=r.heavy?[1,2,3,4,5,6,8,10,12,15].map(k=>`<tr><th scope="row">${k} RM</th><td class="num">${r.rm[k]?r.rm[k].w+' kg':'—'}</td><td class="num muted">${r.rm[k]?shortDate(r.rm[k].date):''}</td><td class="num">${Math.round(k===1?r.best.e:r.best.e/(1+k/30))} kg</td></tr>`).join(''):'';
+  return `<div class="hist">
+    <div class="row between"><h3>Charts &amp; records</h3><span class="muted" style="font-size:13px">${r.sessions} session${r.sessions===1?'':'s'}</span></div>
+    ${ms.length>1?`<div class="seg small" aria-label="Chart">${ms.map(k=>`<button type="button" class="${k===m0?'on':''}" data-exmetric="${k}" data-ex="${exId}">${EXM[k][0]}</button>`).join('')}</div>`:''}
+    <div id="exChart">${exChartHTML(exId,m0)}</div>
+    <div class="rec-grid">${recs.join('')}</div>
+    ${rmRows?`<details class="minor"><summary><span><b>Rep maxes</b><span class="muted">Best weight you've lifted for each rep count, plus an estimate</span></span>${CHEV}</summary><div class="minor-body"><table class="mt-table rm"><thead><tr><th scope="col">Reps</th><th scope="col" class="r">Lifted</th><th scope="col" class="r">When</th><th scope="col" class="r">Est.</th></tr></thead><tbody>${rmRows}</tbody></table></div></details>`:''}
+  </div>`;
+}
+
+/* =====================================================================
+   CUSTOM EXERCISES + CUSTOM PROGRAMS
+   ===================================================================== */
+let CUSTOM_IDS=[];
+const CP_COLORS=[['#ee8fb4','#2b0f1b','#f6b4cd','#2b0f1b'],['#d9534f','#ffffff','#ff8f8b','#2a0b0b'],['#d9782e','#ffffff','#ffb072','#2b1405'],['#b8921b','#1d1600','#f0cd5a','#231b00'],['#3f9b5a','#ffffff','#82d69d','#0b2414'],['#2f8a8f','#ffffff','#6cc3c8','#0b2224'],['#3c6fd8','#ffffff','#93b3ff','#0b1633'],['#7b5cd6','#ffffff','#b9a6ff','#1a1036'],['#17181c','#ffffff','#ececee','#111214']];
+const CP_KANJI=[['我','Self'],['鋼','Steel'],['龍','Dragon'],['雷','Thunder'],['覇','Conqueror'],['心','Heart'],['道','The path'],['闘','Fight'],['鬼','Demon'],['炎','Flame']];
+const WEEKDAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+const DAY_SLOTS={1:[0],2:[0,3],3:[0,2,4],4:[0,1,3,4],5:[0,1,3,4,5],6:[0,1,2,3,4,5],7:[0,1,2,3,4,5,6]};
+const defaultReps=id=>{const t=EX[id]&&EX[id][1];return t==='cond'?'30 s':t==='bw'?'8–15':'8–12';};
+function hydrateProgram(cp){
+  const days=(cp.days||[]).map((d,i)=>{
+    const exercises=(d.ex||[]).filter(x=>EX[x.id]).map(x=>{const L=EX[x.id],auto=x.role==='m'||x.role==='p';
+      return Object.assign({name:L[0],type:L[1],cue:L[2],m:L[3],x:EXPLOSIVE.has(x.id)},E(x.id,auto?0:Math.max(1,Number(x.sets)||3),auto?'':(x.reps||defaultReps(x.id)),Number(x.rest)||90,x.role||''));});
+    const mins=Math.max(15,Math.round(exercises.reduce((a,ex)=>a+rx(ex,6).sets*((ex.rest||90)+40),0)/60/5)*5);
+    return {name:d.name||('Day '+(i+1)),focus:d.focus||'Your session',mins,exercises,optional:!!d.optional,id:'d'+(i+1)};
+  });
+  const core=days.filter(d=>!d.optional).length, opt=days.length-core;
+  const p={id:cp.id,custom:true,name:cp.name||'My program',series:'Your programs',archetype:'Custom build',tags:['Custom',core+' days a week'],kanji:cp.kanji||'我',colors:CP_COLORS[cp.color||0]||CP_COLORS[0],
+    blurb:cp.blurb||'Your own program, run through the same 16-week progression as every character.',
+    traits:[['Build','Your own design'],['Days',core+' a week'+(opt?` + ${opt} optional`:'')],['Progression','16 weeks, 4 blocks, deload every 4th week']],
+    focus:'Your own split, run through the same engine as every character: main lifts follow the RPE blocks, muscle work runs 0–2 reps from failure, and every 4th week is a deload.',
+    sources:[],callouts:DEFAULT_CALLOUTS,days,weeks:16,build:1,female:false};
+  const ws=weeklySets(p); p.priority=Object.entries(ws).sort((a,b)=>b[1]-a[1]).slice(0,5).map(([k])=>k);
+  const g=ks=>Math.max(...ks.map(k=>ws[k]||0)), sc=v=>Math.round(Math.min(98,45+v*3));
+  const cond=days.filter(d=>!d.optional).reduce((a,d)=>a+d.exercises.filter(ex=>ex.type==='cond'||ex.x).length,0);
+  p.physique=[Math.min(95,45+cond*8),sc(g(['quads','hamstrings','glutes'])),sc(g(['lats','upperback','traps'])),sc(g(['abs','obliques'])),sc(g(['biceps','triceps'])),sc(g(['chest'])),sc(g(['shoulders']))];
+  const slots=DAY_SLOTS[Math.min(7,days.length)]||[]; p.schedule=WEEKDAYS.map((w,i)=>{const j=slots.indexOf(i);return [w,j>=0?'D'+(j+1):'—'];});
+  return p;
+}
+function applyCustom(){
+  const cx=profile.customEx||{};
+  CUSTOM_IDS.forEach(id=>{if(!cx[id]){delete EX[id];delete EQUIP[id];}});
+  CUSTOM_IDS=Object.keys(cx);
+  CUSTOM_IDS.forEach(id=>{const c=cx[id];EX[id]=[c.name,c.type||'load',c.cue||'Your exercise.',c.m||{}];EQUIP[id]=c.equip||'BW';});
+  for(let i=PROGRAMS.length-1;i>=0;i--) if(PROGRAMS[i].custom) PROGRAMS.splice(i,1);
+  const cps=Object.values(profile.customPrograms||{}).filter(c=>c&&c.id).sort((a,b)=>String(a.created||'').localeCompare(String(b.created||'')));
+  PROGRAMS.unshift(...cps.map(hydrateProgram));
+}
+const daysText=p=>{const c=coreDays(p),o=p.days.length-c;return `${c}${o?` + ${o}`:''} days`;};
+
+/* ---------- create / edit an exercise ---------- */
+let cxReturn=null;
+const EQ_OPTS=[['B','Barbell'],['D','Dumbbells / kettlebell'],['M','Machine or cable'],['P','Pull-up bar or dip station'],['BW','No equipment'],['S','Other']];
+function openCxForm(id,ret){
+  cxReturn=ret||null; const c=id?(profile.customEx||{})[id]:null; if(id&&!c) return;
+  const m=c?c.m||{}:{}, chk=(k,lvl)=>`<label class="chk"><input type="checkbox" data-mlvl="${lvl}" value="${k}" ${lvl==='p'?(m[k]>=.8?'checked':''):(m[k]>=.4&&m[k]<.8?'checked':'')}> ${MUSCLE_NAMES[k]}</label>`;
+  const sel=(sid,opts,val)=>`<select id="${sid}">${opts.map(([v,l])=>`<option value="${v}" ${String(val)===String(v)?'selected':''}>${esc(l)}</option>`).join('')}</select>`;
+  openSheet(`<div class="row between" style="align-items:flex-start"><div><span class="eyebrow">${c?'Edit':'New'} exercise</span><h2>${c?esc(c.name):'Create an exercise'}</h2></div><button type="button" class="btn small" data-close>Close</button></div>
+   <form class="form" id="cxForm" data-id="${id||''}">
+    <label>Name<input type="text" id="cx-name" value="${c?esc(c.name):''}" maxlength="48" required></label>
+    <div class="grid2"><label>Logged as${sel('cx-type',[['load','Weight × reps'],['bw','Bodyweight (+ optional kg)'],['cond','Timed / rounds']],c?c.type:'load')}</label>
+    <label>Equipment${sel('cx-equip',EQ_OPTS,c?c.equip:'D')}</label></div>
+    <fieldset><legend>Main muscles</legend><div class="checks">${Object.keys(MUSCLE_NAMES).filter(k=>k!=='shoulders').map(k=>chk(k,'p')).join('')}</div></fieldset>
+    <fieldset><legend>Also works <small class="muted">(counts as half a set)</small></legend><div class="checks">${Object.keys(MUSCLE_NAMES).filter(k=>k!=='shoulders').map(k=>chk(k,'s')).join('')}</div></fieldset>
+    <label><span class="lt">Coaching cue <small>optional</small></span><input type="text" id="cx-cue" value="${c?esc(c.cue||''):''}" maxlength="90" placeholder="e.g. Slow on the way down"></label>
+    <div class="row" style="gap:8px;flex-wrap:wrap"><button type="submit" class="btn primary">${c?'Save changes':'Create exercise'}</button>${c?(confirmKey==='cxdel:'+id?`<button type="button" class="btn" data-cx-del="${id}">Tap again to delete</button>`:`<button type="button" class="btn ghost" data-cx-del="${id}">Delete exercise</button>`):''}</div>
+   </form>`);
+  document.getElementById('cxForm').addEventListener('submit',e=>{
+    e.preventDefault();
+    const name=document.getElementById('cx-name').value.trim(); if(!name){toast('Give it a name');return;}
+    const mm={}; document.querySelectorAll('#cxForm [data-mlvl]:checked').forEach(i=>{const v=i.dataset.mlvl==='p'?1:.5;mm[i.value]=Math.max(mm[i.value]||0,v);});
+    const type=document.getElementById('cx-type').value;
+    if(type!=='cond'&&!Object.keys(mm).length){toast('Pick at least one muscle');return;}
+    const nid=id||'cx_'+Date.now().toString(36);
+    profile.customEx=Object.assign({},profile.customEx,{[nid]:{name,type,equip:document.getElementById('cx-equip').value,cue:document.getElementById('cx-cue').value.trim(),m:mm}});
+    saveProfile(); applyCustom(); toast(id?'Exercise updated':'Exercise created');
+    const ret=cxReturn; cxReturn=null;
+    if(ret&&ret.pick){pickExercise(nid,ret.pick);return;}
+    if(ui.view==='builder') render();
+    openExercise(nid,'lib');
+  });
+}
+function deleteCx(id){
+  const cx=Object.assign({},profile.customEx); delete cx[id]; profile.customEx=cx;
+  saveProfile(); applyCustom(); confirmKey=null; toast('Exercise deleted'); openLibrary();
+}
+
+/* ---------- exercise picker (add to workout / builder) ---------- */
+function openPicker(ctx){
+  const ids=Object.keys(EX).sort((a,b)=>EX[a][0].localeCompare(EX[b][0])), mine=new Set(Object.keys(profile.customEx||{}));
+  const ordered=[...ids.filter(i=>mine.has(i)),...ids.filter(i=>!mine.has(i))];
+  const inUse=new Set(ctx.for==='workout'&&draft?draftExercises().map(x=>x.id):[]);
+  const prim=id=>Object.entries(EX[id][3]||{}).filter(([,v])=>v>=.8).map(([k])=>MUSCLE_NAMES[k]).join(', ');
+  openSheet(`<div class="row between" style="align-items:flex-start"><div><span class="eyebrow">${ctx.for==='workout'?'Add to this workout':'Add to '+esc((bld&&bld.days[ctx.day]&&bld.days[ctx.day].name)||'day')}</span><h2>Pick an exercise</h2></div><button type="button" class="btn small" data-close>Close</button></div>
+   <label class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4 4"/></svg><input type="search" id="pickq" placeholder="Search exercises or muscles" aria-label="Search exercises or muscles" autocomplete="off"></label>
+   <button type="button" class="btn small" data-cx-new="pick" style="align-self:flex-start">+ Create a new exercise</button>
+   <ul class="swap-list" id="pickList">${ordered.map(id=>{const ok=exAvailable(id),used=inUse.has(id);return `<li data-search="${esc((EX[id][0]+' '+prim(id)).toLowerCase())}"><button type="button" class="swap-opt" data-pickex="${id}" ${used?'disabled':''}><span><b>${esc(EX[id][0])}${mine.has(id)?' <span class="pill plain">Yours</span>':''}</b><span class="muted">${used?'Already in this workout':esc(prim(id)||({cond:'Conditioning',bw:'Bodyweight',load:'Weights'})[EX[id][1]])}${ok?'':' · needs equipment you don’t have'}</span></span><span aria-hidden="true">+</span></button></li>`;}).join('')}</ul>`);
+  pickCtx=ctx;
+}
+let pickCtx=null;
+function pickExercise(id,ctx){
+  ctx=ctx||pickCtx; if(!ctx||!EX[id]) return;
+  if(ctx.for==='workout'){addExtra(id);return;}
+  if(ctx.for==='builder'&&bld&&bld.days[ctx.day]){bld.days[ctx.day].ex.push({id,sets:3,reps:defaultReps(id),rest:EX[id][1]==='cond'?60:90,role:''});saveBld();closeSheet();render();toast('Added '+EX[id][0]);}
+}
+const extraEx=x=>{const L=EX[x.id];return Object.assign({name:L[0],type:L[1],cue:L[2],m:L[3],x:EXPLOSIVE.has(x.id),extra:true},E(x.id,x.sets,x.reps,x.rest));};
+function addExtra(id){
+  if(!draft) return; draft.extra=draft.extra||[];
+  if(draftExercises().some(x=>x.id===id)){toast('Already in this workout');return;}
+  const x={id,sets:3,reps:defaultReps(id),rest:EX[id][1]==='cond'?60:90}; draft.extra.push(x);
+  const ex=extraEx(x), sug=suggestFor(ex,draft.week), n=rx(ex,draft.week).sets, r=parseInt(ex.reps), last=lastFor(id);
+  const lw=profile.autoProg!==false&&sug&&sug.w!=null?sug.w:(last&&last[0].w!=null?last[0].w:'');
+  draft.entries[id]=Array.from({length:n},()=>({w:lw,r:isNaN(r)?'':r,done:false}));
+  lsSet(DKEY,draft); closeSheet(); render(); toast('Added '+EX[id][0]);
+  setTimeout(()=>view.querySelector(`[data-card="${id}"]`)?.scrollIntoView({block:'center'}),30);
+}
+function removeExtra(id){
+  if(!draft||!draft.extra) return; draft.extra=draft.extra.filter(x=>x.id!==id); delete draft.entries[id];
+  lsSet(DKEY,draft); confirmKey=null; render(); toast('Removed');
+}
+
+/* ---------- program builder ---------- */
+const BKEY2='archetype.builder.v1';
+let bld=lsGet(BKEY2,null);
+const saveBld=()=>lsSet(BKEY2,bld);
+const blankDay=i=>({name:'Day '+(i+1),focus:'',optional:false,ex:[]});
+function startBuilder(id){
+  if(id){const cp=(profile.customPrograms||{})[id]; if(!cp) return;
+    if(draft&&draft.prog===id){toast('Finish or discard the current workout first');return;}
+    bld=JSON.parse(JSON.stringify(cp));}
+  else bld={id:null,name:'',kanji:'我',color:0,days:[blankDay(0)]};
+  saveBld(); confirmKey=null; ui.preview=null; go('builder');
+}
+function copyInto(pid){
+  const p=PROGRAMS.find(x=>x.id===pid); if(!p||!bld) return;
+  bld.days=p.days.map(d=>({name:d.name,focus:d.focus,optional:!!d.optional,ex:d.exercises.map(x=>({id:x.id,sets:x.sets||3,reps:x.reps||'',rest:x.rest||90,role:x.main?'m':x.power?'p':x.grow?'g':''}))}));
+  if(!bld.name) bld.name=p.name+' (mine)';
+  saveBld(); render(); toast('Copied '+p.name+'’s days');
+}
+const ROLE_OPTS=[['','Muscle'],['g','Muscle+'],['m','Main'],['p','Power']];
+const restLbl=s=>s<60?s+'s':s%60?Math.floor(s/60)+':'+String(s%60).padStart(2,'0'):(s/60)+'m';
+const REST_OPTS=[30,45,60,75,90,120,150,180,240];
+function viewBuilder(){
+  if(!bld) return viewNoProgram('program');
+  const c=CP_COLORS[bld.color||0], prev={kanji:bld.kanji||'我',name:bld.name||'My program',crack:false};
+  return `<button type="button" class="btn ghost small back" data-b-cancel>‹ ${bld.id?'Back to program':'Cancel'}</button>
+  <section class="section"><span class="eyebrow">${bld.id?'Edit program':'Build your own'}</span><h2>${bld.id?esc(bld.name||'Your program'):'Create a program'}</h2>
+   <p class="muted" style="font-size:14px">Pick your days and exercises. It runs on the same 16-week engine as the characters: RPE blocks on main lifts, auto progression and a deload every 4th week.</p></section>
+  <section class="card form builder themed" style="--pc-l:${c[0]};--pc-on-l:${c[1]};--pc-d:${c[2]};--pc-on-d:${c[3]}">
+    <div class="b-head">${emblem('bld',prev)}<label style="flex:1">Program name<input type="text" data-b="name" value="${esc(bld.name||'')}" maxlength="40" placeholder="My program"></label></div>
+    <fieldset><legend>Seal</legend><div class="kanji-pick">${CP_KANJI.map(([k,l])=>`<button type="button" class="${bld.kanji===k?'on':''}" data-b-kanji="${k}" aria-label="${l}" title="${l}" lang="ja">${k}</button>`).join('')}</div></fieldset>
+    <fieldset><legend>Colour</legend><div class="swatches">${CP_COLORS.map((cc,i)=>`<button type="button" class="${(bld.color||0)===i?'on':''}" data-b-color="${i}" style="background:linear-gradient(135deg,${cc[0]} 50%,${cc[2]} 50%)" aria-label="Colour ${i+1}"></button>`).join('')}</div></fieldset>
+    <div class="b-copy"><label style="flex:1">Start from a character<select id="b-copy-from"><option value="">Choose a program…</option>${PROGRAMS.filter(p=>!p.custom).map(p=>`<option value="${p.id}">${esc(p.name)} · ${esc(p.series)}</option>`).join('')}</select></label><button type="button" class="btn small" data-b-copy>Copy days</button></div>
+  </section>
+  ${bld.days.map((d,i)=>`<section class="card form b-day">
+    <div class="row between"><span class="day-num">DAY ${i+1}${d.optional?' · OPTIONAL':''}</span>${bld.days.length>1?`<button type="button" class="btn ghost small" data-b-rmday="${i}">${confirmKey==='rmday:'+i?'Tap again to remove':'Remove day'}</button>`:''}</div>
+    <div class="grid2"><label>Day name<input type="text" data-bd="${i}:name" value="${esc(d.name||'')}" maxlength="30"></label><label>Focus<input type="text" data-bd="${i}:focus" value="${esc(d.focus||'')}" maxlength="40" placeholder="e.g. Push, legs"></label></div>
+    ${i===0?'<p class="muted b-help">Type: <b>Main</b> and <b>Power</b> lifts get their sets, reps and RPE from the 16-week blocks. <b>Muscle</b> work uses your sets and reps. <b>Muscle+</b> adds a set from week 5.</p>':''}
+    <label class="chk" style="align-self:flex-start"><input type="checkbox" data-bd="${i}:optional" ${d.optional?'checked':''}> Optional day</label>
+    <div class="b-list">${d.ex.length?d.ex.map((x,j)=>{const L=EX[x.id],auto=x.role==='m'||x.role==='p';return `<div class="b-ex">
+      <div class="b-name">${L?esc(L[0]):'<span class="muted">Deleted exercise</span>'}</div>
+      <div class="b-ctl"><button type="button" class="mini-btn" data-b-up="${i}:${j}" aria-label="Move up" ${j?'':'disabled'}>↑</button><button type="button" class="mini-btn" data-b-down="${i}:${j}" aria-label="Move down" ${j<d.ex.length-1?'':'disabled'}>↓</button><button type="button" class="mini-btn" data-b-rmex="${i}:${j}" aria-label="Remove">✕</button></div>
+      <div class="b-fields">
+        <label><small>Type</small><select data-bx="${i}:${j}:role">${ROLE_OPTS.map(([v,l])=>`<option value="${v}" ${String(x.role||'')===v?'selected':''}>${l}</option>`).join('')}</select></label>
+        <label><small>Sets</small><input type="number" inputmode="numeric" min="1" max="10" data-bx="${i}:${j}:sets" value="${auto?'':x.sets}" placeholder="${auto?'auto':''}" ${auto?'disabled':''}></label>
+        <label><small>Reps</small><input type="text" data-bx="${i}:${j}:reps" value="${auto?'':esc(x.reps||'')}" placeholder="${auto?'auto':'8–12'}" ${auto?'disabled':''} maxlength="12"></label>
+        <label><small>Rest</small><select data-bx="${i}:${j}:rest">${REST_OPTS.map(s=>`<option value="${s}" ${Number(x.rest)===s?'selected':''}>${restLbl(s)}</option>`).join('')}</select></label>
+      </div></div>`;}).join(''):'<p class="muted" style="font-size:14px">No exercises yet.</p>'}</div>
+    <button type="button" class="btn small" data-b-addex="${i}" style="align-self:flex-start">+ Add exercise</button>
+  </section>`).join('')}
+  ${bld.days.length<7?'<button type="button" class="btn" data-b-addday>+ Add day</button>':''}
+  <button type="button" class="btn primary block" data-b-save>${bld.id?'Save changes':'Create program'}</button>
+  ${bld.id?(confirmKey==='cpdel'?`<div class="confirm"><span>Delete this program? Logged sessions stay in your history.</span><button type="button" class="btn small primary" data-b-delete>Delete</button><button type="button" class="btn small" data-cancel>Keep</button></div>`:'<button type="button" class="btn ghost" data-b-delask>Delete program</button>'):''}`;
+}
+function saveBuilder(){
+  if(!bld) return;
+  bld.name=(bld.name||'').trim()||'My program';
+  bld.days.forEach(d=>d.ex=d.ex.filter(x=>EX[x.id]));
+  if(!bld.days.some(d=>!d.optional&&d.ex.length)){toast('Add at least one exercise to a non-optional day');return;}
+  const id=bld.id||'u'+Date.now().toString(36);
+  const rec=Object.assign({},bld,{id,created:bld.created||new Date().toISOString(),updated:new Date().toISOString()});
+  profile.customPrograms=Object.assign({},profile.customPrograms,{[id]:rec});
+  saveProfile(); applyCustom(); const isNew=!bld.id; bld=null; saveBld();
+  ui.preview=ui.active===id?null:id; ui.week=null; go('program'); toast(isNew?'Program created':'Program saved');
+}
+function deleteProgram(){
+  if(!bld||!bld.id) return; const id=bld.id;
+  if(draft&&draft.prog===id){toast('Finish or discard the current workout first');return;}
+  const cps=Object.assign({},profile.customPrograms); delete cps[id]; profile.customPrograms=cps;
+  if(ui.active===id) ui.active=null;
+  saveProfile(); applyCustom(); bld=null; saveBld(); confirmKey=null; go('browse'); toast('Program deleted');
+}
+function builderInput(t){
+  if(!bld) return false;
+  if(t.dataset.b){bld[t.dataset.b]=t.value;saveBld();return true;}
+  if(t.dataset.bd){const [i,k]=t.dataset.bd.split(':');const d=bld.days[+i];if(!d)return true;d[k]=t.type==='checkbox'?t.checked:t.value;saveBld();if(k==='optional')render();return true;}
+  if(t.dataset.bx){const [i,j,k]=t.dataset.bx.split(':');const x=bld.days[+i]&&bld.days[+i].ex[+j];if(!x)return true;x[k]=k==='sets'||k==='rest'?Number(t.value):t.value;
+    if(k==='role'&&(t.value==='m'||t.value==='p')){x.sets=0;x.reps='';} else if(k==='role'&&!x.sets){x.sets=3;x.reps=defaultReps(x.id);}
+    saveBld(); if(k==='role') render(); return true;}
+  return false;
+}
+function builderClick(t){
+  if(!bld) return false; const ds=t.dataset;
+  const ij=v=>v.split(':').map(Number);
+  if(ds.bKanji){bld.kanji=ds.bKanji;saveBld();render();return true;}
+  if(ds.bColor!=null){bld.color=Number(ds.bColor);saveBld();render();return true;}
+  if(t.hasAttribute('data-b-copy')){const v=document.getElementById('b-copy-from').value;if(!v){toast('Choose a program to copy');return true;}copyInto(v);return true;}
+  if(t.hasAttribute('data-b-addday')){bld.days.push(blankDay(bld.days.length));saveBld();render();return true;}
+  if(ds.bRmday!=null){const i=+ds.bRmday;if(confirmKey==='rmday:'+i){bld.days.splice(i,1);confirmKey=null;saveBld();}else confirmKey='rmday:'+i;render();return true;}
+  if(ds.bAddex!=null){openPicker({for:'builder',day:+ds.bAddex});return true;}
+  if(ds.bUp){const [i,j]=ij(ds.bUp),a=bld.days[i].ex;if(j>0){[a[j-1],a[j]]=[a[j],a[j-1]];saveBld();render();}return true;}
+  if(ds.bDown){const [i,j]=ij(ds.bDown),a=bld.days[i].ex;if(j<a.length-1){[a[j+1],a[j]]=[a[j],a[j+1]];saveBld();render();}return true;}
+  if(ds.bRmex){const [i,j]=ij(ds.bRmex);bld.days[i].ex.splice(j,1);saveBld();render();return true;}
+  if(t.hasAttribute('data-b-save')){saveBuilder();return true;}
+  if(t.hasAttribute('data-b-delask')){confirmKey='cpdel';render();return true;}
+  if(t.hasAttribute('data-b-delete')){deleteProgram();return true;}
+  if(t.hasAttribute('data-b-cancel')){const id=bld.id;bld=null;saveBld();confirmKey=null;if(id){ui.preview=ui.active===id?null:id;go('program');}else go('browse');return true;}
+  return false;
+}
+
 /* ---------- render + nav ---------- */
 const view=document.getElementById('view');
 function updateNavDot(){document.querySelectorAll('nav.tabs button').forEach(b=>{b.classList.toggle('on',b.dataset.tab===ui.view);b.querySelector('.dot')?.remove();if(b.dataset.tab==='workout'&&draft){const s=document.createElement('span');s.className='dot';b.appendChild(s)}})}
 function render(){
   setProgram(ui.view==='workout'&&draft?(draft.prog||'itadori'):ui.view==='program'?(ui.preview||ui.active):ui.active);
-  view.innerHTML=ui.view==='browse'?viewBrowse():ui.view==='program'?((ui.preview||ui.active)?viewProgram():viewNoProgram('program')):(ui.view==='workout'&&!ui.active&&!draft)?viewNoProgram('workout'):ui.view==='workout'?viewWorkout():ui.view==='history'?viewHistory():viewYou();
+  view.innerHTML=ui.view==='builder'?viewBuilder():ui.view==='browse'?viewBrowse():ui.view==='program'?((ui.preview||ui.active)?viewProgram():viewNoProgram('program')):(ui.view==='workout'&&!ui.active&&!draft)?viewNoProgram('workout'):ui.view==='workout'?viewWorkout():ui.view==='history'?viewHistory():viewYou();
   updateNavDot(); tickClock();
   const c=view.querySelector('.chips'),on=c&&c.querySelector('.chip.on');
   if(on) c.scrollLeft=on.offsetLeft-c.clientWidth/2+on.offsetWidth/2;
@@ -2552,19 +3487,42 @@ function go(tab){ui.view=tab;confirmKey=null;saveUI();render();window.scrollTo({
 document.querySelector('nav.tabs').addEventListener('click',e=>{const b=e.target.closest('[data-tab]');if(b){ui.preview=null;go(b.dataset.tab);}});
 
 /* ---------- workout actions ---------- */
+function swapsFor(d){
+  const swaps={},autoSwapped=[],saved=(profile.swaps&&profile.swaps[PROGRAM.id])||{};
+  d.exercises.forEach(ex=>{
+    let id=saved[ex.id]&&EX[saved[ex.id]]&&exAvailable(saved[ex.id])?saved[ex.id]:ex.id;
+    if(!exAvailable(id)){const alt=altsFor(ex.id).find(exAvailable);if(alt){id=alt;autoSwapped.push(ex.name+' → '+EX[alt][0]);}}
+    if(id!==ex.id) swaps[ex.id]=id;
+  });
+  return {swaps,autoSwapped};
+}
+function openPreview(w,dayId){
+  const d=dayById(dayId); if(!d) return;
+  const same=draft&&(draft.prog||'itadori')===PROGRAM.id&&draft.week===w&&draft.dayId===dayId;
+  if(same){go('workout');return;}
+  const {swaps,autoSwapped}=swapsFor(d), exs=d.exercises.map(ex=>swaps[ex.id]?makeEx(ex,swaps[ex.id]):ex);
+  const planned=plannedSets(exs,w), totalSets=exs.reduce((a,ex)=>a+rx(ex,w).sets,0), done=sessions[keyOf(w,d.id)];
+  const ph=phaseOf(w), canStart=PROGRAM.id===ui.active;
+  openSheet(`<div class="themed preview" style="${themeVars(PROGRAM)}">
+    <div class="row between" style="align-items:flex-start"><div style="min-width:0"><span class="eyebrow">${esc(PROGRAM.name)} · Week ${w} · ${ph.name}</span><h2>${esc(d.name)}</h2><p class="muted" style="font-size:14px">${esc(d.focus)}</p></div><button type="button" class="btn small" data-close>Close</button></div>
+    <div class="pv-stats"><div class="stat"><b>${exs.length}</b><span>Exercises</span></div><div class="stat"><b>${totalSets}</b><span>Sets</span></div><div class="stat"><b>~${d.mins}</b><span>Minutes</span></div></div>
+    ${done?`<p class="note">Done ${fmtDate(done.date)}. Starting again replaces that log.</p>`:''}
+    ${isDeload(w)?'<p class="note">Deload week: lighter weights, fewer sets, done fast.</p>':''}
+    ${autoSwapped.length?`<p class="note">Swapped for your equipment: ${autoSwapped.map(esc).join(', ')}.</p>`:''}
+    <div class="pv-mus"><div class="row between"><h3>Muscles worked</h3><span class="muted" style="font-size:12px">planned sets</span></div>${sessHeat(planned,'Planned sets per muscle')}</div>
+    <div><h3>Exercises</h3><ol class="pv-list">${exs.map(ex=>{const sug=suggestFor(ex,w),last=lastFor(ex.id);return `<li><div class="pv-row"><b>${esc(ex.name)}</b><span class="num">${esc(rxText(ex,w))}</span></div>
+      <span class="muted">${sug&&sug.w!=null?`Try ${sug.w} kg`:''}${sug&&sug.w!=null&&last&&ex.type!=='cond'?' · ':''}${last&&ex.type!=='cond'?`Last: ${last.map(x=>`${x.w??(ex.type==='bw'?'BW':0)}×${x.r??'–'}`).join(', ')}`:''}${!sug&&!last?esc(ex.cue):''}</span></li>`;}).join('')}</ol></div>
+    ${draft?`<p class="note">You have a workout in progress. Finish or discard it before starting this one.</p><button type="button" class="btn primary block" data-tab-go="workout">Go to current workout</button>`
+     :canStart?`<button type="button" class="btn primary block" data-start-go="${w}|${d.id}">Start workout</button>`:'<p class="note">Select this program to start its sessions.</p>'}
+  </div>`);
+}
 function startWorkout(w,dayId){
   if(PROGRAM.id!==ui.active){toast('Select this program to start it');return;}
   if(draft&&!((draft.prog||'itadori')===PROGRAM.id&&draft.week===w&&draft.dayId===dayId)){ go('workout'); toast('Finish or discard the current workout first'); return; }
   if(!draft){
-    const d=dayById(dayId),entries={},swaps={},autoSwapped=[];
-    const saved=(profile.swaps&&profile.swaps[PROGRAM.id])||{};
-    d.exercises.forEach(ex=>{
-      let id=saved[ex.id]&&exAvailable(saved[ex.id])?saved[ex.id]:ex.id;
-      if(!exAvailable(id)){const alt=altsFor(ex.id).find(exAvailable);if(alt){id=alt;autoSwapped.push(ex.name+' → '+EX[alt][0]);}}
-      if(id!==ex.id) swaps[ex.id]=id;
-    });
+    const d=dayById(dayId),entries={},{swaps,autoSwapped}=swapsFor(d);
     draft={prog:PROGRAM.id,week:w,dayId,startedAt:Date.now(),entries,swaps,autoSwapped};
-    draftExercises().forEach(ex=>{const n=rx(ex,w).sets,last=lastFor(ex.id);const sug=suggestFor(ex,w);const lw=sug&&sug.w!=null?sug.w:(last&&last[0].w!=null?last[0].w:'');const r=parseInt(rx(ex,w).reps);
+    draftExercises().forEach(ex=>{const n=rx(ex,w).sets,last=lastFor(ex.id);const sug=suggestFor(ex,w);const lw=profile.autoProg!==false&&sug&&sug.w!=null?sug.w:(last&&last[0].w!=null?last[0].w:'');const r=parseInt(rx(ex,w).reps);
       entries[ex.id]=Array.from({length:n},()=>({w:lw,r:isNaN(r)?'':r,done:false}));});
     lsSet(DKEY,draft);
   }
@@ -2589,7 +3547,20 @@ async function finishWorkout(){
   if(sum.rankUp) showRankUp(prog,rankBefore,rankAfter,()=>openSummary(sum)); else openSummary(sum);
 }
 view.addEventListener('click',e=>{
+  const tp=e.target.closest('[data-tip]'); if(tp){showTip(tp);return;}
   const t=e.target.closest('button'); if(!t) return;
+  if(ui.view==='builder'&&builderClick(t)) return;
+  if(t.dataset.mtMode){mt.mode=t.dataset.mtMode;view.querySelector('#mt').outerHTML=muscleTracker();return;}
+  if(t.dataset.mtRange){mt.range=t.dataset.mtRange;view.querySelector('#mt').outerHTML=muscleTracker();return;}
+  if(t.hasAttribute('data-mt-info')){openMtInfo();return;}
+  if(t.dataset.ttRange){tt.range=t.dataset.ttRange;view.querySelector('#tt').outerHTML=trainingTrends();return;}
+  if(t.dataset.ttGroup){tt.group=t.dataset.ttGroup;view.querySelector('#tt').outerHTML=trainingTrends();return;}
+  if(t.hasAttribute('data-exlib')){openLibrary();return;}
+  if(t.dataset.exopen){openExercise(t.dataset.exopen,'lib');return;}
+  if(t.hasAttribute('data-addex')){openPicker({for:'workout'});return;}
+  if(t.dataset.rmex){if(confirmKey==='rmex:'+t.dataset.rmex)removeExtra(t.dataset.rmex);else{confirmKey='rmex:'+t.dataset.rmex;t.textContent='Tap to remove';}return;}
+  if(t.hasAttribute('data-cp-new')){startBuilder(null);return;}
+  if(t.dataset.cpEdit){startBuilder(t.dataset.cpEdit);return;}
   if(t.dataset.pick){ui.preview=t.dataset.pick===ui.active?null:t.dataset.pick;ui.week=null;go('program');return;}
   if(t.dataset.abbr){e.stopPropagation();openAbbr(t.dataset);return;}
   if(t.dataset.exinfo){openExercise(t.dataset.exinfo);return;}
@@ -2611,7 +3582,7 @@ view.addEventListener('click',e=>{
   }
   if(t.dataset.tab==='program'){ui.preview=null;}
   if(t.dataset.series){view.querySelectorAll('[data-series]').forEach(b=>b.classList.toggle('on',b===t));filterBrowse();return;}
-  if(t.dataset.start){const [w,d]=t.dataset.start.split('|');startWorkout(Number(w),d);return;}
+  if(t.dataset.start){const [w,d]=t.dataset.start.split('|');openPreview(Number(w),d);return;}
   if(t.dataset.week){ui.week=Number(t.dataset.week);saveUI();render();return;}
   if(t.dataset.tab){go(t.dataset.tab);return;}
   if(t.hasAttribute('data-tick')){
@@ -2637,11 +3608,14 @@ view.addEventListener('click',e=>{
 });
 view.addEventListener('input',e=>{
   if(e.target.id==='q'){filterBrowse();return;}
+  if(ui.view==='builder'){if(e.target.type!=='checkbox'&&e.target.tagName!=='SELECT')builderInput(e.target);return;}
   const inp=e.target; if(!inp.dataset.f||!draft) return;
   const row=inp.closest('.set'); draft.entries[row.dataset.ex][Number(row.dataset.i)][inp.dataset.f]=inp.value; lsSet(DKEY,draft);
   if(inp.dataset.f==='w'&&row.dataset.i==='0'){const exo=draftExercises().find(x=>x.id===row.dataset.ex);const slot=view.querySelector(`[data-card="${row.dataset.ex}"] .warm-slot`);if(exo&&slot)slot.innerHTML=warmupHTML(exo,num(inp.value));}
 });
 
+view.addEventListener('change',e=>{if(ui.view==='builder'&&(e.target.type==='checkbox'||e.target.tagName==='SELECT')&&e.target.id!=='b-copy-from')builderInput(e.target);});
+view.addEventListener('toggle',e=>{const d=e.target;if(!d.matches||!d.matches('details.sess')||!d.open)return;const slot=d.querySelector('.sess-mus-slot');if(!slot||slot.childElementCount)return;const s=sessions[d.dataset.sid];if(!s)return;const ms=muscleSets([s]);slot.innerHTML=Object.keys(ms).length?sessHeat(ms,'Sets per muscle'):'<p class="na">Not available just yet</p>';},true);
 function refreshCard(ex){const slot=view.querySelector(`[data-card="${ex.id}"] .effort-slot`);if(slot)slot.innerHTML=effortNote(ex,draft.entries[ex.id]||[]);}
 view.addEventListener('submit',e=>{
   if(e.target.id!=='profileForm') return; e.preventDefault();
@@ -2651,7 +3625,7 @@ view.addEventListener('submit',e=>{
   if(age<13||age>99||height<120||height>230||weight<30||weight>250){toast('Check those numbers look right');return;}
   const plates=v('pf-plates').split(/[,\s]+/).map(Number).filter(x=>x>0&&x<=50);
   Object.assign(profile,{name:v('pf-name'),sex,age,height,weight,experience:v('pf-exp'),activity:v('pf-act'),goal:v('pf-goal'),equipment:v('pf-equip'),
-    injuries:[...view.querySelectorAll('.checks input:checked')].map(i=>i.value),bar:num(v('pf-bar'))||20,plates:plates.length?plates:PROFILE_DEFAULT.plates});
+    injuries:[...view.querySelectorAll('.checks input:checked')].map(i=>i.value),autoProg:!!document.getElementById('pf-auto')?.checked,bar:num(v('pf-bar'))||20,plates:plates.length?plates:PROFILE_DEFAULT.plates});
   if(!profile.since) profile.since=dayKey(new Date());
   youEditing=false; saveProfile(); render(); toast('Profile saved');
 });
@@ -2670,6 +3644,8 @@ document.getElementById('restSkip').onclick=stopRest;
 let toastT;
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>t.hidden=true,2400);}
 
+applyCustom();
+if(ui.active&&!PROGRAMS.some(p=>p.id===ui.active)){ui.active=null;if(!draft)ui.view='browse';}
 render();
 initRemote();
 </script>
