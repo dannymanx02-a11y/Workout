@@ -619,6 +619,26 @@ body.sheet-open{overflow:hidden}
 .otsu{font-family:var(--font-kanji);font-size:18px;color:var(--accent);letter-spacing:.06em}
 .otsu small{font-family:var(--font-body);font-size:12px;color:var(--muted);letter-spacing:.02em}
 .ru-jp{position:relative;z-index:2;font-family:var(--font-kanji);font-size:28px;color:#fff;letter-spacing:.3em;opacity:0;animation:ruUp .4s .2s ease-out forwards;text-shadow:0 2px 0 rgba(0,0,0,.4)}
+
+/* spotify mini player */
+.miniplayer{position:fixed;left:max(14px,env(safe-area-inset-left,0px));right:max(14px,env(safe-area-inset-right,0px));bottom:calc(var(--nav-gap) + 64px + 8px);max-width:460px;margin:0 auto;z-index:21;background:color-mix(in srgb,var(--surface) 92%,transparent);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 24px rgba(0,0,0,.18);overflow:hidden}
+.mp-in{display:flex;align-items:center;gap:10px;padding:8px 8px 8px 8px}
+.mp-art{width:40px;height:40px;border-radius:8px;object-fit:cover;flex:0 0 auto;background:var(--surface-2)}
+.mp-empty{display:grid;place-items:center;color:var(--muted);font-size:18px}
+.mp-meta{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.25}
+.mp-meta b{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mp-meta span{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mp-btn{flex:0 0 auto;width:38px;height:38px;border:0;border-radius:50%;background:transparent;display:grid;place-items:center;color:var(--ink);padding:0}
+.mp-btn svg{width:20px;height:20px;fill:currentColor;stroke:currentColor;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.mp-btn[data-sp="toggle"] svg path[d^="M8 5v14"]{fill:none;stroke-width:3}
+.mp-main{background:var(--accent);color:var(--on-accent);width:42px;height:42px}
+a.mp-btn svg{fill:none}
+.mp-bar{display:block;height:3px;background:var(--line)}
+.mp-bar i{display:block;height:100%;background:var(--accent)}
+body.has-player .app{padding-bottom:calc(var(--nav-gap) + 64px + 190px)}
+body.has-player .toast{bottom:calc(var(--nav-gap) + 64px + 150px)}
+.sp-steps{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:14px}
+.sp-uri{display:block;margin-top:4px;padding:8px 10px;border-radius:8px;background:var(--surface-2);font-family:var(--font-mono);font-size:12px;word-break:break-all;user-select:all}
 </style>
 
 <div class="app" id="view"></div>
@@ -631,6 +651,7 @@ body.sheet-open{overflow:hidden}
     <button type="button" id="restSkip">Skip</button>
   </div>
 </div>
+<div class="miniplayer" id="miniplayer" hidden></div>
 <div class="toast" id="toast" hidden></div>
 <div class="sheet" id="sheet" hidden></div>
 <div class="ru-wrap" id="rankup" hidden></div>
@@ -3048,6 +3069,7 @@ function viewYou(){
   <section class="card"><div class="row between"><h3>Consistency</h3><span class="muted" style="font-size:13px">${streak?`<b class="num">${streak}</b>-week streak`:'2+ sessions a week builds a streak'}</span></div>
     ${calendarHTML(16)}
   </section>
+  ${spotifyCard()}
   ${viewProgress().replace('<span class="eyebrow">Progress</span>','<span class="eyebrow" style="margin-top:6px">Lifting stats</span>')}`;
 }
 
@@ -3602,6 +3624,8 @@ view.addEventListener('click',e=>{
   if(t.dataset.exopen){openExercise(t.dataset.exopen,'lib');return;}
   if(t.hasAttribute('data-addex')){openPicker({for:'workout'});return;}
   if(t.dataset.rmex){if(confirmKey==='rmex:'+t.dataset.rmex)removeExtra(t.dataset.rmex);else{confirmKey='rmex:'+t.dataset.rmex;t.textContent='Tap to remove';}return;}
+  if(t.hasAttribute('data-sp-refresh')){spRefresh();toast('Refreshed');return;}
+  if(t.hasAttribute('data-sp-off')){sp={clientId:sp.clientId};spSave();spState=null;spPoll();render();toast('Spotify disconnected');return;}
   if(t.hasAttribute('data-cp-new')){startBuilder(null);return;}
   if(t.dataset.cpEdit){startBuilder(t.dataset.cpEdit);return;}
   if(t.dataset.pick){ui.preview=t.dataset.pick===ui.active?null:t.dataset.pick;ui.week=null;go('program');return;}
@@ -3661,6 +3685,7 @@ view.addEventListener('change',e=>{if(ui.view==='builder'&&(e.target.type==='che
 view.addEventListener('toggle',e=>{const d=e.target;if(!d.matches||!d.matches('details.sess')||!d.open)return;const slot=d.querySelector('.sess-mus-slot');if(!slot||slot.childElementCount)return;const s=sessions[d.dataset.sid];if(!s)return;const ms=muscleSets([s]);slot.innerHTML=Object.keys(ms).length?sessHeat(ms,'Sets per muscle'):'<p class="na">Not available just yet</p>';},true);
 function refreshCard(ex){const slot=view.querySelector(`[data-card="${ex.id}"] .effort-slot`);if(slot)slot.innerHTML=effortNote(ex,draft.entries[ex.id]||[]);}
 view.addEventListener('submit',e=>{
+  if(e.target.id==='spForm'){e.preventDefault();const v=document.getElementById('sp-id').value.trim();if(!/^[0-9a-f]{32}$/i.test(v)){toast('That doesn’t look like a Client ID');return;}sp.clientId=v;spSave();spConnect();return;}
   if(e.target.id!=='profileForm') return; e.preventDefault();
   const v=id=>document.getElementById(id).value.trim();
   const sex=v('pf-sex'),age=num(v('pf-age')),height=num(v('pf-height')),weight=num(v('pf-weight'));
@@ -3687,10 +3712,107 @@ document.getElementById('restSkip').onclick=stopRest;
 let toastT;
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>t.hidden=true,2400);}
 
+/* =====================================================================
+   SPOTIFY MINI PLAYER (Web API + PKCE; works in the home-screen app, not inside Claude)
+   ===================================================================== */
+const SP={key:'archetype.spotify.v1',api:'https://api.spotify.com/v1',scopes:'user-read-playback-state user-modify-playback-state user-read-currently-playing'};
+const IN_CLAUDE=!!(window.claude&&typeof window.claude.use==='function');
+let sp=lsGet(SP.key,{}), spState=null, spTimer=null, spBusy=false, spLastPlay=0;
+const SP_LINGER=5*60*1000; /* keep the player for 5 min after music pauses, so you can resume */
+const spSave=()=>lsSet(SP.key,sp);
+const spRedirect=()=>location.origin+location.pathname;
+const spConnected=()=>!!(sp.refresh&&sp.clientId);
+const b64url=buf=>btoa(String.fromCharCode(...new Uint8Array(buf))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+async function spConnect(){
+  if(IN_CLAUDE){toast('Spotify works in the home-screen app');return;}
+  if(!sp.clientId){toast('Add your Spotify Client ID first');return;}
+  const verifier=b64url(crypto.getRandomValues(new Uint8Array(48))), state=b64url(crypto.getRandomValues(new Uint8Array(12)));
+  const challenge=b64url(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(verifier)));
+  sp.verifier=verifier; sp.state=state; spSave();
+  location.href='https://accounts.spotify.com/authorize?'+new URLSearchParams({client_id:sp.clientId,response_type:'code',redirect_uri:spRedirect(),code_challenge_method:'S256',code_challenge:challenge,state,scope:SP.scopes});
+}
+async function spToken(body){
+  const r=await fetch('https://accounts.spotify.com/api/token',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(body)});
+  if(!r.ok) throw new Error('token '+r.status);
+  const j=await r.json(); sp.access=j.access_token; sp.exp=Date.now()+(j.expires_in-60)*1000; if(j.refresh_token) sp.refresh=j.refresh_token; spSave();
+}
+async function spHandleRedirect(){
+  const q=new URLSearchParams(location.search); if(!q.has('code')&&!q.has('error')) return;
+  const ok=q.get('state')&&q.get('state')===sp.state, code=q.get('code');
+  history.replaceState(null,'',spRedirect());
+  if(!ok||!code){toast(q.get('error')==='access_denied'?'Spotify connection cancelled':'Spotify connection failed');return;}
+  try{await spToken({grant_type:'authorization_code',code,redirect_uri:spRedirect(),client_id:sp.clientId,code_verifier:sp.verifier});delete sp.verifier;delete sp.state;spSave();toast('Spotify connected');spPoll();if(ui.view==='you')render();}
+  catch(e){toast('Spotify connection failed. Check the redirect URI.');}
+}
+async function spAccess(){
+  if(!spConnected()) return null;
+  if(sp.access&&Date.now()<sp.exp) return sp.access;
+  try{await spToken({grant_type:'refresh_token',refresh_token:sp.refresh,client_id:sp.clientId});return sp.access;}
+  catch(e){return null;}
+}
+async function spCall(method,path){
+  const t=await spAccess(); if(!t) return {status:401};
+  try{const r=await fetch(SP.api+path,{method,headers:{Authorization:'Bearer '+t}});
+    let j=null; if(r.status!==204){try{j=await r.json();}catch(e){}}
+    return {status:r.status,json:j};}catch(e){return {status:0};}
+}
+async function spRefresh(){
+  if(!spConnected()||IN_CLAUDE){spState=null;spRender();return;}
+  const r=await spCall('GET','/me/player?additional_types=episode');
+  spState=r.status===200&&r.json&&r.json.item?r.json:(r.status===204||r.status===200?{idle:true}:spState);
+  if(spState&&spState.is_playing) spLastPlay=Date.now();
+  if(r.status===401){spState=null;}
+  spRender();
+}
+function spPoll(){clearInterval(spTimer);if(!spConnected()||IN_CLAUDE){spRender();return;}spRefresh();spTimer=setInterval(()=>{if(document.visibilityState==='visible')spRefresh();},5000);}
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&spConnected())spRefresh();});
+async function spAction(a){
+  if(spBusy) return; spBusy=true;
+  const map={toggle:spState&&spState.is_playing?['PUT','/me/player/pause']:['PUT','/me/player/play'],next:['POST','/me/player/next'],prev:['POST','/me/player/previous']};
+  if(a==='toggle'&&spState&&!spState.idle){spState.is_playing=!spState.is_playing;spRender();}
+  const r=await spCall(...map[a]); spBusy=false;
+  const reason=r.json&&r.json.error&&r.json.error.reason;
+  if(r.status===403) toast(reason==='PREMIUM_REQUIRED'?'Spotify Premium is needed to control playback':'Spotify said no to that one');
+  else if(r.status===404) toast('Start a song in Spotify first, then control it here');
+  else if(r.status>=400||r.status===0) toast('Could not reach Spotify');
+  setTimeout(spRefresh,450);
+}
+function spRender(){
+  const el=document.getElementById('miniplayer'); if(!el) return;
+  const show=spConnected()&&!IN_CLAUDE&&!!spState&&!spState.idle&&!!spState.item&&(spState.is_playing||Date.now()-spLastPlay<SP_LINGER);
+  el.hidden=!show; document.body.classList.toggle('has-player',show); if(!show) return;
+  if(false){el.innerHTML=`<div class="mp-in"><span class="mp-art mp-empty" aria-hidden="true">♪</span><span class="mp-meta"><b>Nothing playing</b><span>Start music in Spotify</span></span><a class="mp-btn" href="spotify:" aria-label="Open Spotify"><svg viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a></div>`;return;}
+  const it=spState.item, art=(it.album&&it.album.images||it.images||[]).slice(-1)[0], artist=it.artists?it.artists.map(a=>a.name).join(', '):(it.show&&it.show.name)||'';
+  const pct=it.duration_ms?Math.min(100,(spState.progress_ms||0)/it.duration_ms*100):0;
+  el.innerHTML=`<div class="mp-in">
+    ${art?`<img class="mp-art" src="${esc(art.url)}" alt="">`:'<span class="mp-art mp-empty" aria-hidden="true">♪</span>'}
+    <span class="mp-meta"><b>${esc(it.name)}</b><span>${esc(artist)}${spState.device?` · ${esc(spState.device.name)}`:''}</span></span>
+    <button type="button" class="mp-btn" data-sp="prev" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M6 5v14M19 5L9 12l10 7z"/></svg></button>
+    <button type="button" class="mp-btn mp-main" data-sp="toggle" aria-label="${spState.is_playing?'Pause':'Play'}">${spState.is_playing?'<svg viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></svg>':'<svg viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></svg>'}</button>
+    <button type="button" class="mp-btn" data-sp="next" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M18 5v14M5 5l10 7-10 7z"/></svg></button>
+  </div><span class="mp-bar" aria-hidden="true"><i style="width:${pct.toFixed(1)}%"></i></span>`;
+}
+document.getElementById('miniplayer').addEventListener('click',e=>{const b=e.target.closest('[data-sp]');if(b)spAction(b.dataset.sp);});
+function spotifyCard(){
+  if(IN_CLAUDE) return `<section class="card"><div class="row between"><h3>Spotify</h3><span class="pill plain">Home-screen app</span></div><p class="muted" style="font-size:14px">The mini player that controls your Spotify music only works in the home-screen version of the app (your GitHub one). Set it up there in this card.</p></section>`;
+  return `<section class="card"><div class="row between"><h3>Spotify</h3>${spConnected()?'<span class="pill">Connected</span>':''}</div>
+    ${spConnected()?`<p class="muted" style="font-size:14px">The mini player pops up above the tab bar only while Spotify is playing on one of your devices, and hides a few minutes after the music stops. Controlling playback needs Spotify Premium.</p><div class="row" style="gap:8px;flex-wrap:wrap"><button type="button" class="btn small" data-sp-refresh>Refresh</button><button type="button" class="btn small ghost" data-sp-off>Disconnect</button></div>`
+    :`<p class="muted" style="font-size:14px">Control your Spotify music from a mini player in the app: play, pause and skip. It never starts or stops anything on its own.</p>
+      <details class="minor"><summary><span class="muted">One-time setup (2 minutes)</span>${CHEV}</summary><div class="minor-body" style="gap:8px">
+        <ol class="sp-steps"><li>Go to <a href="https://developer.spotify.com/dashboard" target="_blank" rel="noopener">developer.spotify.com/dashboard</a>, log in and tap <b>Create app</b>.</li>
+        <li>Any name and description. Tick <b>Web API</b>. For <b>Redirect URI</b>, paste:<code class="sp-uri">${esc(spRedirect())}</code></li>
+        <li>Save, open the app's settings and copy the <b>Client ID</b> into the box below.</li></ol>
+        <p class="muted" style="font-size:12px">Spotify only lets an app's owner use it in this mode, and the owner needs Premium. Your Client ID stays on this phone.</p>
+      </div></details>
+      <form class="form" id="spForm"><label>Spotify Client ID<input type="text" id="sp-id" value="${esc(sp.clientId||'')}" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="32 letters and numbers"></label><button type="submit" class="btn primary">Connect Spotify</button></form>`}
+  </section>`;
+}
+
 applyCustom();
 if(ui.active&&!PROGRAMS.some(p=>p.id===ui.active)){ui.active=null;if(!draft)ui.view='browse';}
 render();
 initRemote();
+spHandleRedirect().finally(spPoll);
 </script>
 <script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));}</script>
 </body>
