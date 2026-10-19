@@ -14,6 +14,7 @@
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}*{-webkit-tap-highlight-color:transparent}body{margin:0;font:14px system-ui,-apple-system,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
+<script>window.SHUGYO_PHOTOS=["ace", "agito", "allmight", "baki", "bakugo", "bisky", "broly", "casca", "chahaein", "choso", "deku", "doppo", "endeavor", "eren", "garou", "gohan", "gojo", "goku", "griffith", "guts", "guy", "gyomei", "hakari", "hisoka", "ichigo", "inosuke", "ippo", "itadori", "jack", "jinwoo", "jonathan", "jotaro", "julius", "kenpachi", "kenshiro", "levi", "luffy", "maki", "megumi", "mikasa", "mirio", "miyata", "nanami", "naruto", "nobara", "ohma", "oliva", "piccolo", "reiner", "rengoku", "rocklee", "saitama", "sanji", "sasuke", "sonic", "takamura", "tanjiro", "tengen", "thorfinn", "thorkell", "todo", "toji", "uvogin", "vegeta", "yoruichi", "yujiro", "yuki", "yuta", "zoro"];</script>
 <title>Shugyō</title>
 <title>Shugyō</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -639,6 +640,21 @@ body.has-player .app{padding-bottom:calc(var(--nav-gap) + 64px + 190px)}
 body.has-player .toast{bottom:calc(var(--nav-gap) + 64px + 150px)}
 .sp-steps{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:14px}
 .sp-uri{display:block;margin-top:4px;padding:8px 10px;border-radius:8px;background:var(--surface-2);font-family:var(--font-mono);font-size:12px;word-break:break-all;user-select:all}
+
+/* temporary photo admin */
+.adm-btn{display:inline;margin-left:8px;font-size:11px;letter-spacing:.06em;text-transform:none}
+.adm-list{display:flex;flex-direction:column;gap:8px}
+.adm-row{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px 10px}
+.adm-thumb{flex:0 0 auto;width:52px;height:52px;border-radius:10px;overflow:hidden;display:grid;place-items:center;background:var(--surface-2)}
+.adm-thumb img{width:100%;height:100%;object-fit:cover}
+.adm-thumb .emblem{width:44px;height:44px;--seal-ink:var(--on-accent);color:var(--accent)}
+.adm-name{flex:1;min-width:0;display:flex;flex-direction:column;font-size:14px;line-height:1.3}
+.adm-name b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.adm-name .muted{font-size:12px}
+
+.adm-paste{flex:0 0 auto;padding:8px 12px;border-radius:10px;border:1.5px dashed var(--line);font-size:13px;font-weight:700;color:var(--muted);cursor:pointer;caret-color:transparent;-webkit-user-select:text;user-select:text;outline:none;white-space:nowrap}
+.adm-paste:focus{border-color:var(--accent);color:var(--ink);background:var(--accent-soft)}
+@media (max-width:400px){.adm-row{flex-wrap:wrap}.adm-name{flex-basis:calc(100% - 64px)}.adm-row .adm-paste{margin-left:64px}}
 </style>
 
 <div class="app" id="view"></div>
@@ -2009,7 +2025,15 @@ ui.preview=null;
 let remote=null, migrated=false, confirmKey=null, refsCol=null, assetsApi=null, pendingRef=null;
 const RKEY='archetype.refs.v1';
 let localRefs=lsGet(RKEY,{}), remoteRefs={};
-const refSrc=id=>{const r=remoteRefs[id]||localRefs[id];return r?(r.assetId?'/_blob/'+r.assetId:r.data):null;};
+/* photos live in IndexedDB (much more room than localStorage), with localStorage as a fallback */
+const IDB={db:null,
+  open(){return new Promise(res=>{try{const r=indexedDB.open('shugyo',1);r.onupgradeneeded=()=>r.result.createObjectStore('kv');r.onsuccess=()=>res(this.db=r.result);r.onerror=()=>res(null);}catch(e){res(null)}});},
+  async get(k){const db=this.db||await this.open();if(!db)return undefined;return new Promise(res=>{try{const q=db.transaction('kv').objectStore('kv').get(k);q.onsuccess=()=>res(q.result);q.onerror=()=>res(undefined);}catch(e){res(undefined)}});},
+  async set(k,v){const db=this.db||await this.open();if(!db)return false;return new Promise(res=>{try{const t=db.transaction('kv','readwrite');t.objectStore('kv').put(v,k);t.oncomplete=()=>res(true);t.onerror=()=>res(false);t.onabort=()=>res(false);}catch(e){res(false)}});}};
+async function saveLocalRefs(){const ok=await IDB.set('refs',localRefs);if(ok)lsSet(RKEY,null);else{try{localStorage.setItem(RKEY,JSON.stringify(localRefs));}catch(e){toast('Phone storage is full. Some photos were not saved.');}}}
+IDB.get('refs').then(v=>{const legacy=Object.keys(localRefs).length;if(v&&typeof v==='object')localRefs=Object.assign({},v,localRefs);if(legacy)saveLocalRefs();if(v&&Object.keys(v).length&&typeof safeRender==='function')safeRender();});
+const BUNDLED=new Set(window.SHUGYO_PHOTOS||[]); /* photos shipped with the home-screen app */
+const refSrc=id=>{const r=remoteRefs[id]||localRefs[id];return r?(r.assetId?'/_blob/'+r.assetId:r.data):(BUNDLED.has(id)?'photo-'+id+'.jpg':null);};
 if(draft&&!ui.active) ui.active=draft.prog||'itadori';
 ui.view=(ui.active||draft)?'workout':'browse';
 const keyOf=(w,d,p=PROGRAM.id)=>p==='itadori'?`w${w}-${d}`:`${p}-w${w}-${d}`;
@@ -2087,16 +2111,16 @@ async function saveRef(pid,file){
     try{
       const up=await assetsApi.upload(shot.blob,{type:'image/jpeg'});
       await refsCol.doc(pid).set({assetId:up.id,updatedAt:new Date().toISOString()});
-      remoteRefs[pid]={assetId:up.id}; delete localRefs[pid]; lsSet(RKEY,localRefs);
+      remoteRefs[pid]={assetId:up.id}; delete localRefs[pid]; saveLocalRefs();
       if(old){try{await assetsApi.delete(old);}catch(e){}}
       render(); toast('Photo added'); return;
     }catch(e){ if(e&&e.code==='quota_exceeded'){toast('Photo storage is full');return;} }
   }
-  localRefs[pid]={data:shot.data}; lsSet(RKEY,localRefs); render(); toast('Photo saved on this device');
+  localRefs[pid]={data:shot.data}; saveLocalRefs(); render(); toast('Photo saved on this device');
 }
 async function removeRef(pid){
   const old=remoteRefs[pid]&&remoteRefs[pid].assetId;
-  delete remoteRefs[pid]; delete localRefs[pid]; lsSet(RKEY,localRefs); render();
+  delete remoteRefs[pid]; delete localRefs[pid]; saveLocalRefs(); render();
   if(refsCol){try{await refsCol.doc(pid).delete();}catch(e){}}
   if(old&&assetsApi){try{await assetsApi.delete(old);}catch(e){}}
   toast('Photo removed');
@@ -2151,17 +2175,32 @@ document.getElementById('sheet').addEventListener('click',e=>{if(e.target.closes
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!document.getElementById('sheet').hidden)closeSheet();});
 
 /* ---------- backup & restore ---------- */
+const blobToDataURL=b=>new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(b);});
+async function assetData(id){
+  try{const r=await fetch('/_blob/'+id);if(r.ok){const b=await r.blob();if(b.type.startsWith('image/'))return await blobToDataURL(b);}}catch(e){}
+  try{return await new Promise((res,rej)=>{const img=new Image();img.crossOrigin='anonymous';img.onload=()=>{const c=document.createElement('canvas');c.width=img.naturalWidth;c.height=img.naturalHeight;c.getContext('2d').drawImage(img,0,0);res(c.toDataURL('image/jpeg',.85));};img.onerror=rej;img.src='/_blob/'+id;});}catch(e){return null;}
+}
+function shrinkDataURL(src,max=700,q=.8){
+  return new Promise(res=>{const img=new Image();img.onload=()=>{const k=Math.min(1,max/Math.max(img.width,img.height));if(k>=1&&src.length<160000){res(src);return;}const c=document.createElement('canvas');c.width=Math.round(img.width*k);c.height=Math.round(img.height*k);c.getContext('2d').drawImage(img,0,0,c.width,c.height);res(c.toDataURL('image/jpeg',q));};img.onerror=()=>res(src);img.src=src;});
+}
 async function saveBackup(){
-  const data={app:'archetype',version:2,exportedAt:new Date().toISOString(),active:ui.active,sessions,photos:localRefs,profile,body:bodyEntries};
-  const text=JSON.stringify(data), name='archetype-backup-'+new Date().toISOString().slice(0,10)+'.json';
+  const photos=Object.assign({},localRefs), body=JSON.parse(JSON.stringify(bodyEntries));
+  const remoteIds=Object.entries(remoteRefs).filter(([,r])=>r&&r.assetId), bodyIds=Object.values(body).filter(e=>e.photoAsset&&!e.photo);
+  if(remoteIds.length||bodyIds.length) toast(`Packing ${remoteIds.length+bodyIds.length} photo${remoteIds.length+bodyIds.length>1?'s':''}…`);
+  let missed=0;
+  for(const [pid,r] of remoteIds){const d=await assetData(r.assetId);if(d)photos[pid]={data:d};else missed++;}
+  for(const e of bodyIds){const d=await assetData(e.photoAsset);if(d)e.photo=d;else missed++;}
+  const data={app:'archetype',version:3,exportedAt:new Date().toISOString(),active:ui.active,sessions,photos,profile,body};
+  const text=JSON.stringify(data), name='shugyo-backup-'+new Date().toISOString().slice(0,10)+'.json';
+  const done=()=>toast(missed?`Backup saved (${missed} photo${missed>1?'s':''} couldn’t be included)`:'Backup saved'+(Object.keys(photos).length?` with ${Object.keys(photos).length+Object.values(body).filter(e=>e.photo).length} photos`:''));
   try{
     const dl=window.claude&&typeof window.claude.use==='function'?await window.claude.use('downloads'):null;
-    if(dl){ try{await dl.save({filename:name,data:text});toast('Backup saved');}catch(e){ if(e&&e.code!=='declined') toast('Could not save the backup here'); } return; }
+    if(dl){ try{await dl.save({filename:name,data:text});done();}catch(e){ if(e&&e.code!=='declined') toast('Could not save the backup here'); } return; }
   }catch(e){}
   const file=new File([text],name,{type:'application/json'});
   try{ if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file],title:'Shugyō backup'});return;} }catch(e){ if(e&&e.name==='AbortError') return; }
   const a=document.createElement('a');a.href=URL.createObjectURL(file);a.download=name;document.body.appendChild(a);a.click();
-  setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},2000);toast('Backup saved');
+  setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},2000);done();
 }
 async function restoreBackup(file){
   let data; try{data=JSON.parse(await file.text());}catch(e){toast('That file is not a valid backup');return;}
@@ -2174,14 +2213,17 @@ async function restoreBackup(file){
     if(remote){try{await remote.doc(id).set(s);}catch(e){}}
   }
   lsSet(SKEY,sessions);
-  if(data.photos&&typeof data.photos==='object'){Object.entries(data.photos).forEach(([k,v])=>{if(v&&typeof v.data==='string'&&v.data.startsWith('data:image/'))localRefs[k]={data:v.data};});lsSet(RKEY,localRefs);}
+  let pics=0;
+  if(data.photos&&typeof data.photos==='object'){for(const [k,v] of Object.entries(data.photos)){if(v&&typeof v.data==='string'&&v.data.startsWith('data:image/')){localRefs[k]={data:await shrinkDataURL(v.data)};pics++;}}await saveLocalRefs();}
   
   if(data.profile&&typeof data.profile==='object'&&!hasProfile()){profile=Object.assign({},PROFILE_DEFAULT,data.profile);saveProfile();}
   else if(data.profile&&typeof data.profile==='object'){let ch=false;['customEx','customPrograms'].forEach(k=>{const src=data.profile[k];if(src&&typeof src==='object'){const cur=Object.assign({},profile[k]);Object.entries(src).forEach(([id,v])=>{if(!cur[id]){cur[id]=v;ch=true;}});profile[k]=cur;}});if(ch)saveProfile();}
   applyCustom();
-  if(data.body&&typeof data.body==='object'){for(const [k,e] of Object.entries(data.body)){if(e&&e.date&&!bodyEntries[k]){const c=Object.assign({},e);if(c.photoAsset&&!c.photo)delete c.photoAsset;await saveBody(c);}}}
+  if(data.body&&typeof data.body==='object'){for(const [k,e] of Object.entries(data.body)){if(!e||!e.date)continue;const cur=bodyEntries[k];const hasPic=typeof e.photo==='string'&&e.photo.startsWith('data:image/');
+    if(cur&&!(hasPic&&!cur.photo&&!(cur.photoAsset&&IN_CLAUDE)))continue;
+    const c=Object.assign({},cur||{},e);if(hasPic){c.photo=await shrinkDataURL(e.photo,600);delete c.photoAsset;pics++;}else if(c.photoAsset&&!IN_CLAUDE)delete c.photoAsset;await saveBody(c);}}
   if(!ui.active&&data.active&&PROGRAMS.some(p=>p.id===data.active)) ui.active=data.active;
-  saveUI(); render(); toast(added?`Restored ${added} session${added>1?'s':''}`:'Nothing new to restore');
+  saveUI(); render(); toast(added||pics?`Restored ${added} session${added===1?'':'s'}${pics?` and ${pics} photo${pics>1?'s':''}`:''}`:'Nothing new to restore');
 }
 document.getElementById('restoreFile').addEventListener('change',e=>{const f=e.target.files&&e.target.files[0];e.target.value='';if(f)restoreBackup(f);});
 
@@ -2206,7 +2248,31 @@ function emblem(uid,p=PROGRAM){
 }
 
 const CHEV='<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
+let photoAdmin=false;
+function viewPhotoAdmin(){
+  const series=[...new Set(PROGRAMS.map(p=>p.series))], n=PROGRAMS.filter(p=>refSrc(p.id)).length;
+  return `<section class="section">
+    <div class="row between"><div><span class="eyebrow">Admin · temporary</span><h2>Character photos</h2><p class="muted" style="font-size:14px"><b class="num">${n}</b> of ${PROGRAMS.length} have a photo. Copy an image, then tap <b>Paste</b> on a character (on a phone, long-press it and choose Paste).</p></div><button type="button" class="btn small primary" data-admin-off>Done</button></div>
+    ${series.map(se=>`<h3 class="series-head">${esc(se)}</h3><div class="adm-list">${PROGRAMS.filter(p=>p.series===se).map(p=>{const src=refSrc(p.id);return `
+      <div class="adm-row themed" style="${themeVars(p)}">
+        <span class="adm-thumb">${src?`<img src="${esc(src)}" alt="">`:emblem('adm-'+p.id,p)}</span>
+        <span class="adm-name"><b>${esc(p.name)}</b><span class="muted">${src?'Has photo':'No photo'}</span></span>
+        <span class="adm-paste" contenteditable="true" role="button" tabindex="0" inputmode="none" spellcheck="false" data-paste-for="${p.id}" aria-label="Paste a photo for ${esc(p.name)}">Paste</span>
+        <button type="button" class="btn small ${src?'':'primary'}" data-photo-for="${p.id}">${src?'Change':'Add'}</button>
+        ${src?`<button type="button" class="btn small ghost" data-photo-rm-for="${p.id}" aria-label="Remove ${esc(p.name)} photo">Remove</button>`:''}
+      </div>`;}).join('')}</div>`).join('')}
+  </section>`;
+}
+async function pasteFromClipboard(pid,zone){
+  try{
+    if(!navigator.clipboard||!navigator.clipboard.read) throw 0;
+    const items=await navigator.clipboard.read();
+    for(const it of items){const t=it.types.find(x=>x.startsWith('image/'));if(t){const b=await it.getType(t);zone&&zone.blur();await saveRef(pid,new File([b],'pasted.'+t.split('/')[1],{type:t}));return true;}}
+    toast('No image on the clipboard');return true;
+  }catch(e){return false;}
+}
 function viewBrowse(){
+  if(photoAdmin) return viewPhotoAdmin();
   const series=[...new Set(PROGRAMS.map(p=>p.series))];
   return `
   <section class="section">
@@ -3548,7 +3614,7 @@ function render(){
   const c=view.querySelector('.chips'),on=c&&c.querySelector('.chip.on');
   if(on) c.scrollLeft=on.offsetLeft-c.clientWidth/2+on.offsetWidth/2;
 }
-function go(tab){ui.view=tab;confirmKey=null;saveUI();render();window.scrollTo({top:0});}
+function go(tab){if(tab!=='browse')photoAdmin=false;ui.view=tab;confirmKey=null;saveUI();render();window.scrollTo({top:0});}
 document.querySelector('nav.tabs').addEventListener('click',e=>{const b=e.target.closest('[data-tab]');if(b){ui.preview=null;go(b.dataset.tab);}});
 
 /* ---------- workout actions ---------- */
@@ -3626,6 +3692,10 @@ view.addEventListener('click',e=>{
   if(t.dataset.rmex){if(confirmKey==='rmex:'+t.dataset.rmex)removeExtra(t.dataset.rmex);else{confirmKey='rmex:'+t.dataset.rmex;t.textContent='Tap to remove';}return;}
   if(t.hasAttribute('data-sp-refresh')){spRefresh();toast('Refreshed');return;}
   if(t.hasAttribute('data-sp-off')){sp={clientId:sp.clientId};spSave();spState=null;spPoll();render();toast('Spotify disconnected');return;}
+  if(t.hasAttribute('data-admin-on')){photoAdmin=true;render();window.scrollTo({top:0});return;}
+  if(t.hasAttribute('data-admin-off')){photoAdmin=false;render();window.scrollTo({top:0});return;}
+  if(t.dataset.photoFor){pendingRef=t.dataset.photoFor;document.getElementById('refFile').click();return;}
+  if(t.dataset.photoRmFor){if(confirmKey==='prm:'+t.dataset.photoRmFor){confirmKey=null;removeRef(t.dataset.photoRmFor);}else{confirmKey='prm:'+t.dataset.photoRmFor;t.textContent='Tap again';}return;}
   if(t.hasAttribute('data-cp-new')){startBuilder(null);return;}
   if(t.dataset.cpEdit){startBuilder(t.dataset.cpEdit);return;}
   if(t.dataset.pick){ui.preview=t.dataset.pick===ui.active?null:t.dataset.pick;ui.week=null;go('program');return;}
@@ -3681,6 +3751,14 @@ view.addEventListener('input',e=>{
   if(inp.dataset.f==='w'&&row.dataset.i==='0'){const exo=draftExercises().find(x=>x.id===row.dataset.ex);const slot=view.querySelector(`[data-card="${row.dataset.ex}"] .warm-slot`);if(exo&&slot)slot.innerHTML=warmupHTML(exo,num(inp.value));}
 });
 
+view.addEventListener('paste',e=>{
+  const z=e.target.closest&&e.target.closest('[data-paste-for]'); if(!z) return;
+  e.preventDefault(); const it=[...(e.clipboardData?e.clipboardData.items:[])].find(i=>i.type.startsWith('image/'));
+  if(!it){toast('No image on the clipboard. Copy a photo first.');return;}
+  const f=it.getAsFile(); z.blur(); if(f) saveRef(z.dataset.pasteFor,f);
+});
+view.addEventListener('beforeinput',e=>{if(e.target.closest&&e.target.closest('[data-paste-for]')&&e.inputType!=='insertFromPaste')e.preventDefault();});
+view.addEventListener('click',e=>{const z=e.target.closest('[data-paste-for]');if(!z)return;pasteFromClipboard(z.dataset.pasteFor,z).then(ok=>{if(!ok){z.focus();toast('Long-press here and tap Paste (or press Ctrl/Cmd+V)');}});});
 view.addEventListener('change',e=>{if(ui.view==='builder'&&(e.target.type==='checkbox'||e.target.tagName==='SELECT')&&e.target.id!=='b-copy-from')builderInput(e.target);});
 view.addEventListener('toggle',e=>{const d=e.target;if(!d.matches||!d.matches('details.sess')||!d.open)return;const slot=d.querySelector('.sess-mus-slot');if(!slot||slot.childElementCount)return;const s=sessions[d.dataset.sid];if(!s)return;const ms=muscleSets([s]);slot.innerHTML=Object.keys(ms).length?sessHeat(ms,'Sets per muscle'):'<p class="na">Not available just yet</p>';},true);
 function refreshCard(ex){const slot=view.querySelector(`[data-card="${ex.id}"] .effort-slot`);if(slot)slot.innerHTML=effortNote(ex,draft.entries[ex.id]||[]);}
