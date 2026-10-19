@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yuji+Syuku&display=swap&text=人物記録自分稽古修行済お疲れ様でした昇格麦脚火忍青瞳豪迅滅巨奇猛宝昇香誓戯承紳月狂瞬北我鋼龍雷覇心道闘一修刃剣力努器天守岩影律悟愛戦打拍拳斬日星暴武歩炎無燃爆牙狼猪獣王白盾継翼血賭透速進鎖音鬼魔">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yuji+Syuku&display=swap&text=初段二三四五六七八九十人物記録自分稽古修行済お疲れ様でした昇格麦脚火忍青瞳豪迅滅巨奇猛宝昇香誓戯承紳月狂瞬北我鋼龍雷覇心道闘一修刃剣力努器天守岩影律悟愛戦打拍拳斬日星暴武歩炎無燃爆牙狼猪獣王白盾継翼血賭透速進鎖音鬼魔">
 <style>
 /* Layout: phone-first single column; graphite monochrome, ink hero band, physique detail tucked into collapsibles */
 :root{
@@ -655,6 +655,24 @@ body.has-player .toast{bottom:calc(var(--nav-gap) + 64px + 150px)}
 .adm-paste{flex:0 0 auto;padding:8px 12px;border-radius:10px;border:1.5px dashed var(--line);font-size:13px;font-weight:700;color:var(--muted);cursor:pointer;caret-color:transparent;-webkit-user-select:text;user-select:text;outline:none;white-space:nowrap}
 .adm-paste:focus{border-color:var(--accent);color:var(--ink);background:var(--accent-soft)}
 @media (max-width:400px){.adm-row{flex-wrap:wrap}.adm-name{flex-basis:calc(100% - 64px)}.adm-row .adm-paste{margin-left:64px}}
+
+/* set tags, supersets, kanji ranks, backup nudge */
+.set .idx{border:0;background:none;padding:0;width:28px;height:28px;border-radius:8px;cursor:pointer}
+.set.t-W .idx{background:var(--surface-2);color:var(--muted);font-weight:700}
+.set.t-D .idx{background:var(--accent-soft);color:var(--accent);font-weight:700}
+.set.t-W input{opacity:.75}
+.tip{font-size:13px;color:var(--muted);background:var(--surface);border:1px dashed var(--line);border-radius:10px;padding:10px 12px}
+.ex-card.in-ss{border-left:3px solid var(--accent)}
+.ex-card.ss-link{margin-bottom:-10px;border-bottom-left-radius:4px;border-bottom-right-radius:4px}
+.ex-card.ss-link + .ex-card.in-ss{border-top-left-radius:4px;border-top-right-radius:4px}
+.ss-tag{align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:3px 8px;border-radius:999px}
+.ss-btn{margin-left:auto}
+.ss-mini{font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:1px 5px;border-radius:5px;text-decoration:none;display:inline-block}
+.rank-badge span{display:block;font-family:var(--font-kanji);font-size:19px;line-height:1;white-space:nowrap;letter-spacing:0}
+.jp-inline{font-family:var(--font-kanji);letter-spacing:.06em}
+.ru-num{font-family:var(--font-kanji)!important;font-size:22px!important}
+.nudge{flex-direction:row;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}
+.nudge>div:first-child{display:flex;flex-direction:column;gap:2px;font-size:14px;min-width:0;flex:1 1 200px}
 </style>
 
 <div class="app" id="view"></div>
@@ -2192,7 +2210,7 @@ async function saveBackup(){
   for(const e of bodyIds){const d=await assetData(e.photoAsset);if(d)e.photo=d;else missed++;}
   const data={app:'archetype',version:3,exportedAt:new Date().toISOString(),active:ui.active,sessions,photos,profile,body};
   const text=JSON.stringify(data), name='shugyo-backup-'+new Date().toISOString().slice(0,10)+'.json';
-  const done=()=>toast(missed?`Backup saved (${missed} photo${missed>1?'s':''} couldn’t be included)`:'Backup saved'+(Object.keys(photos).length?` with ${Object.keys(photos).length+Object.values(body).filter(e=>e.photo).length} photos`:''));
+  const done=()=>{const i=lsGet(BKINFO,{});i.last=Date.now();delete i.snooze;lsSet(BKINFO,i);document.querySelectorAll('.nudge').forEach(n=>n.remove());toast(missed?`Backup saved (${missed} photo${missed>1?'s':''} couldn’t be included)`:'Backup saved'+(Object.keys(photos).length?` with ${Object.keys(photos).length+Object.values(body).filter(e=>e.photo).length} photos`:''));};
   try{
     const dl=window.claude&&typeof window.claude.use==='function'?await window.claude.use('downloads'):null;
     if(dl){ try{await dl.save({filename:name,data:text});done();}catch(e){ if(e&&e.code!=='declined') toast('Could not save the backup here'); } return; }
@@ -2249,6 +2267,16 @@ function emblem(uid,p=PROGRAM){
 
 const CHEV='<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
 let photoAdmin=false;
+const BKINFO='archetype.backupinfo.v1';
+function backupNudge(){
+  if(typeof IN_CLAUDE!=='undefined'&&IN_CLAUDE) return '';
+  const list=sortedSessions(); if(list.length<3) return '';
+  const info=lsGet(BKINFO,{}), now=Date.now(), first=new Date(list[list.length-1].date).getTime();
+  if(info.snooze&&now<info.snooze) return '';
+  const since=info.last||first, days=Math.floor((now-since)/864e5); if(days<14) return '';
+  return `<section class="card nudge"><div><b>Back up your progress</b><span class="muted">${info.last?`Last backup ${days} days ago.`:'You haven’t saved a backup yet.'} Your sessions only live on this phone.</span></div>
+    <div class="row" style="gap:8px"><button type="button" class="btn small primary" data-backup>Save backup</button><button type="button" class="btn small ghost" data-backup-later>Later</button></div></section>`;
+}
 function viewPhotoAdmin(){
   const series=[...new Set(PROGRAMS.map(p=>p.series))], n=PROGRAMS.filter(p=>refSrc(p.id)).length;
   return `<section class="section">
@@ -2471,20 +2499,28 @@ function viewWorkoutPicker(){
   return `
   <section class="section">
     <span class="eyebrow">Workout <span class="jp" lang="ja" title="keiko: practice">稽古</span></span>
+    ${backupNudge()}
     ${nu?`<div class="hero up-next"><div class="hero-main"><div class="hero-copy"><div class="tag-row"><span class="series-tag">${esc(PROGRAM.series)}</span>${PROGRAM.female?'<span class="mine fem">Female physique</span>':''}</div><span class="eyebrow">${profile.name?`Ready, ${esc(profile.name)}? · `:''}Week ${nu.w} · ${phaseOf(nu.w).name}</span><h1>${esc(nu.d.name.toUpperCase())}</h1><p class="sub">${esc(PROGRAM.name)} · ${nu.d.exercises.length} exercises · ~${nu.d.mins} min</p></div>${bannerArt('next')}</div><button type="button" class="btn primary block" data-start="${nu.w}|${nu.d.id}">${draft?'Resume workout':'Start'}</button></div>`
     :`<div class="card empty"><b>All ${PROGRAM.weeks} weeks done.</b><span>Run it back, or wait for the next physique.</span></div>`}
     <h3 style="margin-top:6px">Or pick a day from week ${w}</h3>
     ${PROGRAM.days.map(d=>`<button type="button" class="card" style="text-align:left;flex-direction:row;align-items:center;justify-content:space-between" data-start="${w}|${d.id}"><span><b>${esc(d.name)}</b>${d.optional?' <span class="pill plain">Optional</span>':''}<br><span class="muted" style="font-size:13px">${d.exercises.length} exercises · ~${d.mins} min</span></span>${sessions[keyOf(w,d.id)]?'<span class="pill good">Done</span>':'<span class="muted">›</span>'}</button>`).join('')}
   </section>`;
 }
+const SET_TAGS={'':'working set',W:'warm-up set',D:'drop set'};
+const tagMark=t=>t==='W'?'ʷ':t==='D'?'ᴰ':'';
 function setRow(ex,i,s){
   if(ex.type==='cond') return `<div class="set cond ${s.done?'done':''}" data-ex="${ex.id}" data-i="${i}"><span class="idx">${i+1}</span><span class="target">${esc(rx(ex,draft.week).reps)}</span><button type="button" class="tick" data-tick aria-label="Mark set ${i+1} done" aria-pressed="${!!s.done}">${TICK}</button></div>`;
   const ph=ex.type==='bw'?'BW':'0';
-  return `<div class="set ${s.done?'done':''}" data-ex="${ex.id}" data-i="${i}"><span class="idx">${i+1}</span>
+  return `<div class="set ${s.done?'done':''} ${s.tag?'t-'+s.tag:''}" data-ex="${ex.id}" data-i="${i}"><button type="button" class="idx" data-settag aria-label="Set ${i+1}: ${SET_TAGS[s.tag||'']}. Tap to change the set type">${s.tag||i+1}</button>
     <label><input type="number" inputmode="decimal" step="0.5" min="0" id="w-${ex.id}-${i}" data-f="w" value="${s.w??''}" placeholder="${ph}" aria-label="Set ${i+1} weight"><small>${ex.type==='bw'?'+kg':'kg'}</small></label>
     <label><input type="number" inputmode="numeric" min="0" id="r-${ex.id}-${i}" data-f="r" value="${s.r??''}" placeholder="${esc(rx(ex,draft.week).reps)}" aria-label="Set ${i+1} reps"><small>reps</small></label>
     <button type="button" class="tick" data-tick aria-label="Mark set ${i+1} done" aria-pressed="${!!s.done}">${TICK}</button>
     ${s.done&&rirEligible(ex)?`<div class="rir" role="group" aria-label="Reps left in the tank"><span>Reps left?</span>${[0,1,2,3,4].map(v=>`<button type="button" class="${s.rir===v?'on':''}" data-rir="${v}">${v===4?'4+':v}</button>`).join('')}</div>`:''}</div>`;
+}
+function ssLabels(){
+  const list=draftExercises(), out={}; let g=0;
+  for(let i=0;i<list.length;i++){ if(draft.ss&&draft.ss[list[i].id]&&i<list.length-1){ const L=String.fromCharCode(65+g++); let n=1; out[list[i].id]=L+n; while(draft.ss[list[i].id]&&i<list.length-1){ i++; out[list[i].id]=L+(++n); } } }
+  return out;
 }
 function viewWorkout(){
   if(!draft) return viewWorkoutPicker();
@@ -2496,10 +2532,12 @@ function viewWorkout(){
     <details class="minor"><summary><span class="muted">Muscles worked today</span>${CHEV}</summary><div class="minor-body">${sessHeat(plannedSets(draftExercises(),draft.week),'Planned sets today')}</div></details>
   </section>
   ${draft.week===15?'<div class="confirm"><b>Test week.</b> On the first lift, work up in small jumps to one heavy single that still moves fast. Log it as your last set.</div>':(phaseOf(draft.week).name==='Black Flash'?'<div class="confirm"><b>Black Flash block.</b> Every set on the first lift should be fast and violent. If the bar slows, stop there.</div>':'')}
+  ${!lsGet('archetype.tip.settag',0)?`<p class="tip">Tip: tap a set number to mark it as a <b>warm-up</b> (W) or <b>drop set</b> (D). Warm-ups don't count towards your volume. <button type="button" class="link-btn" data-tip-ok>Got it</button></p>`:''}
   ${draft.autoSwapped&&draft.autoSwapped.length?`<div class="confirm"><span>Swapped for your equipment: ${draft.autoSwapped.map(x=>esc(x)).join(', ')}.</span></div>`:''}
-  ${draftExercises().map(ex=>{const last=lastFor(ex.id,key);const sets=draft.entries[ex.id]||[];const sug=suggestFor(ex,draft.week,key);const st=stressFor(ex.id);const w0=num(sets[0]&&sets[0].w);return `
-  <article class="card ex-card" data-card="${ex.id}">
-    <div class="row between" style="align-items:flex-start"><div style="min-width:0"><button type="button" class="ex-name" data-exinfo="${ex.id}"><h3>${esc(ex.name)}</h3><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 8.5v7l6-3.5z" fill="currentColor" stroke="none"/></svg></button><p class="cue">${esc(ex.cue)}${ex.rest>0?` <span class="rest-hint">Rest ${fmtRest(ex.rest)}</span>`:''}</p></div><div class="ex-side"><span class="pill ${ex.main||ex.power?'':'plain'}">${rxHTML(ex,draft.week)}</span>${ex.extra?`<button type="button" class="swap-btn" data-rmex="${ex.id}" aria-label="Remove ${esc(ex.name)}">${confirmKey==='rmex:'+ex.id?'Tap to remove':'Remove'}</button>`:`<button type="button" class="swap-btn" data-swap="${ex.id}" aria-label="Swap ${esc(ex.name)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h11l-3-3M17 17H6l3 3"/></svg>Swap</button>`}</div></div>
+  ${(()=>{const ssl=ssLabels(),all=draftExercises();return all.map((ex,ix)=>{const ssLab=ssl[ex.id],isLast=ix===all.length-1;const last=lastFor(ex.id,key);const sets=draft.entries[ex.id]||[];const sug=suggestFor(ex,draft.week,key);const st=stressFor(ex.id);const w0=num(sets[0]&&sets[0].w);return `
+  <article class="card ex-card ${ssLab?'in-ss':''} ${ssLab&&draft.ss&&draft.ss[ex.id]?'ss-link':''}" data-card="${ex.id}">
+    ${ssLab?`<span class="ss-tag">Superset ${ssLab}</span>`:''}
+    <div class="row between" style="align-items:flex-start"><div style="min-width:0"><button type="button" class="ex-name" data-exinfo="${ex.id}"><h3>${esc(ex.name)}</h3><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 8.5v7l6-3.5z" fill="currentColor" stroke="none"/></svg></button><p class="cue">${esc(ex.cue)}${ex.rest>0?` <span class="rest-hint">${ssLab&&draft.ss&&draft.ss[ex.id]?'Go straight to the next exercise':'Rest '+fmtRest(ex.rest)}</span>`:''}</p></div><div class="ex-side"><span class="pill ${ex.main||ex.power?'':'plain'}">${rxHTML(ex,draft.week)}</span>${ex.extra?`<button type="button" class="swap-btn" data-rmex="${ex.id}" aria-label="Remove ${esc(ex.name)}">${confirmKey==='rmex:'+ex.id?'Tap to remove':'Remove'}</button>`:`<button type="button" class="swap-btn" data-swap="${ex.id}" aria-label="Swap ${esc(ex.name)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h11l-3-3M17 17H6l3 3"/></svg>Swap</button>`}</div></div>
     ${ex.extra?'<p class="last">Added by you</p>':''}${ex.swappedFrom?`<p class="last">Swapped from ${esc(EX[ex.swappedFrom]?EX[ex.swappedFrom][0]:ex.swappedFrom)}</p>`:''}
     ${st.length?`<p class="warn">Easy on your ${st.map(k=>INJURY_NAMES[k].toLowerCase()).join(' and ')}: stop if it hurts, or tap Swap.</p>`:''}
     ${last&&ex.type!=='cond'?`<p class="last">Last: ${last.map(s=>`${s.w??(ex.type==='bw'?'BW':0)}×${s.r??'–'}`).join(', ')}</p>`:''}
@@ -2507,8 +2545,8 @@ function viewWorkout(){
     <div class="warm-slot">${warmupHTML(ex,w0)}</div>
     <div class="sets">${sets.map((s,i)=>setRow(ex,i,s)).join('')}</div>
     <div class="effort-slot">${effortNote(ex,sets)}</div>
-    <div class="set-actions"><button type="button" class="btn small" data-addset="${ex.id}">+ Set</button>${sets.length>1?`<button type="button" class="btn small ghost" data-rmset="${ex.id}">Remove last</button>`:''}</div>
-  </article>`;}).join('')}
+    <div class="set-actions"><button type="button" class="btn small" data-addset="${ex.id}">+ Set</button>${sets.length>1?`<button type="button" class="btn small ghost" data-rmset="${ex.id}">Remove last</button>`:''}${!isLast?`<button type="button" class="btn small ${draft.ss&&draft.ss[ex.id]?'':'ghost'} ss-btn" data-ss="${ex.id}" aria-pressed="${!!(draft.ss&&draft.ss[ex.id])}">${draft.ss&&draft.ss[ex.id]?'Unlink superset':'Superset with next'}</button>`:''}</div>
+  </article>`;}).join('');})()}
   <button type="button" class="btn block add-ex" data-addex>+ Add exercise</button>
   <button type="button" class="btn primary block" data-finish>Finish workout</button>
   ${confirmKey==='discard'?`<div class="confirm"><span>Discard this workout? Logged sets will be lost.</span><button type="button" class="btn small primary" data-discard-yes>Discard</button><button type="button" class="btn small" data-cancel>Keep going</button></div>`:`<button type="button" class="btn ghost" data-discard>Discard workout</button>`}`;
@@ -2522,7 +2560,7 @@ function viewHistory(){
   ${!list.length?`<div class="card empty"><b>No sessions yet</b><span>Finished workouts land here with every set you logged.</span><button type="button" class="btn primary" data-tab="workout">Go to workout</button></div>`
   :list.map(s=>`<details class="sess" data-sid="${s.id}">
     <summary><b>W${s.week} · ${esc(s.dayName)}</b><span class="num muted">${s.volume?Math.round(s.volume).toLocaleString()+' kg':''}</span><span class="meta">${esc(progName(s.program))} · ${fmtDate(s.date)} · ${sessTimes(s)} (${fmtDur(s.durationMin)}) · ${s.doneSets} sets</span></summary>
-    <div class="body">${s.entries.filter(e=>e.sets.some(x=>x.done)).map(e=>`<div class="sess-ex"><button type="button" class="ex-link" data-exopen="${esc(e.exId)}">${esc(e.name)}</button><span class="num">${e.type==='cond'?e.sets.filter(x=>x.done).length+' rounds':e.sets.filter(x=>x.done).map(x=>`${x.w??(e.type==='bw'?'BW':0)}×${x.r??'–'}`).join(' · ')}</span></div>`).join('')}
+    <div class="body">${s.entries.filter(e=>e.sets.some(x=>x.done)).map(e=>`<div class="sess-ex"><button type="button" class="ex-link" data-exopen="${esc(e.exId)}">${e.ss?`<span class="ss-mini">${e.ss}</span> `:''}${esc(e.name)}</button><span class="num">${e.type==='cond'?e.sets.filter(x=>x.done).length+' rounds':e.sets.filter(x=>x.done).map(x=>`${x.w??(e.type==='bw'?'BW':0)}×${x.r??'–'}${tagMark(x.tag)}`).join(' · ')}</span></div>`).join('')}
     <div class="sess-mus"><span class="eyebrow">Muscles worked</span><div class="sess-mus-slot"></div></div>
     ${confirmKey==='del:'+s.id?`<div class="confirm"><span>Delete this session?</span><button type="button" class="btn small primary" data-del-yes="${s.id}">Delete</button><button type="button" class="btn small" data-cancel>Cancel</button></div>`:`<button type="button" class="btn ghost small" data-del="${s.id}" style="align-self:flex-start">Delete session</button>`}
     </div></details>`).join('')}`;
@@ -2742,9 +2780,12 @@ function rankOf(p,done){
   const prevAt=Math.ceil(i/(r.length-1)*tot);
   return {name:r[i],i,n:r.length,next:i<r.length-1?r[i+1]:null,nextAt,prevAt,pct:nextAt?Math.min(1,(done-prevAt)/Math.max(1,nextAt-prevAt)):1};
 }
+const KNUM=['','一','二','三','四','五','六','七','八','九','十'];
+const kanjiNum=n=>n<=10?KNUM[n]:n<20?'十'+KNUM[n-10]:KNUM[Math.floor(n/10)]+'十'+(KNUM[n%10]||'');
+const danOf=n=>n===1?'初段':kanjiNum(n)+'段';
 function rankCard(p){
   const done=doneOf(p), r=rankOf(p,done);
-  return `<div class="rank"><div class="rank-badge" aria-hidden="true">${r.i+1}</div><div class="rank-info"><span class="eyebrow">Rank ${r.i+1} of ${r.n}</span><b>${esc(r.name)}</b>
+  return `<div class="rank"><div class="rank-badge" aria-hidden="true" title="${r.i+1}"><span lang="ja">${danOf(r.i+1)}</span></div><div class="rank-info"><span class="eyebrow">Rank ${r.i+1} of ${r.n} · <span lang="ja" class="jp-inline">${danOf(r.i+1)}</span></span><b>${esc(r.name)}</b>
     ${r.next?`<span class="bar"><i style="width:${Math.round(r.pct*100)}%"></i></span><span class="muted rank-next">${r.nextAt-done} session${r.nextAt-done===1?'':'s'} to ${esc(r.next)}</span>`:'<span class="muted rank-next">Top rank reached</span>'}</div></div>`;
 }
 
@@ -2884,7 +2925,7 @@ function showRankUp(p,before,after,then){
     <div class="ru-content">
       <span class="ru-series">${esc(p.series)} · ${esc(p.name)}</span>
       <span class="ru-jp" lang="ja" aria-hidden="true">昇格</span><div class="ru-title" aria-hidden="true">${word}</div>
-      <div class="ru-seal-wrap"><svg class="ru-splat" viewBox="-160 -110 520 630" aria-hidden="true" style="--sk-branch:color-mix(in srgb,var(--accent) 30%,#4a332b)"><g fill="var(--accent)">${sakura(hashStr(p.id+'ru'+after.i),{big:true,petals:24})}</g></svg><div class="ru-seal">${emblem('ru',p)}<span class="ru-num">${after.i+1}</span></div></div>
+      <div class="ru-seal-wrap"><svg class="ru-splat" viewBox="-160 -110 520 630" aria-hidden="true" style="--sk-branch:color-mix(in srgb,var(--accent) 30%,#4a332b)"><g fill="var(--accent)">${sakura(hashStr(p.id+'ru'+after.i),{big:true,petals:24})}</g></svg><div class="ru-seal">${emblem('ru',p)}<span class="ru-num" lang="ja" title="Rank ${after.i+1}">${kanjiNum(after.i+1)}</span></div></div>
       <div class="ru-from"><span>${esc(before.name)}</span></div>
       <div class="ru-to"><span>${esc(after.name)}</span></div>
       <p class="ru-meta">Rank ${after.i+1} of ${after.n}${after.next?` · ${esc(after.next)} in ${after.nextAt-done} session${after.nextAt-done===1?'':'s'}`:' · Top rank'}</p>
@@ -3108,6 +3149,7 @@ function viewYou(){
   const photos=body.filter(e=>bodyPhotoSrc(e)).slice(-8).reverse();
   const editing=youEditing||!hasProfile();
   return `
+  ${backupNudge()}
   <section class="section"><span class="eyebrow">You</span><h2>${profile.name?esc(profile.name):'Your profile'} <span class="jp" lang="ja" title="jibun: yourself">自分</span></h2></section>
   <section class="card">
     ${editing?`<div><h3>${hasProfile()?'Edit profile':'Set up your profile'}</h3><p class="muted" style="font-size:14px">Used for weight suggestions, warm-ups, swaps and nutrition targets. Stays private to you.</p></div>${profileForm()}`
@@ -3151,7 +3193,7 @@ function muscleSets(list){
   const t={};
   list.forEach(s=>(s.entries||[]).forEach(e=>{
     if(e.type==='cond') return; const M=exMeta(e.exId); if(!M) return;
-    const n=e.sets.filter(x=>x.done).length; if(!n) return;
+    const n=e.sets.filter(x=>x.done&&x.tag!=='W').length; if(!n) return;
     addMuscles(t,M.m,n,e.exId);
   }));
   return t;
@@ -3659,12 +3701,13 @@ function startWorkout(w,dayId){
   }
   go('workout');
 }
-function vol(entries){return entries.reduce((a,e)=>a+e.sets.reduce((b,s)=>b+(s.done&&s.w>0&&s.r>0?s.w*s.r:0),0),0)}
+function vol(entries){return entries.reduce((a,e)=>a+e.sets.reduce((b,s)=>b+(s.done&&s.tag!=='W'&&s.w>0&&s.r>0?s.w*s.r:0),0),0)}
 async function finishWorkout(){
   const d=dayById(draft.dayId);
-  const entries=draftExercises().map(ex=>({exId:ex.id,name:ex.name,type:ex.type,sets:(draft.entries[ex.id]||[]).map(s=>{const o={w:num(s.w),r:num(s.r),done:!!s.done};if(s.rir!=null)o.rir=s.rir;return o;})}));
-  const doneSets=entries.reduce((a,e)=>a+e.sets.filter(s=>s.done).length,0);
-  if(!doneSets){toast('Tick off at least one set first');return;}
+  const entries=draftExercises().map(ex=>({exId:ex.id,name:ex.name,type:ex.type,sets:(draft.entries[ex.id]||[]).map(s=>{const o={w:num(s.w),r:num(s.r),done:!!s.done};if(s.rir!=null)o.rir=s.rir;if(s.tag)o.tag=s.tag;return o;})}));
+  const ssl=ssLabels(); entries.forEach(e=>{if(ssl[e.exId])e.ss=ssl[e.exId];});
+  const doneSets=entries.reduce((a,e)=>a+e.sets.filter(s=>s.done&&s.tag!=='W').length,0);
+  if(!entries.some(e=>e.sets.some(s=>s.done))){toast('Tick off at least one set first');return;}
   const id=keyOf(draft.week,d.id);
   const now=Date.now();
   const s={id,program:PROGRAM.id,week:draft.week,dayId:d.id,dayName:d.name,date:new Date(now).toISOString(),startedAt:new Date(draft.startedAt).toISOString(),finishedAt:new Date(now).toISOString(),durationMin:Math.max(1,Math.round((now-draft.startedAt)/60000)),entries,volume:Math.round(vol(entries)),doneSets};
@@ -3708,6 +3751,7 @@ view.addEventListener('click',e=>{
   if(t.hasAttribute('data-body-log')){openBodyLog();return;}
   if(t.dataset.bodyDel){if(confirmKey==='bdel:'+t.dataset.bodyDel){confirmKey=null;deleteBody(t.dataset.bodyDel).then(render);toast('Check-in deleted');}else{confirmKey='bdel:'+t.dataset.bodyDel;t.textContent='Tap again to delete';}return;}
   if(t.hasAttribute('data-backup')){saveBackup();return;}
+  if(t.hasAttribute('data-backup-later')){const i=lsGet(BKINFO,{});i.snooze=Date.now()+3*864e5;lsSet(BKINFO,i);t.closest('.nudge').remove();return;}
   if(t.hasAttribute('data-restore')){document.getElementById('restoreFile').click();return;}
   if(t.hasAttribute('data-photo')){pendingRef=PROGRAM.id;document.getElementById('refFile').click();return;}
   if(t.hasAttribute('data-photo-rm')){removeRef(PROGRAM.id);return;}
@@ -3722,6 +3766,13 @@ view.addEventListener('click',e=>{
   if(t.dataset.start){const [w,d]=t.dataset.start.split('|');openPreview(Number(w),d);return;}
   if(t.dataset.week){ui.week=Number(t.dataset.week);saveUI();render();return;}
   if(t.dataset.tab){go(t.dataset.tab);return;}
+  if(t.hasAttribute('data-tip-ok')){lsSet('archetype.tip.settag',1);t.closest('.tip').remove();return;}
+  if(t.hasAttribute('data-settag')){
+    const row=t.closest('.set'),ex=row.dataset.ex,i=Number(row.dataset.i),s=draft.entries[ex][i];
+    s.tag=({'':'W',W:'D',D:''})[s.tag||'']; if(!s.tag) delete s.tag; lsSet(DKEY,draft);
+    const exo=draftExercises().find(x=>x.id===ex); row.outerHTML=setRow(exo,i,s); toast(s.tag?`Set ${i+1}: ${SET_TAGS[s.tag]}`:`Set ${i+1}: working set`); return;
+  }
+  if(t.dataset.ss){draft.ss=draft.ss||{};if(draft.ss[t.dataset.ss])delete draft.ss[t.dataset.ss];else draft.ss[t.dataset.ss]=1;lsSet(DKEY,draft);render();return;}
   if(t.hasAttribute('data-tick')){
     const row=t.closest('.set'),ex=row.dataset.ex,i=Number(row.dataset.i),s=draft.entries[ex][i];
     s.done=!s.done; if(!s.done) delete s.rir; lsSet(DKEY,draft);
