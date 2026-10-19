@@ -28,7 +28,7 @@
   --pc-l:#17181c; --pc-on-l:#ffffff; --pc-d:#ececee; --pc-on-d:#111214;
   --accent:var(--pc-l); --on-accent:var(--pc-on-l); --accent-soft:color-mix(in srgb,var(--accent) 18%,transparent); --good:#17181c; --good-soft:rgba(23,24,28,.07);
   --hero-bg:#17181c; --hero-ink:#f3f3f5; --hero-muted:#979aa3; --hero-accent:var(--accent); --hero-on-accent:var(--on-accent); --hero-track:rgba(255,255,255,.14);
-  --bd-sil:#dfe1e6; --bd-base:#c2c5cc; --bd-edge:#a3a6af; --hm-1:#f8cdb3; --hm-2:#f5ad87; --hm-3:#f08c62; --hm-4:#e96a3c;
+  --bd-sil:#dfe1e6; --bd-base:#c2c5cc; --bd-line:#8b8f99; --bd-edge:#a3a6af; --hm-1:#f8cdb3; --hm-2:#f5ad87; --hm-3:#f08c62; --hm-4:#e96a3c;
   --bm-sil:#e7e8eb; --bm-base:#d2d4d9; --bm-line:rgba(23,24,28,.16); --bm-hit:var(--accent);
   --fig-hi:#dcdde2; --fig-lo:#878a94; --fig-sil:#5f626b; --fig-line:rgba(23,24,28,.35);
   --font-display:'Outfit',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
@@ -38,7 +38,7 @@
   --nav-h:64px;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bd-sil:#2c2e34; --bd-base:#4a4c54; --bd-edge:#55575f; --hm-1:#f8cdb3; --hm-2:#f5ad87; --hm-3:#f08c62; --hm-4:#e96a3c;
+  --bd-sil:#2c2e34; --bd-base:#4a4c54; --bd-line:#121317; --bd-edge:#55575f; --hm-1:#f8cdb3; --hm-2:#f5ad87; --hm-3:#f08c62; --hm-4:#e96a3c;
   --bg:#0f1012; --surface:#17181b; --surface-2:#202126; --ink:#ececee; --muted:#989aa2; --line:#2a2b31;
   --accent:var(--pc-d); --on-accent:var(--pc-on-d); --accent-soft:color-mix(in srgb,var(--accent) 20%,transparent); --good:#ececee; --good-soft:rgba(236,236,238,.08);
   --hero-bg:#1c1d21; --hero-ink:#f0f0f2; --hero-muted:#979aa3; --hero-accent:var(--accent); --hero-on-accent:var(--on-accent); --hero-track:rgba(255,255,255,.12);
@@ -46,7 +46,7 @@
   --fig-hi:#d8dae2; --fig-lo:#696c78; --fig-sil:#2a2c33; --fig-line:rgba(0,0,0,.5); color-scheme:dark;
 }}
 :root[data-theme="dark"]{
-  --bd-sil:#2c2e34; --bd-base:#4a4c54; --bd-edge:#55575f; --hm-1:#f8cdb3; --hm-2:#f5ad87; --hm-3:#f08c62; --hm-4:#e96a3c;
+  --bd-sil:#2c2e34; --bd-base:#4a4c54; --bd-line:#121317; --bd-edge:#55575f; --hm-1:#f8cdb3; --hm-2:#f5ad87; --hm-3:#f08c62; --hm-4:#e96a3c;
   --bg:#0f1012; --surface:#17181b; --surface-2:#202126; --ink:#ececee; --muted:#989aa2; --line:#2a2b31;
   --accent:var(--pc-d); --on-accent:var(--pc-on-d); --accent-soft:color-mix(in srgb,var(--accent) 20%,transparent); --good:#ececee; --good-soft:rgba(236,236,238,.08);
   --hero-bg:#1c1d21; --hero-ink:#f0f0f2; --hero-muted:#979aa3; --hero-accent:var(--accent); --hero-on-accent:var(--on-accent); --hero-track:rgba(255,255,255,.12);
@@ -582,7 +582,7 @@ body.sheet-open{overflow:hidden}
 .sheet-grab{width:44px;height:5px;padding:8px 40px;background-clip:content-box!important;box-sizing:content-box;margin:-8px auto -8px!important;touch-action:none}
 @media (prefers-reduced-motion: reduce){.sheet:not([hidden]) .sheet-panel,.sheet:not([hidden]) .sheet-back{animation:none}}
 .backbtn{position:fixed;z-index:45;top:calc(env(safe-area-inset-top,0px) + 12px);left:max(12px,env(safe-area-inset-left,0px));width:42px;height:42px;border-radius:50%;padding:0;display:grid;place-items:center;cursor:pointer;color:#fff;
-  background:radial-gradient(120% 100% at 30% 0%,rgba(255,255,255,.22),rgba(255,255,255,0) 50%),linear-gradient(160deg,rgba(40,40,46,.55),rgba(8,8,10,.62));
+  background:radial-gradient(120% 100% at 30% 0%,rgba(255,255,255,.22),rgba(255,255,255,0) 50%),linear-gradient(160deg,rgba(34,34,40,.7),rgba(6,6,8,.8));
   -webkit-backdrop-filter:blur(14px) saturate(170%);backdrop-filter:blur(14px) saturate(170%);
   border:1px solid rgba(255,255,255,.16);box-shadow:inset 0 1px 0 rgba(255,255,255,.32),inset 0 -2px 6px rgba(0,0,0,.45),0 8px 22px rgba(0,0,0,.32);
   transition:transform .15s ease,opacity .2s;-webkit-tap-highlight-color:transparent}
@@ -591,6 +591,40 @@ body.sheet-open{overflow:hidden}
 .backbtn[hidden]{display:none}
 body.has-back .app{padding-top:64px}
 body.has-back .wo-head{padding-left:54px}
+.build{text-align:center;font-size:11px;letter-spacing:.06em;color:var(--muted);opacity:.7;padding:18px 0 4px}.build .num{font-size:11px}
+.restbub{position:fixed;z-index:46;top:calc(env(safe-area-inset-top,0px) + 8px);right:max(12px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;align-items:flex-end;gap:8px;--rb:#f08c62}
+.restbub[hidden]{display:none}
+.rb-btn,.rb-menu{color:#fff;background:radial-gradient(120% 100% at 30% 0%,rgba(255,255,255,.22),rgba(255,255,255,0) 50%),linear-gradient(160deg,rgba(34,34,40,.7),rgba(6,6,8,.8));
+  -webkit-backdrop-filter:blur(14px) saturate(170%);backdrop-filter:blur(14px) saturate(170%);border:1px solid rgba(255,255,255,.16);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.32),inset 0 -2px 6px rgba(0,0,0,.45),0 8px 22px rgba(0,0,0,.32)}
+.rb-btn{position:relative;width:58px;height:58px;border-radius:50%;padding:0;display:grid;place-items:center;cursor:pointer;-webkit-tap-highlight-color:transparent;animation:rbIn .5s cubic-bezier(.2,1.5,.4,1) both;transition:transform .15s}
+.rb-btn:active{transform:scale(.92)}
+.rb-ring{position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);overflow:visible}
+.rb-track{fill:none;stroke:rgba(255,255,255,.12);stroke-width:4}
+.rb-prog{fill:none;stroke:var(--rb);stroke-width:4;stroke-linecap:round;filter:drop-shadow(0 0 3px color-mix(in srgb,var(--rb) 70%,transparent))}
+.rb-t{position:relative;font-family:var(--font-mono);font-size:13px;font-weight:600;letter-spacing:-.02em;text-shadow:0 1px 2px rgba(0,0,0,.6)}
+.restbub.fill .rb-prog{animation:rbFill .85s cubic-bezier(.65,0,.25,1) both}
+.restbub.fill .rb-btn::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--rb);opacity:0;animation:rbPulse .9s .7s ease-out}
+.restbub.fill .rb-t{animation:rbNum .85s ease both}
+.restbub.done .rb-prog{stroke-dashoffset:0!important;animation:rbGlow .6s ease-in-out 3 alternate}
+.restbub.done .rb-t{font-family:var(--font-display);font-size:16px;letter-spacing:.06em;color:var(--rb)}
+.restbub.done .rb-btn{animation:rbBounce .5s cubic-bezier(.2,1.6,.4,1)}
+.restbub.out .rb-btn,.restbub.out .rb-menu{animation:rbOut .25s ease-in both}
+.rb-menu{display:flex;align-items:center;gap:4px;border-radius:999px;padding:5px;animation:rbMenu .28s cubic-bezier(.2,1.3,.4,1) both;transform-origin:top right}
+.rb-menu[hidden]{display:none}
+.rb-lbl{font-size:11px;color:rgba(255,255,255,.7);padding:0 6px 0 8px;max-width:120px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rb-menu button{border:0;border-radius:999px;padding:8px 11px;font-size:13px;font-weight:700;color:#fff;background:rgba(255,255,255,.1);cursor:pointer}
+.rb-menu button[data-rb="skip"]{background:var(--rb);color:#111}
+@keyframes rbIn{from{transform:scale(.3) rotate(-30deg);opacity:0}to{transform:none;opacity:1}}
+@keyframes rbFill{0%{stroke-dashoffset:158;stroke-width:1}55%{stroke-width:6}100%{stroke-dashoffset:0;stroke-width:4}}
+@keyframes rbPulse{0%{opacity:.9;transform:scale(.9)}100%{opacity:0;transform:scale(1.5)}}
+@keyframes rbNum{0%{opacity:0;transform:scale(.6)}60%{opacity:0}100%{opacity:1;transform:none}}
+@keyframes rbGlow{to{filter:drop-shadow(0 0 9px var(--rb))}}
+@keyframes rbBounce{40%{transform:scale(1.15)}}
+@keyframes rbOut{to{transform:scale(.4);opacity:0}}
+@keyframes rbMenu{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
+body.has-rest .wo-head{padding-right:72px}
+@media (prefers-reduced-motion: reduce){.rb-btn,.restbub.fill .rb-prog,.restbub.fill .rb-t,.rb-menu{animation:none}}
 .heat{display:flex;flex-direction:column;gap:14px}
 .heat svg{width:100%;height:auto;display:block;max-height:400px}
 .heat-key{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;font-size:14px}
@@ -742,6 +776,13 @@ body.has-player .toast{bottom:calc(var(--nav-gap) + 64px + 150px)}
   </div>
 </div>
 <div class="miniplayer" id="miniplayer" hidden></div>
+<div class="restbub" id="restbub" hidden>
+  <button type="button" class="rb-btn" id="rbBtn" aria-label="Rest timer. Tap for options">
+    <svg class="rb-ring" viewBox="0 0 60 60" aria-hidden="true"><circle class="rb-track" cx="30" cy="30" r="25"/><circle class="rb-prog" id="rbProg" cx="30" cy="30" r="25" transform="rotate(-90 30 30)"/></svg>
+    <span class="rb-t" id="rbT">0:00</span>
+  </button>
+  <div class="rb-menu" id="rbMenu" hidden><span class="rb-lbl" id="rbL">Rest</span><button type="button" data-rb="-15">−15s</button><button type="button" data-rb="15">+15s</button><button type="button" data-rb="skip">Skip</button></div>
+</div>
 <div class="toast" id="toast" hidden></div>
 <div class="pr-pop" id="prpop" hidden aria-live="assertive"></div>
 <div class="sheet" id="sheet" hidden></div>
@@ -3367,11 +3408,12 @@ const BODY_SYM=(()=>{
 const BODY_EXTRA={front:[[3.4,105.5,3,5.6,22],[24.6,199,4,6.2,0]],back:[[2.8,112.5,3,5.6,25],[30.6,218,3,4.4,0]]};
 function heatFigure(view,tiers,dx,pal){
   const ell=([x,y,rx,ry,r],m)=>{const X=m?100-x:x;return `<ellipse cx="${X}" cy="${y}" rx="${rx}" ry="${ry}" transform="rotate(${m?-r:r} ${X} ${y})"/>`;};
-  const sil=`<g class="bd-sil" fill="var(--bd-sil)" stroke="var(--bd-sil)" stroke-width="5" stroke-linejoin="round">${BODY_SYM[view].map(([,ps])=>ps.map(d=>`<path d="${d}"/>`).join('')).join('')}${BODY_EXTRA[view].map(e=>ell(e,0)+ell(e,1)).join('')}</g>`;
+  const shapes=`${BODY_SYM[view].map(([,ps])=>ps.map(d=>`<path d="${d}"/>`).join('')).join('')}${BODY_EXTRA[view].map(e=>ell(e,0)+ell(e,1)).join('')}`;
+  const sil=`<g fill="var(--bd-line)" stroke="var(--bd-line)" stroke-width="6.6" stroke-linejoin="round">${shapes}</g><g class="bd-sil" fill="var(--bd-sil)" stroke="var(--bd-sil)" stroke-width="5" stroke-linejoin="round">${shapes}</g>`;
   return `<g transform="translate(${dx},0)">${sil}${BODY_SYM[view].map(([keys,ps])=>{
     const ks=keys?keys.split(' '):[], t=Math.max(0,...ks.map(k=>tiers[k]||0)), hit=ks.filter(k=>tiers[k]);
     const fill=!keys?'var(--bd-sil)':t?`var(--${pal||'hm'}-${t})`:'var(--bd-base)';
-    return ps.map(d=>`<path d="${d}" fill="${fill}">${ks.length?`<title>${(hit.length?hit:ks).map(k=>MUSCLE_NAMES[k]).join(' / ')}</title>`:''}</path>`).join('');}).join('')}</g>`;
+    return ps.map(d=>`<path d="${d}" fill="${fill}" stroke="var(--bd-line)" stroke-width=".7" stroke-linejoin="round">${ks.length?`<title>${(hit.length?hit:ks).map(k=>MUSCLE_NAMES[k]).join(' / ')}</title>`:''}</path>`).join('');}).join('')}</g>`;
 }
 const BODY_VB='-4 -4 218 230';
 function bodyHeat(vals,_t,label){
@@ -3809,9 +3851,12 @@ function builderClick(t){
 /* ---------- render + nav ---------- */
 const view=document.getElementById('view');
 function updateNavDot(){document.querySelectorAll('nav.tabs button').forEach(b=>{b.classList.toggle('on',b.dataset.tab===ui.view);b.querySelector('.dot')?.remove();if(b.dataset.tab==='workout'&&draft){const s=document.createElement('span');s.className='dot';b.appendChild(s)}})}
+/* build number: big updates . new builds . quick fixes */
+const APP_BUILD='00.38.00';
+const buildTag=()=>`<footer class="build"><span lang="ja">修行</span> Shugyō · build <span class="num">${APP_BUILD}</span></footer>`;
 function render(){
   setProgram(ui.view==='workout'&&draft?(draft.prog||'itadori'):ui.view==='program'?(ui.preview||ui.active):ui.active);
-  view.innerHTML=ui.view==='builder'?viewBuilder():ui.view==='browse'?viewBrowse():ui.view==='program'?((ui.preview||ui.active)?viewProgram():viewNoProgram('program')):(ui.view==='workout'&&!ui.active&&!draft)?viewNoProgram('workout'):ui.view==='workout'?viewWorkout():ui.view==='history'?viewHistory():viewYou();
+  view.innerHTML=(ui.view==='builder'?viewBuilder():ui.view==='browse'?viewBrowse():ui.view==='program'?((ui.preview||ui.active)?viewProgram():viewNoProgram('program')):(ui.view==='workout'&&!ui.active&&!draft)?viewNoProgram('workout'):ui.view==='workout'?viewWorkout():ui.view==='history'?viewHistory():viewYou())+buildTag();
   updateNavDot(); tickClock(); syncWake(); navCur={view:ui.view,preview:ui.preview,week:ui.week}; updBack();
   const c=view.querySelector('.chips'),on=c&&c.querySelector('.chip.on');
   if(on) c.scrollLeft=on.offsetLeft-c.clientWidth/2+on.offsetWidth/2;
@@ -3961,6 +4006,7 @@ view.addEventListener('click',e=>{
     s.done=!s.done; if(!s.done){delete s.rir;delete s.pr;}
     const exo=draftExercises().find(x=>x.id===ex);
     if(s.done&&exo) checkPR(exo,i,s);
+    if(s.done&&exo&&exo.rest>0&&!(draft.ss&&draft.ss[exo.id])) startRest(exo.rest,exo.name); else if(!s.done&&restEl&&!restEl.hidden&&restName===(exo&&exo.name)) stopRest();
     lsSet(DKEY,draft);
     row.outerHTML=setRow(exo,i,s); refreshCard(exo);
     return;
@@ -4015,13 +4061,40 @@ view.addEventListener('submit',e=>{
 /* ---------- clocks ---------- */
 function tickClock(){const c=document.getElementById('clock');if(c&&draft)c.textContent=fmtTime((Date.now()-draft.startedAt)/1000);}
 setInterval(tickClock,1000);
-let restEnd=0,restTimer=null,restName='';
-const restEl=document.getElementById('rest');
-function startRest(sec,name){restName=name;restEnd=Date.now()+sec*1000;document.getElementById('restL').textContent='Rest · '+name;restEl.hidden=false;clearInterval(restTimer);restTimer=setInterval(restTick,250);restTick();}
-function restTick(){const left=(restEnd-Date.now())/1000;document.getElementById('restT').textContent=fmtTime(left);if(left<=0){const late=Date.now()-restEnd>4000;stopRest();if(!late)restAlert();toast('Rest over. Next set.');}}
-function stopRest(){clearInterval(restTimer);restEl.hidden=true;}
-document.getElementById('restAdd').onclick=()=>{restEnd+=15000;restTick();};
-document.getElementById('restSkip').onclick=stopRest;
+let restEnd=0,restTimer=null,restName='',restTotal=0,restMenuT=0,restDoneT=0;
+const restEl=document.getElementById('restbub'), RB_C=2*Math.PI*25;
+function startRest(sec,name,resume){
+  restName=name; restTotal=sec*1000; if(!resume) restEnd=Date.now()+restTotal;
+  if(draft){draft.rest={end:restEnd,total:restTotal,name};lsSet(DKEY,draft);}
+  const p=draft?progById(draft.prog||'itadori'):PROGRAM; restEl.style.setProperty('--rb',p&&p.colors?p.colors[2]:'#f08c62');
+  document.getElementById('rbL').textContent='Rest · '+name;
+  clearTimeout(restDoneT); restEl.classList.remove('done','out','go'); restEl.hidden=false; document.body.classList.add('has-rest');
+  const pr=document.getElementById('rbProg'); pr.style.transition='none'; pr.style.strokeDasharray=RB_C; pr.style.strokeDashoffset=RB_C;
+  restEl.classList.remove('fill'); void restEl.offsetWidth; if(!resume) restEl.classList.add('fill');
+  clearInterval(restTimer); restTimer=setInterval(restTick,250);
+  setTimeout(()=>{restEl.classList.remove('fill');restTick();},resume?0:900); restTick(true);
+}
+function restTick(skipRing){
+  const left=(restEnd-Date.now())/1000; document.getElementById('rbT').textContent=fmtTime(Math.max(0,left));
+  if(!skipRing&&!restEl.classList.contains('fill')){const pr=document.getElementById('rbProg');pr.style.transition='stroke-dashoffset .25s linear';pr.style.strokeDashoffset=String(RB_C*(1-Math.max(0,Math.min(1,left*1000/restTotal))));}
+  if(left<=0){const late=Date.now()-restEnd>4000; clearInterval(restTimer); if(draft&&draft.rest){delete draft.rest;lsSet(DKEY,draft);}
+    if(late){stopRest();return;}
+    restAlert(); document.getElementById('rbT').textContent='GO'; restEl.classList.add('done'); hideRestMenu();
+    restDoneT=setTimeout(stopRest,2600);}
+}
+function stopRest(){clearInterval(restTimer);clearTimeout(restDoneT);restEnd=0;if(draft&&draft.rest){delete draft.rest;lsSet(DKEY,draft);}
+  if(restEl.hidden) return; restEl.classList.add('out'); hideRestMenu(); setTimeout(()=>{restEl.hidden=true;restEl.classList.remove('out','done');document.body.classList.remove('has-rest');},260);}
+function hideRestMenu(){clearTimeout(restMenuT);document.getElementById('rbMenu').hidden=true;restEl.classList.remove('open');}
+document.getElementById('rbBtn').addEventListener('click',()=>{
+  if(restEl.classList.contains('done')){stopRest();return;}
+  const m=document.getElementById('rbMenu'); if(m.hidden){m.hidden=false;restEl.classList.add('open');clearTimeout(restMenuT);restMenuT=setTimeout(hideRestMenu,5000);} else hideRestMenu();
+});
+document.getElementById('rbMenu').addEventListener('click',e=>{const b=e.target.closest('[data-rb]');if(!b)return;const v=b.dataset.rb;
+  if(v==='skip'){stopRest();return;}
+  restEnd=Math.max(Date.now()+1000,restEnd+Number(v)*1000); restTotal=Math.max(restTotal,restEnd-Date.now()); if(draft){draft.rest={end:restEnd,total:restTotal,name:restName};lsSet(DKEY,draft);}
+  restTick(); clearTimeout(restMenuT); restMenuT=setTimeout(hideRestMenu,5000);});
+/* pick the rest back up if the app was closed mid-rest */
+setTimeout(()=>{if(draft&&draft.rest&&draft.rest.end>Date.now()){restEnd=draft.rest.end;startRest(draft.rest.total/1000,draft.rest.name,true);}},0);
 
 
 /* ---------- rest alerts + keep screen awake (no sound, so music is never touched) ---------- */
@@ -4171,6 +4244,6 @@ initRemote();
 spHandleRedirect().finally(spPoll);
 </script>
 
-<script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));}</script>
+<script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).catch(()=>{}));}</script>
 </body>
 </html>
