@@ -1,11 +1,11 @@
 {
- "name": "Archetype Training",
- "short_name": "Archetype",
+ "name": "Shugyō 修行",
+ "short_name": "Shugyō",
  "start_url": "./",
  "scope": "./",
  "display": "standalone",
- "background_color": "#17181c",
- "theme_color": "#17181c",
+ "background_color": "#141215",
+ "theme_color": "#141215",
  "orientation": "portrait",
  "icons": [
   {

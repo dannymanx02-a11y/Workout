@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Archetype">
+<meta name="apple-mobile-web-app-title" content="Shugyō">
 <meta name="theme-color" content="#17181c">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-180.png">
@@ -14,13 +14,13 @@
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}*{-webkit-tap-highlight-color:transparent}body{margin:0;font:14px system-ui,-apple-system,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
-<title>Archetype Training</title>
-<title>Archetype Training</title>
+<title>Shugyō</title>
+<title>Shugyō</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yuji+Syuku&display=swap&text=麦脚火忍青瞳豪迅滅巨奇猛宝昇香誓戯承紳月狂瞬北我鋼龍雷覇心道闘一修刃剣力努器天守岩影律悟愛戦打拍拳斬日星暴武歩炎無燃爆牙狼猪獣王白盾継翼血賭透速進鎖音鬼魔">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yuji+Syuku&display=swap&text=人物記録自分稽古修行済お疲れ様でした昇格麦脚火忍青瞳豪迅滅巨奇猛宝昇香誓戯承紳月狂瞬北我鋼龍雷覇心道闘一修刃剣力努器天守岩影律悟愛戦打拍拳斬日星暴武歩炎無燃爆牙狼猪獣王白盾継翼血賭透速進鎖音鬼魔">
 <style>
 /* Layout: phone-first single column; graphite monochrome, ink hero band, physique detail tucked into collapsibles */
 :root{
@@ -267,7 +267,8 @@ nav.tabs button.on::before{content:"";position:absolute;top:0;left:30%;right:30%
 .hero-copy .emblem{width:52px;height:52px}
 .banner-art{position:relative;width:100%;aspect-ratio:340/410;max-width:220px;justify-self:center;display:grid;place-items:center}
 .banner-art .splat-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.banner-art .splat{color:var(--accent);opacity:.95}
+.banner-art .splat{color:var(--accent);opacity:.97;--sk-branch:color-mix(in srgb,var(--accent) 28%,#5a3e34)}
+.wo-banner .banner-art .sk-petals{display:none}
 .wo-banner .banner-art{width:76px;flex:0 0 auto}
 
 .up-next h1{font-size:clamp(26px,7.5vw,36px)}
@@ -606,6 +607,18 @@ body.sheet-open{overflow:hidden}
 .pv-row{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
 .pv-row .num{font-size:12.5px;color:var(--muted);text-align:right;flex:0 0 auto}
 .pv-list .muted{font-size:13px}
+
+/* Japan theme */
+.jp{font-family:var(--font-kanji);font-weight:400;font-size:.62em;color:var(--muted);letter-spacing:.08em;margin-left:4px;vertical-align:.12em;text-transform:none}
+.eyebrow .jp{font-size:12px;letter-spacing:.1em;margin-left:6px;vertical-align:0}
+.hero{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='24' viewBox='0 0 48 24'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.045' stroke-width='1.2'%3E%3Cpath d='M0 24a24 24 0 0 1 48 0M6 24a18 18 0 0 1 36 0M12 24a12 12 0 0 1 24 0M18 24a6 6 0 0 1 12 0'/%3E%3Cpath d='M-24 12a24 24 0 0 1 48 0M-18 12a18 18 0 0 1 36 0M-12 12a12 12 0 0 1 24 0M24 12a24 24 0 0 1 48 0M30 12a18 18 0 0 1 36 0M36 12a12 12 0 0 1 24 0'/%3E%3C/g%3E%3C/svg%3E");background-size:48px 24px;background-position:right bottom}
+.hanko{flex:0 0 auto;display:grid;justify-items:center;gap:2px;transform:rotate(-8deg)}
+.hanko b{width:40px;height:40px;border-radius:50%;border:2.5px solid #c8372d;color:#c8372d;display:grid;place-items:center;font-family:var(--font-kanji);font-weight:400;font-size:22px;line-height:1;box-shadow:inset 0 0 0 2px color-mix(in srgb,#c8372d 25%,transparent)}
+.hanko small{font-size:10px;font-weight:700;color:#c8372d;letter-spacing:.04em;font-family:var(--font-mono)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .hanko b,:root:not([data-theme="light"]) .hanko small{color:#ff6a5c;border-color:#ff6a5c}}
+.otsu{font-family:var(--font-kanji);font-size:18px;color:var(--accent);letter-spacing:.06em}
+.otsu small{font-family:var(--font-body);font-size:12px;color:var(--muted);letter-spacing:.02em}
+.ru-jp{position:relative;z-index:2;font-family:var(--font-kanji);font-size:28px;color:#fff;letter-spacing:.3em;opacity:0;animation:ruUp .4s .2s ease-out forwards;text-shadow:0 2px 0 rgba(0,0,0,.4)}
 </style>
 
 <div class="app" id="view"></div>
@@ -2125,13 +2138,13 @@ async function saveBackup(){
     if(dl){ try{await dl.save({filename:name,data:text});toast('Backup saved');}catch(e){ if(e&&e.code!=='declined') toast('Could not save the backup here'); } return; }
   }catch(e){}
   const file=new File([text],name,{type:'application/json'});
-  try{ if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file],title:'Archetype backup'});return;} }catch(e){ if(e&&e.name==='AbortError') return; }
+  try{ if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file],title:'Shugyō backup'});return;} }catch(e){ if(e&&e.name==='AbortError') return; }
   const a=document.createElement('a');a.href=URL.createObjectURL(file);a.download=name;document.body.appendChild(a);a.click();
   setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},2000);toast('Backup saved');
 }
 async function restoreBackup(file){
   let data; try{data=JSON.parse(await file.text());}catch(e){toast('That file is not a valid backup');return;}
-  if(!data||data.app!=='archetype'||typeof data.sessions!=='object'){toast('That file is not an Archetype backup');return;}
+  if(!data||data.app!=='archetype'||typeof data.sessions!=='object'){toast('That file is not a Shugyō backup');return;}
   let added=0;
   for(const [id,s] of Object.entries(data.sessions)){
     if(!s||typeof s!=='object'||!s.date) continue;
@@ -2176,7 +2189,7 @@ function viewBrowse(){
   const series=[...new Set(PROGRAMS.map(p=>p.series))];
   return `
   <section class="section">
-    <div><span class="eyebrow">Browse · ${PROGRAMS.filter(p=>!p.custom).length} characters</span><h2>Characters</h2><p class="muted" style="font-size:14px">Training programs built around a character's physique.</p></div>
+    <div><span class="eyebrow">Browse · ${PROGRAMS.filter(p=>!p.custom).length} characters</span><h2>Characters <span class="jp" lang="ja" title="jinbutsu: characters">人物</span></h2><p class="muted" style="font-size:14px">Training programs built around a character's physique.</p></div>
     <label class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4 4"/></svg><input type="search" id="q" placeholder="Search characters, series or style" aria-label="Search characters, series or style" autocomplete="off"></label>
     <div class="chips" aria-label="Series">${['All',...series].map((x,i)=>`<button type="button" class="chip ${i?'':'on'}" data-series="${esc(x)}">${esc(x)}</button>`).join('')}</div>
     <button type="button" class="card create-card" data-cp-new><span class="plus" aria-hidden="true">+</span><span><b>Build your own program</b><span class="muted">Pick your days and exercises. Same 16-week engine, ranks and stats.</span></span></button>
@@ -2229,13 +2242,42 @@ function splatter(seed){
   for(let i=0;i<4;i++){const a=r()*Math.PI*2,dist=100+r()*70,x=100+Math.cos(a)*dist,y=205+Math.sin(a)*dist;g+=`<ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="${(10+r()*14).toFixed(1)}" ry="${(2+r()*3).toFixed(1)}" transform="rotate(${(a*180/Math.PI).toFixed(0)} ${x.toFixed(1)} ${y.toFixed(1)})"/>`;}
   return g;
 }
+/* ---------- sakura: seeded branch, blossoms and falling petals (replaces the paint splatter) ---------- */
+const PETAL='M0,0 C-6.5,-6 -7.5,-14.5 -3.2,-19.5 L0,-16.8 L3.2,-19.5 C7.5,-14.5 6.5,-6 0,0Z';
+function blossom(x,y,s,rot,op){
+  const st=[0,60,120,180,240,300].map(a=>{const t=a*Math.PI/180;return `<circle cx="${(Math.cos(t)*5.2).toFixed(1)}" cy="${(Math.sin(t)*5.2).toFixed(1)}" r="1.15"/>`;}).join('');
+  return `<g transform="translate(${x.toFixed(1)},${y.toFixed(1)}) rotate(${rot.toFixed(0)}) scale(${s.toFixed(2)})" opacity="${op.toFixed(2)}">${[0,72,144,216,288].map(a=>`<path d="${PETAL}" transform="rotate(${a})"/>`).join('')}<circle r="3.6" fill="#fff" fill-opacity=".55"/><g fill="#000" fill-opacity=".28">${st}</g></g>`;
+}
+const fallPetal=(x,y,s,rot,op)=>`<path d="${PETAL}" transform="translate(${x.toFixed(1)},${y.toFixed(1)}) rotate(${rot.toFixed(0)}) scale(${s.toFixed(2)},${(s*.8).toFixed(2)})" opacity="${op.toFixed(2)}"/>`;
+function sakura(seed,o={}){
+  const r=rng(seed), flip=r()<.5, big=o.big?1.25:1.75;
+  const P0=[-80,30+r()*60],P1=[20+r()*40,40+r()*50],P2=[110+r()*40,240+r()*50],P3=[280,320+r()*50];
+  const bz=t=>{const u=1-t;return [0,1].map(i=>u*u*u*P0[i]+3*u*u*t*P1[i]+3*u*t*t*P2[i]+t*t*t*P3[i]);};
+  let branch='', flowers='', petals='';
+  const N=16; for(let i=0;i<N;i++){const a=bz(i/N),b=bz((i+1)/N);branch+=`<line x1="${a[0].toFixed(1)}" y1="${a[1].toFixed(1)}" x2="${b[0].toFixed(1)}" y2="${b[1].toFixed(1)}" stroke-width="${((12-i*.55)*(o.big?1:1.45)).toFixed(1)}"/>`;}
+  const twigEnds=[];
+  [.22,.4,.58,.74,.88].forEach((t,k)=>{const a=bz(t),b=bz(t+.02),ang=Math.atan2(b[1]-a[1],b[0]-a[0])+(k%2?1:-1)*(.6+r()*.6),len=40+r()*45;
+    const e=[a[0]+Math.cos(ang)*len,a[1]+Math.sin(ang)*len],c=[a[0]+Math.cos(ang-.3)*len*.55,a[1]+Math.sin(ang-.3)*len*.55];
+    branch+=`<path d="M${a[0].toFixed(1)},${a[1].toFixed(1)} Q${c[0].toFixed(1)},${c[1].toFixed(1)} ${e[0].toFixed(1)},${e[1].toFixed(1)}" fill="none" stroke-width="${((4.5-k*.5)*(o.big?1:1.4)).toFixed(1)}"/>`;twigEnds.push(e);});
+  twigEnds.forEach(e=>{flowers+=blossom(e[0],e[1],(1.05+r()*.45)*big,r()*72,.95);
+    for(let j=0;j<2;j++)flowers+=blossom(e[0]+(r()-.5)*44,e[1]+(r()-.5)*40,(.6+r()*.45)*big,r()*72,.75+r()*.2);});
+  [.12,.3,.48,.66,.8,.95].forEach(t=>{const a=bz(t);flowers+=blossom(a[0]+(r()-.5)*18,a[1]+(r()-.5)*18,(.8+r()*.5)*big,r()*72,.9);});
+  for(let i=0;i<7;i++){const t=.1+r()*.85,a=bz(t);flowers+=`<ellipse cx="${(a[0]+(r()-.5)*30).toFixed(1)}" cy="${(a[1]+(r()-.5)*30).toFixed(1)}" rx="3.2" ry="4.6" transform="rotate(${(r()*180).toFixed(0)})" opacity=".85"/>`;}
+  const np=o.petals??16;
+  for(let i=0;i<np;i++){const x=-60+r()*320,y=40+r()*360;petals+=fallPetal(x,y,(.3+r()*.45)*big,r()*360,.35+r()*.55);}
+  const inner=`<g class="sk-branch" stroke="var(--sk-branch)" stroke-linecap="round">${branch}</g><g class="sk-petals">${petals}</g><g class="sk-flowers">${flowers}</g>`;
+  return flip?`<g transform="translate(200,0) scale(-1,1)">${inner}</g>`:inner;
+}
+
 function bannerArt(uid,p=PROGRAM){
-  const g=splatter(hashStr(p.id+uid)), src=refSrc(p.id);
+  const src=refSrc(p.id), g=sakura(hashStr(p.id+uid),{petals:src?10:16});
   return `<div class="banner-art ${src?'has-photo':''}" aria-hidden="true">
     <svg class="splat-svg" viewBox="-70 0 340 410">
-      ${src?`<defs><clipPath id="sp-${uid}">${g}</clipPath></defs>`:''}
       <g class="splat" fill="currentColor">${g}</g>
-      ${src?`<image href="${esc(src)}" x="-40" y="40" width="280" height="330" preserveAspectRatio="xMidYMid slice" clip-path="url(#sp-${uid})"/>`:''}
+      ${src?`<defs><clipPath id="sp-${uid}"><circle cx="100" cy="200" r="118"/></clipPath></defs>
+      <circle cx="100" cy="200" r="121" fill="var(--hero-bg)"/>
+      <image href="${esc(src)}" x="-18" y="82" width="236" height="236" preserveAspectRatio="xMidYMid slice" clip-path="url(#sp-${uid})"/>
+      <circle cx="100" cy="200" r="122" fill="none" stroke="var(--accent)" stroke-width="7" stroke-dasharray="560 200" stroke-linecap="round" transform="rotate(-58 100 200)" opacity=".9"/>`:''}
     </svg>
     ${emblem('art-'+uid,p)}
   </div>`;
@@ -2290,14 +2332,14 @@ function viewProgram(){
   </section>
 
   <section class="section">
-    <div class="row between"><div><span class="eyebrow">Block ${blockOf(w)} of 4 · ${BLOCKS[blockOf(w)-1][0]}</span><h2>Week ${w}</h2></div>${ph.name!==BLOCKS[blockOf(w)-1][0]?`<span class="pill">${ph.name}</span>`:''}</div>
+    <div class="row between"><div><span class="eyebrow">Block ${blockOf(w)} of 4 · ${BLOCKS[blockOf(w)-1][0]}</span><h2>Week ${w} <span class="jp" lang="ja" title="shugyō: training">修行</span></h2></div>${ph.name!==BLOCKS[blockOf(w)-1][0]?`<span class="pill">${ph.name}</span>`:''}</div>
     <div class="chips" role="tablist" aria-label="Week">${Array.from({length:PROGRAM.weeks},(_,i)=>i+1).map(k=>`${k>1&&k%4===1?'<span class="chip-sep" aria-hidden="true"></span>':''}<button type="button" class="chip ${k===w?'on':''} ${weekDone(k)?'done':''}" data-week="${k}" aria-selected="${k===w}">W${k}</button>`).join('')}</div>
     <p class="muted" style="font-size:14px">${ph.note}</p>
     ${PROGRAM.days.map((d,i)=>{const s=sessions[keyOf(w,d.id)];return `
     <article class="card">
       <div class="day-head">
         <div style="min-width:0"><div class="day-num">DAY ${i+1}${d.optional?' · OPTIONAL':''}</div><h3>${esc(d.name)}</h3><p class="muted" style="font-size:13px">${esc(d.focus)} · ~${d.mins} min</p></div>
-        ${s?`<span class="pill good nowrap">Done ${new Date(s.date).toLocaleDateString(undefined,{day:'numeric',month:'short'})}</span>`:''}
+        ${s?`<span class="hanko" title="Done ${new Date(s.date).toLocaleDateString(undefined,{day:'numeric',month:'short'})}"><b lang="ja">済</b><small>${new Date(s.date).toLocaleDateString(undefined,{day:'numeric',month:'short'})}</small></span>`:''}
       </div>
       <ul class="ex-list">${d.exercises.map(ex=>`<li class="${ex.main||ex.power?'main':''}"><span>${esc(ex.name)}</span><span class="num">${rxHTML(ex,w)}</span></li>`).join('')}</ul>
       ${isActive?`<button type="button" class="btn ${s?'':'primary'} small" data-start="${w}|${d.id}">${s?'Redo session':'Start session'}</button>`:''}
@@ -2341,7 +2383,7 @@ function viewWorkoutPicker(){
   const nu=nextUp(), w=nu?nu.w:(ui.week||1);
   return `
   <section class="section">
-    <span class="eyebrow">Workout</span>
+    <span class="eyebrow">Workout <span class="jp" lang="ja" title="keiko: practice">稽古</span></span>
     ${nu?`<div class="hero up-next"><div class="hero-main"><div class="hero-copy"><div class="tag-row"><span class="series-tag">${esc(PROGRAM.series)}</span>${PROGRAM.female?'<span class="mine fem">Female physique</span>':''}</div><span class="eyebrow">${profile.name?`Ready, ${esc(profile.name)}? · `:''}Week ${nu.w} · ${phaseOf(nu.w).name}</span><h1>${esc(nu.d.name.toUpperCase())}</h1><p class="sub">${esc(PROGRAM.name)} · ${nu.d.exercises.length} exercises · ~${nu.d.mins} min</p></div>${bannerArt('next')}</div><button type="button" class="btn primary block" data-start="${nu.w}|${nu.d.id}">${draft?'Resume workout':'Start'}</button></div>`
     :`<div class="card empty"><b>All ${PROGRAM.weeks} weeks done.</b><span>Run it back, or wait for the next physique.</span></div>`}
     <h3 style="margin-top:6px">Or pick a day from week ${w}</h3>
@@ -2386,7 +2428,7 @@ function viewWorkout(){
 }
 function viewHistory(){
   const list=sortedSessions();
-  return `<div class="row between"><div><span class="eyebrow">History${list.length?` · ${list.length} session${list.length>1?'s':''}`:''}</span><h2>Analytics</h2></div><button type="button" class="btn small" data-exlib>Exercises</button></div>
+  return `<div class="row between"><div><span class="eyebrow">History${list.length?` · ${list.length} session${list.length>1?'s':''}`:''}</span><h2>Analytics <span class="jp" lang="ja" title="kiroku: record">記録</span></h2></div><button type="button" class="btn small" data-exlib>Exercises</button></div>
   ${muscleTracker()}
   ${trainingTrends()}
   <h2 style="margin-top:4px">Sessions</h2>
@@ -2693,6 +2735,7 @@ function openSummary(sum){
   lastSummary=sum; const s=sum.session, p=progById(s.program);
   openSheet(`<div class="themed sum" style="${themeVars(p)}">
     <span class="series-tag">${esc(p.name)} · ${esc(p.series)}</span>
+    <span class="otsu" lang="ja">お疲れ様でした <small lang="en">· good work today</small></span>
     <h2>${esc(s.dayName)} done</h2>
     <p class="muted" style="font-size:14px">Week ${s.week} · ${fmtDate(s.date)}</p>
     <div class="times"><div><span class="eyebrow">Started</span><b class="num">${fmtClock(sessStart(s))}</b></div><span class="arrow" aria-hidden="true">→</span><div><span class="eyebrow">Finished</span><b class="num">${fmtClock(s.finishedAt||s.date)}</b></div><div class="dur"><span class="eyebrow">Workout time</span><b class="num">${fmtDur(s.durationMin)}</b></div></div>
@@ -2734,7 +2777,7 @@ async function shareCard(){
   const lines=[]; if(sum.rankUp) lines.push(['Rank up',sum.rankAfter.name]); sum.prs.slice(0,3).forEach(x=>lines.push(['PR',x.name+' · '+x.text.split(':')[1].split('(')[0].trim()]));
   if(!lines.length) lines.push(['Rank',rankOf(p,doneOf(p)).name]);
   lines.forEach(([k,v])=>{g.fillStyle=accent;g.fillText(k.toUpperCase(),72,yy);g.fillStyle=ink;g.fillText(v,72+200,yy);yy+=58;});
-  g.fillStyle='#6b6e77';g.font='500 28px Outfit, system-ui, sans-serif';g.fillText('Archetype Training · '+fmtDate(s.date),72,H-60);
+  g.fillStyle='#6b6e77';g.font='500 28px Outfit, system-ui, sans-serif';g.fillText('Shugyō 修行 · '+fmtDate(s.date),72,H-60);
   c.toBlob(b=>{ if(b) saveFileOut(b,'archetype-'+p.id+'-w'+s.week+'.png','Workout summary'); },'image/png');
 }
 
@@ -2753,8 +2796,8 @@ function showRankUp(p,before,after,then){
     <div class="ru-parts" aria-hidden="true">${parts}</div>
     <div class="ru-content">
       <span class="ru-series">${esc(p.series)} · ${esc(p.name)}</span>
-      <div class="ru-title" aria-hidden="true">${word}</div>
-      <div class="ru-seal-wrap"><svg class="ru-splat" viewBox="-160 -110 520 630" aria-hidden="true"><g fill="var(--accent)">${splatter(hashStr(p.id+'ru'+after.i))}</g></svg><div class="ru-seal">${emblem('ru',p)}<span class="ru-num">${after.i+1}</span></div></div>
+      <span class="ru-jp" lang="ja" aria-hidden="true">昇格</span><div class="ru-title" aria-hidden="true">${word}</div>
+      <div class="ru-seal-wrap"><svg class="ru-splat" viewBox="-160 -110 520 630" aria-hidden="true" style="--sk-branch:color-mix(in srgb,var(--accent) 30%,#4a332b)"><g fill="var(--accent)">${sakura(hashStr(p.id+'ru'+after.i),{big:true,petals:24})}</g></svg><div class="ru-seal">${emblem('ru',p)}<span class="ru-num">${after.i+1}</span></div></div>
       <div class="ru-from"><span>${esc(before.name)}</span></div>
       <div class="ru-to"><span>${esc(after.name)}</span></div>
       <p class="ru-meta">Rank ${after.i+1} of ${after.n}${after.next?` · ${esc(after.next)} in ${after.nextAt-done} session${after.nextAt-done===1?'':'s'}`:' · Top rank'}</p>
@@ -2771,16 +2814,16 @@ function confetti(cv,accent){
   if(!cv||!cv.getContext) return; if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const g=cv.getContext('2d'); if(!g) return;
   const dpr=Math.min(2,window.devicePixelRatio||1), W=cv.clientWidth, H=cv.clientHeight; cv.width=W*dpr; cv.height=H*dpr; g.scale(dpr,dpr);
-  const cols=[accent,accent,'#ffffff','#f4f2ec','#ffd54a','#ff6b6b','#6ec6ff','#b18cff'];
+  const cols=[accent,accent,accent,'#ffd6e2','#ffe9ef','#ffffff','#f7a8c0','#f48fb1'];const petal=window.Path2D?new Path2D(PETAL):null;
   const ox=W/2, oy=H*0.42, P=[];
   const add=(n,burst)=>{for(let i=0;i<n;i++){const a=burst?Math.random()*Math.PI*2:Math.PI/2+(Math.random()-.5)*.6, sp=burst?6+Math.random()*12:1+Math.random()*2;
-    P.push({x:burst?ox:Math.random()*W,y:burst?oy:-20-Math.random()*H*.5,vx:Math.cos(a)*sp,vy:burst?Math.sin(a)*sp-6:sp,w:6+Math.random()*7,h:9+Math.random()*9,r:Math.random()*6.28,vr:(Math.random()-.5)*.35,c:cols[(Math.random()*cols.length)|0],t:0,shape:Math.random()<.25?'c':'r'});}};
+    P.push({x:burst?ox:Math.random()*W,y:burst?oy:-20-Math.random()*H*.5,vx:Math.cos(a)*sp,vy:burst?Math.sin(a)*sp-6:sp,w:6+Math.random()*7,h:9+Math.random()*9,r:Math.random()*6.28,vr:(Math.random()-.5)*.25,c:cols[(Math.random()*cols.length)|0],t:0,shape:petal&&Math.random()<.85?'p':(Math.random()<.5?'c':'r'),k:.55+Math.random()*.7});}};
   add(170,true); add(110,false);
   if(!window.requestAnimationFrame) return;
   let last=performance.now(), start=last; cancelAnimationFrame(confettiRAF);
   const tick=now=>{const dt=Math.min(2,(now-last)/16.7); last=now; g.clearRect(0,0,W,H); let alive=0;
-    for(const q of P){q.vy+=0.28*dt; q.vx*=0.985; q.vy*=0.99; q.x+=q.vx*dt+Math.sin((now+q.r*500)/300)*0.6; q.y+=q.vy*dt; q.r+=q.vr*dt; if(q.y<H+30){alive++;
-      g.save(); g.translate(q.x,q.y); g.rotate(q.r); g.fillStyle=q.c; if(q.shape==='c'){g.beginPath();g.arc(0,0,q.w/2.2,0,6.28);g.fill();} else {g.scale(1,Math.cos(now/180+q.r)); g.fillRect(-q.w/2,-q.h/2,q.w,q.h);} g.restore();}}
+    for(const q of P){q.vy+=(q.shape==='p'?0.16:0.28)*dt; q.vx*=0.982; q.vy*=q.shape==='p'?0.975:0.99; q.x+=q.vx*dt+Math.sin((now+q.r*500)/300)*(q.shape==='p'?1.4:0.6); q.y+=q.vy*dt; q.r+=q.vr*dt; if(q.y<H+30){alive++;
+      g.save(); g.translate(q.x,q.y); g.rotate(q.r); g.fillStyle=q.c; if(q.shape==='p'){g.scale(q.k,q.k*Math.max(.25,Math.abs(Math.cos(now/260+q.r))));g.fill(petal);} else if(q.shape==='c'){g.beginPath();g.arc(0,0,q.w/2.2,0,6.28);g.fill();} else {g.scale(1,Math.cos(now/180+q.r)); g.fillRect(-q.w/2,-q.h/2,q.w,q.h);} g.restore();}}
     if(alive&&now-start<7000) confettiRAF=requestAnimationFrame(tick); else g.clearRect(0,0,W,H);};
   confettiRAF=requestAnimationFrame(tick);
 }
@@ -2978,7 +3021,7 @@ function viewYou(){
   const photos=body.filter(e=>bodyPhotoSrc(e)).slice(-8).reverse();
   const editing=youEditing||!hasProfile();
   return `
-  <section class="section"><span class="eyebrow">You</span><h2>${profile.name?esc(profile.name):'Your profile'}</h2></section>
+  <section class="section"><span class="eyebrow">You</span><h2>${profile.name?esc(profile.name):'Your profile'} <span class="jp" lang="ja" title="jibun: yourself">自分</span></h2></section>
   <section class="card">
     ${editing?`<div><h3>${hasProfile()?'Edit profile':'Set up your profile'}</h3><p class="muted" style="font-size:14px">Used for weight suggestions, warm-ups, swaps and nutrition targets. Stays private to you.</p></div>${profileForm()}`
     :`<div class="row between"><h3>Profile</h3><button type="button" class="btn small" data-profile-edit>Edit</button></div>
