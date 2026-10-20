@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yuji+Syuku&display=swap&text=初段二三四五六七八九十人物記録自分稽古修行済お疲れ様でした昇格麦脚火忍青瞳豪迅滅巨奇猛宝昇香誓戯承紳月狂瞬北我鋼龍雷覇心道闘一修刃剣力努器天守岩影律悟愛戦打拍拳斬日星暴武歩炎無燃爆牙狼猪獣王白盾継翼血賭透速進鎖音鬼魔回復新休憩">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yuji+Syuku&display=swap&text=初段二三四五六七八九十人物記録自分稽古修行済お疲れ様でした昇格麦脚火忍青瞳豪迅滅巨奇猛宝昇香誓戯承紳月狂瞬北我鋼龍雷覇心道闘一修刃剣力努器天守岩影律悟愛戦打拍拳斬日星暴武歩炎無燃爆牙狼猪獣王白盾継翼血賭透速進鎖音鬼魔回復新休憩便適合率">
 <style>
 /* Layout: phone-first single column; graphite monochrome, ink hero band, physique detail tucked into collapsibles */
 :root{
@@ -625,6 +625,71 @@ body.has-back .wo-head{padding-left:54px}
 @keyframes rbMenu{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
 body.has-rest .wo-head{padding-right:72px}
 @media (prefers-reduced-motion: reduce){.rb-btn,.restbub.fill .rb-prog,.restbub.fill .rb-t,.rb-menu{animation:none}}
+.sync{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;width:100%;background:none;border:0;padding:2px 0;color:inherit;cursor:pointer;opacity:.85;text-align:left}
+.sync-l{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--hero-muted,var(--muted));white-space:nowrap}
+.sync-bar{height:4px;border-radius:99px;background:rgba(127,127,127,.22);overflow:hidden;position:relative}
+.sync-bar i{display:block;height:100%;border-radius:99px;background:repeating-linear-gradient(115deg,var(--accent) 0 6px,color-mix(in srgb,var(--accent) 60%,transparent) 6px 12px);background-size:28px 100%;animation:syncSlide 1.6s linear infinite}
+.sync-n{font-size:11px;color:var(--hero-muted,var(--muted))}
+@keyframes syncSlide{to{background-position:28px 0}}
+.sync-big{display:flex;flex-direction:column;gap:2px}.sync-big b{font-size:44px;line-height:1;color:var(--accent)}
+.sync-list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.sync-list li{display:grid;grid-template-columns:minmax(120px,1.2fr) 1fr 40px;align-items:center;gap:10px;font-size:14px}
+.sync-list li>span:first-child{display:flex;flex-direction:column}.sync-list small{font-size:11px}.sync-list .num{text-align:right;font-size:13px}
+.mail-list{list-style:none;margin:0;padding:0;display:grid}
+.mail-row{display:flex;align-items:center;gap:12px;width:100%;background:none;border:0;border-top:1px solid var(--line);padding:10px 0;color:inherit;text-align:left;cursor:pointer}
+.mail-list li:first-child .mail-row{border-top:0}
+.env{position:relative;width:36px;height:36px;border-radius:10px;background:var(--surface-2);display:grid;place-items:center;flex:0 0 auto}
+.env svg{width:20px;height:20px;fill:none;stroke:var(--muted);stroke-width:1.7;stroke-linejoin:round}
+.mail-row.unread .env{background:var(--accent-soft)}.mail-row.unread .env svg{stroke:var(--accent)}
+.env i{position:absolute;top:-3px;right:-3px;width:10px;height:10px;border-radius:50%;background:#c8372d;border:2px solid var(--surface)}
+.mail-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}.mail-txt .muted{font-size:13px}.mail-txt small{font-weight:500;color:var(--muted);font-size:12px}
+.wrapped{display:flex;flex-direction:column;gap:12px}
+.wr-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;scrollbar-width:none;margin:0 -4px;padding:0 4px;overscroll-behavior-x:contain}
+.wr-track::-webkit-scrollbar{display:none}
+.wr-s{flex:0 0 100%;scroll-snap-align:center;min-height:360px;border-radius:20px;padding:24px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;
+  background:radial-gradient(120% 80% at 50% 0%,var(--accent-soft),transparent 70%),var(--surface);border:1px solid var(--line);position:relative;overflow:hidden}
+.wr-k{font-family:var(--font-kanji);font-size:54px;line-height:1;color:var(--accent);opacity:.9}
+.wr-cover .emblem{width:84px;height:84px}
+.wr-big{font-family:var(--font-display);font-weight:400;font-size:72px;line-height:1;color:var(--accent)}.wr-big small{font-size:24px;margin-left:4px}
+.wr-mid{font-family:var(--font-display);font-weight:400;font-size:34px;line-height:1.1}
+.wr-stamp{font-family:var(--font-kanji);color:#c8372d;border:2.5px solid #c8372d;border-radius:8px;padding:4px 8px 2px;transform:rotate(-8deg);font-size:20px}
+.wr-prs{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:6px;width:100%;max-width:280px}.wr-prs li{display:flex;justify-content:space-between;gap:10px;font-size:14px}
+.wr-heat svg{max-height:170px}.wr-s .sync{max-width:280px;opacity:1}
+.wr-dots{display:flex;justify-content:center;gap:6px}.wr-dots i{width:6px;height:6px;border-radius:50%;background:var(--line);transition:all .2s}.wr-dots i.on{background:var(--accent);width:18px;border-radius:3px}
+@media (prefers-reduced-motion: reduce){.sync-bar i{animation:none}}
+.splash{position:fixed;inset:0;z-index:100;background:#120f14;overflow:hidden;display:grid;place-items:center;pointer-events:none;animation:spAuto .45s 4.5s forwards}
+.splash[hidden]{display:none}
+.splash.out{opacity:0;transform:scale(1.03);transition:opacity .5s ease,transform .5s ease}
+.sp-stage{position:absolute;left:50%;bottom:0;width:390px;height:844px;transform-origin:50% 100%;transform:translateX(-50%) scale(var(--k,1))}
+.sp-scene{position:absolute;left:0;top:0;width:390px;height:844px;opacity:0;will-change:opacity}
+.sp-fx{position:absolute;inset:0}
+.sp-logo{position:relative;display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:-18vh}
+.sp-seal{width:84px;height:84px;border-radius:14px;background:#c8372d;display:grid;place-items:center;overflow:hidden;opacity:0;will-change:transform,opacity;
+  box-shadow:0 0 0 3px #120f14,0 0 0 4.5px rgba(200,55,45,.55),0 12px 40px rgba(200,55,45,.35);transform:rotate(-6deg)}
+.sp-seal span{font-family:var(--font-kanji);font-size:54px;line-height:1;color:#fbeef1;margin-top:-4px;opacity:0;will-change:transform,opacity}
+.sp-word{font-family:var(--font-display);font-weight:600;font-size:30px;letter-spacing:.1em;margin-right:-.1em;color:#f6eef1;opacity:0;will-change:transform,opacity}
+.sp-sub{font-family:var(--font-kanji);font-size:13px;letter-spacing:.6em;margin-right:-.6em;color:rgba(246,226,233,.55);opacity:0}
+.sp-pt{position:absolute;left:0;top:0;width:0;height:0;will-change:transform}
+.sp-pt b{position:absolute;display:block;width:var(--s);height:calc(var(--s)*.62);border-radius:100% 0 100% 0;background:var(--c);opacity:0;will-change:transform,opacity}
+.sp-rip{position:absolute;width:60px;height:10px;margin:-5px 0 0 -30px;border:1px solid rgba(243,196,210,.75);border-radius:50%;opacity:0;will-change:transform,opacity}
+.splash.go .sp-scene{animation:spScene .8s cubic-bezier(.2,.7,.2,1) forwards}
+.splash.go .sp-seal{animation:spStamp .6s .2s cubic-bezier(.2,1.5,.35,1) forwards}
+.splash.go .sp-seal span{animation:spInk .55s .42s cubic-bezier(.2,.8,.2,1) forwards}
+.splash.go .sp-word{animation:spWord .6s .55s cubic-bezier(.2,.8,.2,1) forwards}
+.splash.go .sp-sub{animation:spWord .6s .72s ease forwards}
+.splash.go .sp-pt{animation:spPFall var(--d) var(--dl) cubic-bezier(.35,.1,.6,1) forwards}
+.splash.go .sp-pt b{animation:spPSway var(--sw) var(--swd) ease-in-out infinite alternate,spPOp var(--d) var(--dl) linear forwards}
+.splash.go .sp-rip{animation:spRip 1.2s var(--dl) ease-out forwards}
+@keyframes spScene{to{opacity:1}}
+@keyframes spStamp{0%{transform:scale(1.9) rotate(-14deg);opacity:0}55%{opacity:1}100%{transform:rotate(-6deg);opacity:1}}
+@keyframes spInk{from{opacity:0;transform:translateY(-10px) scale(1.15)}to{opacity:1;transform:none}}
+@keyframes spWord{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes spPFall{from{transform:translate3d(var(--x),var(--y),0)}to{transform:translate3d(var(--x),calc(var(--y) + var(--fall)),0)}}
+@keyframes spPSway{from{transform:translateX(calc(var(--amp)*-1)) rotate(-35deg)}to{transform:translateX(var(--amp)) rotate(45deg)}}
+@keyframes spPOp{0%{opacity:0}18%{opacity:1}85%{opacity:1}100%{opacity:0}}
+@keyframes spRip{0%{opacity:.8;transform:scale(.1)}100%{opacity:0;transform:scale(1.5)}}
+@keyframes spAuto{to{opacity:0;visibility:hidden}}
+@media (prefers-reduced-motion: reduce){.splash.go *{animation-duration:.01s!important;animation-delay:0s!important}.sp-fx{display:none}}
 .heat{display:flex;flex-direction:column;gap:14px}
 .heat svg{width:100%;height:auto;display:block;max-height:400px}
 .heat-key{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;font-size:14px}
@@ -765,6 +830,10 @@ body.has-player .toast{bottom:calc(var(--nav-gap) + 64px + 150px)}
 .nudge>div:first-child{display:flex;flex-direction:column;gap:2px;font-size:14px;min-width:0;flex:1 1 200px}
 </style>
 
+<div class="splash" id="splash" aria-hidden="true">
+  <div class="sp-stage" id="spStage"><svg class="sp-scene" id="spScene" viewBox="0 0 390 844" width="390" height="844"></svg><div class="sp-fx" id="spFx"></div></div>
+  <div class="sp-logo"><div class="sp-seal"><span lang="ja">修</span></div><div class="sp-word">Shugyō</div><div class="sp-sub" lang="ja">修 行</div></div>
+</div>
 <div class="app" id="view"></div>
 
 <div class="rest" id="rest" hidden>
@@ -2541,6 +2610,7 @@ function viewProgram(){
     <div class="meter">
       <div class="row between"><span>${!isActive&&!done?'Not started':nu?`Next: Week ${nu.w}, ${esc(nu.d.name)}`:'Program complete'}</span><span><b>${done}</b> / ${coreTotal()} sessions</span></div>
       <div class="bar"><i style="width:${pct}%"></i></div>
+      ${syncBar(PROGRAM)}
       ${isActive?`<span class="hero-rank">Rank <b>${esc(rankOf(PROGRAM,done).name)}</b>${rankOf(PROGRAM,done).next?` · ${rankOf(PROGRAM,done).nextAt-done} to ${esc(rankOf(PROGRAM,done).next)}`:''}</span>`:''}
     </div>
     ${action}
@@ -2664,7 +2734,8 @@ function viewHistory(){
     <div class="body">${s.entries.filter(e=>e.sets.some(x=>x.done)).map(e=>`<div class="sess-ex"><button type="button" class="ex-link" data-exopen="${esc(e.exId)}">${e.ss?`<span class="ss-mini">${e.ss}</span> `:''}${esc(e.name)}</button><span class="num">${e.type==='cond'?e.sets.filter(x=>x.done).length+' rounds':e.sets.filter(x=>x.done).map(x=>`${x.w??(e.type==='bw'?'BW':0)}×${x.r??'–'}${tagMark(x.tag)}`).join(' · ')}</span></div>`).join('')}
     <div class="sess-mus"><span class="eyebrow">Muscles worked</span><div class="sess-mus-slot"></div></div>
     ${confirmKey==='del:'+s.id?`<div class="confirm"><span>Delete this session?</span><button type="button" class="btn small primary" data-del-yes="${s.id}">Delete</button><button type="button" class="btn small" data-cancel>Cancel</button></div>`:`<button type="button" class="btn ghost small" data-del="${s.id}" style="align-self:flex-start">Delete session</button>`}
-    </div></details>`).join('')}`;
+    </div></details>`).join('')}
+  ${list.length?(confirmKey==='delall'?`<div class="confirm"><span>Delete all ${list.length} sessions? Ranks, PRs and stats reset. This can't be undone.</span><button type="button" class="btn small primary" data-delall-yes>Delete all</button><button type="button" class="btn small" data-cancel>Cancel</button></div>`:`<button type="button" class="btn ghost small" data-delall style="align-self:center">Delete all sessions</button>`):''}`;
 }
 function spark(pts){
   if(pts.length<2) return '';
@@ -2968,11 +3039,12 @@ function swipeClose(){
   const bk=sh.querySelector('.sheet-back'); if(bk){bk.style.transition='opacity .26s';bk.style.opacity='0';}
   setTimeout(closeSheet,250);
 }
-(()=>{const sh=document.getElementById('sheet'); let y0=0,t0=0,dy=0,drag=false,pn=null,canDrag=false;
-  sh.addEventListener('touchstart',e=>{pn=e.target.closest('.sheet-panel'); if(!pn) return; y0=e.touches[0].clientY; t0=performance.now(); dy=0; drag=false;
+(()=>{const sh=document.getElementById('sheet'); let y0=0,x0=0,t0=0,dy=0,drag=false,pn=null,canDrag=false;
+  sh.addEventListener('touchstart',e=>{pn=e.target.closest('.sheet-panel'); if(!pn) return; y0=e.touches[0].clientY; x0=e.touches[0].clientX; t0=performance.now(); dy=0; drag=false;
     canDrag=pn.scrollTop<=0&&!e.target.closest('input,textarea,select,.chips,.seg,[data-noswipe]');},{passive:true});
   sh.addEventListener('touchmove',e=>{if(!pn||!canDrag) return; dy=e.touches[0].clientY-y0;
-    if(!drag){ if(dy>6&&pn.scrollTop<=0){drag=true;pn.style.transition='none';} else if(dy<0){canDrag=false;return;} else return; }
+    const dx=Math.abs(e.touches[0].clientX-x0);
+    if(!drag){ if(dx>Math.abs(dy)&&dx>6){canDrag=false;return;} if(dy>6&&pn.scrollTop<=0){drag=true;pn.style.transition='none';} else if(dy<0){canDrag=false;return;} else return; }
     e.preventDefault(); const d=Math.max(0,dy); pn.style.transform=`translateY(${d}px)`;
     const bk=sh.querySelector('.sheet-back'); if(bk) bk.style.opacity=String(Math.max(.15,1-d/500));},{passive:false});
   const end=()=>{if(!pn||!drag){pn=null;return;} const v=dy/Math.max(1,performance.now()-t0);
@@ -3294,6 +3366,7 @@ function viewYou(){
   const photos=body.filter(e=>bodyPhotoSrc(e)).slice(-8).reverse();
   const editing=youEditing||!hasProfile();
   return `
+  ${mailCard()}
   ${backupNudge()}
   <section class="section"><span class="eyebrow">You</span><h2>${profile.name?esc(profile.name):'Your profile'} <span class="jp" lang="ja" title="jibun: yourself">自分</span></h2></section>
   <section class="card">
@@ -3465,6 +3538,96 @@ function openRecInfo(){
     <p>Every working set you log adds fatigue to the muscles it hits (warm-ups don't count). That fatigue fades over the muscle's recovery window: about 3 days for legs, glutes and lower back, 2½ for chest and back, 2 for arms and delts, 1½ for abs, calves and forearms.</p>
     <p>Around 8 hard sets inside that window counts as fully cooked. The time shown is roughly when that muscle is good to train hard again.</p>
     <p class="muted" style="font-size:14px">It's a guide, not a scan. Sleep, food and how hard the sets really were all move it.</p>`);
+}
+
+/* ---------- sync rate (適合率): how close you are to the character ---------- */
+const SYNC_FAM=[
+  {k:'squat',label:'Squat',ids:{squat:1,fsquat:1/.85,bss:1/.55,legpress:1/2.2},m:1.75,f:1.35},
+  {k:'bench',label:'Bench',ids:{bench:1,incline:1/.85,dbbench:1/.8},m:1.3,f:.8},
+  {k:'hinge',label:'Deadlift',ids:{deadlift:1,trapbar:1,rdl:1/.75},m:2.1,f:1.65},
+  {k:'press',label:'Overhead press',ids:{ohp:1,pushpress:1/1.25,dbohp:1/.8},m:.85,f:.55},
+  {k:'pull',label:'Pull-up',ids:{wpullup:1,pullup:1,chinup:1},m:1.45,f:1.1,bw:true}];
+function syncRate(p){
+  const bwKnown=!!currentWeight(), bw=currentWeight()||(p.female?62:78), size=.6+.4*(p.build||1);
+  const progIds=new Set(p.days.flatMap(d=>d.exercises.map(e=>e.id)));
+  const fams=SYNC_FAM.filter(f=>Object.keys(f.ids).some(id=>progIds.has(id))).map(f=>{
+    let best=0; Object.entries(f.ids).forEach(([id,fac])=>exHistory(id).forEach(h=>h.done.forEach(x=>{if(x.tag==='W'||!(x.r>0))return;
+      const load=f.bw?bw+(x.w||0):(x.w||0); if(load>0) best=Math.max(best,e1rm(load,x.r)*fac);})));
+    const target=(p.female?f.f:f.m)*size*bw; return {label:f.label,v:Math.min(1,best/target),best,target};});
+  const str=fams.length?fams.reduce((a,f)=>a+f.v,0)/fams.length:0;
+  const prog=Math.min(1,doneOf(p)/totalOf(p));
+  const cut=Date.now()-28*864e5, recent=Object.values(sessions).filter(s=>new Date(s.date).getTime()>=cut).length, cons=Math.min(1,recent/(coreDays(p)*4));
+  const pct=Math.round(100*(.5*str+.35*prog+.15*cons));
+  return {pct,str,prog,cons,fams,bwKnown,bw};
+}
+function syncBar(p){
+  if(!Object.keys(sessions).length) return '';
+  const r=syncRate(p);
+  return `<button type="button" class="sync" data-sync-info="${p.id}" aria-label="Sync rate with ${esc(p.name)}: ${r.pct}%. Tap for the breakdown">
+    <span class="sync-l"><span lang="ja">適合率</span> Sync</span><span class="sync-bar"><i style="width:${Math.max(2,r.pct)}%"></i></span><span class="sync-n num">${r.pct}%</span></button>`;
+}
+function openSyncInfo(id){
+  const p=progById(id), r=syncRate(p), row=(l,v,sub)=>`<li><span><b>${l}</b>${sub?`<small class="muted">${sub}</small>`:''}</span><span class="sync-bar"><i style="width:${Math.round(v*100)}%"></i></span><span class="num">${Math.round(v*100)}%</span></li>`;
+  openSheet(`<div class="themed sync-sheet" style="${themeVars(p)}"><div class="row between"><div><span class="eyebrow">${esc(p.name)}</span><h2>Sync rate <span class="jp" lang="ja">適合率</span></h2></div><button type="button" class="btn small" data-close>Close</button></div>
+    <div class="sync-big"><b class="num">${r.pct}%</b><span class="muted">how close you are to ${esc(p.name.split('/')[0])}'s physique</span></div>
+    <ul class="sync-list">${row('Strength',r.str,'50% of the score')}${r.fams.map(f=>row('· '+f.label,f.v,f.best?`${Math.round(f.best)} of ${Math.round(f.target)} kg est. 1RM`:`target ${Math.round(f.target)} kg`)).join('')}
+      ${row('Program progress',r.prog,`35% · ${doneOf(p)} of ${totalOf(p)} sessions`)}${row('Consistency',r.cons,'15% · last 4 weeks')}</ul>
+    <p class="muted" style="font-size:13px">Strength targets scale with your bodyweight${r.bwKnown?` (${r.bw} kg)`:' (add it in You for an accurate read)'} and ${esc(p.name.split('/')[0])}'s frame. It only counts lifts this program trains.</p></div>`);
+}
+
+/* ---------- monthly recap mail (便り) ---------- */
+const MAIL_KEY='archetype.mail.v1';
+let mailState=(()=>{try{return JSON.parse(localStorage.getItem(MAIL_KEY)||'{}')}catch(e){return {}}})(); mailState.read=mailState.read||{};
+const mailSave=()=>{try{localStorage.setItem(MAIL_KEY,JSON.stringify(mailState))}catch(e){}};
+const KMONTH=['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
+const monthKey=d=>{const x=new Date(d);return x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0');};
+const monthName=k=>{const [y,m]=k.split('-').map(Number);return new Date(y,m-1,1).toLocaleDateString(undefined,{month:'long'})+(y!==new Date().getFullYear()?' '+y:'');};
+function monthStats(key){
+  const all=sortedSessions().slice().reverse(), list=all.filter(s=>monthKey(s.date)===key);
+  const best={}, prs=[];
+  all.forEach(s=>{const inM=monthKey(s.date)===key;(s.entries||[]).forEach(e=>{if(e.type==='cond')return;let top=0,topSet=null;
+    e.sets.forEach(x=>{if(!x.done||x.tag==='W'||!(x.w>0&&x.r>0))return;const v=e1rm(x.w,x.r);if(v>top){top=v;topSet=x;}});
+    if(!top)return; const prev=best[e.exId]; if(inM&&prev&&top>prev+.05) prs.push({name:e.name||exMeta(e.exId)?.name||e.exId,w:topSet.w,r:topSet.r,gain:top-prev});
+    best[e.exId]=Math.max(prev||0,top);});});
+  const mus=muscleSets(list), topM=Object.entries(mus).filter(([k])=>MUSCLE_NAMES[k]).sort((a,b)=>b[1]-a[1]);
+  const exCount={}; list.forEach(s=>(s.entries||[]).forEach(e=>{const n=e.sets.filter(x=>x.done&&x.tag!=='W').length;if(n)exCount[e.name||e.exId]=(exCount[e.name||e.exId]||0)+n;}));
+  const favEx=Object.entries(exCount).sort((a,b)=>b[1]-a[1])[0];
+  const progs={}; list.forEach(s=>progs[s.program||'itadori']=(progs[s.program||'itadori']||0)+1);
+  const mainP=Object.entries(progs).sort((a,b)=>b[1]-a[1])[0];
+  const days=new Set(list.map(s=>new Date(s.date).toDateString())).size;
+  return {key,list,n:list.length,mins:list.reduce((a,s)=>a+(s.durationMin||0),0),kg:list.reduce((a,s)=>a+(s.volume||0),0),sets:list.reduce((a,s)=>a+(s.doneSets||0),0),
+    prs:prs.sort((a,b)=>b.gain-a.gain),mus,topM,favEx,mainP:mainP?progById(mainP[0]):null,days};
+}
+function mailCard(){
+  const keys=[...new Set(sortedSessions().map(s=>monthKey(s.date)))]; if(!keys.length) return '';
+  const cur=monthKey(new Date()), all=mailState.showAll?keys:keys.slice(0,3);
+  return `<section class="card mail"><div class="row between"><h3>Mail <span class="jp" lang="ja" title="tayori: letters">便り</span></h3>${keys.some(k=>!mailState.read[k])?'<span class="pill">New</span>':''}</div>
+    <ul class="mail-list">${all.map(k=>{const st=monthStats(k),unread=!mailState.read[k];return `<li><button type="button" class="mail-row ${unread?'unread':''}" data-mail="${k}">
+      <span class="env" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg>${unread?'<i></i>':''}</span>
+      <span class="mail-txt"><b>${monthName(k)} recap${k===cur?' <small>so far</small>':''}</b><span class="muted">${st.n} session${st.n===1?'':'s'} · ${Math.round(st.kg).toLocaleString()} kg${st.prs.length?` · ${st.prs.length} PR${st.prs.length===1?'':'s'}`:''}</span></span><span class="muted">›</span></button></li>`;}).join('')}</ul>
+    ${keys.length>3?`<button type="button" class="btn ghost small" data-mail-all>${mailState.showAll?'Show less':`Show all ${keys.length}`}</button>`:''}</section>`;
+}
+function openWrapped(key){
+  const st=monthStats(key), p=st.mainP||PROGRAM, cur=monthKey(new Date())===key, [y,mo]=key.split('-').map(Number);
+  mailState.read[key]=true; mailSave();
+  const h=Math.floor(st.mins/60), mm=st.mins%60, cars=st.kg/1500, tiers={};
+  st.topM.forEach(([k],i)=>tiers[k]=i<2?4:i<4?3:i<7?2:1);
+  const fun=st.kg>=1500?`That's ${cars>=10?Math.round(cars):cars.toFixed(1)} cars lifted.`:st.kg>=250?`That's ${Math.round(st.kg/250)} vending machine${st.kg>=500?'s':''}.`:'Every rep counts.';
+  const rank=rankOf(p,doneOf(p));
+  const slides=[
+    `<div class="wr-s wr-cover"><span class="wr-k" lang="ja">${KMONTH[mo-1]}</span><span class="eyebrow">${monthName(key)}${cur?' · so far':''}</span><h2>Your month of shugyō</h2>${emblem('wr-'+key,p)}<span class="muted">Swipe →</span></div>`,
+    `<div class="wr-s"><span class="eyebrow">You showed up</span><b class="wr-big num">${st.n}</b><span>session${st.n===1?'':'s'} on ${st.days} day${st.days===1?'':'s'}</span><span class="muted">${h?h+'h ':''}${mm}m under the bar · ${st.sets} working sets</span></div>`,
+    `<div class="wr-s"><span class="eyebrow">Total lifted</span><b class="wr-big num">${Math.round(st.kg).toLocaleString()}<small>kg</small></b><span>${fun}</span></div>`,
+    `<div class="wr-s"><span class="eyebrow">New records</span><b class="wr-big num">${st.prs.length}</b><span lang="ja" class="wr-stamp">新記録</span>${st.prs.length?`<ul class="wr-prs">${st.prs.slice(0,3).map(r=>`<li><b>${esc(r.name)}</b><span class="num">${r.w} kg × ${r.r}</span></li>`).join('')}</ul>`:'<span class="muted">None this month. Next month’s yours.</span>'}</div>`,
+    `<div class="wr-s"><span class="eyebrow">Most trained</span><b class="wr-mid">${st.topM.length?MUSCLE_NAMES[st.topM[0][0]]:'—'}</b>${st.topM.length?`<div class="heat wr-heat"><svg viewBox="${BODY_VB}" aria-hidden="true">${heatFigure('front',tiers,0)}${heatFigure('back',tiers,110)}</svg></div>`:''}${st.favEx?`<span class="muted">Favourite lift: ${esc(st.favEx[0])} (${st.favEx[1]} sets)</span>`:''}</div>`,
+    `<div class="wr-s"><span class="eyebrow">${esc(p.name)}</span><b class="wr-mid">${esc(rank.name)}</b><span class="muted">Rank ${rank.i+1} of ${rank.n}${rank.next?` · ${rank.nextAt-doneOf(p)} sessions to ${esc(rank.next)}`:''}</span>${syncBar(p).replace('<button','<div').replace('</button>','</div>')}</div>`,
+    `<div class="wr-s wr-end"><span class="wr-k" lang="ja">お疲れ様</span><h2>${cur?'Keep it going':'See you next month'}</h2><span class="muted">${cur?'This letter updates as you train.':'A new letter lands at the start of every month.'}</span><button type="button" class="btn primary" data-close>Done</button></div>`];
+  openSheet(`<div class="themed wrapped" style="${themeVars(p)}" data-noswipe-x>
+    <div class="row between"><span class="eyebrow">${monthName(key)} recap</span><button type="button" class="btn small" data-close>Close</button></div>
+    <div class="wr-track" id="wrTrack">${slides.join('')}</div>
+    <div class="wr-dots" id="wrDots">${slides.map((_,i)=>`<i class="${i?'':'on'}"></i>`).join('')}</div></div>`);
+  const tr=document.getElementById('wrTrack'); tr.addEventListener('scroll',()=>{const i=Math.round(tr.scrollLeft/tr.clientWidth);document.querySelectorAll('#wrDots i').forEach((d,j)=>d.classList.toggle('on',i===j));},{passive:true});
+  if(ui.view==='you') render();
 }
 /* ---------- muscle tracker card ---------- */
 const mt={mode:'body',range:'7D'};
@@ -3852,7 +4015,7 @@ function builderClick(t){
 const view=document.getElementById('view');
 function updateNavDot(){document.querySelectorAll('nav.tabs button').forEach(b=>{b.classList.toggle('on',b.dataset.tab===ui.view);b.querySelector('.dot')?.remove();if(b.dataset.tab==='workout'&&draft){const s=document.createElement('span');s.className='dot';b.appendChild(s)}})}
 /* build number: big updates . new builds . quick fixes */
-const APP_BUILD='00.38.00';
+const APP_BUILD='00.40.06';
 const buildTag=()=>`<footer class="build"><span lang="ja">修行</span> Shugyō · build <span class="num">${APP_BUILD}</span></footer>`;
 function render(){
   setProgram(ui.view==='workout'&&draft?(draft.prog||'itadori'):ui.view==='program'?(ui.preview||ui.active):ui.active);
@@ -3953,6 +4116,11 @@ view.addEventListener('click',e=>{
   if(t.dataset.mtRange){mt.range=t.dataset.mtRange;view.querySelector('#mt').outerHTML=muscleTracker();return;}
   if(t.hasAttribute('data-mt-info')){openMtInfo();return;}
   if(t.hasAttribute('data-rec-info')){openRecInfo();return;}
+  if(t.dataset.syncInfo){openSyncInfo(t.dataset.syncInfo);return;}
+  if(t.dataset.mail){openWrapped(t.dataset.mail);return;}
+  if(t.hasAttribute('data-mail-all')){mailState.showAll=!mailState.showAll;mailSave();render();return;}
+  if(t.hasAttribute('data-delall')){confirmKey='delall';render();requestAnimationFrame(()=>view.querySelector('[data-delall-yes]')?.scrollIntoView({block:'center'}));return;}
+  if(t.hasAttribute('data-delall-yes')){const ids=Object.keys(sessions);confirmKey=null;(async()=>{for(const id of ids)await removeSession(id);render();})();sessions={};lsSet(SKEY,sessions);render();toast('All sessions deleted');return;}
   if(t.dataset.ttRange){tt.range=t.dataset.ttRange;view.querySelector('#tt').outerHTML=trainingTrends();return;}
   if(t.dataset.ttGroup){tt.group=t.dataset.ttGroup;view.querySelector('#tt').outerHTML=trainingTrends();return;}
   if(t.hasAttribute('data-exlib')){openLibrary();return;}
@@ -4239,7 +4407,71 @@ function spotifyCard(){
 
 applyCustom();
 if(ui.active&&!PROGRAMS.some(p=>p.id===ui.active)){ui.active=null;if(!draft)ui.view='browse';}
+/* ---------- splash: sakura over a night lake ----------
+   The scene is one static SVG (no per-element animation), so iPhone paints it once.
+   Petals, ripples and the logo are separate GPU layers that only move with transform/opacity. */
+let splashScene=null;
+function splashSVG(){
+  if(splashScene) return splashScene;
+  const r=rng(hashStr('shugyo-splash')), H=560, f=v=>v.toFixed(1);
+  let branches='', blooms=''; const pts=[];
+  const grow=(x,y,a,len,w,d)=>{
+    const x2=x+Math.cos(a)*len, y2=y+Math.sin(a)*len, bend=(r()-.5)*len*.3, mx=(x+x2)/2+Math.cos(a+Math.PI/2)*bend, my=(y+y2)/2+Math.sin(a+Math.PI/2)*bend;
+    branches+=`<path d="M${f(x)} ${f(y)}Q${f(mx)} ${f(my)} ${f(x2)} ${f(y2)}" stroke-width="${f(w)}"/>`;
+    if(d<=2){const n=d===0?9:4;for(let k=0;k<n;k++){const ang=r()*Math.PI*2,dist=r()*18,cx=x2+Math.cos(ang)*dist*1.3,cy=y2+Math.sin(ang)*dist*.8,rad=2.2+r()*4.2,col=['#f6c1d0','#ee9fb7','#fcdde6','#e78aa8','#f9cfdc'][(r()*5)|0];
+      if(r()<.35) pts.push([cx,cy]);
+      blooms+=`<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(rad)}" fill="${col}" fill-opacity="${(.3+r()*.45).toFixed(2)}"/>`;}}
+    if(d>0){const k=d>=5?2:(r()<.3?3:2);for(let i=0;i<k;i++) grow(x2,y2,a+(i-(k-1)/2)*(.48+r()*.2)+(r()-.5)*.2-(x2>150?.18:0),len*(.7+r()*.1),w*.62,d-1);}
+  };
+  grow(34,H,-1.4,98,13,6); grow(372,H,-1.85,58,7,4);
+  const tree=`<g id="spTree"><g stroke="#2b1e24" fill="none" stroke-linecap="round">${branches}</g>${blooms}</g>`;
+  const lines=Array.from({length:70},(_,i)=>`<rect x="${(-r()*30).toFixed(0)}" y="${(H+2+i*3.6).toFixed(1)}" width="${(390+r()*60).toFixed(0)}" height="${(2.1+r()*.9).toFixed(1)}" fill="#fff" fill-opacity="${Math.max(0,.9-i*.016).toFixed(2)}"/>`).join('');
+  const svg=`<defs>
+    <linearGradient id="spSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#120f14"/><stop offset=".55" stop-color="#1b1419"/><stop offset="1" stop-color="#2a1c24"/></linearGradient>
+    <linearGradient id="spLake" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1d151b"/><stop offset="1" stop-color="#0d0b0e"/></linearGradient>
+    <radialGradient id="spMoon"><stop offset="0" stop-color="#fbeef2" stop-opacity=".9"/><stop offset=".35" stop-color="#f6d9e2" stop-opacity=".25"/><stop offset="1" stop-color="#f6d9e2" stop-opacity="0"/></radialGradient>
+    <mask id="spMask">${lines}</mask>
+  </defs>
+  <rect width="390" height="${H}" fill="url(#spSky)"/>
+  <circle cx="300" cy="190" r="90" fill="url(#spMoon)" opacity=".55"/><circle cx="300" cy="190" r="15" fill="#f8e7ec" opacity=".7"/>
+  <g opacity=".5">${tree}</g>
+  <rect y="${H}" width="390" height="${844-H}" fill="url(#spLake)"/>
+  <line x1="0" y1="${H}" x2="390" y2="${H}" stroke="#f3c4d2" stroke-opacity=".12"/>
+  <g mask="url(#spMask)" opacity=".32"><g transform="translate(0 ${2*H}) scale(1 -1)"><use href="#spTree"/><circle cx="300" cy="190" r="15" fill="#f8e7ec" opacity=".7"/></g></g>
+  <g stroke="#f8e7ec" stroke-linecap="round" opacity=".25">${[0,1,2,3,4].map(i=>`<line x1="${300-(14-i*2)}" x2="${300+(14-i*2)}" y1="${H+16+i*11}" y2="${H+16+i*11}" stroke-width="${1.4-i*.2}"/>`).join('')}</g>`;
+  return splashScene={svg,pts,H};
+}
+function splashFx(){
+  /* petals live on the same 390×844 stage as the scene, so they always line up with the trees */
+  const {pts,H}=splashSVG(), r=rng(Date.now()>>>0), drops=[];
+  /* only start petals deep inside the blossom clouds: points with plenty of blossoms around and below them */
+  const inner=pts.filter(([x,y])=>{let n=0,below=0;for(const [a,b] of pts){const d=Math.hypot(a-x,b-y);if(d<20)n++;if(b>y+6&&b<y+30&&Math.abs(a-x)<16)below++;}return n>=5&&below>=2;});
+  const src=inner.length>8?inner:pts;
+  const petals=Array.from({length:22},()=>{const [x,y]=src[(r()*src.length)|0]||[100,300];
+    const fall=H-y+40+r()*170, d=1.8+r()*1.5, dl=r()*1, sz=6+r()*5;
+    if(drops.length<3&&dl+d<2.7&&y+fall>H+10) drops.push([x+(r()-.5)*20,y+fall,dl+d-.15]);
+    return `<i class="sp-pt" style="--x:${x.toFixed(1)}px;--y:${y.toFixed(1)}px;--fall:${fall.toFixed(0)}px;--d:${d.toFixed(2)}s;--dl:${dl.toFixed(2)}s;transform:translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0)"><b style="--s:${sz.toFixed(1)}px;--c:${['#815565','#845f6c','#866772','#886f78','#89747c'][(r()*5)|0]};--amp:${(4+r()*9).toFixed(0)}px;--sw:${(.55+r()*.5).toFixed(2)}s;--swd:${(-r()).toFixed(2)}s"></b></i>`;}).join('');
+  const rips=(drops.length?drops:[[150,640,.9],[262,705,1.3]]).map(([x,y,dl])=>`<i class="sp-rip" style="left:${x.toFixed(0)}px;top:${Math.min(y,815).toFixed(0)}px;--dl:${dl.toFixed(2)}s"></i>`).join('');
+  return petals+rips;
+}
+function fitSplash(){const el=document.getElementById('splash'),st=document.getElementById('spStage');if(!el||!st||el.hidden)return;
+  st.style.setProperty('--k',Math.max(el.clientWidth/390,el.clientHeight/844).toFixed(4));}
+addEventListener('resize',fitSplash); if(window.ResizeObserver) new ResizeObserver(fitSplash).observe(document.getElementById('splash'));
+let splashT=0;
+function showSplash(ms){
+  const el=document.getElementById('splash'); if(!el) return;
+  el.classList.remove('go','out'); el.hidden=false; el.style.animation='none'; void el.offsetWidth; el.style.animation='';
+  const sc=document.getElementById('spScene'); if(!sc.firstChild) sc.innerHTML=splashSVG().svg;
+  document.getElementById('spFx').innerHTML=splashFx(); fitSplash();
+  clearTimeout(splashT);
+  /* wait two frames so the scene and the app underneath are painted before anything moves */
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{ el.classList.add('go');
+    splashT=setTimeout(()=>{el.classList.add('out');setTimeout(()=>{el.hidden=true;el.classList.remove('out','go');document.getElementById('spFx').innerHTML='';},520);},ms||1900); }));
+}
+let hiddenAt=0; document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='hidden') hiddenAt=Date.now(); else if(hiddenAt&&Date.now()-hiddenAt>10*60*1000) showSplash(1500); });
+
 render();
+showSplash();
 initRemote();
 spHandleRedirect().finally(spPoll);
 </script>
