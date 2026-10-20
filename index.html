@@ -659,6 +659,10 @@ body.has-rest .wo-head{padding-right:72px}
 @media (prefers-reduced-motion: reduce){.sync-bar i{animation:none}}
 .splash{position:fixed;inset:0;z-index:100;background:#120f14;overflow:hidden;display:grid;place-items:center;pointer-events:none;animation:spAuto .45s 4.5s forwards}
 .splash[hidden]{display:none}
+.splash.cover{animation:none}
+.splash.cover .sp-scene,.splash.cover .sp-seal,.splash.cover .sp-seal span,.splash.cover .sp-word,.splash.cover .sp-sub{opacity:1;animation:none!important}
+.splash.qout{opacity:0;transition:opacity .18s ease}
+
 .splash.out{opacity:0;transform:scale(1.03);transition:opacity .5s ease,transform .5s ease}
 .sp-stage{position:absolute;left:50%;bottom:0;width:390px;height:844px;transform-origin:50% 100%;transform:translateX(-50%) scale(var(--k,1))}
 .sp-scene{position:absolute;left:0;top:0;width:390px;height:844px;opacity:0;will-change:opacity}
@@ -4015,7 +4019,7 @@ function builderClick(t){
 const view=document.getElementById('view');
 function updateNavDot(){document.querySelectorAll('nav.tabs button').forEach(b=>{b.classList.toggle('on',b.dataset.tab===ui.view);b.querySelector('.dot')?.remove();if(b.dataset.tab==='workout'&&draft){const s=document.createElement('span');s.className='dot';b.appendChild(s)}})}
 /* build number: big updates . new builds . quick fixes */
-const APP_BUILD='00.40.06';
+const APP_BUILD='00.40.07';
 const buildTag=()=>`<footer class="build"><span lang="ja">修行</span> Shugyō · build <span class="num">${APP_BUILD}</span></footer>`;
 function render(){
   setProgram(ui.view==='workout'&&draft?(draft.prog||'itadori'):ui.view==='program'?(ui.preview||ui.active):ui.active);
@@ -4468,7 +4472,23 @@ function showSplash(ms){
   requestAnimationFrame(()=>requestAnimationFrame(()=>{ el.classList.add('go');
     splashT=setTimeout(()=>{el.classList.add('out');setTimeout(()=>{el.hidden=true;el.classList.remove('out','go');document.getElementById('spFx').innerHTML='';},520);},ms||1900); }));
 }
-let hiddenAt=0; document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='hidden') hiddenAt=Date.now(); else if(hiddenAt&&Date.now()-hiddenAt>10*60*1000) showSplash(1500); });
+/* When you leave the app, show the finished night-lake frame straight away, so the snapshot iPhone takes
+   (and shows while the app reopens) is the scene, not the main screen. */
+function coverSplash(){
+  const el=document.getElementById('splash'); if(!el) return; clearTimeout(splashT);
+  const sc=document.getElementById('spScene'); if(!sc.firstChild) sc.innerHTML=splashSVG().svg;
+  document.getElementById('spFx').innerHTML=''; el.classList.remove('go','out','qout'); el.classList.add('cover'); el.hidden=false; fitSplash();
+}
+function uncoverSplash(long){
+  const el=document.getElementById('splash'); if(!el||!el.classList.contains('cover')) return; clearTimeout(splashT);
+  if(long){ document.getElementById('spFx').innerHTML=splashFx(); fitSplash(); requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add('go')));
+    splashT=setTimeout(()=>{el.classList.add('out');setTimeout(()=>{el.hidden=true;el.classList.remove('out','go','cover');document.getElementById('spFx').innerHTML='';},520);},1500); }
+  else { requestAnimationFrame(()=>{el.classList.add('qout'); splashT=setTimeout(()=>{el.hidden=true;el.classList.remove('qout','cover');},200);}); }
+}
+let hiddenAt=0;
+document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='hidden'){hiddenAt=Date.now();coverSplash();} else uncoverSplash(hiddenAt&&Date.now()-hiddenAt>10*60*1000); });
+addEventListener('pagehide',coverSplash);
+addEventListener('pageshow',e=>{ if(e.persisted) uncoverSplash(true); });
 
 render();
 showSplash();
